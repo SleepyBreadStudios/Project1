@@ -1,3 +1,8 @@
+/******************************************************************************
+ * UI manager, handles clicking of buttons.
+ * 
+ * Authors: Alicia T, Jason N, Jino C
+ *****************************************************************************/
 using DilmerGames.Core.Singletons;
 using TMPro;
 using Unity.Netcode;
