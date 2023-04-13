@@ -1,10 +1,16 @@
+/******************************************************************************
+ * Player behavior script, handles movement and collision with items.
+ * 
+ * Authors: Alicia T, Jason N, Jino C
+ *****************************************************************************/
+
 using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerControl : NetworkBehaviour
+public class PlayerBehavior : NetworkBehaviour
 {
     [SerializeField]
-    private float walkSpeed = 3.5f;
+    private float walkSpeed = 0.2f;
 
     [SerializeField]
     private Vector2 defaultPositionRange = new Vector2(-4, 4);
@@ -15,14 +21,18 @@ public class PlayerControl : NetworkBehaviour
     [SerializeField]
     private NetworkVariable<float> leftRightPosition = new NetworkVariable<float>();
 
+    PlayerInventory playerInventory = null;
+
     // client caches positions
     private float oldForwardBackwardPosition;
     private float oldLeftRightPosition;
 
     void Start()
     {
-        transform.position = new Vector3(Random.Range(defaultPositionRange.x, defaultPositionRange.y), 0,
-               Random.Range(defaultPositionRange.x, defaultPositionRange.y));
+        //transform.position = new Vector3(Random.Range(defaultPositionRange.x, defaultPositionRange.y), 0,
+        //       Random.Range(defaultPositionRange.x, defaultPositionRange.y));
+        transform.position = new Vector3(0,0,0);
+        playerInventory = gameObject.GetComponent<PlayerInventory>();
     }
 
     void Update()
@@ -76,5 +86,15 @@ public class PlayerControl : NetworkBehaviour
     {
         forwardBackPosition.Value = forwardBackward;
         leftRightPosition.Value = leftRight;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Player collision detected");
+        Debug.Log("Item found: " + collision.gameObject.GetComponent<ItemBehavior>().GetItemType().GetName());
+        if(collision.CompareTag("Item"))
+        {
+            playerInventory.AddItem(collision.gameObject.GetComponent<ItemBehavior>().GetItemType());
+        }
     }
 }
