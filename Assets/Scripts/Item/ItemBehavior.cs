@@ -22,7 +22,16 @@ public class ItemBehavior : MonoBehaviour
         Debug.Log("Item collision detected");
         if(collision.CompareTag("Player"))
         {
-            Destroy(this.gameObject);
+            // if inventory is not full
+            if(!(collision.gameObject.GetComponent<PlayerInventory>().IsInventoryFull()))
+            {
+               Debug.Log("Item picked up, destroying overworld object");
+               Destroy(this.gameObject);
+            }
+            else
+            {
+               Debug.Log("Item was not picked up, player collided with's inventory is full");
+            }
         }
     }
 }

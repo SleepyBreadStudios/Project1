@@ -14,9 +14,11 @@ public class PlayerInventory : MonoBehaviour
 {
     // num of different stacked items it can hold
     [SerializeField]
-    private int numItems = 10;
+    private int numItems = 1;
 
     private List<StackObject> inventory = new();
+
+   private bool inventoryFull = false;
 
     // add item to player inventory
     public bool AddItem(ItemData item) 
@@ -49,8 +51,24 @@ public class PlayerInventory : MonoBehaviour
         }
         // else there is no space in inventory
         Debug.Log("Inventory full :(");
+        inventoryFull = true;
         return false;
     }
+
+   // getter method
+   public bool IsInventoryFull()
+   {
+      return inventoryFull;
+      // for if inventory full isn't detected in time
+      // fail safe is checking every time this method is called
+      /*if (inventory.Count >= numItems)
+      {
+         return true;
+      }
+      else 
+         return false; */
+
+   }
 }
 
 public class StackObject 
@@ -60,11 +78,11 @@ public class StackObject
 
     // max num of items that stack can hold
     [SerializeField]
-    private int maxStack = 64;
+    private int maxStack = 1;
 
     // curr num of items stack is holding
     [SerializeField]
-    private int currStack = 1;
+    private int currStack = 0;
 
     private bool isFull = false;
 
@@ -93,13 +111,17 @@ public class StackObject
     // is stack full
     public bool IsFullStack()
     {
-        return isFull;
+         if (currStack >= maxStack)
+         {
+            isFull = true;
+         }
+         return isFull;
     }
 
     public void SetCurrStack(int newStack)
     {
         currStack = newStack;
-        if(currStack == maxStack) 
+        if(currStack >= maxStack) 
         {
             isFull = true;
         }

@@ -19,7 +19,7 @@ public class PlayersManager : NetworkSingleton<PlayersManager>
     {
         NetworkManager.Singleton.OnClientConnectedCallback += (id) =>
         {
-            if(IsServer)
+            if(IsServer || IsHost)
                 playersInGame.Value++;
                 Debug.Log($"{id} just connected...");
         };
