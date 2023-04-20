@@ -11,7 +11,6 @@ namespace DapperDino.Items.Inventories
 {
     public class InventoryItemDragHandler : ItemDragHandler
     {
-
         public override void OnPointerUp(PointerEventData eventData)
         {
             if (eventData.button == PointerEventData.InputButton.Left)
@@ -21,6 +20,8 @@ namespace DapperDino.Items.Inventories
                 if (eventData.hovered.Count == 0)
                 {
                     InventorySlot thisSlot = ItemSlotUI as InventorySlot;
+                    // delete item from inventory
+                    thisSlot.DragDelete(thisSlot.SlotIndex);
                 }
             }
         }

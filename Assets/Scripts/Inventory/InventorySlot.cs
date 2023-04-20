@@ -56,4 +56,9 @@ public class InventorySlot : ItemSlotUI, IDropHandler
         base.EnableSlotUI(enable);
         itemQuantityText.enabled = enable;
     }
+
+    public void DragDelete(int slotIndex)
+    {
+        inventory.DeleteFromInventory(slotIndex);
+    }
 }

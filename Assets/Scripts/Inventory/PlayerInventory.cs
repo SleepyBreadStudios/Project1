@@ -141,6 +141,18 @@ public class PlayerInventory : MonoBehaviour
            return false;
     }
 
+    public void DeleteFromInventory(int slotIndex)
+    {
+        // if slotIndex passed in is out of bounds
+        if (slotIndex < 0 || slotIndex > inventory.Count - 1) { return; }
+
+        // delete object
+        inventory[slotIndex] = new ItemSlot();
+        currInventorySize--;
+
+        OnItemsUpdated.Invoke();
+    }
+
     public void Swap(int indexOne, int indexTwo)
     {
         ItemSlot firstSlot = inventory[indexOne];
