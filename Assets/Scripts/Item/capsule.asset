@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
-  m_Name: triangle
+  m_Name: capsule
   m_EditorClassIdentifier: 
-  itemName: Triangle
-  icon: {fileID: 7482667652216324306, guid: 84d9229f5ac6a8f44bd847ab54fc8894, type: 3}
-  count: 50
-  maxStack: 99
+  itemName: capsule
+  icon: {fileID: -9095717837082945937, guid: f9676fb283163fe4db32d885ad33ef28, type: 3}
+  count: 2
+  maxStack: 9
   startingCondition: 100

@@ -3,10 +3,10 @@
  * 
  * Authors: Alicia T, Jason N, Jino C
  *****************************************************************************/
-
+//#define Debug
 using Unity.Netcode;
 using UnityEngine;
-//#define Debug
+
 
 public class PlayerBehavior : NetworkBehaviour
 {

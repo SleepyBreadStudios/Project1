@@ -29,6 +29,9 @@ public class ItemData : ScriptableObject
     // for durability
     [SerializeField]
     private int startingCondition = 100;
+
+    [SerializeField]
+    private bool unique = false;
     
     // getter method
     public string GetName()
@@ -44,5 +47,10 @@ public class ItemData : ScriptableObject
     public int GetMaxStackAmount()
     {
         return maxStack;
+    }
+
+    public bool GetUnique()
+    {
+        return unique;
     }
 }

@@ -3,7 +3,7 @@
  * 
  * Authors: Alicia T, Jason N, Jino C
  *****************************************************************************/
-#define Debug
+//#define Debug
 using DapperDino.Events.CustomEvents;
 using System;
 using System.Collections;
@@ -44,6 +44,17 @@ public class PlayerInventory : MonoBehaviour
 #if Debug
         Debug.Log("Attempting to add item to inventory, inventory count now: " + currInventorySize);
 #endif
+        // check if item is unique
+        if(nItem.GetUnique())
+        {
+            // if it is, check if we have the item in the inventory yet
+            var foundUnique = inventory.Find(stackItem => stackItem.item == nItem);
+            // already have item? return
+            if(foundUnique != null)
+            {
+                return false;
+            }
+        }
         // check for existing not full stacks with same item 
         var foundStack = inventory.FirstOrDefault(stackItem => stackItem.item == nItem && stackItem.IsFullStack() != true);
         // if found

@@ -3,11 +3,11 @@
  * 
  * Authors: Alicia T, Jason N, Jino C
  *****************************************************************************/
-
+//#define Debug
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//#define Debug
+
 
 // consider making abstract
 public class ItemBehavior : MonoBehaviour
@@ -58,15 +58,16 @@ public class ItemBehavior : MonoBehaviour
         }
     }
     */
+
     // on pick up delete, determined by player based on whether item was able to be picked up or not
     public void Delete()
     {
         Destroy(this.gameObject);
     }
+
     private void Start()
     {
 
         itemCount = itemType.GetCount();
-        Debug.Log(itemCount);
     }
 }

@@ -3,6 +3,7 @@
  * 
  * Authors: Alicia T, Jason N, Jino C
  *****************************************************************************/
+
 using DilmerGames.Core.Singletons;
 using TMPro;
 using Unity.Netcode;
@@ -35,7 +36,7 @@ public class UIManager : Singleton<UIManager>
     // private Button executePhysicsButton;
 
 
-    private bool hasServerStarted;
+    //private bool hasServerStarted;
 
     private void Awake()
     {
@@ -100,10 +101,10 @@ public class UIManager : Singleton<UIManager>
             Debug.Log($"{id} just connected...");
         };
 
-        NetworkManager.Singleton.OnServerStarted += () =>
-        {
-            hasServerStarted = true;
-        };
+        //NetworkManager.Singleton.OnServerStarted += () =>
+        //{
+        //    hasServerStarted = true;
+        //};
 
         // executePhysicsButton.onClick.AddListener(() => 
         // {

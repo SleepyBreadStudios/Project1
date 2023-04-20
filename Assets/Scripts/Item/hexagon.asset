@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: hexagon
   icon: {fileID: -712631045867808456, guid: 926f77341bdcc9947ade8d590dc14d94, type: 3}
-  count: 90
+  count: 40
   maxStack: 99
   startingCondition: 100

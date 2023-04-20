@@ -1,3 +1,9 @@
+/******************************************************************************
+ * Player manager, handles the connection of players to the host.
+ * 
+ * Authors: Alicia T, Jason N, Jino C
+ *****************************************************************************/
+//#define Debug
 using DilmerGames.Core.Singletons;
 using Unity.Netcode;
 using UnityEngine;
