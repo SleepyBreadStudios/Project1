@@ -1,3 +1,9 @@
+/******************************************************************************
+ * Item Drag Handler - handles interaction with inventory [clicking, dragging, dropping].
+ * 
+ * Authors: Alicia T, Jason N, Jino C
+ *****************************************************************************/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +17,7 @@ public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
     private CanvasGroup canvasGroup = null;
     private Transform originalParent = null;
+    //private Vector3 originalScale;
     private bool isHovering = false;
 
     public ItemSlotUI ItemSlotUI => itemSlotUI;
@@ -35,9 +42,10 @@ public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
         {
             // raise event
             originalParent = transform.parent;
+            //originalScale = transform.localScale;
 
             // set parent to parent two up
-            transform.SetParent(transform.parent.parent);
+            transform.SetParent(transform.parent.parent.parent);
             
             // ignore item that is being dragged and look at what is underneath it
             canvasGroup.blocksRaycasts = false;
@@ -59,6 +67,7 @@ public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
         {
             transform.SetParent(originalParent);
             transform.localPosition = Vector3.zero;
+            //transform.localScale = originalScale;
             canvasGroup.blocksRaycasts = true;
         }
     }

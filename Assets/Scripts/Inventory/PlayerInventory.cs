@@ -4,6 +4,8 @@
  * Authors: Alicia T, Jason N, Jino C
  *****************************************************************************/
 
+using DapperDino.Events.CustomEvents;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,9 +14,10 @@ using System.Linq;
 // consider making inventory a scriptable object for save + load
 public class PlayerInventory : MonoBehaviour
 {
+    [SerializeField] private VoidEvent onInventoryItemsUpdated = null;
     // num of different stacked items it can hold
     [SerializeField]
-    private int maxInventorySize = 4;
+    private int maxInventorySize = 40;
     private int currInventorySize = 0;
 
     //[SerializeField]
@@ -29,6 +32,8 @@ public class PlayerInventory : MonoBehaviour
 
     // fetches the inventory slot by index
     public ItemSlot GetSlotByIndex(int index) => inventory[index];
+
+    public Action OnItemsUpdated = delegate { };
 
     // add item to player inventory
     public bool AddItem(ItemData nItem)
@@ -46,6 +51,7 @@ public class PlayerInventory : MonoBehaviour
                 // add item and return
                 foundStack.AddToStack(nItem.GetCount());
                 //foundStack.SetCurrStack(foundStack.GetCurrStack() + nItem.GetCount());
+                OnItemsUpdated.Invoke();
                 Debug.Log("Successfully added item, inventory count now: " + currInventorySize);
                 Debug.Log("Stack of " + inventory[foundStack.GetSlotIndex()].GetItemName() + ": " + inventory[foundStack.GetSlotIndex()].GetCurrStack());
                 return true;
@@ -66,6 +72,7 @@ public class PlayerInventory : MonoBehaviour
                 foundEmptySlot.SetSlotIndex(inventory.IndexOf(foundEmptySlot));
                 // account for new inventory size
                 currInventorySize++;
+                OnItemsUpdated.Invoke();
                 Debug.Log("Successfully added item, inventory count now: " + currInventorySize);
                 Debug.Log("Stack of " + inventory[foundEmptySlot.GetSlotIndex()].GetItemName() + ": " + inventory[foundEmptySlot.GetSlotIndex()].GetCurrStack());
                 return true;
@@ -133,6 +140,9 @@ public class PlayerInventory : MonoBehaviour
                     
                     // not sure if we need this line but it's intent is to delete the slot we aren't using anymore
                     firstSlot = null;
+
+                    OnItemsUpdated.Invoke();
+
                     return;
                 }
             }
@@ -141,9 +151,12 @@ public class PlayerInventory : MonoBehaviour
         // if not swap the empty slot and full slot
         inventory[indexOne] = secondSlot;
         inventory[indexTwo] = firstSlot;
+
+        OnItemsUpdated.Invoke();
     }
 
-    private void Start()
+    // init inventory before anything
+    private void Awake()
     {
         // intialize the inventory with item slots based on current max inventory size
         for(int i = 0; i < maxInventorySize; i++)
@@ -151,6 +164,19 @@ public class PlayerInventory : MonoBehaviour
             inventory.Add(new ItemSlot());
         }
     }
+
+
+
+    public void OnEnable() => OnItemsUpdated += onInventoryItemsUpdated.Raise;
+
+    public void OnDisable() => OnItemsUpdated -= onInventoryItemsUpdated.Raise;
+
+    //[ContextMenu("Test Add")]
+    //public void TestAdd()
+    //{
+    //    AddItem(testItemSlot);
+    //}
+
 }
 
 public class ItemSlot

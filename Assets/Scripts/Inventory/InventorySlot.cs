@@ -1,3 +1,9 @@
+/******************************************************************************
+ * Inventory slot class. Inherits from ItemSlotUI. Handles inventory UI.
+ * 
+ * Authors: Alicia T, Jason N, Jino C
+ *****************************************************************************/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
