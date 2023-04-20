@@ -23,6 +23,12 @@ public class PlayerBehavior : NetworkBehaviour
 
     PlayerInventory playerInventory = null;
 
+    [SerializeField]
+    private GameObject InventoryUI = null;
+
+    // is inventory showing at the moment?
+    private bool inventoryEnabled = false;
+
     // client caches positions
     private float oldForwardBackwardPosition;
     private float oldLeftRightPosition;
@@ -33,6 +39,7 @@ public class PlayerBehavior : NetworkBehaviour
         //       Random.Range(defaultPositionRange.x, defaultPositionRange.y));
         transform.position = new Vector3(0,0,0);
         playerInventory = gameObject.GetComponent<PlayerInventory>();
+        InventoryUI.transform.localScale = new Vector3(0, 0, 0);
     }
 
     void Update()
@@ -72,12 +79,28 @@ public class PlayerBehavior : NetworkBehaviour
             leftRight += walkSpeed;
         }
 
+
         if (oldForwardBackwardPosition != forwardBackward ||
             oldLeftRightPosition != leftRight)
         {
             UpdateClientPositionServerRpc(forwardBackward, leftRight);
             oldForwardBackwardPosition = forwardBackward;
             oldLeftRightPosition = leftRight;
+        }
+
+        // access inventory
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            if(inventoryEnabled)
+            {
+                InventoryUI.transform.localScale = new Vector3(0, 0, 0);
+                inventoryEnabled = false;
+            }
+            else
+            {
+                InventoryUI.transform.localScale = new Vector3(1, 1, 1);
+                inventoryEnabled = true;
+            }
         }
     }
 

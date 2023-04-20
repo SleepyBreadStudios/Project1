@@ -221,6 +221,7 @@ MonoBehaviour:
     m_InternalValue: 0
   leftRightPosition:
     m_InternalValue: 0
+  InventoryUI: {fileID: 2429238710024984738}
 --- !u!61 &7473115271021685892
 BoxCollider2D:
   m_ObjectHideFlags: 0
