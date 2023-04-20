@@ -16,11 +16,15 @@ public class ItemData : ScriptableObject
     private string itemName = null;
 
     [SerializeField]
-    private Sprite icon = null;
+    public Sprite icon = null;
 
     // for if an item drops as multiple
     [SerializeField]
     private int count = 1;
+
+    // item should know how many it can stack up to
+    [SerializeField]
+    private int maxStack = 99;
 
     // for durability
     [SerializeField]
@@ -35,5 +39,10 @@ public class ItemData : ScriptableObject
     public int GetCount()
     {
         return count;
+    }
+
+    public int GetMaxStackAmount()
+    {
+        return maxStack;
     }
 }

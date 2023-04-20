@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7473115271021685892}
   - component: {fileID: 5498536427684773116}
   - component: {fileID: 1932680522406000021}
-  - component: {fileID: 9187626019066172061}
+  - component: {fileID: 31469402132694548}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &9187626019066172061
+--- !u!114 &31469402132694548
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -248,4 +248,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 406dba276ffcc3b46800421c69c97dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numItems: 1
+  maxInventorySize: 4

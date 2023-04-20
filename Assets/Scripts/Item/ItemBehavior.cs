@@ -1,5 +1,5 @@
 ﻿/******************************************************************************
- * Shared template for items.
+ * Shared template for items. Handles it's own deletion.
  * 
  * Authors: Alicia T, Jason N, Jino C
  *****************************************************************************/
@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// consider making abstract
 public class ItemBehavior : MonoBehaviour
 {
     public ItemData itemType;
