@@ -6,6 +6,7 @@
 
 using Unity.Netcode;
 using UnityEngine;
+//#define Debug
 
 public class PlayerBehavior : NetworkBehaviour
 {
@@ -111,13 +112,20 @@ public class PlayerBehavior : NetworkBehaviour
         leftRightPosition.Value = leftRight;
     }
 
+    // Pick up item and add to player inventory
     private void OnTriggerEnter2D(Collider2D collision)
     {
+#if Debug
         Debug.Log("Player collision detected");
         Debug.Log("Item found: " + collision.gameObject.GetComponent<ItemBehavior>().GetItemType().GetName());
+#endif
         if(collision.CompareTag("Item"))
         {
-            playerInventory.AddItem(collision.gameObject.GetComponent<ItemBehavior>().GetItemType());
+            bool delete = playerInventory.AddItem(collision.gameObject.GetComponent<ItemBehavior>(), collision.gameObject.GetComponent<ItemBehavior>().GetItemType());
+            if(delete)
+            {
+                collision.gameObject.GetComponent<ItemBehavior>().Delete();
+            }
         }
     }
 }

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
-  m_Name: Item Test2
+  m_Name: checkmark
   m_EditorClassIdentifier: 
-  itemName: Circle
-  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  count: 3
-  maxStack: 9
+  itemName: Checkmark
+  icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  count: 1
+  maxStack: 1
   startingCondition: 100

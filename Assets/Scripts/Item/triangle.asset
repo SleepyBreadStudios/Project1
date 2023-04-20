@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
-  m_Name: item Test3
+  m_Name: triangle
   m_EditorClassIdentifier: 
-  itemName: Checkmark
-  icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  count: 1
-  maxStack: 1
+  itemName: Triangle
+  icon: {fileID: 7482667652216324306, guid: 84d9229f5ac6a8f44bd847ab54fc8894, type: 3}
+  count: 90
+  maxStack: 99
   startingCondition: 100

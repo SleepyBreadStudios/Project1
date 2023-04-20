@@ -3,13 +3,14 @@
  * 
  * Authors: Alicia T, Jason N, Jino C
  *****************************************************************************/
-
+#define Debug
 using DapperDino.Events.CustomEvents;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+
 
 // consider making inventory a scriptable object for save + load
 public class PlayerInventory : MonoBehaviour
@@ -28,7 +29,7 @@ public class PlayerInventory : MonoBehaviour
     // possibly use an array for inventory
     // private StackObject[] inventory = new StackObject[maxInventorySize];
 
-    private bool inventoryFull = false;
+    //private bool inventoryFull = false;
 
     // fetches the inventory slot by index
     public ItemSlot GetSlotByIndex(int index) => inventory[index];
@@ -36,25 +37,50 @@ public class PlayerInventory : MonoBehaviour
     public Action OnItemsUpdated = delegate { };
 
     // add item to player inventory
-    public bool AddItem(ItemData nItem)
+    public bool AddItem(ItemBehavior nBehavior, ItemData nItem)
     {
+        // temporary count variable for changing 
+        int count = nBehavior.GetCount();
+#if Debug
         Debug.Log("Attempting to add item to inventory, inventory count now: " + currInventorySize);
-        // check for existing stacks with same item
-        var foundStack = inventory.FirstOrDefault(stackItem => stackItem.item == nItem);
+#endif
+        // check for existing not full stacks with same item 
+        var foundStack = inventory.FirstOrDefault(stackItem => stackItem.item == nItem && stackItem.IsFullStack() != true);
         // if found
         if (foundStack != null)
         {
             // if not full
             if (!(foundStack.IsFullStack()))
             {
+#if Debug
                 Debug.Log("Found existing stack that is not full, adding to it");
-                // add item and return
-                foundStack.AddToStack(nItem.GetCount());
-                //foundStack.SetCurrStack(foundStack.GetCurrStack() + nItem.GetCount());
-                OnItemsUpdated.Invoke();
-                Debug.Log("Successfully added item, inventory count now: " + currInventorySize);
-                Debug.Log("Stack of " + inventory[foundStack.GetSlotIndex()].GetItemName() + ": " + inventory[foundStack.GetSlotIndex()].GetCurrStack());
-                return true;
+#endif
+                // calculate remaining space in stack
+                int remainingSpace = foundStack.GetMaxStack() - foundStack.GetCurrStack();
+                // if it all fits in the stack, combine
+                if (count <= remainingSpace)
+                {
+                    // add item and return
+                    foundStack.AddToStack(count);
+                    OnItemsUpdated.Invoke();
+#if Debug
+                    Debug.Log("Successfully added item, inventory count now: " + currInventorySize);
+                    Debug.Log("Stack of " + inventory[foundStack.GetSlotIndex()].GetItemName() + ": " + inventory[foundStack.GetSlotIndex()].GetCurrStack());
+#endif
+                    return true;
+                }
+                else
+                {
+#if Debug
+                    Debug.Log("Adding to existing stack, looking for another slot to add remaining");
+#endif
+                    // add what fits
+                    foundStack.AddToStack(remainingSpace);
+                    OnItemsUpdated.Invoke();
+                    // then attempt to make a new stack with the rest
+                    count -= remainingSpace;
+                    nBehavior.SetCount(count);
+                }
             }
         }
         // if item is not currently in list or stack was full
@@ -62,51 +88,47 @@ public class PlayerInventory : MonoBehaviour
         if (currInventorySize < maxInventorySize)
         {
             // look for first empty inventory slot
+#if Debug
             Debug.Log("Inventory is not full, looking for empty slot in inventory");
+#endif
             var foundEmptySlot = inventory.Find(stackItem => stackItem.IsEmptySlot() == true);
             if (foundEmptySlot != null)
             {
                 // change first empty inventory slot to hold item picked up
-                foundEmptySlot.SetItemSlot(nItem, nItem.GetCount());
+                foundEmptySlot.SetItemSlot(nItem, count);
                 // tell slot what it's index is in the array
                 foundEmptySlot.SetSlotIndex(inventory.IndexOf(foundEmptySlot));
                 // account for new inventory size
                 currInventorySize++;
                 OnItemsUpdated.Invoke();
+#if Debug
                 Debug.Log("Successfully added item, inventory count now: " + currInventorySize);
                 Debug.Log("Stack of " + inventory[foundEmptySlot.GetSlotIndex()].GetItemName() + ": " + inventory[foundEmptySlot.GetSlotIndex()].GetCurrStack());
+#endif
                 return true;
             }
         }
         // else there is no space in inventory
-        Debug.Log("Inventory full :(");
-        inventoryFull = true;
+#if Debug
+        Debug.Log("Inventory full");
+#endif
+        //inventoryFull = true;
         return false;
     }
 
     // getter method
     public bool IsInventoryFull()
     {
-        return inventoryFull;
+        //return inventoryFull;
         // for if inventory full isn't detected in time
         // fail safe is checking every time this method is called
-        /*if (inventory.Count >= maxInventorySize)
+        if (currInventorySize >= maxInventorySize)
         {
            return true;
         }
         else 
-           return false; */
+           return false;
     }
-
-    //public int GetTotalQuantity(InventoryItem item)
-    //{
-    //    int totalCount = 0;
-
-    //    foreach(StackObject stackObject in inventory)
-    //    {
-    //        totalCount += item
-    //    }
-    //}
 
     public void Swap(int indexOne, int indexTwo)
     {
