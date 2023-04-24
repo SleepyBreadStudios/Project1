@@ -69,5 +69,29 @@ public class ItemBehavior : MonoBehaviour
     {
 
         itemCount = itemType.GetCount();
+        
+    }
+
+    private void Update()
+    {
+        // Random movement of objects to test performance of code
+        Vector3 pos = transform.position;
+        int randx = Random.Range(0, 2);
+        int randy = Random.Range(0, 2);
+        if (randx == 0) {
+            pos.x -= (float)0.01;
+        } else {
+            pos.x += (float)0.01;
+        }
+
+        if (randy == 0) {
+            pos.y -= (float)0.001;
+        } else {
+            pos.y += (float)0.001;
+        } 
+
+        transform.position = pos;
+
+        
     }
 }
