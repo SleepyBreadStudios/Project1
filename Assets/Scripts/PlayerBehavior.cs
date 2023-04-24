@@ -41,6 +41,16 @@ public class PlayerBehavior : NetworkBehaviour
         transform.position = new Vector3(0,0,0);
         playerInventory = gameObject.GetComponent<PlayerInventory>();
         InventoryUI.transform.localScale = new Vector3(0, 0, 0);
+        
+        // Sets random color when players spawn
+        float rand = Random.Range(0, 256);
+        float rand2 = Random.Range(0, 256);
+        float rand3 = Random.Range(0, 256);
+        rand = rand / 255.0f;
+        rand2 = rand2 / 255.0f;
+        rand3 = rand3 / 255.0f;
+        
+        gameObject.GetComponent<Renderer>().material.color = new Color(rand, rand2, rand3);
     }
 
     void Update()
