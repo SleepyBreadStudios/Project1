@@ -3,7 +3,7 @@
  * 
  * Authors: Alicia T, Jason N, Jino C
  *****************************************************************************/
-
+//#define Debug
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +16,8 @@ public abstract class ItemSlotUI : MonoBehaviour, IDropHandler
     protected Image itemIconImage = null;
 
     public int SlotIndex { get; private set; }
+
+    public string SlotType;
 
     //public abstract HotbarItem SlotItem { get; set; }
 

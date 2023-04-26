@@ -3,7 +3,7 @@
  * 
  * Authors: Alicia T, Jason N, Jino C
  *****************************************************************************/
-
+//#define Debug
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,9 +31,23 @@ public class InventorySlot : ItemSlotUI, IDropHandler
         ItemDragHandler itemDragHandler = eventData.pointerDrag.GetComponent<ItemDragHandler>();
 
         // swap stack positions
-        if((itemDragHandler.ItemSlotUI as InventorySlot) != null)
+        if (itemDragHandler.ItemSlotUI.SlotType == "InventorySlot")
         {
-            inventory.Swap(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
+            if ((itemDragHandler.ItemSlotUI as InventorySlot) != null)
+            {
+                inventory.Swap(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
+            }
+        }
+        else if (itemDragHandler.ItemSlotUI.SlotType == "CraftingSlot")
+        {
+            if ((itemDragHandler.ItemSlotUI as CraftingSlot) != null)
+            {
+                inventory.SwapInventory(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
+            }
+        }
+        else
+        {
+            Debug.Log("Dragging from something that isn't an inventory slot or crafting slot? Error, not intended behavior");
         }
     }
 
@@ -60,5 +74,10 @@ public class InventorySlot : ItemSlotUI, IDropHandler
     public void DragDelete(int slotIndex)
     {
         inventory.DeleteFromInventory(slotIndex);
+    }
+
+    private void Awake()
+    {
+        SlotType = "InventorySlot";
     }
 }

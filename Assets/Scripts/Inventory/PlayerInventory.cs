@@ -1,5 +1,6 @@
 /******************************************************************************
- * Inventory class for players.
+ * Inventory class for players. Main heavy lifting for managing the data structure
+ * for player inventory. Inherits from PlayerItemManager.
  * 
  * Authors: Alicia T, Jason N, Jino C
  *****************************************************************************/
@@ -11,20 +12,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-
 // consider making inventory a scriptable object for save + load
-public class PlayerInventory : MonoBehaviour
+public class PlayerInventory : PlayerItemManager
 {
-    [SerializeField] private VoidEvent onInventoryItemsUpdated = null;
-    // num of different stacked items it can hold
     [SerializeField]
-    private int maxInventorySize = 40;
-    private int currInventorySize = 0;
+    private CraftingInventoryManager playerCrafting = null;
+    //[SerializeField] private VoidEvent onInventoryItemsUpdated = null;
+    // num of different stacked items it can hold
 
     //[SerializeField]
 
     // inventory list
-    private List<ItemSlot> inventory = new();
+    //private List<ItemSlot> inventory = new();
 
     // possibly use an array for inventory
     // private StackObject[] inventory = new StackObject[maxInventorySize];
@@ -32,9 +31,9 @@ public class PlayerInventory : MonoBehaviour
     //private bool inventoryFull = false;
 
     // fetches the inventory slot by index
-    public ItemSlot GetSlotByIndex(int index) => inventory[index];
+    //public ItemSlot GetSlotByIndex(int index) => inventory[index];
 
-    public Action OnItemsUpdated = delegate { };
+    //public Action OnItemsUpdated = delegate { };
 
     // add item to player inventory
     public bool AddItem(ItemBehavior nBehavior, ItemData nItem)
@@ -127,64 +126,32 @@ public class PlayerInventory : MonoBehaviour
         return false;
     }
 
-    // getter method
-    public bool IsInventoryFull()
+    public void SwapInventory(int craftingIndex, int inventoryIndex)
     {
-        //return inventoryFull;
-        // for if inventory full isn't detected in time
-        // fail safe is checking every time this method is called
-        if (currInventorySize >= maxInventorySize)
-        {
-           return true;
-        }
-        else 
-           return false;
-    }
-
-    public void DeleteFromInventory(int slotIndex)
-    {
-        // if slotIndex passed in is out of bounds
-        if (slotIndex < 0 || slotIndex > inventory.Count - 1) { return; }
-
-        // delete object
-        inventory[slotIndex] = new ItemSlot();
-        currInventorySize--;
-
-        OnItemsUpdated.Invoke();
-    }
-
-    public void Swap(int indexOne, int indexTwo)
-    {
-        ItemSlot firstSlot = inventory[indexOne];
-        ItemSlot secondSlot = inventory[indexTwo];
-
-        // to be changed, need to override == operator to compare the two itemslot items
-        // intent is to not do anything if the slot its being dropped on is it's own slot
-        if(firstSlot == secondSlot)
-        {
-            return;
-        }
+        ItemSlot inventorySlot = inventory[inventoryIndex];
+        ItemSlot craftingSlot = playerCrafting.GetSlotByIndex(craftingIndex);
 
         // if dropping item onto another item
-        if(secondSlot.item != null)
+        if (inventorySlot.item != null)
         {
             // are they the same item?
-            if(firstSlot.item == secondSlot.item)
+            if (craftingSlot.item == inventorySlot.item)
             {
                 // check how much space is left inside slot
-                int secondSlotRemainingSpace = secondSlot.GetMaxStack() - secondSlot.GetCurrStack();
+                int secondSlotRemainingSpace = inventorySlot.GetMaxStack() - inventorySlot.GetCurrStack();
 
-                // if the first slot can fit within the second slot, combine stacks
-                if(firstSlot.GetCurrStack() <= secondSlotRemainingSpace)
+                // if the slot can fit within the other slot, combine stacks
+                if (craftingSlot.GetCurrStack() <= secondSlotRemainingSpace)
                 {
-                    // combine first stack into second stack
-                    secondSlot.AddToStack(firstSlot.GetCurrStack());
+                    // combine stacks
+                    inventorySlot.AddToStack(craftingSlot.GetCurrStack());
 
-                    // set first inventory slot to an empty slot
-                    inventory[indexOne] = new ItemSlot();
-                    
+                    // set inventory slot to an empty slot
+                    // same as deleting basically
+                    playerCrafting.DeleteFromInventory(craftingIndex);
+
                     // not sure if we need this line but it's intent is to delete the slot we aren't using anymore
-                    firstSlot = null;
+                    inventorySlot = null;
 
                     OnItemsUpdated.Invoke();
 
@@ -193,9 +160,9 @@ public class PlayerInventory : MonoBehaviour
             }
         }
 
-        // if not swap the empty slot and full slot
-        inventory[indexOne] = secondSlot;
-        inventory[indexTwo] = firstSlot;
+        //// if not swap the empty slot and full slot
+        inventory[inventoryIndex] = craftingSlot;
+        playerCrafting.AddSlotByRef(inventorySlot, craftingIndex);
 
         OnItemsUpdated.Invoke();
     }
@@ -212,9 +179,9 @@ public class PlayerInventory : MonoBehaviour
 
 
 
-    public void OnEnable() => OnItemsUpdated += onInventoryItemsUpdated.Raise;
+    //public void OnEnable() => OnItemsUpdated += onInventoryItemsUpdated.Raise;
 
-    public void OnDisable() => OnItemsUpdated -= onInventoryItemsUpdated.Raise;
+    //public void OnDisable() => OnItemsUpdated -= onInventoryItemsUpdated.Raise;
 
     //[ContextMenu("Test Add")]
     //public void TestAdd()
@@ -222,112 +189,114 @@ public class PlayerInventory : MonoBehaviour
     //    AddItem(testItemSlot);
     //}
 
+    
+
 }
 
-public class ItemSlot
-{
-    // type of item in inventory slot
-    public ItemData item;
+//public class ItemSlot
+//{
+//    // type of item in inventory slot
+//    public ItemData item;
 
-    // max num of items that stack can hold
-    private int maxStack = 0;
+//    // max num of items that stack can hold
+//    private int maxStack = 0;
 
-    // curr num of items stack is holding
-    [SerializeField]
-    private int currStack = 0;
+//    // curr num of items stack is holding
+//    [SerializeField]
+//    private int currStack = 0;
 
-    private int slotIndex = -1;
+//    private int slotIndex = -1;
 
-    private bool isFull = false;
-    private bool isEmpty = true;
+//    private bool isFull = false;
+//    private bool isEmpty = true;
 
-    // constructor methods
-    public ItemSlot()
-    {
-        item = null;
-        maxStack = 0;
-        currStack = 0;
-        isEmpty = true;
-    }
+//    // constructor methods
+//    public ItemSlot()
+//    {
+//        item = null;
+//        maxStack = 0;
+//        currStack = 0;
+//        isEmpty = true;
+//    }
 
-    public ItemSlot(ItemData itemData, int num)
-    {
-        item = itemData;
-        maxStack = item.GetMaxStackAmount();
-        currStack = num;
-        isEmpty = false;
-    }
+//    public ItemSlot(ItemData itemData, int num)
+//    {
+//        item = itemData;
+//        maxStack = item.GetMaxStackAmount();
+//        currStack = num;
+//        isEmpty = false;
+//    }
 
-    // getter methods
-    public string GetItemName()
-    {
-        return item.GetName();
-    }
+//    // getter methods
+//    public string GetItemName()
+//    {
+//        return item.GetName();
+//    }
 
-    public int GetMaxStack()
-    {
-        return maxStack;
-    }
+//    public int GetMaxStack()
+//    {
+//        return maxStack;
+//    }
 
-    public int GetCurrStack()
-    {
-        return currStack;
-    }
+//    public int GetCurrStack()
+//    {
+//        return currStack;
+//    }
 
-    public int GetSlotIndex()
-    {
-        return slotIndex;
-    }
+//    public int GetSlotIndex()
+//    {
+//        return slotIndex;
+//    }
 
-    // set methods
-    // possibly obsolete method
-    public void SetCurrStack(int newStack)
-    {
-        currStack = newStack;
-        if (currStack >= maxStack)
-        {
-            isFull = true;
-        }
-        isEmpty = false;
-    }
+//    // set methods
+//    // possibly obsolete method
+//    public void SetCurrStack(int newStack)
+//    {
+//        currStack = newStack;
+//        if (currStack >= maxStack)
+//        {
+//            isFull = true;
+//        }
+//        isEmpty = false;
+//    }
 
-    public void SetItemSlot(ItemData itemData, int num)
-    {
-        item = itemData;
-        maxStack = item.GetMaxStackAmount();
-        currStack = num;
-        isEmpty = false;
-    }
+//    public void SetItemSlot(ItemData itemData, int num)
+//    {
+//        item = itemData;
+//        maxStack = item.GetMaxStackAmount();
+//        currStack = num;
+//        isEmpty = false;
+//    }
 
-    public void SetSlotIndex(int newSlotIndex)
-    {
-        slotIndex = newSlotIndex;
-        isEmpty = false;
-    }
+//    public void SetSlotIndex(int newSlotIndex)
+//    {
+//        slotIndex = newSlotIndex;
+//        isEmpty = false;
+//    }
 
-    // is stack full
-    public bool IsFullStack()
-    {
-        if (currStack >= maxStack)
-        {
-            isFull = true;
-        }
-        return isFull;
-    }
+//    // is stack full
+//    public bool IsFullStack()
+//    {
+//        if (currStack >= maxStack)
+//        {
+//            isFull = true;
+//        }
+//        return isFull;
+//    }
 
-    // is slot empty
-    public bool IsEmptySlot()
-    {
-        return isEmpty;
-    }
+//    // is slot empty
+//    public bool IsEmptySlot()
+//    {
+//        return isEmpty;
+//    }
 
-    public void AddToStack(int num)
-    {
-        currStack += num;
-        if (currStack >= maxStack)
-        {
-            isFull = true;
-        }
-        isEmpty = false;
-    }
-}
+//    public void AddToStack(int num)
+//    {
+//        currStack += num;
+//        if (currStack >= maxStack)
+//        {
+//            isFull = true;
+//        }
+//        isEmpty = false;
+//    }
+//}

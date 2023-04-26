@@ -45,7 +45,8 @@ public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
             //originalScale = transform.localScale;
 
             // set parent to parent two up
-            transform.SetParent(transform.parent.parent.parent);
+            // please do not look at this hard code :) intent is so that the item is above all the other ui
+            transform.SetParent(transform.parent.parent.parent.parent.parent.parent.parent);
             
             // ignore item that is being dragged and look at what is underneath it
             canvasGroup.blocksRaycasts = false;
