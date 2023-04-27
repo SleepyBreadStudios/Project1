@@ -21,7 +21,7 @@ public class CraftingInventoryManager : PlayerItemManager
 
         // if dropping item onto another item
         if (craftingSlot.item != null)
-        {
+        { 
             // are they the same item?
             if (craftingSlot.item == inventorySlot.item)
             {
