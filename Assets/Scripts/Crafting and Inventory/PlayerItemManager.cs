@@ -110,6 +110,10 @@ public abstract class PlayerItemManager : MonoBehaviour
     public virtual void AddSlotByRef(ItemSlot itemSlot, int index)
     {
         inventory[index] = itemSlot;
+        if (itemSlot.item != null)
+        {
+            currInventorySize++;
+        }
         OnItemsUpdated.Invoke();
     }
 }
@@ -179,7 +183,14 @@ public class ItemSlot
         {
             isFull = true;
         }
-        isEmpty = false;
+        if(currStack <= 0)
+        {
+            isEmpty = true;
+        }
+        else
+        {
+            isEmpty = false;
+        }
     }
 
     public void SetItemSlot(ItemData itemData, int num)

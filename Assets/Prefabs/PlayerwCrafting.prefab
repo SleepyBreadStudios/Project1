@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 3880470758285264941}
   - component: {fileID: 4531908144347946919}
   - component: {fileID: 1025459570113205275}
-  - component: {fileID: 4421403025459825655}
+  - component: {fileID: 1635490780126689059}
   m_Layer: 0
   m_Name: PlayerwCrafting
   m_TagString: Player
@@ -422,8 +422,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onInventoryItemsUpdated: {fileID: 11400000, guid: cb5a201f7a491d84fba9a5d5731c602d, type: 2}
   maxInventorySize: 40
-  playerCrafting: {fileID: 4421403025459825655}
---- !u!114 &4421403025459825655
+  playerCrafting: {fileID: 1635490780126689059}
+--- !u!114 &1635490780126689059
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -438,6 +438,7 @@ MonoBehaviour:
   onInventoryItemsUpdated: {fileID: 11400000, guid: cb5a201f7a491d84fba9a5d5731c602d, type: 2}
   maxInventorySize: 5
   playerInventory: {fileID: 1025459570113205275}
+  craftingManager: {fileID: 0}
 --- !u!1 &3632004594383022530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1499,7 +1500,7 @@ PrefabInstance:
     - target: {fileID: 51881576596004030, guid: f5666db254d642e4a87a846799bc35ef, type: 3}
       propertyPath: crafting
       value: 
-      objectReference: {fileID: 4421403025459825655}
+      objectReference: {fileID: 1635490780126689059}
     - target: {fileID: 4188244453444387295, guid: f5666db254d642e4a87a846799bc35ef, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3189,7 +3190,7 @@ PrefabInstance:
     - target: {fileID: 51881576596004030, guid: f5666db254d642e4a87a846799bc35ef, type: 3}
       propertyPath: crafting
       value: 
-      objectReference: {fileID: 4421403025459825655}
+      objectReference: {fileID: 1635490780126689059}
     - target: {fileID: 4188244453444387295, guid: f5666db254d642e4a87a846799bc35ef, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3523,7 +3524,7 @@ PrefabInstance:
     - target: {fileID: 51881576596004030, guid: f5666db254d642e4a87a846799bc35ef, type: 3}
       propertyPath: crafting
       value: 
-      objectReference: {fileID: 4421403025459825655}
+      objectReference: {fileID: 1635490780126689059}
     - target: {fileID: 4188244453444387295, guid: f5666db254d642e4a87a846799bc35ef, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4309,7 +4310,7 @@ PrefabInstance:
     - target: {fileID: 51881576596004030, guid: f5666db254d642e4a87a846799bc35ef, type: 3}
       propertyPath: crafting
       value: 
-      objectReference: {fileID: 4421403025459825655}
+      objectReference: {fileID: 1635490780126689059}
     - target: {fileID: 4188244453444387295, guid: f5666db254d642e4a87a846799bc35ef, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4419,7 +4420,7 @@ PrefabInstance:
     - target: {fileID: 51881576596004030, guid: f5666db254d642e4a87a846799bc35ef, type: 3}
       propertyPath: crafting
       value: 
-      objectReference: {fileID: 4421403025459825655}
+      objectReference: {fileID: 1635490780126689059}
     - target: {fileID: 4188244453444387295, guid: f5666db254d642e4a87a846799bc35ef, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

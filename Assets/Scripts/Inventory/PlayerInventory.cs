@@ -163,6 +163,8 @@ public class PlayerInventory : PlayerItemManager
         //// if not swap the empty slot and full slot
         inventory[inventoryIndex] = craftingSlot;
         playerCrafting.AddSlotByRef(inventorySlot, craftingIndex);
+        currInventorySize++;
+
 
         OnItemsUpdated.Invoke();
     }

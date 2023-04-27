@@ -5,17 +5,26 @@ using UnityEngine.UI;
 
 public class CraftingManager : MonoBehaviour
 {
-    // Should replace this with inventory items later once we have it working
-    private Item currentItem;
-    //public Image customCursor;
+    [SerializeField]
+    public List<Recipe> recipes;
 
-    public void OnMouseDownItem(Item item)
+    // Creates the item for the player and updates respective inventory and crafting slots
+    // Once an item is crafted, should be sent in the crafted slot
+    // Checks item present and compares across recipes
+    public Recipe Craft(List<string> itemsInCrafting)
     {
-        if (currentItem == null)
+        // check if it's a recipe
+        var foundRecipe = recipes.Find(recipe => recipe.IsRecipeEqual(itemsInCrafting) == true);
+        if (foundRecipe == null)
         {
-            currentItem = item;
-            //customCursor.gameObject.SetActive(true);
-            //customeCursor.sprite = currentItem.GetComponent<Image>().sprite;
+            return null;
+        }
+        else
+        {
+            // return the item that matches the recipe found
+            //var newItem = foundRecipe.GetCraftedItem();
+            //return newItem;
+            return foundRecipe;
         }
     }
 }
