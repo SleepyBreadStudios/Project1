@@ -47,6 +47,31 @@ public abstract class PlayerItemManager : MonoBehaviour
 
     public virtual void OnDisable() => OnItemsUpdated -= onInventoryItemsUpdated.Raise;
 
+    public virtual void SplitStack(int slotIndex)
+    {
+        Debug.Log("Attempting to split stack");
+        ItemSlot slot = inventory[slotIndex];
+        // if can hold another stack
+        if (!IsInventoryFull())
+        {
+            // halve the stack
+            int newStackCount = slot.HalveStack();
+            // look for empty slot
+            var foundEmptySlot = inventory.Find(stackItem => stackItem.IsEmptySlot() == true);
+            if (foundEmptySlot != null)
+            {
+                // change first empty inventory slot to hold item picked up
+                foundEmptySlot.SetItemSlot(slot.item, newStackCount);
+                // tell slot what it's index is in the array
+                foundEmptySlot.SetSlotIndex(inventory.IndexOf(foundEmptySlot));
+                // account for new inventory size
+                currInventorySize++;
+                OnItemsUpdated.Invoke();
+                // override this in crafting so that it updates the string form
+            }
+        }
+    }
+
     // this code is duplicated in it's children classes, refactoring required
     public virtual void Swap(int indexOne, int indexTwo)
     {
@@ -88,7 +113,7 @@ public abstract class PlayerItemManager : MonoBehaviour
             }
         }
 
-        // if not swap the empty slot and full slot
+        // if not swap the slots
         inventory[indexOne] = secondSlot;
         inventory[indexTwo] = firstSlot;
 
@@ -156,7 +181,14 @@ public class ItemSlot
     // getter methods
     public string GetItemName()
     {
-        return item.GetName();
+        if (item != null)
+        {
+            return item.GetName();
+        }
+        else
+        {
+            return "";
+        }
     }
 
     public int GetMaxStack()
@@ -231,6 +263,22 @@ public class ItemSlot
             isFull = true;
         }
         isEmpty = false;
+    }
+
+    public int HalveStack()
+    {
+        // rounded up
+        double half = 2;
+        double leftover = Math.Ceiling((double)currStack / half);
+
+        // rounded down
+        if (currStack > 1)
+        {
+            currStack /= 2;
+        }
+
+        return (int)leftover;
+
     }
 }
 

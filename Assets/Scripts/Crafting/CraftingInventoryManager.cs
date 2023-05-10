@@ -8,6 +8,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using System.Threading.Tasks;
 
 public class CraftingInventoryManager : PlayerItemManager
 {
@@ -17,14 +18,17 @@ public class CraftingInventoryManager : PlayerItemManager
     [SerializeField]
     private CraftingManager craftingManager = null;
 
-    [SerializeField]
-    public ItemSlot resultSlot = null;
+    //[SerializeField]
+    //public ItemSlot resultSlot = null;
 
+    [SerializeField]
     List<string> craftingStringForm = new();
 
+    private int resultAmount = 0;
 
+    private bool currentlyCrafting = false;
 
-    public void SwapCrafting(int inventoryIndex, int craftingIndex)
+    public void SwapWInventory(int inventoryIndex, int craftingIndex)
     {
         ItemSlot craftingSlot = inventory[craftingIndex];
         ItemSlot inventorySlot = playerInventory.GetSlotByIndex(inventoryIndex);
@@ -56,14 +60,19 @@ public class CraftingInventoryManager : PlayerItemManager
                     return;
                 }
             }
+            // prepare for swap
+            // remove old item name from crafting
+            craftingStringForm.Remove(inventory[craftingIndex].GetItemName());
         }
 
-        //// if not swap the empty slot and full slot
+        // if not swap the slots 
         inventory[craftingIndex] = inventorySlot;
-        playerInventory.AddSlotByRef(craftingSlot, inventoryIndex);
-        currInventorySize++;
         // add to crafting string as well
         craftingStringForm.Add(inventorySlot.GetItemName());
+        currInventorySize++;
+
+        // update player inventory
+        playerInventory.AddSlotByRef(craftingSlot, inventoryIndex);
 
         OnItemsUpdated.Invoke();
         AttemptToCraftItem();
@@ -75,6 +84,33 @@ public class CraftingInventoryManager : PlayerItemManager
     {
         base.Swap(indexOne, indexTwo);
         AttemptToCraftItem();
+    }
+
+    public void SwapWResult(int resultIndex, int craftingIndex)
+    {
+        ItemSlot craftingSlot = inventory[craftingIndex];
+        ItemSlot resultSlot = inventory[resultIndex];
+
+        // if dropping item onto another item
+        // do nothing, should not swap with result slot
+        if (craftingSlot.item != null)
+        {
+            return;
+        }
+
+        // if not swap the empty slot and full slot
+        inventory[craftingIndex] = resultSlot;
+        // update crafting based on successful crafted item
+        Craft();
+
+        // add to crafting string as well
+        craftingStringForm.Add(resultSlot.GetItemName());
+        currInventorySize++;
+
+        // update result slot with empty slot
+        inventory[resultIndex] = new ItemSlot();
+
+        OnItemsUpdated.Invoke();
     }
 
     public override void DeleteFromInventory(int slotIndex)
@@ -100,9 +136,20 @@ public class CraftingInventoryManager : PlayerItemManager
         AttemptToCraftItem();
     }
 
+    public void RemoveItemFromCrafting(int slotIndex)
+    {
+        craftingStringForm.Remove(inventory[slotIndex].GetItemName());
+    }
+
     // every time crafting inventory is updated, check to see if we can make an item
+    // updates preview of crafting
     public void AttemptToCraftItem()
     {
+        // don't update crafting preview if there is crafting in the process
+        if(currentlyCrafting)
+        {
+            return;
+        }
         Recipe recipe = craftingManager.Craft(craftingStringForm);
         if(recipe != null)
         {
@@ -116,19 +163,44 @@ public class CraftingInventoryManager : PlayerItemManager
                         lowestCount = inventory[i].GetCurrStack();
                 }
             }
-            resultSlot.SetItemSlot(recipe.GetCraftedItem(), lowestCount);
-            // update counts to reflect new item
-            for(int i = 0; i < recipe.GetNumItems(); i++)
+            
+            inventory[maxInventorySize - 1].SetItemSlot(recipe.GetCraftedItem(), lowestCount);
+            resultAmount = lowestCount;
+            OnItemsUpdated.Invoke();
+        }
+        else
+        {
+            // clear preview result if the new contents of the crafting inventory is not a recipe
+            if(!(inventory[maxInventorySize - 1].IsEmptySlot()))
             {
-                var foundItem = inventory.Find(itemSlot => itemSlot.GetItemName() == recipe.recipeList[i]);
-                foundItem.SetCurrStack(foundItem.GetCurrStack() - lowestCount);
-                if(foundItem.IsEmptySlot())
+                base.DeleteFromInventory(maxInventorySize - 1);
+                resultAmount = 0;
+            }
+        }
+    }
+
+    // Officially craft by updating item stacks to reflect that they've been used
+    public void Craft()
+    {
+        currentlyCrafting = true;
+        Recipe recipe = craftingManager.Craft(craftingStringForm);
+        for (int i = 0; i < recipe.GetNumItems(); i++)
+        {
+            var foundItem = inventory.Find(itemSlot => itemSlot.GetItemName() == recipe.recipeList[i]);
+            //Debug.Log(foundItem.GetItemName());
+            if (foundItem != null)
+            {
+                //Debug.Log("Subtracting by " + resultAmount);
+                foundItem.SetCurrStack(foundItem.GetCurrStack() - resultAmount);
+                if (foundItem.IsEmptySlot())
                 {
                     DeleteFromInventory(inventory.IndexOf(foundItem));
                 }
             }
         }
-        OnItemsUpdated.Invoke();
+        resultAmount = 0;
+        AttemptToCraftItem();
+        currentlyCrafting = false;
     }
 
     private void Awake()
@@ -138,7 +210,7 @@ public class CraftingInventoryManager : PlayerItemManager
         {
             inventory.Add(new ItemSlot());
         }
-        resultSlot = inventory[maxInventorySize - 1];
+        //resultSlot = inventory[maxInventorySize - 1];
         craftingManager = GameObject.Find("CraftingManager").GetComponent<CraftingManager>();
     }
 }

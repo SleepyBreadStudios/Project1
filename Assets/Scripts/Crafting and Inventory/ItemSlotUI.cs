@@ -40,4 +40,6 @@ public abstract class ItemSlotUI : MonoBehaviour, IDropHandler
     {
         itemIconImage.enabled = enable;
     }
+
+    public abstract void SplitStack();
 }

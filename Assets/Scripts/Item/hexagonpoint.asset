@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
   m_Name: hexagonpoint
   m_EditorClassIdentifier: 
-  itemName: Hexagon Point
+  itemName: HexagonPoint
   icon: {fileID: -2135585597343286014, guid: 541896f6831a1cd46ad410377e91f2df, type: 3}
   count: 1
   maxStack: 1
   startingCondition: 100
+  unique: 0
