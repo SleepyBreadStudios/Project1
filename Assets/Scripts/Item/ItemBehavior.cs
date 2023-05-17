@@ -105,7 +105,7 @@ public class ItemBehavior : MonoBehaviour
         if (other.gameObject.CompareTag("Item") && immunity > 10.0f)
         {
             string toLoad = "Items/" + itemPrefabs[Random.Range(0, 10)];
-            GameObject newItem = Instantiate(Resources.Load(toLoad, typeof(GameObject)), transform.position, Quaternion.identity) as GameObject;
+            GameObject newItem = Instantiate(Resources.Load("Projectile", typeof(GameObject)), transform.position, Quaternion.identity) as GameObject;
             this.Delete();
         }
     }

@@ -30,6 +30,9 @@ public class UIManager : Singleton<UIManager>
     private TextMeshProUGUI objectCount;
 
     [SerializeField]
+    private TextMeshProUGUI enemyCount;
+
+    [SerializeField]
     private TMP_InputField joinCodeInput;
 
     [SerializeField]
@@ -56,6 +59,11 @@ public class UIManager : Singleton<UIManager>
     {
         playersInGameText.text = $"Players in game: {PlayersManager.Instance.PlayersInGame}";
         objectCount.text = $"ObjectCount: {GameObject.FindGameObjectsWithTag("Item").Length}";
+        enemyCount.text = $"Enemy Count: {GameObject.FindGameObjectsWithTag("Enemy").Length}";
+        if(GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+        {
+            enemyCount.text = $"You win!";
+        }
     }
 
     void Start()

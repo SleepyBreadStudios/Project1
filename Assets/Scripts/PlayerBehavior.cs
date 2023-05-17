@@ -27,6 +27,10 @@ public class PlayerBehavior : NetworkBehaviour
     [SerializeField]
     private GameObject InventoryUI = null;
 
+    // projectile prefab
+    [SerializeField]
+    private GameObject projectile = null;
+
     // is inventory showing at the moment?
     private bool inventoryEnabled = false;
 
@@ -112,6 +116,25 @@ public class PlayerBehavior : NetworkBehaviour
                 InventoryUI.transform.localScale = new Vector3(1, 1, 1);
                 inventoryEnabled = true;
             }
+        }
+
+        // shoot projectile
+        if (Input.GetMouseButtonDown(0) && !inventoryEnabled)
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Debug.Log("Mouse coords: " + mousePos.x + ", " + mousePos.y);
+            
+            // instantiate projectile
+            GameObject projectileObj = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
+
+            // set orientation
+            projectileObj.transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - projectileObj.transform.position);
+
+            // IMPORTANT: get network to recognize object
+            projectileObj.GetComponent<NetworkObject>().Spawn(true);
+            projectileObj.transform.GetComponent<NetworkObject>().Spawn(true);
+
+
         }
     }
 
