@@ -1,10 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
-<<<<<<< Updated upstream
---- !u!1 &6616707134031558949
-=======
---- !u!1 &6645977553513272130
->>>>>>> Stashed changes
+--- !u!1 &5990605733793356645
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12,74 +8,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< Updated upstream
-  - component: {fileID: 5525360679354250626}
-  - component: {fileID: 4386037948280543909}
-  - component: {fileID: 8014900975970340512}
-  - component: {fileID: 420407555551583028}
-  - component: {fileID: 8173659023330190929}
-  - component: {fileID: 8857981149942295992}
-  - component: {fileID: 6373138443470228652}
-  - component: {fileID: 1534750319420513688}
-=======
-  - component: {fileID: 8597639666151107099}
-  - component: {fileID: 1300745890772910960}
-  - component: {fileID: 2535693435258325582}
-  - component: {fileID: 2171194009916804221}
-  - component: {fileID: 5770756924588968793}
-  - component: {fileID: 1099921365549247450}
-  - component: {fileID: 6850809047135547333}
-  - component: {fileID: 4065240185470812561}
->>>>>>> Stashed changes
+  - component: {fileID: 5541498277958337219}
+  - component: {fileID: 2011193873744964702}
+  - component: {fileID: 1986960944373688545}
+  - component: {fileID: 6255298561632056582}
+  - component: {fileID: 840699199486188456}
+  - component: {fileID: 5768114397335908058}
+  - component: {fileID: 2766833341222582889}
+  - component: {fileID: 5156430475229565211}
   m_Layer: 0
-  m_Name: circle
+  m_Name: hexagon
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< Updated upstream
---- !u!4 &5525360679354250626
-=======
---- !u!4 &8597639666151107099
->>>>>>> Stashed changes
+--- !u!4 &5541498277958337219
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-  m_GameObject: {fileID: 6616707134031558949}
+  m_GameObject: {fileID: 5990605733793356645}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.5, y: -3.87, z: 0}
-=======
-  m_GameObject: {fileID: 6645977553513272130}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.95, y: 0, z: 0}
->>>>>>> Stashed changes
+  m_LocalPosition: {x: 1.87, y: -2.8, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-<<<<<<< Updated upstream
-  m_RootOrder: 22
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4386037948280543909
-=======
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1300745890772910960
->>>>>>> Stashed changes
+--- !u!212 &2011193873744964702
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-  m_GameObject: {fileID: 6616707134031558949}
-=======
-  m_GameObject: {fileID: 6645977553513272130}
->>>>>>> Stashed changes
+  m_GameObject: {fileID: 5990605733793356645}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -114,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 5d8adadf101cc094cbb28196994dbd3e, type: 3}
+  m_Sprite: {fileID: -712631045867808456, guid: 926f77341bdcc9947ade8d590dc14d94, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -125,21 +90,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
-<<<<<<< Updated upstream
---- !u!114 &8014900975970340512
-=======
---- !u!114 &2535693435258325582
->>>>>>> Stashed changes
+--- !u!114 &1986960944373688545
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-  m_GameObject: {fileID: 6616707134031558949}
-=======
-  m_GameObject: {fileID: 6645977553513272130}
->>>>>>> Stashed changes
+  m_GameObject: {fileID: 5990605733793356645}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
@@ -149,21 +106,13 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
-<<<<<<< Updated upstream
---- !u!114 &420407555551583028
-=======
---- !u!114 &2171194009916804221
->>>>>>> Stashed changes
+--- !u!114 &6255298561632056582
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-  m_GameObject: {fileID: 6616707134031558949}
-=======
-  m_GameObject: {fileID: 6645977553513272130}
->>>>>>> Stashed changes
+  m_GameObject: {fileID: 5990605733793356645}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
@@ -183,22 +132,14 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
-<<<<<<< Updated upstream
---- !u!50 &8173659023330190929
-=======
---- !u!50 &5770756924588968793
->>>>>>> Stashed changes
+--- !u!50 &840699199486188456
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-  m_GameObject: {fileID: 6616707134031558949}
-=======
-  m_GameObject: {fileID: 6645977553513272130}
->>>>>>> Stashed changes
+  m_GameObject: {fileID: 5990605733793356645}
   m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -218,54 +159,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
-<<<<<<< Updated upstream
---- !u!114 &8857981149942295992
-=======
---- !u!114 &1099921365549247450
->>>>>>> Stashed changes
+--- !u!114 &5768114397335908058
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-  m_GameObject: {fileID: 6616707134031558949}
-=======
-  m_GameObject: {fileID: 6645977553513272130}
->>>>>>> Stashed changes
+  m_GameObject: {fileID: 5990605733793356645}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
---- !u!114 &6373138443470228652
-MonoBehaviour:
+--- !u!60 &2766833341222582889
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6616707134031558949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eceb5a197c4e06428bb3488dfe27037, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemType: {fileID: 11400000, guid: c808d46a9aae0a046815842505905e7e, type: 2}
---- !u!58 &1534750319420513688
-=======
---- !u!58 &6850809047135547333
->>>>>>> Stashed changes
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-  m_GameObject: {fileID: 6616707134031558949}
-=======
-  m_GameObject: {fileID: 6645977553513272130}
->>>>>>> Stashed changes
+  m_GameObject: {fileID: 5990605733793356645}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -294,20 +206,34 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
-<<<<<<< Updated upstream
-=======
---- !u!114 &4065240185470812561
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 0.8828125}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.25, y: 0.43359375}
+      - {x: -0.5, y: 0}
+      - {x: -0.25, y: -0.43359375}
+      - {x: 0.25, y: -0.43359375}
+      - {x: 0.5, y: 0}
+      - {x: 0.25, y: 0.43359375}
+  m_UseDelaunayMesh: 0
+--- !u!114 &5156430475229565211
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6645977553513272130}
+  m_GameObject: {fileID: 5990605733793356645}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4f13b67fa3aa9244965dda164a89770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: {fileID: 11400000, guid: c808d46a9aae0a046815842505905e7e, type: 2}
->>>>>>> Stashed changes
+  itemType: {fileID: 11400000, guid: bde4cce924c14ea4d92d3d909ef0e308, type: 2}

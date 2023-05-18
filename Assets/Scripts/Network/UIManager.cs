@@ -24,6 +24,9 @@ public class UIManager : Singleton<UIManager>
     private Button startClientButton;
 
     [SerializeField]
+    private Button endServerButton;
+
+    [SerializeField]
     private TextMeshProUGUI playersInGameText;
 
     [SerializeField]
@@ -38,6 +41,8 @@ public class UIManager : Singleton<UIManager>
     // [SerializeField]
     // private Button executePhysicsButton;
 
+    [SerializeField]
+    private SpawnerManager spawner;
 
     //private bool hasServerStarted;
 
@@ -99,11 +104,19 @@ public class UIManager : Singleton<UIManager>
                 Debug.Log("Unable to start client...");
         });
 
+        endServerButton?.onClick.AddListener(async () =>
+        {
+            spawner.PrintObjectsServerRpc();
+            //NetworkManager.Singleton.Shutdown();
+        });
+
         // STATUS TYPE CALLBACKS
         NetworkManager.Singleton.OnClientConnectedCallback += (id) =>
         {
             Debug.Log($"{id} just connected...");
         };
+
+
 
         //NetworkManager.Singleton.OnServerStarted += () =>
         //{
