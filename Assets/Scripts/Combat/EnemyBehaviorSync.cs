@@ -1,18 +1,17 @@
-﻿/******************************************************************************
- * Enemy behavior file. Meant to be inherited by other enemy types.
- * 
- * Authors: Alicia T, Jason N, Jino C
- *****************************************************************************/
-//#define Debug
+/******************************************************************************
+* Shared template for enemies.
+* 
+* Authors: Alicia T, Jason N, Jino C
+*****************************************************************************/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-
-// consider making abstract
-public class EnemyBehavior : MonoBehaviour
+public class EnemyBehaviorSync : MonoBehaviour
 {
+
+    private EnemySpawner Spawner = null;
     private Vector2 dest;
 
     // internal enemy name
@@ -90,8 +89,8 @@ public class EnemyBehavior : MonoBehaviour
 
     void Start()
     {
+        Spawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
         health = Random.Range(2, 6);
-        
         dest = transform.position;
     }
 
