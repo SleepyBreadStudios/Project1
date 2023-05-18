@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
   m_Name: circle
   m_EditorClassIdentifier: 
-  itemName: Circle
+  itemName: circle
   icon: {fileID: -2413806693520163455, guid: 5d8adadf101cc094cbb28196994dbd3e, type: 3}
   count: 3
   maxStack: 9
   startingCondition: 100
+  unique: 0

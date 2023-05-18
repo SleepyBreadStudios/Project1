@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
   m_Name: star
   m_EditorClassIdentifier: 
-  itemName: Star
+  itemName: star
   icon: {fileID: -6573826362745927925, guid: abdc9bd5f3d499042abf0fc3726246cd, type: 3}
   count: 1
   maxStack: 1
   startingCondition: 100
+  unique: 0

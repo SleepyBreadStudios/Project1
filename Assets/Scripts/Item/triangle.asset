@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
   m_Name: triangle
   m_EditorClassIdentifier: 
-  itemName: Triangle
+  itemName: triangle
   icon: {fileID: 7482667652216324306, guid: 84d9229f5ac6a8f44bd847ab54fc8894, type: 3}
   count: 50
   maxStack: 99
   startingCondition: 100
+  unique: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
   m_Name: flower
   m_EditorClassIdentifier: 
-  itemName: Flower
+  itemName: flower
   icon: {fileID: -2413806693520163455, guid: f50d497c18808c648952964c1b6d8eae, type: 3}
   count: 1
   maxStack: 1

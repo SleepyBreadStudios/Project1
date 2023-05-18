@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
   m_Name: roundedsquare
   m_EditorClassIdentifier: 
-  itemName: Rounded Square
+  itemName: roundedsquare
   icon: {fileID: -5177388603050735206, guid: 3c44ddbdf78afd5479c21ea77ef5f6b6, type: 3}
   count: 5
   maxStack: 9
   startingCondition: 100
+  unique: 0

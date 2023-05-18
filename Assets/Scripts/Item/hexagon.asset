@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
   m_Name: hexagon
   m_EditorClassIdentifier: 
-  itemName: Hexagon
+  itemName: hexagon
   icon: {fileID: -712631045867808456, guid: 926f77341bdcc9947ade8d590dc14d94, type: 3}
   count: 40
   maxStack: 99
