@@ -35,7 +35,7 @@ public class SpawnerManager : NetworkBehaviour
             Vector3 randLoc = new Vector3(randx, randy, 0);
             GameObject newItem = Instantiate(Resources.Load(toLoad), randLoc, Quaternion.identity) as GameObject;
             newItem.GetComponent<NetworkObject>().Spawn();
-            spawnedItems.Add(newItem);
+            //spawnedItems.Add(newItem);
             //AddtoClientRpc(newItem);
         }
     }
@@ -63,10 +63,20 @@ public class SpawnerManager : NetworkBehaviour
         if (gameObj.GetComponent<NetworkObject>().IsSpawned)
         {
             gameObj.GetComponent<NetworkObject>().Despawn();
-            spawnedItems.Remove(gameObj);
+            //spawnedItems.Remove(gameObj);
             //RemoveFromClientClientRpc(gameObj);
         }
         return true;
+    }
+
+    public void AddObject(GameObject newItem)
+    {
+        spawnedItems.Add(newItem);
+    }
+
+    public void RemoveObject(GameObject objToRemove)
+    {
+        spawnedItems.Remove(objToRemove);
     }
 
     //[ClientRpc]
@@ -81,27 +91,49 @@ public class SpawnerManager : NetworkBehaviour
     //    spawnedItems.Remove(gameObj);
     //}
 
+    //protected override void OnSynchronize<T>(ref BufferSerializer<T> serializer)
+    //{
+
+    //    base.OnSynchronize(ref serializer);
+    //}
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        //if(spawnedItems.Count == 0)
+        //{
+        //    Debug.Log("Hello");
+        //}
+        //else
+        //{
+        //    Debug.Log("???");
+        //}
+    }
+
     [ServerRpc]
     public void PrintObjectsServerRpc()
     {
         for (int i = 0; i < spawnedItems.Count; i++)
         {
-            Debug.Log(spawnedItems[i].transform.position);
+            //Debug.Log(spawnedItems[i].transform.position);
+            if(spawnedItems[i] != null)
+            {
+                Debug.Log(spawnedItems[i].name + ": " + spawnedItems[i].transform.position);
+            }
         }
-        PrintObjectsClientRpc();
     }
 
     [ClientRpc]
     public void PrintObjectsClientRpc()
     {
-        if (IsClient)
+        if (IsClient && !IsHost)
         {
-            Debug.Log("Hello");
             for (int i = 0; i < spawnedItems.Count; i++)
             {
-                Debug.Log("Client: " + spawnedItems[i].transform.position);
+                if(spawnedItems[i] != null)
+                {
+                    Debug.Log(spawnedItems[i].name + ": " + spawnedItems[i].transform.position);
+                }
             }
-            Debug.Log("Hello again :D");
         }
 
     }

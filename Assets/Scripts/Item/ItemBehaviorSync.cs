@@ -12,7 +12,7 @@ using UnityEngine.UI;
 
 
 // consider making abstract
-public class ItemBehaviorSync : MonoBehaviour
+public class ItemBehaviorSync : NetworkBehaviour
 {
     public ItemData itemType;
     private Vector2 randLoc;
@@ -53,13 +53,15 @@ public class ItemBehaviorSync : MonoBehaviour
 
         randLoc = new Vector2(randx, randy);
     }
+    void Awake()
+    {
+        Spawner = GameObject.Find("SpawnerManager").GetComponent<SpawnerManager>();
+    }
 
     void Start()
     {
-        Spawner = GameObject.Find("SpawnerManager").GetComponent<SpawnerManager>();
         itemCount = itemType.GetCount();
         move();
-
     }
 
     void Update()
@@ -88,5 +90,17 @@ public class ItemBehaviorSync : MonoBehaviour
             //if (spawnedObject)
             //this.Delete();
         }
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        Spawner.AddObject(this.gameObject);
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        Spawner.RemoveObject(this.gameObject);
+        base.OnNetworkDespawn();
     }
 }
