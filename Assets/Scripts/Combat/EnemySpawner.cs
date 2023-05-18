@@ -7,8 +7,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : NetworkBehaviour
 {
     [SerializeField]
     private GameObject enemyPrefab;
@@ -28,6 +29,11 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+
+    public void Spawn()
+    {
         StartCoroutine(spawnEnemy(enemyInterval, enemyPrefab));
         StartCoroutine(spawnEnemy(enemyInterval2, enemyPrefab2));
         StartCoroutine(spawnEnemy(enemyInterval3, enemyPrefab3));
@@ -36,6 +42,7 @@ public class EnemySpawner : MonoBehaviour
     private IEnumerator spawnEnemy(float interval, GameObject enemy) {
         yield return new WaitForSeconds(interval);
         GameObject newEnemy = Instantiate(enemy, new Vector3(Random.Range(-5f, 5), Random.Range(-6f, 6f), 0), Quaternion.identity);
+        newEnemy.GetComponent<NetworkObject>().Spawn();
         StartCoroutine(spawnEnemy(interval, enemy));
     }
 }

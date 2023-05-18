@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!58 &67629112
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -416,11 +416,6 @@ MonoBehaviour:
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
     - Override: 0
-      Prefab: {fileID: 2010660883}
-      SourcePrefabToOverride: {fileID: 0}
-      SourceHashToOverride: 0
-      OverridingTargetPrefab: {fileID: 0}
-    - Override: 0
       Prefab: {fileID: 8092736827747560257, guid: 7ad212b4591ec57428a557d4da23eed4, type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
@@ -570,7 +565,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!58 &193111520
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -925,7 +920,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!58 &286999759
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2710,7 +2705,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!58 &1143374662
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2930,7 +2925,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!58 &1147407626
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3150,7 +3145,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!58 &1269118614
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3968,6 +3963,7 @@ MonoBehaviour:
   enemyCount: {fileID: 606581662}
   joinCodeInput: {fileID: 679539769}
   joinCode: {fileID: 906773584}
+  enemySpawn: {fileID: 2010660884}
 --- !u!4 &1967031064
 Transform:
   m_ObjectHideFlags: 0
@@ -3993,6 +3989,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2010660885}
   - component: {fileID: 2010660884}
+  - component: {fileID: 2010660886}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -4033,6 +4030,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2010660886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010660883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2338094832
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &2086599835
 GameObject:
   m_ObjectHideFlags: 0
@@ -4108,7 +4121,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!58 &2123280865
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4317,6 +4330,10 @@ PrefabInstance:
     - target: {fileID: 111342030854125855, guid: b92d7ce3b93eb1640ad2741f344f08dd, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 111342030854125855, guid: b92d7ce3b93eb1640ad2741f344f08dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5684551994177645111, guid: b92d7ce3b93eb1640ad2741f344f08dd, type: 3}
       propertyPath: GlobalObjectIdHash
