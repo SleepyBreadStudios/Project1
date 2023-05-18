@@ -36,7 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8206349176818431040
 SpriteRenderer:
@@ -183,6 +183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02bbb527038dc94283b8e1682e642a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  strength: 1
+  speed: 0
 --- !u!58 &1504863541564908085
 CircleCollider2D:
   m_ObjectHideFlags: 0

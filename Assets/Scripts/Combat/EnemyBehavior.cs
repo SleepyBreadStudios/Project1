@@ -25,6 +25,7 @@ public class EnemyBehavior : MonoBehaviour
     private int health; // Requested by Kelvin
 
     // strength value
+    [SerializeField]
     private int strength;
 
     // defense value
@@ -91,18 +92,13 @@ public class EnemyBehavior : MonoBehaviour
     void Start()
     {
         health = Random.Range(2, 6);
-        
+        Debug.Log(health);
         dest = transform.position;
     }
 
     void Update()
     {
         move();
-
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
 
     }
 }

@@ -14,6 +14,9 @@ public class PlayerBehavior : NetworkBehaviour
     private float walkSpeed = 0.2f;
 
     [SerializeField]
+    private int health = 20;
+
+    [SerializeField]
     private Vector2 defaultPositionRange = new Vector2(-4, 4);
 
     [SerializeField]
@@ -136,6 +139,7 @@ public class PlayerBehavior : NetworkBehaviour
 
 
         }
+
     }
 
     [ServerRpc]
@@ -158,6 +162,14 @@ public class PlayerBehavior : NetworkBehaviour
             if(delete)
             {
                 collision.gameObject.GetComponent<ItemBehavior>().Delete();
+            }
+        }
+        if(collision.CompareTag("Enemy"))
+        {
+            this.health -= collision.gameObject.GetComponent<EnemyBehavior>().getStrength();
+            Debug.Log(health);
+            if (health <= 0) {
+                Destroy(this.gameObject);
             }
         }
     }
