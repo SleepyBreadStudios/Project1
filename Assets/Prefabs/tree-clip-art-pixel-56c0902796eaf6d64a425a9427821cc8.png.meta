@@ -128,7 +128,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      tree-clip-art-pixel-56c0902796eaf6d64a425a9427821cc8_0: 458131210709905794
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

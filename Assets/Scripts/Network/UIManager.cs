@@ -41,6 +41,9 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     public EnemySpawner enemySpawn = null;
 
+    [SerializeField]
+    public OverworldSpawner overworldSpawn = null;
+
     // [SerializeField]
     // private Button executePhysicsButton;
 
@@ -94,6 +97,7 @@ public class UIManager : Singleton<UIManager>
                 Debug.Log("Host started...");
                 joinCode.text = RelayManager.Instance.joinCode;
                 enemySpawn.Spawn();
+                overworldSpawn.Spawn();
             }
             else
                 Debug.Log("Unable to start host...");
