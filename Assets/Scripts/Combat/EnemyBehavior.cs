@@ -25,6 +25,7 @@ public class EnemyBehavior : NetworkBehaviour
 
     private GameObject itemObj = null;
 
+    [SerializeField]
     // health value
     private int health = 3;
 

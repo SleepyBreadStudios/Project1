@@ -184,6 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 4103991691459504235, guid: 9a22e1b3e33a9164cb6a363ffca43158, type: 3}
+  health: 1
   speed: 5
 --- !u!58 &1504863541564908085
 CircleCollider2D:

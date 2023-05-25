@@ -14,6 +14,9 @@ public class OverworldSpawner : NetworkBehaviour
 
     [SerializeField]
     private GameObject structure = null;
+    
+    [SerializeField]
+    private GameObject structure2 = null;
 
     // Allows to set number of objects to spawn in world
     [SerializeField]
@@ -26,12 +29,13 @@ public class OverworldSpawner : NetworkBehaviour
     public void Spawn()
     {
         StartCoroutine(spawnObject(2.0f, structure));
+        StartCoroutine(spawnObject(2.0f, structure2));
     }
 
-    private IEnumerator spawnObject(float interval, GameObject structure) {
+    private IEnumerator spawnObject(float interval, GameObject s) {
         yield return new WaitForSeconds(interval);
-        GameObject newObject = Instantiate(structure, new Vector3(Random.Range(-10f, 10), Random.Range(-10f, 10f), 0), Quaternion.identity);
+        GameObject newObject = Instantiate(s, new Vector3(Random.Range(-10f, 10), Random.Range(-10f, 10f), 0), Quaternion.identity);
         newObject.GetComponent<NetworkObject>().Spawn();
-        StartCoroutine(spawnObject(2.0f, structure));
+        StartCoroutine(spawnObject(2.0f, s));
     }
 }
