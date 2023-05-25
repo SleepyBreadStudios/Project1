@@ -14,9 +14,6 @@ public class PlayerBehavior : NetworkBehaviour
     private float walkSpeed = 0.2f;
 
     [SerializeField]
-    private int health = 20;
-
-    [SerializeField]
     private Vector2 defaultPositionRange = new Vector2(-4, 4);
 
     [SerializeField]
@@ -33,6 +30,8 @@ public class PlayerBehavior : NetworkBehaviour
     // projectile prefab
     [SerializeField]
     private GameObject projectile = null;
+
+    public GameObject projectileObj = null;
 
     // is inventory showing at the moment?
     private bool inventoryEnabled = false;
@@ -125,21 +124,12 @@ public class PlayerBehavior : NetworkBehaviour
         if (Input.GetMouseButtonDown(0) && !inventoryEnabled)
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Debug.Log("Mouse coords: " + mousePos.x + ", " + mousePos.y);
-            
-            // instantiate projectile
-            GameObject projectileObj = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
+
+            ProjectileServerRpc(mousePos);
 
             // set orientation
-            projectileObj.transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - projectileObj.transform.position);
-
-            // IMPORTANT: get network to recognize object
-            projectileObj.GetComponent<NetworkObject>().Spawn(true);
-            projectileObj.transform.GetComponent<NetworkObject>().Spawn(true);
-
-
+         
         }
-
     }
 
     [ServerRpc]
@@ -147,6 +137,18 @@ public class PlayerBehavior : NetworkBehaviour
     {
         forwardBackPosition.Value = forwardBackward;
         leftRightPosition.Value = leftRight;
+    }
+
+    [ServerRpc]
+    public void ProjectileServerRpc(Vector3 mousePos)
+    {
+        // instantiate projectile
+        projectileObj = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
+
+        // IMPORTANT: get network to recognize object
+        projectileObj.GetComponent<NetworkObject>().Spawn(true);
+
+        projectileObj.transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - projectileObj.transform.position);
     }
 
     // Pick up item and add to player inventory
@@ -162,14 +164,6 @@ public class PlayerBehavior : NetworkBehaviour
             if(delete)
             {
                 collision.gameObject.GetComponent<ItemBehavior>().Delete();
-            }
-        }
-        if(collision.CompareTag("Enemy"))
-        {
-            this.health -= collision.gameObject.GetComponent<EnemyBehavior>().getStrength();
-            Debug.Log(health);
-            if (health <= 0) {
-                Destroy(this.gameObject);
             }
         }
     }

@@ -6,12 +6,13 @@
 //#define Debug
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 // consider making abstract
-public class EnemyBehavior : MonoBehaviour
+public class EnemyBehavior : NetworkBehaviour
 {
     private Vector2 dest;
 
@@ -22,17 +23,15 @@ public class EnemyBehavior : MonoBehaviour
     private ItemData item = null;
 
     // health value
-    private int health; // Requested by Kelvin
+    private int health = 3;
 
     // strength value
-    [SerializeField]
     private int strength;
 
     // defense value
     private int defense;
 
     // speed value
-    [SerializeField]
     private int speed;
 
     // getter method
@@ -66,11 +65,6 @@ public class EnemyBehavior : MonoBehaviour
         return speed;
     }
 
-    public void takeDamage()
-    {
-        health--;
-    }
-
     public void move()
     {
         if (transform.position.x == dest.x && transform.position.y == dest.y)
@@ -91,14 +85,42 @@ public class EnemyBehavior : MonoBehaviour
 
     void Start()
     {
-        health = Random.Range(2, 6);
-        Debug.Log(health);
         dest = transform.position;
+        LoadServerRpc();
     }
 
     void Update()
     {
         move();
 
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Projectile"))
+        {
+            DamageServerRpc();
+        }
+    }
+
+    [ServerRpc]
+    public void LoadServerRpc()
+    {
+        GetComponent<NetworkObject>().Spawn();
+    }
+
+    [ServerRpc]
+    public void DamageServerRpc()
+    {
+        health--;
+        if (health <= 0)
+        {
+            GetComponent<NetworkObject>().Despawn(true);
+        }
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        Destroy(gameObject);
     }
 }
