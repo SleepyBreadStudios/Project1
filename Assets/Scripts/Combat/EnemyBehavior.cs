@@ -6,12 +6,13 @@
 //#define Debug
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 // consider making abstract
-public class EnemyBehavior : MonoBehaviour
+public class EnemyBehavior : NetworkBehaviour
 {
     private Vector2 dest;
 
@@ -64,11 +65,6 @@ public class EnemyBehavior : MonoBehaviour
         return speed;
     }
 
-    public void takeDamage()
-    {
-        health--;
-    }
-
     public void move()
     {
         if (transform.position.x == dest.x && transform.position.y == dest.y)
@@ -90,6 +86,7 @@ public class EnemyBehavior : MonoBehaviour
     void Start()
     {
         dest = transform.position;
+        LoadServerRpc();
     }
 
     void Update()
@@ -100,6 +97,30 @@ public class EnemyBehavior : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.CompareTag("Projectile"))
+        {
+            DamageServerRpc();
+        }
+    }
 
+    [ServerRpc]
+    public void LoadServerRpc()
+    {
+        GetComponent<NetworkObject>().Spawn();
+    }
+
+    [ServerRpc]
+    public void DamageServerRpc()
+    {
+        health--;
+        if (health <= 0)
+        {
+            GetComponent<NetworkObject>().Despawn(true);
+        }
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        Destroy(gameObject);
     }
 }

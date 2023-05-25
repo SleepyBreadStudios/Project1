@@ -6,12 +6,13 @@
 //#define Debug
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 // consider making abstract
-public class ProjectileBehavior : MonoBehaviour
+public class ProjectileBehavior : NetworkBehaviour
 {
     private Vector2 randLoc;
     private float speed;
@@ -30,11 +31,6 @@ public class ProjectileBehavior : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<EnemyBehavior>().takeDamage();
-            if(other.gameObject.GetComponent<EnemyBehavior>().getHealth() <= 0)
-            {
-                other.gameObject.GetComponent<EnemyBehavior>().Delete();
-            }
             Destroy(this.gameObject);
         }
     }

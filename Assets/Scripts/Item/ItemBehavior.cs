@@ -6,6 +6,7 @@
 //#define Debug
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -105,8 +106,10 @@ public class ItemBehavior : MonoBehaviour
         if (other.gameObject.CompareTag("Item") && immunity > 10.0f)
         {
             string toLoad = "Items/" + itemPrefabs[Random.Range(0, 10)];
-            GameObject newItem = Instantiate(Resources.Load("Projectile", typeof(GameObject)), transform.position, Quaternion.identity) as GameObject;
+            GameObject projectile = Instantiate(Resources.Load("Projectile", typeof(GameObject)), transform.position, Quaternion.identity) as GameObject;
+            projectile.GetComponent<NetworkObject>().Spawn(true);
             this.Delete();
         }
     }
+
 }

@@ -31,6 +31,8 @@ public class PlayerBehavior : NetworkBehaviour
     [SerializeField]
     private GameObject projectile = null;
 
+    public GameObject projectileObj = null;
+
     // is inventory showing at the moment?
     private bool inventoryEnabled = false;
 
@@ -122,19 +124,11 @@ public class PlayerBehavior : NetworkBehaviour
         if (Input.GetMouseButtonDown(0) && !inventoryEnabled)
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Debug.Log("Mouse coords: " + mousePos.x + ", " + mousePos.y);
-            
-            // instantiate projectile
-            GameObject projectileObj = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
+
+            ProjectileServerRpc(mousePos);
 
             // set orientation
-            projectileObj.transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - projectileObj.transform.position);
-
-            // IMPORTANT: get network to recognize object
-            projectileObj.GetComponent<NetworkObject>().Spawn(true);
-            projectileObj.transform.GetComponent<NetworkObject>().Spawn(true);
-
-
+         
         }
     }
 
@@ -143,6 +137,18 @@ public class PlayerBehavior : NetworkBehaviour
     {
         forwardBackPosition.Value = forwardBackward;
         leftRightPosition.Value = leftRight;
+    }
+
+    [ServerRpc]
+    public void ProjectileServerRpc(Vector3 mousePos)
+    {
+        // instantiate projectile
+        projectileObj = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
+
+        // IMPORTANT: get network to recognize object
+        projectileObj.GetComponent<NetworkObject>().Spawn(true);
+
+        projectileObj.transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - projectileObj.transform.position);
     }
 
     // Pick up item and add to player inventory
