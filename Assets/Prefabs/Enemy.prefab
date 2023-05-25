@@ -183,8 +183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02bbb527038dc94283b8e1682e642a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 2
-  speed: 0
+  item: {fileID: 1160430250773672895, guid: 6bc079337f9b8d648a752285ed776d48, type: 3}
+  speed: 3
 --- !u!58 &1260772222005229234
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -220,4 +220,4 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 1

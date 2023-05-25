@@ -19,8 +19,11 @@ public class EnemyBehavior : NetworkBehaviour
     // internal enemy name
     private string enemyName = null;
 
+    [SerializeField]
     // type of drops the enemy drops when it dies(?)
-    private ItemData item = null;
+    private GameObject item = null;
+
+    private GameObject itemObj = null;
 
     // health value
     private int health = 3;
@@ -31,6 +34,7 @@ public class EnemyBehavior : NetworkBehaviour
     // defense value
     private int defense;
 
+    [SerializeField]
     // speed value
     private int speed;
 
@@ -45,10 +49,10 @@ public class EnemyBehavior : NetworkBehaviour
         return health;
     }
 
-    public ItemData getDrop()
-    {
-        return item;
-    }
+    // public ItemData getDrop()
+    // {
+    //     return item;
+    // }
 
     public int getStrength()
     {
@@ -67,20 +71,36 @@ public class EnemyBehavior : NetworkBehaviour
 
     public void move()
     {
-        if (transform.position.x == dest.x && transform.position.y == dest.y)
-        {
-            float randy = Random.Range
-                (Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).y, Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)).y);
-            float randx = Random.Range
-                (Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x, Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x);
-            dest = new Vector2(randx, randy);
-        }
+        if (speed != 0) {
+            if (transform.position.x == dest.x && transform.position.y == dest.y)
+            {
+                float randy = Random.Range
+                    (Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).y, Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)).y);
+                float randx = Random.Range
+                    (Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x, Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x);
+                dest = new Vector2(randx, randy);
+            }
 
-        transform.position = Vector3.MoveTowards(transform.position, dest, Time.deltaTime * (float)0.3);
+            transform.position = Vector3.MoveTowards(transform.position, dest, Time.deltaTime * (float)0.3);
+        }
     }
     public void Delete()
     {
         Destroy(this.gameObject);
+    }
+
+
+    // Function to allow item drops in enemy
+    public void ItemDrop() {
+        if (item.name == "Enemy3") {
+            for (int i = 0; i < 10; i ++) {
+                itemObj = Instantiate(item, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity) as GameObject;
+                itemObj.GetComponent<NetworkObject>().Spawn(true);
+            }
+        } else {
+            itemObj = Instantiate(item, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity) as GameObject;
+            itemObj.GetComponent<NetworkObject>().Spawn(true);
+        }
     }
 
     void Start()
@@ -115,6 +135,7 @@ public class EnemyBehavior : NetworkBehaviour
         health--;
         if (health <= 0)
         {
+            ItemDrop();
             GetComponent<NetworkObject>().Despawn(true);
         }
     }

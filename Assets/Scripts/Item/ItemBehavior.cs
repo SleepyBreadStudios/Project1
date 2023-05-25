@@ -82,7 +82,7 @@ public class ItemBehavior : MonoBehaviour
     void Start()
     {
         itemCount = itemType.GetCount();
-        move();
+        //move();
     }
 
     void Update()
@@ -93,10 +93,10 @@ public class ItemBehavior : MonoBehaviour
         // Random movement of objects to test performance of code
         if (transform.position.x == randLoc.x && transform.position.y == randLoc.y)
         {
-            move();
+            //move(); // Commented out so that items don't move around after killing an enemy
         } 
         
-        transform.position = Vector3.MoveTowards(transform.position, randLoc, Time.deltaTime * (float)0.3);
+        //transform.position = Vector3.MoveTowards(transform.position, randLoc, Time.deltaTime * (float)0.3);
 
     }
 
