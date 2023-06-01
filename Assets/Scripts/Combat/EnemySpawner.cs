@@ -20,7 +20,7 @@ public class EnemySpawner : NetworkBehaviour
 
 
     [SerializeField]
-    private float enemyInterval = 3.5f;
+    private float enemyInterval = 4.0f;
     [SerializeField]
     private float enemyInterval2 = 6.0f;
     [SerializeField]

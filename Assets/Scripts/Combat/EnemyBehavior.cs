@@ -29,6 +29,9 @@ public class EnemyBehavior : NetworkBehaviour
     // health value
     private int health = 3;
 
+    [SerializeField]
+    private int maxHealth = 3;
+
     // strength value
     private int strength;
 
@@ -38,6 +41,8 @@ public class EnemyBehavior : NetworkBehaviour
     [SerializeField]
     // speed value
     private int speed;
+
+    private float time = 0.0f;
 
     // getter method
     public string getName()
@@ -82,7 +87,7 @@ public class EnemyBehavior : NetworkBehaviour
                 dest = new Vector2(randx, randy);
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, dest, Time.deltaTime * (float)0.3);
+            transform.position = Vector3.MoveTowards(transform.position, dest, Time.deltaTime * (float) speed);
         }
     }
     public void Delete()
@@ -113,7 +118,7 @@ public class EnemyBehavior : NetworkBehaviour
     void Update()
     {
         move();
-
+        StartCoroutine(RegenerateTest());
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -144,5 +149,21 @@ public class EnemyBehavior : NetworkBehaviour
     public override void OnNetworkDespawn()
     {
         Destroy(gameObject);
+    }
+
+    IEnumerator RegenerateTest() {
+        if ((health > 0) && (health < maxHealth)) {
+            yield return new WaitForSeconds(3);
+            health = maxHealth;
+            time = 0.0f;
+            Debug.Log("regenerating");
+        }
+    }
+
+    public void UpdateTime() {
+        if (health < 0) {
+            time++;
+        }
+        Debug.Log(time);
     }
 }

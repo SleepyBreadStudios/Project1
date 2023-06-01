@@ -28,14 +28,14 @@ public class OverworldSpawner : NetworkBehaviour
 
     public void Spawn()
     {
-        StartCoroutine(spawnObject(2.0f, structure));
-        StartCoroutine(spawnObject(2.0f, structure2));
+        StartCoroutine(spawnObject(4.0f, structure));
+        StartCoroutine(spawnObject(4.0f, structure2));
     }
 
     private IEnumerator spawnObject(float interval, GameObject s) {
         yield return new WaitForSeconds(interval);
         GameObject newObject = Instantiate(s, new Vector3(Random.Range(-10f, 10), Random.Range(-10f, 10f), 0), Quaternion.identity);
         newObject.GetComponent<NetworkObject>().Spawn();
-        StartCoroutine(spawnObject(2.0f, s));
+        StartCoroutine(spawnObject(4.0f, s));
     }
 }

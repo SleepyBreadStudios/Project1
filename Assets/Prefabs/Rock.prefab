@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 2297925044054381835}
   m_Layer: 0
   m_Name: Rock
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -185,6 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 6616707134031558949, guid: c7c757b4de7f5fc4fa77365d3970b052, type: 3}
   health: 5
+  maxHealth: 5
   speed: 0
 --- !u!58 &2297925044054381835
 CircleCollider2D:
