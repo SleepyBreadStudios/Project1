@@ -42,13 +42,25 @@ public class InventorySlot : ItemSlotUI, IDropHandler
         {
             if ((itemDragHandler.ItemSlotUI as CraftingSlot) != null)
             {
-                inventory.SwapInventory(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
+                inventory.SwapWCrafting(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
+            }
+        }
+        else if (itemDragHandler.ItemSlotUI.SlotType == "CraftingResultSlot")
+        {
+            if ((itemDragHandler.ItemSlotUI as CraftingResultSlot) != null)
+            {
+                inventory.SwapWResult(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
             }
         }
         else
         {
             Debug.Log("Dragging from something that isn't an inventory slot or crafting slot? Error, not intended behavior");
         }
+    }
+
+    public override void SplitStack()
+    {
+        inventory.SplitStack(SlotIndex);
     }
 
     public override void UpdateSlotUI()

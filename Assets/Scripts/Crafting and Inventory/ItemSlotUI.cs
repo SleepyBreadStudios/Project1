@@ -19,8 +19,6 @@ public abstract class ItemSlotUI : MonoBehaviour, IDropHandler
 
     public string SlotType;
 
-    public bool SlotLock;
-
     //public abstract HotbarItem SlotItem { get; set; }
 
     private void OnEnable()
@@ -42,4 +40,6 @@ public abstract class ItemSlotUI : MonoBehaviour, IDropHandler
     {
         itemIconImage.enabled = enable;
     }
+
+    public abstract void SplitStack();
 }

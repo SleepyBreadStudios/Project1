@@ -6,24 +6,25 @@ using UnityEngine.UI;
 public class CraftingManager : MonoBehaviour
 {
     [SerializeField]
-    private CraftingInventoryManager craftInv = null;
+    public List<Recipe> recipes;
 
-    /*
-     * Because I don't fully understand how items are currently set up and the video in part
-     * goes over an implementation for items to link to the crafting implementation, this is
-     * an implementation that made sense to me. Recipes are stored in a list of arrays which
-     * includes which items have to be present and what it creates.
-     */
-    private List<ItemData[]> recipes = new List<ItemData[]>();
-
-    private void Start()
+    // Creates the item for the player and updates respective inventory and crafting slots
+    // Once an item is crafted, should be sent in the crafted slot
+    // Checks item present and compares across recipes
+    public Recipe Craft(List<string> itemsInCrafting)
     {
-        
-    }
-
-
-    void Update()
-    {
-        craftInv.GetSlotByIndex(5);
+        // check if it's a recipe
+        var foundRecipe = recipes.Find(recipe => recipe.IsRecipeEqual(itemsInCrafting) == true);
+        if (foundRecipe == null)
+        {
+            return null;
+        }
+        else
+        {
+            // return the item that matches the recipe found
+            //var newItem = foundRecipe.GetCraftedItem();
+            //return newItem;
+            return foundRecipe;
+        }
     }
 }

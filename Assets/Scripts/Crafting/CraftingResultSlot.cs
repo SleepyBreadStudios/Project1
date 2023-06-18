@@ -1,5 +1,5 @@
 /******************************************************************************
- * Crafting slot class. Inherits from ItemSlotUI. Handles crafting UI.
+ * Crafting result slot class. Inherits from ItemSlotUI. Handles the result UI.
  * 
  * Authors: Alicia T, Jason N, Jino C
  *****************************************************************************/
@@ -11,7 +11,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class CraftingSlot : ItemSlotUI, IDropHandler
+public class CraftingResultSlot : ItemSlotUI, IDropHandler
 {
     [SerializeField]
     private CraftingInventoryManager crafting = null;
@@ -26,42 +26,17 @@ public class CraftingSlot : ItemSlotUI, IDropHandler
 
     public ItemSlot ItemSlot => crafting.GetSlotByIndex(SlotIndex);
 
+    // do nothing, don't want to be able to drag into crafting result spot
     public override void OnDrop(PointerEventData eventData)
     {
         ItemDragHandler itemDragHandler = eventData.pointerDrag.GetComponent<ItemDragHandler>();
-        Debug.Log("Attempting to place item in crafting");
-        // swap stack positions
-        if (itemDragHandler.ItemSlotUI.SlotType == "InventorySlot")
-        {
-            if ((itemDragHandler.ItemSlotUI as InventorySlot) != null)
-            {
-                crafting.SwapWInventory(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
-            }
-        }
-        else if(itemDragHandler.ItemSlotUI.SlotType == "CraftingSlot")
-        {
-            if ((itemDragHandler.ItemSlotUI as CraftingSlot) != null)
-            {
-                crafting.Swap(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
-            }
-        }
-        else if (itemDragHandler.ItemSlotUI.SlotType == "CraftingResultSlot")
-        {
-            if ((itemDragHandler.ItemSlotUI as CraftingResultSlot) != null)
-            {
-                crafting.SwapWResult(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
-            }
-        }
-        else
-        {
-            Debug.Log("Dragging from something that isn't an inventory slot or crafting slot? Error, not intended behavior");
-        }
-
+        Debug.Log("Attempting to drop on crafting result space");
     }
 
+    // do nothing, don't want to be able to split crafting result spot
     public override void SplitStack()
     {
-        crafting.SplitStack(SlotIndex);
+        Debug.Log("Attempting to split result");
     }
 
     public override void UpdateSlotUI()
@@ -91,6 +66,6 @@ public class CraftingSlot : ItemSlotUI, IDropHandler
 
     private void Awake()
     {
-        SlotType = "CraftingSlot";
+        SlotType = "CraftingResultSlot";
     }
 }

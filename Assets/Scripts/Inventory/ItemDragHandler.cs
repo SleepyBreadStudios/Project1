@@ -38,7 +38,7 @@ public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
-        if(eventData.button == PointerEventData.InputButton.Left)
+        if (eventData.button == PointerEventData.InputButton.Left)
         {
             // raise event
             originalParent = transform.parent;
@@ -47,9 +47,15 @@ public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
             // set parent to parent two up
             // please do not look at this hard code :) intent is so that the item is above all the other ui
             transform.SetParent(transform.parent.parent.parent.parent.parent.parent.parent);
-            
+
             // ignore item that is being dragged and look at what is underneath it
             canvasGroup.blocksRaycasts = false;
+        }
+
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            Debug.Log("Right click");
+            itemSlotUI.SplitStack();
         }
     }
 

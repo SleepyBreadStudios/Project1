@@ -20,7 +20,7 @@ public class CraftingUIManager : PlayerItemManager
     [SerializeField]
     private PlayerInventory playerInventory = null;
 
-    public void SwapCrafting(int inventoryIndex, int craftingIndex)
+    public void SwapWInventory(int inventoryIndex, int craftingIndex)
     {
         Debug.Log("Hello");
         ItemSlot craftingSlot = inventory[craftingIndex];

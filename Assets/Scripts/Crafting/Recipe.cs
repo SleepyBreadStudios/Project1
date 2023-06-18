@@ -10,55 +10,91 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Recipe : CraftingInventoryManager
+[CreateAssetMenu]
+public class Recipe : ScriptableObject
 {
+    //[SerializeField]
+    //private CraftingInventoryManager playerCrafting = null;
+
+    //private int totalItems = 0;
+    //public List<ItemData> items;
+
+    //// Gets the items from the crafting slots
+    //public void GetItems() {
+    //    ItemSlot craftingItem = null;
+    //    for (int i = 0; i < maxInventorySize; i++) {
+    //        craftingItem = inventory[i];
+    //        if (craftingItem.item != null) {
+    //            Debug.Log(craftingItem.item);
+    //            totalItems++;
+    //            items.Add(craftingItem.item);
+    //        }
+    //    }
+    //}
+
+    //// Creates the item for the player and updates respective inventory and crafting slots
+    //// Once an item is crafted, should be sent in the crafted slot
+    //// Checks item present and compares across recipes
+    //public void Craft() {
+    //    if (items.Count == 0) {
+    //        Debug.Log("No items present in crafting slots");
+    //        return;
+    //    }
+
+    //}
+
+    //public bool MakeDiamond() {
+
+    //}
+
+    //public enum CraftableItems {
+    //    None,
+    //    Diamond,
+    //    Pentagon,
+    //    Hexagon,
+    //    Octagon
+    //}
+    [SerializeField]
+    private string recipeContents = "DefaultString";
 
     [SerializeField]
-    private CraftingInventoryManager playerCrafting = null;
+    public List<string> recipeList = new();
 
-    private int totalItems = 0;
-    public List<ItemData> items;
+    [SerializeField]
+    private ItemData craftedItem = null;
 
-    // Gets the items from the crafting slots
-    public void GetItems() {
-        ItemSlot craftingItem = null;
-        for (int i = 0; i < maxInventorySize; i++) {
-            craftingItem = inventory[i];
-            if (craftingItem.item != null) {
-                Debug.Log(craftingItem.item);
-                totalItems++;
-                items.Add(craftingItem.item);
+    [SerializeField]
+    private int numOfItems = 0;
+
+    public bool IsRecipeEqual(List<string> craftingInput)
+    {
+        // num of items in the recipe have to be equal to 
+        // num of items in the crafting
+        if(craftingInput.Count != numOfItems)
+        {
+            return false;
+        }
+        for(int i = 0; i < craftingInput.Count; i++)
+        {
+            // check if item is used in this recipe
+            if(!(recipeContents.Contains(craftingInput[i])))
+            {
+                // if one thing doesn't match it's already not equal
+                return false;
             }
         }
+        // if all items were found in the recipe
+        // the recipe is true
+        return true;
     }
 
-    // Creates the item for the player and updates respective inventory and crafting slots
-    // Once an item is crafted, should be sent in the crafted slot
-    // Checks item present and compares across recipes
-    public void Craft() {
-        if (items.Count == 0) {
-            Debug.Log("No items present in crafting slots");
-            return;
-        }
-
+    public ItemData GetCraftedItem()
+    {
+        return craftedItem;
     }
 
-    /*
-     * Because I don't fully understand how items are currently set up and the video in part
-     * goes over an implementation for items to link to the crafting implementation, this is
-     * an implementation that made sense to me. Recipes are stored in an array of pairs with
-     * size 5, representing the 5 crafting slots. Each pair is a itemtype/num pair, the num
-     * representing which slot it should be in (in case we want order to matter). If the order
-     * does not matter, set the number to -1 in which case the test function will check for
-     * that item in every slot.
-     */
-
-    public enum CraftableItems {
-        None,
-        Diamond,
-        Pentagon,
-        Hexagon,
-        Octagon,
-        PurpCirc
+    public int GetNumItems()
+    {
+        return numOfItems;
     }
 }
