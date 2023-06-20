@@ -31,6 +31,7 @@ public class InventorySlot : ItemSlotUI, IDropHandler
         ItemDragHandler itemDragHandler = eventData.pointerDrag.GetComponent<ItemDragHandler>();
 
         // swap stack positions
+        Debug.Log("??");
         if (itemDragHandler.ItemSlotUI.SlotType == "InventorySlot")
         {
             if ((itemDragHandler.ItemSlotUI as InventorySlot) != null)

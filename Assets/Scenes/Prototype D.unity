@@ -4199,12 +4199,12 @@ MonoBehaviour:
   startHostButton: {fileID: 603402084}
   startClientButton: {fileID: 768987626}
   playersInGameText: {fileID: 1591142433}
-  objectCount: {fileID: 0}
-  enemyCount: {fileID: 0}
+  objectCount: {fileID: 577414223}
+  enemyCount: {fileID: 606581662}
   joinCodeInput: {fileID: 679539769}
   joinCode: {fileID: 906773584}
-  enemySpawn: {fileID: 0}
-  overworldSpawn: {fileID: 0}
+  enemySpawn: {fileID: 2010660884}
+  overworldSpawn: {fileID: 1193123356}
 --- !u!4 &1967031064
 Transform:
   m_ObjectHideFlags: 0
