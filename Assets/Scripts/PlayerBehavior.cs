@@ -14,6 +14,12 @@ public class PlayerBehavior : NetworkBehaviour
     private float walkSpeed = 0.2f;
 
     [SerializeField]
+    private float maxHealth = 5f;
+
+    [SerializeField]
+    private float currHealth = 5f;
+
+    [SerializeField]
     private Vector2 defaultPositionRange = new Vector2(-4, 4);
 
     [SerializeField]
@@ -35,6 +41,15 @@ public class PlayerBehavior : NetworkBehaviour
 
     // is inventory showing at the moment?
     private bool inventoryEnabled = false;
+
+    // has the player learned the dash active?
+    private bool dashLearned = false;
+    // has the player learned the dash shot passive?
+    private bool dashShotLearned = false;
+    // has the player learned the retaliate passive?
+    private bool retaliateLearned = false;
+    // has the player learned the shield active?
+    private bool shieldLearned = false;
 
     // client caches positions
     private float oldForwardBackwardPosition;
@@ -130,6 +145,26 @@ public class PlayerBehavior : NetworkBehaviour
             // set orientation
          
         }
+
+        // dash
+        if (Input.GetKeyDown(KeyCode.LeftShift) && dashLearned)
+        {
+            // insert dash implementation here :D
+
+            // shoot a projectile when you dash
+            if(dashShotLearned)
+            {
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+                ProjectileServerRpc(mousePos);
+            }
+        }
+
+        // shield
+        if(Input.GetKeyDown(KeyCode.LeftControl) && shieldLearned)
+        {
+            // insert shield implementation here (some visual but just immunity to dmg for a bit)
+        }
     }
 
     [ServerRpc]
@@ -166,5 +201,53 @@ public class PlayerBehavior : NetworkBehaviour
                 collision.gameObject.GetComponent<ItemBehavior>().Delete();
             }
         }
+    }
+
+    // skill management
+    public void UpdatePassive(string changedStat, int changeAmount)
+    {
+        switch(changedStat)
+        {
+            case "Speed":
+                // insert smthn
+                break;
+            case "Max Health":
+                maxHealth += changeAmount;
+                break;
+            case "Attack Damage":
+                // insert smthn
+                break;
+            case "Attack Speed":
+                // insert smthn
+                break;
+            case "Health Regen":
+                // insert smthn
+                break;
+            default:
+                Debug.Log("error, switch does not include " + changedStat);
+                break;
+        }
+    }
+
+    public void LearnDash()
+    {
+        dashLearned = true;
+    }
+
+    public void LearnDashShot()
+    {
+        dashShotLearned = true;
+    }
+
+    public void LearnRetaliate()
+    {
+        retaliateLearned = true;
+    }
+
+    // temporarily some actives are already bound to a key
+    // some actives will be free in the user's inventory so that when they hit the key it activates
+    public void LearnShield()
+    {
+        shieldLearned = true;
     }
 }
