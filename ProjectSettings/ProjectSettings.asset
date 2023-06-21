@@ -797,11 +797,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 3a753b14-6eb1-4fc0-8fca-94ef87c8aee5
+  cloudProjectId: 56404378-db22-4f11-b231-13cd2e7952b1
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: SleepyBreadProject1
-  organizationId: jinochai
+  organizationId: sleepybreadstudios
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 75035040f607f6645bf93101d462ff53
+guid: 698833bbc36fcad419ba3555e7648b35
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5025701562091048606
-    second: crafting menu bg_0
+      213: -3010704914664389726
+    second: tempsprite_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -98,13 +98,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: crafting menu bg_0
+      name: tempsprite_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1504
-        height: 1050
+        width: 160
+        height: 278
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,8 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e9e009381f0eeb540800000000000000
-      internalID: 5025701562091048606
+      spriteID: 2a308edd4d3d736d0800000000000000
+      internalID: -3010704914664389726
       vertices: []
       indices: 
       edges: []

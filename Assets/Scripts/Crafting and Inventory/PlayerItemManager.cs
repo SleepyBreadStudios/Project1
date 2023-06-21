@@ -56,6 +56,10 @@ public abstract class PlayerItemManager : MonoBehaviour
         {
             // halve the stack
             int newStackCount = slot.HalveStack();
+            if (newStackCount == 0)
+            {
+                return;
+            }
             // look for empty slot
             var foundEmptySlot = inventory.Find(stackItem => stackItem.IsEmptySlot() == true);
             if (foundEmptySlot != null)
@@ -275,6 +279,10 @@ public class ItemSlot
         if (currStack > 1)
         {
             currStack /= 2;
+        }
+        else
+        {
+            return 0;
         }
 
         return (int)leftover;
