@@ -17,6 +17,9 @@ public class CraftingSlot : ItemSlotUI, IDropHandler
     private CraftingInventoryManager crafting = null;
 
     [SerializeField]
+    private PlayerInventory inventory = null;
+
+    [SerializeField]
     private TextMeshProUGUI itemQuantityText = null;
 
     //override HotbarItem SlotItem
@@ -62,6 +65,20 @@ public class CraftingSlot : ItemSlotUI, IDropHandler
     public override void SplitStack()
     {
         crafting.SplitStack(SlotIndex);
+    }
+
+    // move stack from crafting slot to inventory with shift click
+    public override void QuickMoveStack()
+    {
+        if(inventory.AddStack(ItemSlot))
+        {
+            // item successfully moved from crafting
+            // empty crafting slot
+
+            crafting.DeleteFromInventory(SlotIndex);
+        }
+
+        //crafting.SwapWInventory(,SlotIndex);
     }
 
     public override void UpdateSlotUI()

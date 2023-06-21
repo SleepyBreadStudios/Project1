@@ -82,6 +82,12 @@ public class Recipe : ScriptableObject
                 // if one thing doesn't match it's already not equal
                 return false;
             }
+            // also check if crafting input has all recipe items in case of
+            // duplicate items accounting for recipe amount
+            if(!(craftingInput.Contains(recipeList[i])))
+            {
+                return false;
+            }
         }
         // if all items were found in the recipe
         // the recipe is true

@@ -5,9 +5,11 @@
  * 
  * Authors: Alicia T, Jason N, Jino C
  *****************************************************************************/
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 //using System.Threading.Tasks;
 
 public class CraftingInventoryManager : PlayerItemManager
@@ -27,6 +29,119 @@ public class CraftingInventoryManager : PlayerItemManager
     private int resultAmount = 0;
 
     private bool currentlyCrafting = false;
+
+    public override bool IsInventoryFull()
+    {
+        //return inventoryFull;
+        // for if inventory full isn't detected in time
+        // fail safe is checking every time this method is called
+        // account for result slot
+        if (currInventorySize >= maxInventorySize - 1)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public virtual void SplitStack(int slotIndex)
+    {
+        Debug.Log("Attempting to split stack");
+        ItemSlot slot = inventory[slotIndex];
+        // if can hold another stack
+        if (!IsInventoryFull())
+        {
+            // halve the stack
+            int newStackCount = slot.HalveStack();
+            if (newStackCount == 0)
+            {
+                return;
+            }
+            // look for empty slot
+            var foundEmptySlot = inventory.Find(stackItem => stackItem.IsEmptySlot() == true);
+            if (foundEmptySlot != null)
+            {
+                // change first empty inventory slot to hold item picked up
+                foundEmptySlot.SetItemSlot(slot.item, newStackCount);
+                // tell slot what it's index is in the array
+                foundEmptySlot.SetSlotIndex(inventory.IndexOf(foundEmptySlot));
+                // account for new inventory size
+                currInventorySize++;
+                OnItemsUpdated.Invoke();
+                craftingStringForm.Add(slot.GetItemName());
+                AttemptToCraftItem();
+                // override this in crafting so that it updates the string form
+            }
+        }
+    }
+
+    public override bool AddStack(ItemSlot itemSlot)
+    {
+        if (!IsInventoryFull())
+        {
+            int count = itemSlot.GetCurrStack();
+            var foundStack = inventory.FirstOrDefault(stackItem => stackItem.item == itemSlot.item && stackItem.IsFullStack() != true);
+            // if found
+            if (foundStack != null)
+            {
+                // if not full
+                if (!(foundStack.IsFullStack()))
+                {
+#if Debug
+                Debug.Log("Found existing stack that is not full, adding to it");
+#endif
+                    // calculate remaining space in stack
+                    int remainingSpace = foundStack.GetMaxStack() - foundStack.GetCurrStack();
+                    // if it all fits in the stack, combine
+                    if (count <= remainingSpace)
+                    {
+                        // add item and return
+                        foundStack.AddToStack(count);
+                        OnItemsUpdated.Invoke();
+                        // don't need to add to crafting string if combining stacks
+                        //craftingStringForm.Add(itemSlot.GetItemName());
+                        AttemptToCraftItem();
+#if Debug
+                    Debug.Log("Successfully added item, inventory count now: " + currInventorySize);
+                    Debug.Log("Stack of " + inventory[foundStack.GetSlotIndex()].GetItemName() + ": " + inventory[foundStack.GetSlotIndex()].GetCurrStack());
+#endif
+                        return true;
+                    }
+                    else
+                    {
+#if Debug
+                    Debug.Log("Adding to existing stack, looking for another slot to add remaining");
+#endif
+                        // add what fits
+                        foundStack.AddToStack(remainingSpace);
+                        OnItemsUpdated.Invoke();
+                        // then attempt to make a new stack with the rest
+                        count -= remainingSpace;
+                        itemSlot.SetCurrStack(count);
+                    }
+                }
+            }
+            // look for empty slot
+            var foundEmptySlot = inventory.Find(stackItem => stackItem.IsEmptySlot() == true);
+            if (foundEmptySlot != null)
+            {
+                // change first empty inventory slot to hold item picked up
+                foundEmptySlot.SetItemSlot(itemSlot.item, count);
+                // tell slot what it's index is in the array
+                foundEmptySlot.SetSlotIndex(inventory.IndexOf(foundEmptySlot));
+                // account for new inventory size
+                currInventorySize++;
+                OnItemsUpdated.Invoke();
+                craftingStringForm.Add(itemSlot.GetItemName());
+                AttemptToCraftItem();
+                return true;
+            }
+            // inventory full after adding part of the stack
+            AttemptToCraftItem();
+            return false;
+        }
+        return false;
+    }
 
     public void SwapWInventory(int inventoryIndex, int craftingIndex)
     {
@@ -64,15 +179,22 @@ public class CraftingInventoryManager : PlayerItemManager
             // remove old item name from crafting
             craftingStringForm.Remove(inventory[craftingIndex].GetItemName());
         }
+        else
+        {
+            // the slot is being swapped with an empty slot
+            // update with new size
+            currInventorySize++;
+            // tell inventory it has one less item now
+            playerInventory.UpdateInventory();
+        }
 
-        // if not swap the slots 
+        // swap the slots 
         inventory[craftingIndex] = inventorySlot;
         // add to crafting string as well
         craftingStringForm.Add(inventorySlot.GetItemName());
-        currInventorySize++;
-
         // update player inventory
         playerInventory.AddSlotByRef(craftingSlot, inventoryIndex);
+
 
         OnItemsUpdated.Invoke();
         AttemptToCraftItem();
@@ -124,6 +246,13 @@ public class CraftingInventoryManager : PlayerItemManager
         AttemptToCraftItem();
     }
 
+    // don't update inventory size when emptying result slot
+    public void EmptyResultSlot()
+    {
+        inventory[maxInventorySize - 1] = new ItemSlot();
+        OnItemsUpdated.Invoke();
+    }
+
     public override void AddSlotByRef(ItemSlot itemSlot, int index)
     {
         base.AddSlotByRef(itemSlot, index);
@@ -173,7 +302,7 @@ public class CraftingInventoryManager : PlayerItemManager
             // clear preview result if the new contents of the crafting inventory is not a recipe
             if(!(inventory[maxInventorySize - 1].IsEmptySlot()))
             {
-                base.DeleteFromInventory(maxInventorySize - 1);
+                EmptyResultSlot();
                 resultAmount = 0;
             }
         }

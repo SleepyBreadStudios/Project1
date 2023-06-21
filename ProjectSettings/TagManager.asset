@@ -9,6 +9,7 @@ TagManager:
   - CraftingSlot
   - Enemy
   - Projectile
+  - CraftingOverworld
   layers:
   - Default
   - TransparentFX

@@ -14,6 +14,9 @@ using TMPro;
 public class InventorySlot : ItemSlotUI, IDropHandler
 {
     [SerializeField]
+    private CraftingInventoryManager crafting = null;
+
+    [SerializeField]
     private PlayerInventory inventory = null;
 
     [SerializeField]
@@ -31,7 +34,6 @@ public class InventorySlot : ItemSlotUI, IDropHandler
         ItemDragHandler itemDragHandler = eventData.pointerDrag.GetComponent<ItemDragHandler>();
 
         // swap stack positions
-        Debug.Log("??");
         if (itemDragHandler.ItemSlotUI.SlotType == "InventorySlot")
         {
             if ((itemDragHandler.ItemSlotUI as InventorySlot) != null)
@@ -62,6 +64,17 @@ public class InventorySlot : ItemSlotUI, IDropHandler
     public override void SplitStack()
     {
         inventory.SplitStack(SlotIndex);
+    }
+
+    // move stack from  inventory slot to crafting with shift click
+    public override void QuickMoveStack()
+    {
+        if (crafting.AddStack(ItemSlot))
+        {
+            // item successfully moved from crafting
+            // empty crafting slot
+            inventory.DeleteFromInventory(SlotIndex);
+        }
     }
 
     public override void UpdateSlotUI()

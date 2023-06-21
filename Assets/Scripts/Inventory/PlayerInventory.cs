@@ -159,12 +159,22 @@ public class PlayerInventory : PlayerItemManager
                 }
             }
         }
+        else
+        {
+            // the slot is being swapped with an empty slot
+            // update with new size
+            currInventorySize++;
+            // tell crafting it has one less item now
+            playerCrafting.UpdateInventory();
+        }
 
         // if not swap slots
         inventory[inventoryIndex] = craftingSlot;
         playerCrafting.RemoveItemFromCrafting(craftingIndex);
         playerCrafting.AddSlotByRef(inventorySlot, craftingIndex);
-        currInventorySize++;
+       
+
+        
 
         OnItemsUpdated.Invoke();
         // since swapping with crafting, need to attempt to craft

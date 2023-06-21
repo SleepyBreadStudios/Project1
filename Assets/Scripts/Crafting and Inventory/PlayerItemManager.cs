@@ -19,6 +19,7 @@ public abstract class PlayerItemManager : MonoBehaviour
     [SerializeField]
     protected int maxInventorySize = 0;
     // num of different stacked items it is holding
+    [SerializeField]
     protected int currInventorySize = 0;
 
     // inventory list
@@ -32,6 +33,7 @@ public abstract class PlayerItemManager : MonoBehaviour
     // getter method
     public virtual bool IsInventoryFull()
     {
+
         //return inventoryFull;
         // for if inventory full isn't detected in time
         // fail safe is checking every time this method is called
@@ -74,6 +76,70 @@ public abstract class PlayerItemManager : MonoBehaviour
                 // override this in crafting so that it updates the string form
             }
         }
+    }
+
+     //*IMPORTANT* REFACTOR THIS CODE LOTS OF REPEAT CODE HERE
+    public virtual bool AddStack(ItemSlot itemSlot)
+    {
+        if (!IsInventoryFull())
+        {
+            int count = itemSlot.GetCurrStack();
+            var foundStack = inventory.FirstOrDefault(stackItem => stackItem.item == itemSlot.item && stackItem.IsFullStack() != true);
+            // if found
+            if (foundStack != null)
+            {
+                // if not full
+                if (!(foundStack.IsFullStack()))
+                {   
+#if Debug
+                Debug.Log("Found existing stack that is not full, adding to it");
+#endif
+                    // calculate remaining space in stack
+                    int remainingSpace = foundStack.GetMaxStack() - foundStack.GetCurrStack();
+                    // if it all fits in the stack, combine
+                    if (count <= remainingSpace)
+                    {
+                        // add item and return
+                        foundStack.AddToStack(count);
+                        OnItemsUpdated.Invoke();
+#if Debug
+                    Debug.Log("Successfully added item, inventory count now: " + currInventorySize);
+                    Debug.Log("Stack of " + inventory[foundStack.GetSlotIndex()].GetItemName() + ": " + inventory[foundStack.GetSlotIndex()].GetCurrStack());
+#endif
+                        return true;
+                    }
+                    else
+                    {
+#if Debug
+                    Debug.Log("Adding to existing stack, looking for another slot to add remaining");
+#endif
+                        // add what fits
+                        foundStack.AddToStack(remainingSpace);
+                        OnItemsUpdated.Invoke();
+                        // then attempt to make a new stack with the rest
+                        count -= remainingSpace;
+                        itemSlot.SetCurrStack(count);
+                    }
+                }
+            }
+            // look for empty slot
+            var foundEmptySlot = inventory.Find(stackItem => stackItem.IsEmptySlot() == true);
+            if (foundEmptySlot != null)
+            {
+                // change first empty inventory slot to hold item picked up
+                foundEmptySlot.SetItemSlot(itemSlot.item, count);
+                // tell slot what it's index is in the array
+                foundEmptySlot.SetSlotIndex(inventory.IndexOf(foundEmptySlot));
+                // account for new inventory size
+                currInventorySize++;
+                OnItemsUpdated.Invoke();
+                // override this in crafting so that it updates the string form
+                return true;
+            }
+            // inventory full after adding part of the stack
+            return false;
+        }
+        return false;
     }
 
     // this code is duplicated in it's children classes, refactoring required
@@ -141,9 +207,14 @@ public abstract class PlayerItemManager : MonoBehaviour
         inventory[index] = itemSlot;
         if (itemSlot.item != null)
         {
-            currInventorySize++;
+            //currInventorySize++;
         }
         OnItemsUpdated.Invoke();
+    }
+
+    public virtual void UpdateInventory()
+    {
+        currInventorySize--;
     }
 }
 

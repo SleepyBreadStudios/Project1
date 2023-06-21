@@ -42,4 +42,6 @@ public abstract class ItemSlotUI : MonoBehaviour, IDropHandler
     }
 
     public abstract void SplitStack();
+
+    public abstract void QuickMoveStack();
 }

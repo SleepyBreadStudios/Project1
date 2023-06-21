@@ -57,6 +57,12 @@ public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
             Debug.Log("Right click");
             itemSlotUI.SplitStack();
         }
+
+        if (eventData.button == PointerEventData.InputButton.Left && Input.GetKey(KeyCode.LeftShift))
+        {
+            Debug.Log("Shift click");
+            itemSlotUI.QuickMoveStack();
+        }
     }
 
     public virtual void OnDrag(PointerEventData eventData)
