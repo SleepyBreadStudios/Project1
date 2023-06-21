@@ -44,6 +44,9 @@ public class EnemyBehavior : NetworkBehaviour
 
     private float time = 0.0f;
 
+    [SerializeField]
+    HealthBar healthBar;
+
     // getter method
     public string getName()
     {
@@ -109,9 +112,15 @@ public class EnemyBehavior : NetworkBehaviour
         }
     }
 
+    private void Awake()
+    {
+        healthBar = GetComponentInChildren<HealthBar>();
+    }
+
     void Start()
     {
         dest = transform.position;
+        healthBar.SetHealth(maxHealth);
         LoadServerRpc();
     }
 
@@ -139,6 +148,7 @@ public class EnemyBehavior : NetworkBehaviour
     public void DamageServerRpc()
     {
         health--;
+        healthBar.UpdateHealth(health, maxHealth);
         if (health <= 0)
         {
             ItemDrop();

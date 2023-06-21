@@ -122,7 +122,7 @@ RectTransform:
   - {fileID: 1577701060549589386}
   - {fileID: 5563393479472034875}
   - {fileID: 2007632864642842373}
-  - {fileID: 9200318205900889463}
+  - {fileID: 2961984076770817356}
   - {fileID: 3344641851387320134}
   - {fileID: 3256429071105861691}
   - {fileID: 2721952382903738514}
@@ -133,7 +133,7 @@ RectTransform:
   - {fileID: 7373631958565682902}
   - {fileID: 8199734622200545969}
   - {fileID: 6351485780282736313}
-  - {fileID: 1901389042221814524}
+  - {fileID: 5536642719976405697}
   - {fileID: 2552585203518916273}
   - {fileID: 5590541513837534539}
   - {fileID: 2817518436348414956}
@@ -496,12 +496,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 0.07
+  maxHealth: 5
+  currHealth: 5
   defaultPositionRange: {x: -4, y: 4}
   forwardBackPosition:
     m_InternalValue: 0
   leftRightPosition:
     m_InternalValue: 0
   InventoryUI: {fileID: 1485213299711672405}
+  projectile: {fileID: 4921440393766413185, guid: 33ba34d82f36e8f4bbe3411622a9d2e6, type: 3}
+  projectileObj: {fileID: 4921440393766413185, guid: 33ba34d82f36e8f4bbe3411622a9d2e6, type: 3}
 --- !u!61 &1395901442485989727
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -601,6 +605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onInventoryItemsUpdated: {fileID: 11400000, guid: cb5a201f7a491d84fba9a5d5731c602d, type: 2}
   maxInventorySize: 40
+  playerCrafting: {fileID: 0}
 --- !u!1001 &91890044565569595
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1838,7 +1843,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6923add9811584d4a9bfd2a3ebeeb8ec, type: 3}
---- !u!224 &1901389042221814524 stripped
+--- !u!224 &5536642719976405697 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6247913778940323898, guid: 6923add9811584d4a9bfd2a3ebeeb8ec, type: 3}
   m_PrefabInstance: {fileID: 1901389042221814523}
@@ -5116,7 +5121,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6923add9811584d4a9bfd2a3ebeeb8ec, type: 3}
---- !u!224 &9200318205900889463 stripped
+--- !u!224 &2961984076770817356 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6247913778940323898, guid: 6923add9811584d4a9bfd2a3ebeeb8ec, type: 3}
   m_PrefabInstance: {fileID: 9200318205900889462}

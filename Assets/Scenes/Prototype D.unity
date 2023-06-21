@@ -195,6 +195,7 @@ MonoBehaviour:
   health: 3
   maxHealth: 3
   speed: 0
+  healthBar: {fileID: 0}
 --- !u!114 &67629114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -656,6 +657,7 @@ MonoBehaviour:
   health: 3
   maxHealth: 3
   speed: 0
+  healthBar: {fileID: 0}
 --- !u!114 &193111522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1014,6 +1016,7 @@ MonoBehaviour:
   health: 3
   maxHealth: 3
   speed: 0
+  healthBar: {fileID: 0}
 --- !u!114 &286999761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2856,6 +2859,7 @@ MonoBehaviour:
   health: 3
   maxHealth: 3
   speed: 0
+  healthBar: {fileID: 0}
 --- !u!114 &1143374664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3079,6 +3083,7 @@ MonoBehaviour:
   health: 3
   maxHealth: 3
   speed: 0
+  healthBar: {fileID: 0}
 --- !u!114 &1147407628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3366,6 +3371,7 @@ MonoBehaviour:
   health: 3
   maxHealth: 3
   speed: 0
+  healthBar: {fileID: 0}
 --- !u!114 &1269118616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4151,7 +4157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2754361547801982505, guid: f99a3617a8c8ccd4f99348113071f195, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 951099334
+      value: 2507185551
       objectReference: {fileID: 0}
     - target: {fileID: 6654719521496490200, guid: f99a3617a8c8ccd4f99348113071f195, type: 3}
       propertyPath: m_Name
@@ -4415,6 +4421,7 @@ MonoBehaviour:
   health: 3
   maxHealth: 3
   speed: 0
+  healthBar: {fileID: 0}
 --- !u!114 &2123280867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4633,7 +4640,7 @@ PrefabInstance:
       objectReference: {fileID: 6616707134031558949, guid: c7c757b4de7f5fc4fa77365d3970b052, type: 3}
     - target: {fileID: 8623618068377228790, guid: 51c1fd43a1df45b45b2b85e55a9f59b8, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 951099334
+      value: 401442267
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4694,7 +4701,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2754361547801982505, guid: f99a3617a8c8ccd4f99348113071f195, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 951099334
+      value: 3314342554
       objectReference: {fileID: 0}
     - target: {fileID: 6654719521496490200, guid: f99a3617a8c8ccd4f99348113071f195, type: 3}
       propertyPath: m_Name
