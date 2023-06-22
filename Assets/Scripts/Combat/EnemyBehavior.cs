@@ -127,7 +127,7 @@ public class EnemyBehavior : NetworkBehaviour
     void Update()
     {
         move();
-        StartCoroutine(RegenerateTest());
+        //StartCoroutine(RegenerateTest());
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -148,7 +148,7 @@ public class EnemyBehavior : NetworkBehaviour
     public void DamageServerRpc()
     {
         health--;
-        healthBar.UpdateHealth(health, maxHealth);
+        healthBar.UpdateHealth(health);
         if (health <= 0)
         {
             ItemDrop();

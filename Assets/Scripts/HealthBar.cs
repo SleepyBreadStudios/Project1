@@ -11,8 +11,6 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField]
-    private Slider slider;
 
     [SerializeField]
     private Gradient gradient;
@@ -20,26 +18,53 @@ public class HealthBar : MonoBehaviour
     public float currentHealth;
     public float maxHealth;
 
+    [SerializeField]
+    public Image healthImage;
+
+    float lerpSpeed;
+
     // Sets the values of the health
-    public void SetHealth(float max) {
+    public void SetHealth(float max) 
+    {
         currentHealth = max;
         maxHealth = max;
     }
 
     // Updates the health bar
-    public void UpdateHealth(float currentHealth, float maxHealth) {
-        slider.value = currentHealth / maxHealth;
-        currentHealth = currentHealth;
+    public void UpdateHealth(float health) 
+    {
+        //slider.value = currentHealth / maxHealth;
+        currentHealth = health;
         //GameObject.SetActive(true);
     }
 
-    // private IEnumerator DrainHealthBar()
-    // {
-    //     float elapsedTime = 0f;
-    //     while (elapsedTime < 0.25f)
-    //     {
-    //         elapsedTime = Time.deltaTime;
-    //         slider.value = Mathf.Lerp(slider.value)
-    //     }
-    // }
+    public void HealthColor() 
+    {
+        Color HealthColor = Color.Lerp(Color.red, Color.green, (currentHealth / maxHealth));
+
+        healthImage.color = HealthColor;
+    }
+
+    public void Heal(float value) 
+    {
+
+    }
+
+    private void Activate() 
+    {
+        if (currentHealth == maxHealth) {
+            healthImage.enabled = false;
+        } else {
+            healthImage.enabled = true;
+        }
+    }
+
+    private void Update() 
+    {
+        Activate();
+        lerpSpeed = 3f * Time.deltaTime;
+        healthImage.fillAmount = Mathf.Lerp(healthImage.fillAmount, currentHealth / maxHealth, lerpSpeed);
+        HealthColor();
+    }
+
 }
