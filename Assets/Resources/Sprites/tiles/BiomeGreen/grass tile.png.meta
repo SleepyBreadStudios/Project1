@@ -1,25 +1,28 @@
 fileFormatVersion: 2
-guid: 25ac1592952ca0e4193613903bcd06a9
+guid: 4dd76c92c91017240ac6f6fe83747e4b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3765396946703585323
-    second: avatar example animated_0
+      213: 8195592567191940936
+    second: grass tile_0
   - first:
-      213: -2139289267927690785
-    second: avatar example animated_1
+      213: -8545049647480656855
+    second: grass tile_1
   - first:
-      213: 3456293085824990191
-    second: avatar example animated_2
+      213: -2675118939320571136
+    second: grass tile_2
   - first:
-      213: 3987043508308238829
-    second: avatar example animated_3
+      213: -3086523063805134660
+    second: grass tile_3
   - first:
-      213: 7269787754796130331
-    second: avatar example animated_4
+      213: 3547941216027020312
+    second: grass tile_4
   - first:
-      213: 7402252480467674096
-    second: avatar example animated_5
+      213: -83981095652413597
+    second: grass tile_5
+  - first:
+      213: 1730216431500065900
+    second: grass tile_6
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -113,127 +116,148 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: avatar example idle1
+      name: grass tile_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 3
-        width: 16
-        height: 24
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 0
+        y: 450
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5df64694d6f9ebbc0800000000000000
-      internalID: -3765396946703585323
+      spriteID: 84fae4b84089cb170800000000000000
+      internalID: 8195592567191940936
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: avatar example idle2
+      name: grass tile_1
       rect:
         serializedVersion: 2
-        x: 20
-        y: 3
-        width: 16
-        height: 23
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 53
+        y: 450
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fd15d59ceb7bf42e0800000000000000
-      internalID: -2139289267927690785
+      spriteID: 92ca6d58e92e96980800000000000000
+      internalID: -8545049647480656855
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: avatar example walk1
+      name: grass tile_2
       rect:
         serializedVersion: 2
-        x: 43
-        y: 3
-        width: 16
-        height: 24
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 106
+        y: 450
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: febbc34df3837ff20800000000000000
-      internalID: 3456293085824990191
+      spriteID: 00ba0e18f7110ead0800000000000000
+      internalID: -2675118939320571136
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: avatar example walk2
+      name: grass tile_3
       rect:
         serializedVersion: 2
-        x: 60
-        y: 3
-        width: 16
-        height: 24
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 159
+        y: 450
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: de16db052f2d45730800000000000000
-      internalID: 3987043508308238829
+      spriteID: cb838d660a77a25d0800000000000000
+      internalID: -3086523063805134660
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: avatar example walk3
+      name: grass tile_4
       rect:
         serializedVersion: 2
-        x: 77
-        y: 3
-        width: 16
-        height: 24
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 212
+        y: 450
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b10ab1d227973e460800000000000000
-      internalID: 7269787754796130331
+      spriteID: 81c0249fcb1dc3130800000000000000
+      internalID: 3547941216027020312
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: avatar example walk4
+      name: grass tile_5
       rect:
         serializedVersion: 2
-        x: 94
-        y: 3
-        width: 16
-        height: 24
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 265
+        y: 450
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0f3a70489651ab660800000000000000
-      internalID: 7402252480467674096
+      spriteID: 36f2ac173a3a5def0800000000000000
+      internalID: -83981095652413597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grass tile_6
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 450
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6cfa186da6f20810800000000000000
+      internalID: 1730216431500065900
       vertices: []
       indices: 
       edges: []
@@ -241,7 +265,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: ba7d08631e78cb54ba282f1e715a37b4
+    spriteID: 9be01dc9c5b798244b04cfd8c339b075
     internalID: 0
     vertices: []
     indices: 
@@ -249,12 +273,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      avatar example idle1: -3765396946703585323
-      avatar example idle2: -2139289267927690785
-      avatar example walk1: 3456293085824990191
-      avatar example walk2: 3987043508308238829
-      avatar example walk3: 7269787754796130331
-      avatar example walk4: 7402252480467674096
+      grass tile_0: 8195592567191940936
+      grass tile_1: -8545049647480656855
+      grass tile_2: -2675118939320571136
+      grass tile_3: -3086523063805134660
+      grass tile_4: 3547941216027020312
+      grass tile_5: -83981095652413597
+      grass tile_6: 1730216431500065900
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

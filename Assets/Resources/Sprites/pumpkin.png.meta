@@ -1,25 +1,28 @@
 fileFormatVersion: 2
-guid: 25ac1592952ca0e4193613903bcd06a9
+guid: 1ee4dc15ca38d454792fbd3506be6157
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3765396946703585323
-    second: avatar example animated_0
+      213: 3801843947054940190
+    second: pumpkin_0
   - first:
-      213: -2139289267927690785
-    second: avatar example animated_1
+      213: -6655579283965948428
+    second: pumpkin_1
   - first:
-      213: 3456293085824990191
-    second: avatar example animated_2
+      213: -6609195513140498240
+    second: pumpkin_2
   - first:
-      213: 3987043508308238829
-    second: avatar example animated_3
+      213: 7146241959951293642
+    second: pumpkin_3
   - first:
-      213: 7269787754796130331
-    second: avatar example animated_4
+      213: -6798800175903316494
+    second: pumpkin_4
   - first:
-      213: 7402252480467674096
-    second: avatar example animated_5
+      213: 5743314507615995187
+    second: pumpkin_5
+  - first:
+      213: -3283799310730625120
+    second: pumpkin_6
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -113,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: avatar example idle1
+      name: pumpkin_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 3
+        x: 1
+        y: 2
         width: 16
-        height: 24
+        height: 15
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5df64694d6f9ebbc0800000000000000
-      internalID: -3765396946703585323
+      spriteID: e10cda34decd2c430800000000000000
+      internalID: 3801843947054940190
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: avatar example idle2
+      name: pumpkin_1
       rect:
         serializedVersion: 2
         x: 20
-        y: 3
+        y: 2
         width: 16
-        height: 23
+        height: 14
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -148,20 +151,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fd15d59ceb7bf42e0800000000000000
-      internalID: -2139289267927690785
+      spriteID: 4fdc2cc67e1a2a3a0800000000000000
+      internalID: -6655579283965948428
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: avatar example walk1
+      name: pumpkin_2
       rect:
         serializedVersion: 2
-        x: 43
-        y: 3
+        x: 40
+        y: 2
         width: 16
-        height: 24
+        height: 16
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,20 +172,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: febbc34df3837ff20800000000000000
-      internalID: 3456293085824990191
+      spriteID: 0c0b724a2bb6744a0800000000000000
+      internalID: -6609195513140498240
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: avatar example walk2
+      name: pumpkin_3
       rect:
         serializedVersion: 2
-        x: 60
-        y: 3
-        width: 16
-        height: 24
+        x: 59
+        y: 1
+        width: 15
+        height: 17
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,20 +193,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: de16db052f2d45730800000000000000
-      internalID: 3987043508308238829
+      spriteID: acc53ed333d8c2360800000000000000
+      internalID: 7146241959951293642
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: avatar example walk3
+      name: pumpkin_4
       rect:
         serializedVersion: 2
-        x: 77
-        y: 3
+        x: 78
+        y: 2
         width: 16
-        height: 24
+        height: 14
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -211,20 +214,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b10ab1d227973e460800000000000000
-      internalID: 7269787754796130331
+      spriteID: 2f56b68f24fc5a1a0800000000000000
+      internalID: -6798800175903316494
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: avatar example walk4
+      name: pumpkin_5
       rect:
         serializedVersion: 2
-        x: 94
-        y: 3
+        x: 108
+        y: 2
         width: 16
-        height: 24
+        height: 15
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -232,8 +235,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0f3a70489651ab660800000000000000
-      internalID: 7402252480467674096
+      spriteID: 3358cc38d1a54bf40800000000000000
+      internalID: 5743314507615995187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pumpkin_6
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 2
+        width: 16
+        height: 14
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0af7a3adce99d62d0800000000000000
+      internalID: -3283799310730625120
       vertices: []
       indices: 
       edges: []
@@ -241,7 +265,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: ba7d08631e78cb54ba282f1e715a37b4
+    spriteID: ae615c749763d9b42b726f3621b8119e
     internalID: 0
     vertices: []
     indices: 
@@ -249,12 +273,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      avatar example idle1: -3765396946703585323
-      avatar example idle2: -2139289267927690785
-      avatar example walk1: 3456293085824990191
-      avatar example walk2: 3987043508308238829
-      avatar example walk3: 7269787754796130331
-      avatar example walk4: 7402252480467674096
+      pumpkin_0: 3801843947054940190
+      pumpkin_1: -6655579283965948428
+      pumpkin_2: -6609195513140498240
+      pumpkin_3: 7146241959951293642
+      pumpkin_4: -6798800175903316494
+      pumpkin_5: 5743314507615995187
+      pumpkin_6: -3283799310730625120
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
