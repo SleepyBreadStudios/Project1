@@ -28,9 +28,6 @@ public class Player2Behavior : NetworkBehaviour
     [SerializeField]
     private NetworkVariable<float> leftRightPosition = new NetworkVariable<float>();
 
-    [SerializeField]
-    private NetworkVariable<float> scaleXPosition = new NetworkVariable<float>();
-
     PlayerInventory playerInventory = null;
 
     [SerializeField]
@@ -48,9 +45,11 @@ public class Player2Behavior : NetworkBehaviour
     // client caches positions
     private float oldForwardBackwardPosition = 0;
     private float oldLeftRightPosition = 0;
-    private float oldScaleX = 0;
 
     private GameObject craftingObject = null;
+
+    // for flipping sprite
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
@@ -61,7 +60,7 @@ public class Player2Behavior : NetworkBehaviour
         InventoryUI.transform.localScale = new Vector3(0, 0, 0);
         CraftingUI.transform.localScale = new Vector3(0, 0, 0);
         transform.localScale = new Vector3(1, 1, 1);
-        scaleXPosition.Value = 1;
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
         // grab original position of inventory for resetting
         originalInvPos = InventoryUI.transform.position;
@@ -92,14 +91,13 @@ public class Player2Behavior : NetworkBehaviour
     {
         transform.position = new Vector3(transform.position.x + leftRightPosition.Value,
             transform.position.y + forwardBackPosition.Value, transform.position.z);
-        transform.localScale = new Vector3(scaleXPosition.Value, transform.localScale.y, transform.localScale.z);
+        //transform.localScale = new Vector3(scaleXPosition.Value, transform.localScale.y, transform.localScale.z);
     }
 
     private void UpdateClient()
     {
         float forwardBackward = 0;
         float leftRight = 0;
-        float scaleX = 0;
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
@@ -115,13 +113,13 @@ public class Player2Behavior : NetworkBehaviour
         {
             leftRight -= walkSpeed;
             animator.SetFloat("speed", walkSpeed);
-            scaleX = 1;
+            spriteRenderer.flipX = false;
         }
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             leftRight += walkSpeed;
             animator.SetFloat("speed", walkSpeed);
-            scaleX = -1;
+            spriteRenderer.flipX = true;
         }
         if(forwardBackward == 0 && leftRight == 0)
         {
@@ -131,10 +129,9 @@ public class Player2Behavior : NetworkBehaviour
         if (oldForwardBackwardPosition != forwardBackward ||
             oldLeftRightPosition != leftRight)
         {
-            UpdateClientPositionServerRpc(forwardBackward, leftRight, scaleX);
+            UpdateClientPositionServerRpc(forwardBackward, leftRight);
             oldForwardBackwardPosition = forwardBackward;
             oldLeftRightPosition = leftRight;
-            oldScaleX = scaleX;
             //animator.SetFloat("speed", walkSpeed);
         }
 
@@ -219,14 +216,10 @@ public class Player2Behavior : NetworkBehaviour
     }
 
     [ServerRpc]
-    public void UpdateClientPositionServerRpc(float forwardBackward, float leftRight, float scaleX)
+    public void UpdateClientPositionServerRpc(float forwardBackward, float leftRight)
     {
         forwardBackPosition.Value = forwardBackward;
         leftRightPosition.Value = leftRight;
-        if(scaleX != 0)
-        {
-            scaleXPosition.Value = scaleX;
-        }
         
     }
 
