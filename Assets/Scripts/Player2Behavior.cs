@@ -253,18 +253,18 @@ public class Player2Behavior : NetworkBehaviour
             {
                 if(Input.mouseScrollDelta.y > 0)
                 {
-                    currHotbarSelected++;
-                    if(currHotbarSelected > 9)
-                    {
-                        currHotbarSelected = 0;
-                    }
-                }
-                else
-                {
                     currHotbarSelected--;
                     if (currHotbarSelected < 0)
                     {
                         currHotbarSelected = 9;
+                    }
+                }
+                else
+                {
+                    currHotbarSelected++;
+                    if (currHotbarSelected > 9)
+                    {
+                        currHotbarSelected = 0;
                     }
                 }
                 hotbarChanged = true;
