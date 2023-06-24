@@ -17,6 +17,7 @@ public class HostCode : MonoBehaviour
     public void Update()
     {
         //code.text = UIManager.UI.joinCode.text;
-        joinCode.text = UIManager.UI.joinCode.text;
+        //joinCode.text = UIManager.UI.joinCode.text;
+        joinCode.text = RelayManager.relay.joinCode;
     }
 }

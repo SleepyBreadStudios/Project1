@@ -39,7 +39,6 @@ public class UIManager : Singleton<UIManager>
 
     [SerializeField]
     public Text joinCode;
-    //public static string code;
 
     [SerializeField]
     public EnemySpawner enemySpawn = null;
@@ -108,8 +107,6 @@ public class UIManager : Singleton<UIManager>
             if (NetworkManager.Singleton.StartHost()) {
                 Debug.Log("Host started...");
                 joinCode.text = RelayManager.Instance.joinCode; // Allows the join code to be displayed
-                //code = joinCode.text;
-
                 
                 //TESTING
                 enemySpawn.Spawn();
