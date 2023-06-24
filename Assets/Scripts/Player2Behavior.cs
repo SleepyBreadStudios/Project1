@@ -36,9 +36,13 @@ public class Player2Behavior : NetworkBehaviour
     [SerializeField]
     private GameObject CraftingUI = null;
 
+    [SerializeField]
+    private GameObject HotbarUI = null;
+
     // is inventory showing at the moment?
     private bool inventoryEnabled = false;
     private bool craftingEnabled = false;
+    private bool menuOpen = false;
 
     private Vector3 originalInvPos = new Vector3(0,0,0);
 
@@ -51,6 +55,9 @@ public class Player2Behavior : NetworkBehaviour
     // for flipping sprite
     private SpriteRenderer spriteRenderer;
 
+    // Track hotbar selection
+    private int currHotbarSelected = 1;
+
     void Start()
     {
         //transform.position = new Vector3(Random.Range(defaultPositionRange.x, defaultPositionRange.y), 0,
@@ -59,6 +66,7 @@ public class Player2Behavior : NetworkBehaviour
         playerInventory = gameObject.GetComponent<PlayerInventory>();
         InventoryUI.transform.localScale = new Vector3(0, 0, 0);
         CraftingUI.transform.localScale = new Vector3(0, 0, 0);
+        HotbarUI.transform.localScale = new Vector3(1, 1, 1);
         transform.localScale = new Vector3(1, 1, 1);
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
@@ -99,6 +107,8 @@ public class Player2Behavior : NetworkBehaviour
         float forwardBackward = 0;
         float leftRight = 0;
 
+        #region KEY PRESSES
+        #region MOVEMENT
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             forwardBackward += walkSpeed;
@@ -134,22 +144,29 @@ public class Player2Behavior : NetworkBehaviour
             oldLeftRightPosition = leftRight;
             //animator.SetFloat("speed", walkSpeed);
         }
-
+        #endregion
+        #region INVENTORY/CRAFTING
         // access inventory
         if (Input.GetKeyDown(KeyCode.I))
         {
             if (inventoryEnabled)
             {
                 InventoryUI.transform.localScale = new Vector3(0, 0, 0);
-                InventoryUI.transform.position = originalInvPos; 
+                InventoryUI.transform.position = originalInvPos;
+                HotbarUI.transform.localScale = new Vector3(1, 1, 1);
                 CraftingUI.transform.localScale = new Vector3(0, 0, 0);
                 inventoryEnabled = false;
                 craftingEnabled = false;
+                menuOpen = false;
+                playerInventory.inventoryTransferEnabled(false);
             }
             else
             {
                 InventoryUI.transform.localScale = new Vector3(1, 1, 1);
+                HotbarUI.transform.localScale = new Vector3(0, 0, 0);
                 inventoryEnabled = true;
+                menuOpen = true;
+
             }
         }
 
@@ -170,22 +187,10 @@ public class Player2Behavior : NetworkBehaviour
         //    }
         //}
 
-        // close ui menus if they're open
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (inventoryEnabled || craftingEnabled)
-            {
-                InventoryUI.transform.localScale = new Vector3(0, 0, 0);
-                InventoryUI.transform.position = originalInvPos;
-                CraftingUI.transform.localScale = new Vector3(0, 0, 0);
-                inventoryEnabled = false;
-                craftingEnabled = false;
-            }
-        }
-
         // access overworld crafting
         if(Input.GetMouseButtonDown(1))
         {
+            // check if interacting with craftingtable
             if(!craftingEnabled)
             {
                 RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -199,20 +204,132 @@ public class Player2Behavior : NetworkBehaviour
                         InventoryUI.transform.position = new Vector3(InventoryUI.transform.position.x - 450, InventoryUI.transform.position.y, InventoryUI.transform.position.z);
                         // open crafting
                         CraftingUI.transform.localScale = new Vector3(1, 1, 1);
+                        HotbarUI.transform.localScale = new Vector3(0, 0, 0);
                         inventoryEnabled = true;
                         craftingEnabled = true;
+                        menuOpen = true;
+                        playerInventory.inventoryTransferEnabled(true);
                     }
                     else
                     {
                         Debug.Log("too far from crafting table");
                     }
                 }
+                // not interacting with crafting table and rightclicking nothing
+                else
+                {
+                    playerInventory.useHotbarItem(currHotbarSelected);
+                }
             }
             else
             {
                 Debug.Log("Crafting table already open");
             }
+
         }
+
+        // close ui menus if they're open
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (inventoryEnabled || craftingEnabled)
+            {
+                InventoryUI.transform.localScale = new Vector3(0, 0, 0);
+                InventoryUI.transform.position = originalInvPos;
+                CraftingUI.transform.localScale = new Vector3(0, 0, 0);
+                inventoryEnabled = false;
+                craftingEnabled = false;
+                HotbarUI.transform.localScale = new Vector3(1, 1, 1);
+                menuOpen = false;
+                playerInventory.inventoryTransferEnabled(false);
+            }
+        }
+        #region HOTBAR
+        // check for numkeys for hotbar
+        // don't interact with hotbar if a menu is open
+        if(!menuOpen)
+        {
+            bool hotbarChanged = false;
+            if (Input.mouseScrollDelta.y != 0)
+            {
+                if(Input.mouseScrollDelta.y > 0)
+                {
+                    currHotbarSelected++;
+                    if(currHotbarSelected > 9)
+                    {
+                        currHotbarSelected = 0;
+                    }
+                }
+                else
+                {
+                    currHotbarSelected--;
+                    if (currHotbarSelected < 0)
+                    {
+                        currHotbarSelected = 9;
+                    }
+                }
+                hotbarChanged = true;
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                currHotbarSelected = 1;
+                hotbarChanged = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                currHotbarSelected = 2;
+                hotbarChanged = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                currHotbarSelected = 3;
+                hotbarChanged = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                currHotbarSelected = 4;
+                hotbarChanged = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                currHotbarSelected = 5;
+                hotbarChanged = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                currHotbarSelected = 6;
+                hotbarChanged = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                currHotbarSelected = 7;
+                hotbarChanged = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                currHotbarSelected = 8;
+                hotbarChanged = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha9))
+            {
+                currHotbarSelected = 9;
+                hotbarChanged = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha0))
+            {
+                currHotbarSelected = 0;
+                hotbarChanged = true;
+            }
+            if(hotbarChanged)
+            {
+                playerInventory.updateHotbar(currHotbarSelected);
+            }
+        }
+
+
+
+        #endregion
+        #endregion
+        #endregion
     }
 
     [ServerRpc]

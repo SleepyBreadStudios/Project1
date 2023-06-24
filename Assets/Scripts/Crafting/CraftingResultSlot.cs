@@ -45,13 +45,16 @@ public class CraftingResultSlot : ItemSlotUI, IDropHandler
     // move stack from result slot to inventory with shift click
     public override void QuickMoveStack()
     {
-        if (inventory.AddStack(ItemSlot))
+        if (inventory.inventoryShiftClick)
         {
-            // item successfully moved from crafting
-            // empty crafting slot
-            crafting.Craft();
-            //crafting.DeleteFromInventory(SlotIndex);
-            crafting.EmptyResultSlot();
+            if (inventory.AddStack(ItemSlot))
+            {
+                // item successfully moved from crafting
+                // empty crafting slot
+                crafting.Craft();
+                //crafting.DeleteFromInventory(SlotIndex);
+                crafting.EmptyResultSlot();
+            }
         }
     }
 

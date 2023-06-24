@@ -15,6 +15,7 @@ using System.Linq;
 public abstract class PlayerItemManager : MonoBehaviour
 {
     [SerializeField] private VoidEvent onInventoryItemsUpdated = null;
+
     // num of different stacked items it can hold
     [SerializeField]
     protected int maxInventorySize = 0;

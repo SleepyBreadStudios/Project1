@@ -15,6 +15,8 @@ using System.Linq;
 // consider making inventory a scriptable object for save + load
 public class PlayerInventory : PlayerItemManager
 {
+    [SerializeField] private VoidEvent onHotbarUpdated = null;
+
     [SerializeField]
     private CraftingInventoryManager playerCrafting = null;
     //[SerializeField] private VoidEvent onInventoryItemsUpdated = null;
@@ -23,7 +25,7 @@ public class PlayerInventory : PlayerItemManager
     //[SerializeField]
 
     // inventory list
-    //private List<ItemSlot> inventory = new();
+    private List<ItemSlot> hotbar = new();
 
     // possibly use an array for inventory
     // private StackObject[] inventory = new StackObject[maxInventorySize];
@@ -33,7 +35,13 @@ public class PlayerInventory : PlayerItemManager
     // fetches the inventory slot by index
     //public ItemSlot GetSlotByIndex(int index) => inventory[index];
 
-    //public Action OnItemsUpdated = delegate { };
+    public Action OnHotbarUpdated = delegate { };
+
+    //public void OnEnable() => OnHotbarUpdated += onHotbarUpdated.Raise;
+
+    public int currHotbarNum = 1;
+
+    public bool inventoryShiftClick = false;
 
     // add item to player inventory
     public bool AddItem(ItemBehavior nBehavior, ItemData nItem)
@@ -205,13 +213,56 @@ public class PlayerInventory : PlayerItemManager
         OnItemsUpdated.Invoke();
     }
 
+    public void useHotbarItem(int currHotbarSelected)
+    {
+        // adjust for array starting at 0 
+        if (currHotbarSelected == 0)
+        {
+            currHotbarSelected = 9;
+        }
+        else
+        {
+            currHotbarSelected--;
+        }
+
+        if(inventory[currHotbarSelected].item == null)
+        {
+            Debug.Log("Hotbar slot empty");
+            return;
+        }
+        else
+        {
+            // this is where we trigger the actual effect of the item
+            Debug.Log("Do something here");
+        }
+    }
+
+    // for updating the selection sprite on the hotbar ui
+    // called by player behavior
+    public void updateHotbar(int currHotbarSelected)
+    {
+        currHotbarNum = currHotbarSelected;
+        OnHotbarUpdated.Invoke();
+    }
+
+    // called by player behavior
+    public void inventoryTransferEnabled(bool enable)
+    {
+        inventoryShiftClick = enable;
+    }
+
     // init inventory before anything
     private void Awake()
     {
+        OnHotbarUpdated += onHotbarUpdated.Raise;
         // intialize the inventory with item slots based on current max inventory size
-        for(int i = 0; i < maxInventorySize; i++)
+        for (int i = 0; i < maxInventorySize; i++)
         {
             inventory.Add(new ItemSlot());
+        }
+        for(int i = 0; i < 11; i++)
+        {
+            hotbar.Add(inventory[i]);
         }
     }
 }
