@@ -11,9 +11,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class UIManager : Singleton<UIManager>
 {
+    public static UIManager UI;
     [SerializeField]
     private Button startServerButton;
 
@@ -37,6 +39,7 @@ public class UIManager : Singleton<UIManager>
 
     [SerializeField]
     public Text joinCode;
+    public static string code;
 
     [SerializeField]
     public EnemySpawner enemySpawn = null;
@@ -59,17 +62,25 @@ public class UIManager : Singleton<UIManager>
         //int desiredFPS = 60; // or something else
     
         Screen.SetResolution (width , height, isFullScreen);
+
+        if (UI == null)
+        {
+            UI = this;
+            DontDestroyOnLoad(gameObject);
+        } else {
+            Destroy(gameObject);
+        }
     }
 
     void Update()
     {
-        playersInGameText.text = $"Players in game: {PlayersManager.Instance.PlayersInGame}";
-        objectCount.text = $"ObjectCount: {GameObject.FindGameObjectsWithTag("Item").Length}";
-        enemyCount.text = $"Enemy Count: {GameObject.FindGameObjectsWithTag("Enemy").Length}";
-        if(GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
-        {
-            enemyCount.text = $"You win!";
-        }
+        // playersInGameText.text = $"Players in game: {PlayersManager.Instance.PlayersInGame}";
+        // objectCount.text = $"ObjectCount: {GameObject.FindGameObjectsWithTag("Item").Length}";
+        // enemyCount.text = $"Enemy Count: {GameObject.FindGameObjectsWithTag("Enemy").Length}";
+        // if(GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+        // {
+        //     enemyCount.text = $"You win!";
+        // }
     }
 
     void Start()
@@ -91,11 +102,14 @@ public class UIManager : Singleton<UIManager>
             // relay features - if the Unity transport is found and is relay protocol then we redirect all the 
             // traffic through the relay, else it just uses a LAN type (UNET) communication.
             if (RelayManager.Instance.IsRelayEnabled) 
+                SceneManager.LoadSceneAsync("Overworld");
                 await RelayManager.Instance.SetupRelay();
 
             if (NetworkManager.Singleton.StartHost()) {
                 Debug.Log("Host started...");
-                joinCode.text = RelayManager.Instance.joinCode;
+                joinCode.text = RelayManager.Instance.joinCode; // Allows the join code to be displayed
+                
+                //TESTING
                 enemySpawn.Spawn();
                 overworldSpawn.Spawn();
             }
@@ -136,4 +150,9 @@ public class UIManager : Singleton<UIManager>
         //     SpawnerControl.Instance.SpawnObjects();
         // });
     }
+
+    // public void SetCode()
+    // {
+    //     joinCode.text = RelayManager.Instance.joinCode;
+    // }
 }

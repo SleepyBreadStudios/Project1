@@ -10,6 +10,7 @@ using UnityEngine;
 
 public class RelayManager : Singleton<RelayManager>
 {
+    public static RelayManager relay;
     [SerializeField]
     private string environment = "production";
 
@@ -94,4 +95,16 @@ public class RelayManager : Singleton<RelayManager>
 
         return relayJoinData;
     }
+
+    private void Awake()
+    {
+        if (relay == null)
+        {
+            relay = this;
+            DontDestroyOnLoad(gameObject);
+        } else {
+            Destroy(gameObject);
+        }
+    }
+
 }
