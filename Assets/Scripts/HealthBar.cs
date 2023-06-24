@@ -21,6 +21,9 @@ public class HealthBar : MonoBehaviour
     [SerializeField]
     public Image healthImage;
 
+    [SerializeField]
+    public bool active = false;
+
     float lerpSpeed;
 
     // Sets the values of the health
@@ -54,7 +57,7 @@ public class HealthBar : MonoBehaviour
     {
         if (currentHealth == maxHealth) {
             healthImage.enabled = false;
-        } else {
+        } else if (currentHealth < maxHealth || active) {
             healthImage.enabled = true;
         }
     }
