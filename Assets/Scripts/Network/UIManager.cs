@@ -108,6 +108,8 @@ public class UIManager : Singleton<UIManager>
             if (NetworkManager.Singleton.StartHost()) {
                 Debug.Log("Host started...");
                 joinCode.text = RelayManager.Instance.joinCode; // Allows the join code to be displayed
+                code = joinCode.text;
+
                 
                 //TESTING
                 enemySpawn.Spawn();
@@ -150,9 +152,4 @@ public class UIManager : Singleton<UIManager>
         //     SpawnerControl.Instance.SpawnObjects();
         // });
     }
-
-    // public void SetCode()
-    // {
-    //     joinCode.text = RelayManager.Instance.joinCode;
-    // }
 }
