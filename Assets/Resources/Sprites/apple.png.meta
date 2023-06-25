@@ -1,25 +1,28 @@
 fileFormatVersion: 2
-guid: 25ac1592952ca0e4193613903bcd06a9
+guid: 9cd0551d434e47e4cb6283aa1593f4ea
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3765396946703585323
-    second: avatar example animated_0
+      213: -7832214784768987486
+    second: apple_0
   - first:
-      213: -2139289267927690785
-    second: avatar example animated_1
+      213: -8755805678658342655
+    second: apple_1
   - first:
-      213: 3456293085824990191
-    second: avatar example animated_2
+      213: -270901426560336850
+    second: apple_2
   - first:
-      213: 3987043508308238829
-    second: avatar example animated_3
+      213: -5164730789955816838
+    second: apple_3
   - first:
-      213: 7269787754796130331
-    second: avatar example animated_4
+      213: 4461436408205090986
+    second: apple_4
   - first:
-      213: 7402252480467674096
-    second: avatar example animated_5
+      213: -7516436073707312018
+    second: apple_5
+  - first:
+      213: -7275689925374015147
+    second: apple_6
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -114,7 +117,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -126,7 +129,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -137,13 +140,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: avatar example idle1
+      name: apple_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 3
-        width: 16
-        height: 24
+        x: 1
+        y: 2
+        width: 15
+        height: 17
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,20 +154,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5df64694d6f9ebbc0800000000000000
-      internalID: -3765396946703585323
+      spriteID: 2ae284d66226e4390800000000000000
+      internalID: -7832214784768987486
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: avatar example idle2
+      name: apple_1
       rect:
         serializedVersion: 2
         x: 20
-        y: 3
-        width: 16
-        height: 23
+        y: 2
+        width: 15
+        height: 17
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,20 +175,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fd15d59ceb7bf42e0800000000000000
-      internalID: -2139289267927690785
+      spriteID: 101b83120212d7680800000000000000
+      internalID: -8755805678658342655
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: avatar example walk1
+      name: apple_2
       rect:
         serializedVersion: 2
-        x: 43
-        y: 3
+        x: 40
+        y: 2
         width: 16
-        height: 24
+        height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,20 +196,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: febbc34df3837ff20800000000000000
-      internalID: 3456293085824990191
+      spriteID: e2c79bc76909d3cf0800000000000000
+      internalID: -270901426560336850
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: avatar example walk2
+      name: apple_3
       rect:
         serializedVersion: 2
-        x: 60
-        y: 3
-        width: 16
-        height: 24
+        x: 59
+        y: 2
+        width: 15
+        height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,20 +217,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: de16db052f2d45730800000000000000
-      internalID: 3987043508308238829
+      spriteID: a723920e5b03358b0800000000000000
+      internalID: -5164730789955816838
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: avatar example walk3
+      name: apple_4
       rect:
         serializedVersion: 2
-        x: 77
-        y: 3
-        width: 16
-        height: 24
+        x: 78
+        y: 2
+        width: 15
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,20 +238,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b10ab1d227973e460800000000000000
-      internalID: 7269787754796130331
+      spriteID: aa02f0b86c43aed30800000000000000
+      internalID: 4461436408205090986
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: avatar example walk4
+      name: apple_5
       rect:
         serializedVersion: 2
-        x: 94
-        y: 3
-        width: 16
-        height: 24
+        x: 108
+        y: 2
+        width: 15
+        height: 17
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -256,8 +259,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0f3a70489651ab660800000000000000
-      internalID: 7402252480467674096
+      spriteID: e6c6eb9f63140b790800000000000000
+      internalID: -7516436073707312018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: apple_6
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 2
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5598136af8e870b90800000000000000
+      internalID: -7275689925374015147
       vertices: []
       indices: 
       edges: []
@@ -265,7 +289,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: ba7d08631e78cb54ba282f1e715a37b4
+    spriteID: d53a69933537d99468eebd28b99b488b
     internalID: 0
     vertices: []
     indices: 
@@ -273,12 +297,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      avatar example idle1: -3765396946703585323
-      avatar example idle2: -2139289267927690785
-      avatar example walk1: 3456293085824990191
-      avatar example walk2: 3987043508308238829
-      avatar example walk3: 7269787754796130331
-      avatar example walk4: 7402252480467674096
+      apple_0: -7832214784768987486
+      apple_1: -8755805678658342655
+      apple_2: -270901426560336850
+      apple_3: -5164730789955816838
+      apple_4: 4461436408205090986
+      apple_5: -7516436073707312018
+      apple_6: -7275689925374015147
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -7,6 +7,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,12 @@ using UnityEngine.UI;
 public class ProjectileBehavior : NetworkBehaviour
 {
     private Vector2 randLoc;
+
+    [SerializeField]
     private float speed;
+
+    [SerializeField]
+    private string target;
 
     void Start()
     {
@@ -29,7 +35,7 @@ public class ProjectileBehavior : NetworkBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag(target))
         {
             Destroy(this.gameObject);
         }

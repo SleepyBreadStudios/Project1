@@ -10,15 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2573235274075607241}
   - component: {fileID: 8774018560744792732}
-  - component: {fileID: 3763255975869733711}
   - component: {fileID: 3146239910611959456}
   - component: {fileID: 797592511094102729}
   - component: {fileID: 8164981118111567782}
   - component: {fileID: 5378673949838583217}
-  - component: {fileID: 3748506796218396243}
-  - component: {fileID: 2822666067084600819}
-  m_Layer: 3
-  m_Name: Pumpkin
+  - component: {fileID: 2124561215750895510}
+  - component: {fileID: 7009126471489473660}
+  m_Layer: 6
+  m_Name: Seed
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 5909226124758451408}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.280375, y: 1.6497167, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,10 +76,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -658090937
-  m_SortingLayer: 1
+  m_SortingLayerID: 1836637999
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3801843947054940190, guid: 1ee4dc15ca38d454792fbd3506be6157, type: 3}
+  m_Sprite: {fileID: -1816471319, guid: a49ef2926276bfb4c92e8b30754d5865, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -91,28 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &3763255975869733711
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5909226124758451408}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d58616e65ee617549887e7e1e782d399, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &3146239910611959456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,8 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!58 &3748506796218396243
-CircleCollider2D:
+--- !u!70 &2124561215750895510
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -224,13 +201,14 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.4
---- !u!114 &2822666067084600819
+  m_Size: {x: 5, y: 3}
+  m_Direction: 1
+--- !u!114 &7009126471489473660
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -239,12 +217,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 5909226124758451408}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcae93922135e61469459535fde71858, type: 3}
+  m_Script: {fileID: 11500000, guid: b958ffff6532f694496ed8959a11cee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
-  health: 3
-  maxHealth: 3
-  healthBar: {fileID: 0}
-  isJumping: 0
-  speed: 1
+  speed: 0.5
+  target: Player

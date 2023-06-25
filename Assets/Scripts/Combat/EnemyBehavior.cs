@@ -14,8 +14,6 @@ using UnityEngine.UI;
 // consider making abstract
 public class EnemyBehavior : NetworkBehaviour
 {
-    private Vector2 dest;
-
     // internal enemy name
     private string enemyName = null;
 
@@ -37,10 +35,6 @@ public class EnemyBehavior : NetworkBehaviour
 
     // defense value
     private int defense;
-
-    [SerializeField]
-    // speed value
-    private int speed;
 
     private float time = 0.0f;
 
@@ -73,26 +67,6 @@ public class EnemyBehavior : NetworkBehaviour
         return defense;
     }
 
-    public int getSpeed()
-    {
-        return speed;
-    }
-
-    public void move()
-    {
-        if (speed != 0) {
-            if (transform.position.x == dest.x && transform.position.y == dest.y)
-            {
-                float randy = Random.Range
-                    (Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).y, Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)).y);
-                float randx = Random.Range
-                    (Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x, Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x);
-                dest = new Vector2(randx, randy);
-            }
-
-            transform.position = Vector3.MoveTowards(transform.position, dest, Time.deltaTime * (float) speed);
-        }
-    }
     public void Delete()
     {
         Destroy(this.gameObject);
@@ -119,14 +93,12 @@ public class EnemyBehavior : NetworkBehaviour
 
     void Start()
     {
-        dest = transform.position;
         healthBar.SetHealth(maxHealth);
         LoadServerRpc();
     }
 
     void Update()
     {
-        move();
         //StartCoroutine(RegenerateTest());
     }
 
