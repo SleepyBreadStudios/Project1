@@ -6,7 +6,9 @@
 //#define Debug
 using Unity.Netcode;
 using UnityEngine;
-
+using Cinemachine;
+using DapperDino.Events.CustomEvents;
+using System;
 
 public class Player2Behavior : NetworkBehaviour
 {
@@ -39,10 +41,16 @@ public class Player2Behavior : NetworkBehaviour
     [SerializeField]
     private GameObject HotbarUI = null;
 
+    [SerializeField]
+    Transform m_CameraFollow;
+
     // is inventory showing at the moment?
     private bool inventoryEnabled = false;
     private bool craftingEnabled = false;
     private bool menuOpen = false;
+    private bool escEnabled = false;
+
+    private EscapeMenu escMenu = null;
 
     private Vector3 originalInvPos = new Vector3(0,0,0);
 
@@ -58,6 +66,10 @@ public class Player2Behavior : NetworkBehaviour
     // Track hotbar selection
     private int currHotbarSelected = 1;
 
+    // for telling the escape menu that other menus are open
+    [SerializeField] private VoidEvent onMenuOpenUpdated = null;
+    public Action OnMenuOpenUpdated = delegate { }; 
+
     void Start()
     {
         //transform.position = new Vector3(Random.Range(defaultPositionRange.x, defaultPositionRange.y), 0,
@@ -70,22 +82,42 @@ public class Player2Behavior : NetworkBehaviour
         transform.localScale = new Vector3(1, 1, 1);
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
+        // for esc menu to know when to open and when not to
+        OnMenuOpenUpdated += onMenuOpenUpdated.Raise;
+
         // grab original position of inventory for resetting
         originalInvPos = InventoryUI.transform.position;
 
         // Sets random color when players spawn
-        float rand = Random.Range(0, 256);
-        float rand2 = Random.Range(0, 256);
-        float rand3 = Random.Range(0, 256);
+        float rand = UnityEngine.Random.Range(0, 256);
+        float rand2 = UnityEngine.Random.Range(0, 256);
+        float rand3 = UnityEngine.Random.Range(0, 256);
         rand = rand / 255.0f;
         rand2 = rand2 / 255.0f;
         rand3 = rand3 / 255.0f;
 
         gameObject.GetComponent<Renderer>().material.color = new Color(rand, rand2, rand3);
         craftingObject = GameObject.Find("CraftingTable");
+        escMenu = GameObject.Find("MenuCanvas").GetComponent<EscapeMenu>();
         //MainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         if (IsClient && IsOwner)
+        {
             HotbarUI.transform.localScale = new Vector3(1, 1, 1);
+
+        }
+
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+
+        if (IsClient && IsOwner)
+        {
+            var cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+            cinemachineVirtualCamera.Follow = transform;
+        }
+
     }
 
     void Update()
@@ -111,125 +143,113 @@ public class Player2Behavior : NetworkBehaviour
 
         #region KEY PRESSES
         #region MOVEMENT
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        // don't allow player input if the escape menu is open
+        if (!escEnabled)
         {
-            forwardBackward += walkSpeed;
-            animator.SetFloat("speed", walkSpeed);
-        }
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-        {
-            forwardBackward -= walkSpeed;
-            animator.SetFloat("speed", walkSpeed);
-        }
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            leftRight -= walkSpeed;
-            animator.SetFloat("speed", walkSpeed);
-            spriteRenderer.flipX = false;
-        }
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            leftRight += walkSpeed;
-            animator.SetFloat("speed", walkSpeed);
-            spriteRenderer.flipX = true;
-        }
-        if(forwardBackward == 0 && leftRight == 0)
-        {
-            animator.SetFloat("speed", 0);
-        }
-
-        if (oldForwardBackwardPosition != forwardBackward ||
-            oldLeftRightPosition != leftRight)
-        {
-            UpdateClientPositionServerRpc(forwardBackward, leftRight);
-            oldForwardBackwardPosition = forwardBackward;
-            oldLeftRightPosition = leftRight;
-            //animator.SetFloat("speed", walkSpeed);
-        }
-        #endregion
-        #region INVENTORY/CRAFTING
-        // access inventory
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            if (inventoryEnabled)
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             {
-                InventoryUI.transform.localScale = new Vector3(0, 0, 0);
-                InventoryUI.transform.position = originalInvPos;
-                HotbarUI.transform.localScale = new Vector3(1, 1, 1);
-                CraftingUI.transform.localScale = new Vector3(0, 0, 0);
-                inventoryEnabled = false;
-                craftingEnabled = false;
-                menuOpen = false;
-                playerInventory.inventoryTransferEnabled(false);
+                forwardBackward += walkSpeed;
+                animator.SetFloat("speed", walkSpeed);
             }
-            else
+            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
             {
-                InventoryUI.transform.localScale = new Vector3(1, 1, 1);
-                HotbarUI.transform.localScale = new Vector3(0, 0, 0);
-                inventoryEnabled = true;
-                menuOpen = true;
-
+                forwardBackward -= walkSpeed;
+                animator.SetFloat("speed", walkSpeed);
             }
-        }
-
-        // access crafting
-        //if (Input.GetKeyDown(KeyCode.C))
-        //{
-        //    if (craftingEnabled)
-        //    {
-        //        CraftingUI.transform.localScale = new Vector3(0, 0, 0);
-        //        craftingEnabled = false;
-        //    }
-        //    else
-        //    {
-        //        InventoryUI.transform.localScale = new Vector3(1, 1, 1);
-        //        CraftingUI.transform.localScale = new Vector3(1, 1, 1);
-        //        inventoryEnabled = true;
-        //        craftingEnabled = true;
-        //    }
-        //}
-
-        // access overworld crafting
-        if(Input.GetMouseButtonDown(1))
-        {
-            // check if interacting with craftingtable
-            if(!craftingEnabled)
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
-                RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-                if (hit.collider != null && hit.collider.gameObject == craftingObject)
+                leftRight -= walkSpeed;
+                animator.SetFloat("speed", walkSpeed);
+                spriteRenderer.flipX = false;
+            }
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            {
+                leftRight += walkSpeed;
+                animator.SetFloat("speed", walkSpeed);
+                spriteRenderer.flipX = true;
+            }
+            if (forwardBackward == 0 && leftRight == 0)
+            {
+                animator.SetFloat("speed", 0);
+            }
+
+            if (oldForwardBackwardPosition != forwardBackward ||
+                oldLeftRightPosition != leftRight)
+            {
+                UpdateClientPositionServerRpc(forwardBackward, leftRight);
+                oldForwardBackwardPosition = forwardBackward;
+                oldLeftRightPosition = leftRight;
+                //animator.SetFloat("speed", walkSpeed);
+            }
+            #endregion
+            #region INVENTORY/CRAFTING
+            // access inventory
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                if (inventoryEnabled)
                 {
-                    if (Vector3.Distance(hit.collider.gameObject.transform.position, transform.position) <= 4)
-                    {
-                        Debug.Log("Right clicked crafting table, opening menu");
-                        // adjust position and size of inventory
-                        InventoryUI.transform.localScale = new Vector3(.8f, .8f, .8f);
-                        InventoryUI.transform.position = new Vector3(InventoryUI.transform.position.x - 450, InventoryUI.transform.position.y, InventoryUI.transform.position.z);
-                        // open crafting
-                        CraftingUI.transform.localScale = new Vector3(1, 1, 1);
-                        HotbarUI.transform.localScale = new Vector3(0, 0, 0);
-                        inventoryEnabled = true;
-                        craftingEnabled = true;
-                        menuOpen = true;
-                        playerInventory.inventoryTransferEnabled(true);
-                    }
-                    else
-                    {
-                        Debug.Log("too far from crafting table");
-                    }
+                    // close
+                    InventoryUI.transform.localScale = new Vector3(0, 0, 0);
+                    InventoryUI.transform.position = originalInvPos;
+                    HotbarUI.transform.localScale = new Vector3(1, 1, 1);
+                    CraftingUI.transform.localScale = new Vector3(0, 0, 0);
+                    inventoryEnabled = false;
+                    craftingEnabled = false;
+                    menuOpen = false;
+                    playerInventory.inventoryTransferEnabled(false);
                 }
-                // not interacting with crafting table and rightclicking nothing
                 else
                 {
-                    playerInventory.useHotbarItem(currHotbarSelected);
+                    InventoryUI.transform.localScale = new Vector3(1, 1, 1);
+                    HotbarUI.transform.localScale = new Vector3(0, 0, 0);
+                    inventoryEnabled = true;
+                    menuOpen = true;
                 }
+                OnMenuOpenUpdated.Invoke();
             }
-            else
+
+            // access overworld crafting
+            if (Input.GetMouseButtonDown(1))
             {
-                Debug.Log("Crafting table already open");
+                // check if interacting with craftingtable
+                if (!craftingEnabled)
+                {
+                    RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+                    if (hit.collider != null && hit.collider.gameObject == craftingObject)
+                    {
+                        if (Vector3.Distance(hit.collider.gameObject.transform.position, transform.position) <= 4)
+                        {
+                            Debug.Log("Right clicked crafting table, opening menu");
+                            // adjust position and size of inventory
+                            InventoryUI.transform.localScale = new Vector3(.8f, .8f, .8f);
+                            InventoryUI.transform.position = new Vector3(InventoryUI.transform.position.x - 450, InventoryUI.transform.position.y, InventoryUI.transform.position.z);
+                            // open crafting
+                            CraftingUI.transform.localScale = new Vector3(1, 1, 1);
+                            HotbarUI.transform.localScale = new Vector3(0, 0, 0);
+                            inventoryEnabled = true;
+                            craftingEnabled = true;
+                            menuOpen = true;
+                            playerInventory.inventoryTransferEnabled(true);
+                            OnMenuOpenUpdated.Invoke();
+                        }
+                        else
+                        {
+                            Debug.Log("too far from crafting table");
+                        }
+                    }
+                    // not interacting with crafting table and rightclicking nothing
+                    else
+                    {
+                        playerInventory.useHotbarItem(currHotbarSelected);
+                    }
+                }
+                else
+                {
+                    Debug.Log("Crafting table already open");
+                }
+
             }
-
         }
-
         // close ui menus if they're open
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -243,6 +263,7 @@ public class Player2Behavior : NetworkBehaviour
                 HotbarUI.transform.localScale = new Vector3(1, 1, 1);
                 menuOpen = false;
                 playerInventory.inventoryTransferEnabled(false);
+                OnMenuOpenUpdated.Invoke();
             }
         }
         #region HOTBAR
@@ -332,6 +353,13 @@ public class Player2Behavior : NetworkBehaviour
         #endregion
         #endregion
         #endregion
+    }
+
+    public void EnableEscMenuPlayer()
+    {
+        escEnabled = !escEnabled;
+        Debug.Log("Esc pressed " + escEnabled);
+        menuOpen = escEnabled;
     }
 
     [ServerRpc]
