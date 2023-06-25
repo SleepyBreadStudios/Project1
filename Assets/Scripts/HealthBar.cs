@@ -24,6 +24,9 @@ public class HealthBar : MonoBehaviour
     [SerializeField]
     public bool active = false;
 
+    [SerializeField]
+    public Text healthPoints;
+
     float lerpSpeed;
 
     // Sets the values of the health
@@ -48,16 +51,21 @@ public class HealthBar : MonoBehaviour
         healthImage.color = HealthColor;
     }
 
-    public void Heal(float value) 
+    public void Heal() 
     {
-
+        if (Input.GetKeyDown(KeyCode.H)) {
+            if (currentHealth < maxHealth) {
+                currentHealth++;
+            }
+        }
     }
 
+    // Activates the health bar when the current health is less than max (for enemies)
     private void Activate() 
     {
-        if (currentHealth == maxHealth) {
+        if (currentHealth == maxHealth && !active) {
             healthImage.enabled = false;
-        } else if (currentHealth < maxHealth || active) {
+        } else {
             healthImage.enabled = true;
         }
     }
@@ -65,6 +73,13 @@ public class HealthBar : MonoBehaviour
     private void Update() 
     {
         Activate();
+        Heal();
+        // Testing health decrementing
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            currentHealth--;
+        }
+        
+        healthPoints.text = currentHealth + " / " + maxHealth;
         lerpSpeed = 3f * Time.deltaTime;
         healthImage.fillAmount = Mathf.Lerp(healthImage.fillAmount, currentHealth / maxHealth, lerpSpeed);
         HealthColor();
