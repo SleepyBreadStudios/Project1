@@ -16,14 +16,14 @@ public class StartHostTestScript : MonoBehaviour
 
     public async void SetupRelay()
     {
-        if (RelayManager.Instance.IsRelayEnabled)
-            await RelayManager.Instance.SetupRelay();
+        // if (RelayManager.Instance.IsRelayEnabled)
+        //     await RelayManager.Instance.SetupRelay();
 
-        if (NetworkManager.Singleton.StartHost())
-        {
-            Debug.Log("Host started...");
-        }
-        else
-            Debug.Log("Unable to start host...");
+        // if (NetworkManager.Singleton.StartHost())
+        // {
+        //     Debug.Log("Host started...");
+        // }
+        // else
+        //     Debug.Log("Unable to start host...");
     }
 }
