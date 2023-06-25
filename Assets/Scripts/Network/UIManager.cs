@@ -40,12 +40,6 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     public Text joinCode;
 
-    [SerializeField]
-    public EnemySpawner enemySpawn = null;
-
-    [SerializeField]
-    public OverworldSpawner overworldSpawn = null;
-
     // [SerializeField]
     // private Button executePhysicsButton;
 
@@ -107,10 +101,6 @@ public class UIManager : Singleton<UIManager>
             if (NetworkManager.Singleton.StartHost()) {
                 Debug.Log("Host started...");
                 joinCode.text = RelayManager.Instance.joinCode; // Allows the join code to be displayed
-                
-                //TESTING
-                enemySpawn.Spawn();
-                overworldSpawn.Spawn();
             }
             else
                 Debug.Log("Unable to start host...");

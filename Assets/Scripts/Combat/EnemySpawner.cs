@@ -8,41 +8,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using static UnityEditor.PlayerSettings;
 
 public class EnemySpawner : NetworkBehaviour
 {
     [SerializeField]
     private GameObject enemyPrefab;
-    [SerializeField]
-    private GameObject enemyPrefab2;
-    [SerializeField]
-    private GameObject enemyPrefab3;
 
+    // spawn radius for spawning enemies
+    [SerializeField]
+    private float spawnRadius = 5.0f;
 
+    // polling radius for counting enemies
     [SerializeField]
-    private float enemyInterval = 4.0f;
+    private float pollRadius = 15.0f;
+
+    // rate at which spawner polls surrounding area and determines spawn
     [SerializeField]
-    private float enemyInterval2 = 6.0f;
+    private float pollRate = 10.0f;
+
+    // limit for number of enemies in polling radius
     [SerializeField]
-    private float enemyInterval3 = 2.0f;
+    private int limit = 5;
 
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    public void Spawn()
-    {
-        StartCoroutine(spawnEnemy(enemyInterval, enemyPrefab));
-        StartCoroutine(spawnEnemy(enemyInterval2, enemyPrefab2));
-        StartCoroutine(spawnEnemy(enemyInterval3, enemyPrefab3));
+        StartCoroutine(spawnEnemy(pollRate, enemyPrefab));
     }
 
     private IEnumerator spawnEnemy(float interval, GameObject enemy) {
         yield return new WaitForSeconds(interval);
-        GameObject newEnemy = Instantiate(enemy, new Vector3(Random.Range(-5f, 5), Random.Range(-6f, 6f), 0), Quaternion.identity);
-        newEnemy.GetComponent<NetworkObject>().Spawn();
+
+        float x = transform.position.x;
+        float y = transform.position.y;
+
+        // counter to see how many enemies are within radius, in the future possibly restrict by enemy type
+        int count = 0;
+        foreach (var e in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            if (e != null)
+            {
+                Vector2 loc = e.transform.position;
+                if (loc.x < x + pollRadius && loc.x > x - pollRadius &&
+                    loc.y < y + pollRadius && loc.y > y - pollRadius)
+                {
+                    count++;
+                }
+            }
+        }
+
+        Debug.Log("Spawner counting: " + count);
+
+        // if count is less than limit, spawn an enemy inside spawning radius
+        if (count < limit)
+        {
+            GameObject newEnemy = Instantiate(enemy, new Vector2(Random.Range(x - spawnRadius, x + spawnRadius), 
+                Random.Range(y - spawnRadius, y + spawnRadius)), Quaternion.identity);
+            newEnemy.GetComponent<NetworkObject>().Spawn();
+        }
+
         StartCoroutine(spawnEnemy(interval, enemy));
     }
 }
