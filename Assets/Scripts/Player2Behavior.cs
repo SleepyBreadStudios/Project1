@@ -66,7 +66,7 @@ public class Player2Behavior : NetworkBehaviour
         playerInventory = gameObject.GetComponent<PlayerInventory>();
         InventoryUI.transform.localScale = new Vector3(0, 0, 0);
         CraftingUI.transform.localScale = new Vector3(0, 0, 0);
-        HotbarUI.transform.localScale = new Vector3(1, 1, 1);
+        HotbarUI.transform.localScale = new Vector3(0, 0, 0);
         transform.localScale = new Vector3(1, 1, 1);
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
@@ -84,6 +84,8 @@ public class Player2Behavior : NetworkBehaviour
         gameObject.GetComponent<Renderer>().material.color = new Color(rand, rand2, rand3);
         craftingObject = GameObject.Find("CraftingTable");
         //MainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        if (IsClient && IsOwner)
+            HotbarUI.transform.localScale = new Vector3(1, 1, 1);
     }
 
     void Update()
