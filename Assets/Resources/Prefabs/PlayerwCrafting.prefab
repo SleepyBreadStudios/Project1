@@ -563,6 +563,8 @@ MonoBehaviour:
   CraftingUI: {fileID: 6008881306774076643}
   HotbarUI: {fileID: 8985791887694057301}
   HealthUI: {fileID: 876479535891409676}
+  projectile: {fileID: 4921440393766413185, guid: 33ba34d82f36e8f4bbe3411622a9d2e6, type: 3}
+  projectileObj: {fileID: 4921440393766413185, guid: 33ba34d82f36e8f4bbe3411622a9d2e6, type: 3}
   m_CameraFollow: {fileID: 0}
   onMenuOpenUpdated: {fileID: 11400000, guid: 10ef557d58acde844bd5f31899c34782, type: 2}
 --- !u!61 &910321720902656555

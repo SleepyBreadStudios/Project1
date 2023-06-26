@@ -50,6 +50,11 @@ public class Player2Behavior : NetworkBehaviour
     private GameObject HealthUI = null;
 
     [SerializeField]
+    private GameObject projectile = null;
+
+    public GameObject projectileObj = null;
+
+    [SerializeField]
     Transform m_CameraFollow;
 
     // is inventory showing at the moment?
@@ -98,14 +103,14 @@ public class Player2Behavior : NetworkBehaviour
         originalInvPos = InventoryUI.transform.position;
 
         // Sets random color when players spawn
-        float rand = UnityEngine.Random.Range(0, 256);
-        float rand2 = UnityEngine.Random.Range(0, 256);
-        float rand3 = UnityEngine.Random.Range(0, 256);
-        rand = rand / 255.0f;
-        rand2 = rand2 / 255.0f;
-        rand3 = rand3 / 255.0f;
+        // float rand = UnityEngine.Random.Range(0, 256);
+        // float rand2 = UnityEngine.Random.Range(0, 256);
+        // float rand3 = UnityEngine.Random.Range(0, 256);
+        // rand = rand / 255.0f;
+        // rand2 = rand2 / 255.0f;
+        // rand3 = rand3 / 255.0f;
 
-        gameObject.GetComponent<Renderer>().material.color = new Color(rand, rand2, rand3);
+        // gameObject.GetComponent<Renderer>().material.color = new Color(rand, rand2, rand3);
         craftingObject = GameObject.Find("CraftingTable");
         escMenu = GameObject.Find("MenuCanvas").GetComponent<EscapeMenu>();
         //MainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -373,6 +378,17 @@ public class Player2Behavior : NetworkBehaviour
         {
             DamagePlayer();
         }
+
+                // shoot projectile
+        if (Input.GetMouseButtonDown(0) && !inventoryEnabled)
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            ProjectileServerRpc(mousePos);
+
+            // set orientation
+         
+        }
     }
 
     public void EnableEscMenuPlayer()
@@ -403,6 +419,19 @@ public class Player2Behavior : NetworkBehaviour
         leftRightPosition.Value = leftRight;
         
     }
+
+    [ServerRpc]
+    public void ProjectileServerRpc(Vector3 mousePos)
+    {
+        // instantiate projectile
+        projectileObj = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
+
+        // IMPORTANT: get network to recognize object
+        projectileObj.GetComponent<NetworkObject>().Spawn(true);
+
+        projectileObj.transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - projectileObj.transform.position);
+    }
+
 
     // Pick up item and add to player inventory
     private void OnTriggerEnter2D(Collider2D collision)
