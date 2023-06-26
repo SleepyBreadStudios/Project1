@@ -8,7 +8,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
-using static UnityEditor.PlayerSettings;
 
 public class EnemySpawner : NetworkBehaviour
 {
