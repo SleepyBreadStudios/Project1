@@ -208,7 +208,7 @@ public class PlayerInventory : PlayerItemManager
     }
 
     // ask for player that is asking to use the item so that player can be properly updated
-    public void useHotbarItem(int currHotbarSelected, Player2Behavior playerBehavior)
+    public void useHotbarItem(int currHotbarSelected, Player2Behavior playerBehavior, string lor)
     {
         // adjust for array starting at 0 
         if (currHotbarSelected == 0)
@@ -220,9 +220,9 @@ public class PlayerInventory : PlayerItemManager
             currHotbarSelected--;
         }
 
-        if(inventory[currHotbarSelected].item == null)
+        if(inventory[currHotbarSelected].item == null || lor != inventory[currHotbarSelected].itemBehavior.leftOrRight)
         {
-            Debug.Log("Hotbar slot empty");
+            Debug.Log("Hotbar slot empty, it's an item that doesn't do anything, or clicked wrong interact button");
             return;
         }
         else

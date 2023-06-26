@@ -241,3 +241,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: {fileID: 11400000, guid: 8f848d1864c1c714e80132f75615213d, type: 2}
+  leftOrRight: left

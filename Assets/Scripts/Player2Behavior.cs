@@ -245,17 +245,23 @@ public class Player2Behavior : NetworkBehaviour
                             Debug.Log("too far from crafting table");
                         }
                     }
-                    // not interacting with crafting table and rightclicking nothing
-                    else
+                    // not interacting with crafting table or any menus and rightclicking nothing
+                    else if (!menuOpen)
                     {
-                        playerInventory.useHotbarItem(currHotbarSelected, GetComponent<Player2Behavior>());
+                        playerInventory.useHotbarItem(currHotbarSelected, GetComponent<Player2Behavior>(), "right");
                     }
                 }
                 else
                 {
-                    Debug.Log("Crafting table already open");
+                    //Debug.Log("Crafting table already open");
                 }
-
+            }
+            if(Input.GetMouseButtonDown(0))
+            {
+                if(!menuOpen)
+                {
+                    playerInventory.useHotbarItem(currHotbarSelected, GetComponent<Player2Behavior>(), "left");
+                }
             }
         }
         // close ui menus if they're open

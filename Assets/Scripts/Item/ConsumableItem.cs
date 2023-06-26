@@ -13,4 +13,10 @@ public class ConsumableItem : ItemBehavior
         // tell inventory to consume item on use
         return "Consumable";
     }
+
+    protected override void Start()
+    {
+        base.Start();
+        leftOrRight = "right";
+    }
 }

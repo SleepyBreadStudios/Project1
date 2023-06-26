@@ -24,7 +24,9 @@ public class ItemBehavior : MonoBehaviour
 
     private int itemDurability = 100;
 
-    void Start()
+    public string leftOrRight = "";
+
+    protected virtual void Start()
     {
         itemCount = itemType.GetCount();
         itemDurability = itemType.GetStartingCondition();
