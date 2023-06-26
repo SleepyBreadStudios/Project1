@@ -4,6 +4,7 @@
  * Authors: Alicia T, Jason N, Jino C
  *****************************************************************************/
 //#define Debug
+using NUnit.Framework.Internal;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -14,7 +15,6 @@ using UnityEngine.UI;
 // consider making abstract
 public class EnemyBehavior : NetworkBehaviour
 {
-    // internal enemy name
     private string enemyName = null;
 
     [SerializeField]
@@ -30,11 +30,21 @@ public class EnemyBehavior : NetworkBehaviour
     [SerializeField]
     private int maxHealth = 3;
 
+    [SerializeField]
+    // speed value
+    private int speed;
+
+    [SerializeField]
     // strength value
     private int strength;
 
+    [SerializeField]
     // defense value
     private int defense;
+
+    [SerializeField]
+    // defense value
+    private float aggroRange;
 
     private float time = 0.0f;
 
@@ -57,6 +67,11 @@ public class EnemyBehavior : NetworkBehaviour
     //     return item;
     // }
 
+    public int getSpeed()
+    {
+        return speed;
+    }
+
     public int getStrength()
     {
         return strength;
@@ -65,6 +80,11 @@ public class EnemyBehavior : NetworkBehaviour
     public int getDefense()
     {
         return defense;
+    }
+
+    public float getAggroRange()
+    {
+        return aggroRange;
     }
 
     public void Delete()

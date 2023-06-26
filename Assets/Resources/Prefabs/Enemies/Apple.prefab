@@ -220,12 +220,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fce02b0dc66e6e46be66dda4feccd0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
-  health: 3
-  maxHealth: 3
+  item: {fileID: 4798766307938537059, guid: 1676b12460b37b344bd922c7eaafcd74, type: 3}
+  health: 2
+  maxHealth: 2
+  speed: 1
+  strength: 1
+  defense: 0
+  aggroRange: 8
   healthBar: {fileID: 0}
   isShooting: 0
-  speed: 1
+  moveBias: 0.8
   seed: {fileID: 5909226124758451408, guid: 0dbb501985da0c748bad4a8b35aeda03, type: 3}
 --- !u!95 &4499706666441355999
 Animator:
