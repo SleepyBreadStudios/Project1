@@ -132,7 +132,7 @@ public class EnemyBehavior : NetworkBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Knockback(other.transform.position);
-            if (other.gameObject.CompareTag("PlayerProjectile") ||
+            if (other.gameObject.CompareTag("Projectile") ||
                 other.gameObject.CompareTag("Weapon"))
             {
                 DamageServerRpc();

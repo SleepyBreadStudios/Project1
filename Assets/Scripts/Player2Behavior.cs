@@ -384,6 +384,8 @@ public class Player2Behavior : NetworkBehaviour
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+            string tag = playerInventory.fetchHotbarItem(currHotbarSelected);
+
             ProjectileServerRpc(mousePos);
 
             // set orientation
