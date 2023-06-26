@@ -352,7 +352,7 @@ MonoBehaviour:
   strength: 2
   defense: 0
   aggroRange: 5
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 6280975946706188957}
   isJumping: 0
   moveBias: 0.8
 --- !u!1 &9165166746516134102

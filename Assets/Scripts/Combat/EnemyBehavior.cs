@@ -131,12 +131,17 @@ public class EnemyBehavior : NetworkBehaviour
         Debug.Log("Hit!");
         if (other.gameObject.CompareTag("Player"))
         {
+<<<<<<< HEAD
             Knockback(other.transform.position);
             if (other.gameObject.CompareTag("PlayerProjectile") ||
                 other.gameObject.CompareTag("Weapon"))
             {
                 DamageServerRpc();
             }
+=======
+            //Debug.Log("hello");
+            DamageServerRpc();
+>>>>>>> 98e42ca76882e9f6393e4a72b41409b53da2f4a4
         }
     }
 

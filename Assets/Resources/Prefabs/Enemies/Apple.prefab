@@ -454,7 +454,7 @@ MonoBehaviour:
   strength: 1
   defense: 0
   aggroRange: 8
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 9054926393187670398}
   isShooting: 0
   moveBias: 0.8
   seed: {fileID: 5909226124758451408, guid: 0dbb501985da0c748bad4a8b35aeda03, type: 3}

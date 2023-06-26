@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64fd869100de05f40ac51990b5bed79f, type: 3}
-  m_Name: Potion
+  m_Name: Sword
   m_EditorClassIdentifier: 
-  recipeContents: MagicEssenceFireGold
+  recipeContents: WoodDiamond
   recipeList:
-  - MagicEssence
-  - Fire
-  - Gold
-  craftedItem: {fileID: 11400000, guid: 78b9e62d30206c3459296771a86fdee2, type: 2}
-  numOfItems: 3
+  - Wood
+  - Diamond
+  craftedItem: {fileID: 11400000, guid: 8f848d1864c1c714e80132f75615213d, type: 2}
+  numOfItems: 2
