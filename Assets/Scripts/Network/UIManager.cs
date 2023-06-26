@@ -49,12 +49,6 @@ public class UIManager : Singleton<UIManager>
     private void Awake()
     {
         Cursor.visible = true;
-        int width = 768; // or something else
-        int height= 432; // or something else
-        bool isFullScreen = false; // should be windowed to run in arbitrary resolution
-        //int desiredFPS = 60; // or something else
-    
-        Screen.SetResolution (width , height, isFullScreen);
 
         if (UI == null)
         {
