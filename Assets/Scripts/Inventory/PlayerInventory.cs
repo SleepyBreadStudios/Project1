@@ -244,6 +244,10 @@ public class PlayerInventory : PlayerItemManager
                     //inventory[currHotbarSelected].UpdateDurability();
                     OnItemsUpdated.Invoke();
                     break;
+                case "Weapon":
+                    //inventory[currHotbarSelected].UpdateDurability();
+                    OnItemsUpdated.Invoke();
+                    break;
                 default:
                     break;
 

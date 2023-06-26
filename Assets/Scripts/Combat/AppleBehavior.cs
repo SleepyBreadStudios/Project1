@@ -76,24 +76,28 @@ public class AppleBehavior : EnemyBehavior
     {
         if (GameObject.FindWithTag("Player") != null)
         {
-            Vector2 playerLoc = GameObject.FindWithTag("Player").transform.position;
-            if (Vector2.Distance(transform.position, playerLoc) < getAggroRange())
+            GameObject[] playerLoc = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject player in playerLoc)
             {
-                if (playerLoc.x - transform.position.x < 0)
+                Vector2 loc = player.transform.position;
+                if (Vector2.Distance(transform.position, loc) < getAggroRange())
                 {
-                    spriteRenderer.flipX = false;
+                    if (loc.x - transform.position.x < 0)
+                    {
+                        spriteRenderer.flipX = false;
+                    }
+                    else if (loc.x - transform.position.x > 0)
+                    {
+                        spriteRenderer.flipX = true;
+                    }
+                    isShooting = true;
+                    animator.SetTrigger("shoot");
                 }
-                else if (playerLoc.x - transform.position.x > 0)
+                else
                 {
-                    spriteRenderer.flipX = true;
+                    isShooting = false;
+                    animator.ResetTrigger("shoot");
                 }
-                isShooting = true;
-                animator.SetTrigger("shoot");
-            }
-            else
-            {
-                isShooting = false;
-                animator.ResetTrigger("shoot");
             }
         }
     }

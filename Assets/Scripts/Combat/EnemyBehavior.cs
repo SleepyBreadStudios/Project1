@@ -17,6 +17,8 @@ public class EnemyBehavior : NetworkBehaviour
 {
     private string enemyName = null;
 
+    private Rigidbody2D rb;
+
     [SerializeField]
     // type of drops the enemy drops when it dies(?)
     private GameObject item = null;
@@ -115,6 +117,8 @@ public class EnemyBehavior : NetworkBehaviour
     {
         healthBar.SetHealth(maxHealth);
         LoadServerRpc();
+
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -124,9 +128,15 @@ public class EnemyBehavior : NetworkBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Projectile"))
+        Debug.Log("Hit!");
+        if (other.gameObject.CompareTag("Player"))
         {
-            DamageServerRpc();
+            Knockback(other.transform.position);
+            if (other.gameObject.CompareTag("PlayerProjectile") ||
+                other.gameObject.CompareTag("Weapon"))
+            {
+                DamageServerRpc();
+            }
         }
     }
 
@@ -146,6 +156,12 @@ public class EnemyBehavior : NetworkBehaviour
             ItemDrop();
             GetComponent<NetworkObject>().Despawn(true);
         }
+    }
+
+    public void Knockback(Vector2 applier)
+    {
+        Vector2 calc = transform.position;
+        rb.AddForce(calc - applier);
     }
 
     public override void OnNetworkDespawn()

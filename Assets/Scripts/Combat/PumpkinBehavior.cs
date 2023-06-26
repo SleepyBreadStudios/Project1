@@ -98,16 +98,24 @@ public class PumpkinBehavior : EnemyBehavior
     {
         if (GameObject.FindWithTag("Player") != null)
         {
-            Vector2 playerLoc = GameObject.FindWithTag("Player").transform.position;
-            if (Vector2.Distance(transform.position, playerLoc) < getAggroRange())
+            GameObject[] playerLoc = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject player in playerLoc)
             {
-                idleLock = true;
-                animator.SetTrigger("jump");
-            } else
-            {
-                idleLock = false;
-                isJumping = false;
-                animator.ResetTrigger("jump");
+                Vector2 loc = player.transform.position;
+                if (Vector2.Distance(transform.position, loc) < getAggroRange())
+                {
+                    if (Vector2.Distance(transform.position, loc) < getAggroRange())
+                    {
+                        idleLock = true;
+                        animator.SetTrigger("jump");
+                    }
+                    else
+                    {
+                        idleLock = false;
+                        isJumping = false;
+                        animator.ResetTrigger("jump");
+                    }
+                }
             }
         }
     }
