@@ -126,6 +126,7 @@ public class EnemyBehavior : NetworkBehaviour
     {
         if (other.gameObject.CompareTag("Projectile"))
         {
+            //Debug.Log("hello");
             DamageServerRpc();
         }
     }

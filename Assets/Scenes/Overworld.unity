@@ -5419,7 +5419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3599189078228081255, guid: c8d582487d0ab3b4588ac00c3c02a9d1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3764162281949257106, guid: c8d582487d0ab3b4588ac00c3c02a9d1, type: 3}
       propertyPath: m_RootOrder
@@ -5788,6 +5788,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 797ad4f8540d2964d8e98b2d3ea29e8e, type: 2}
   - {fileID: 11400000, guid: c599dc83e97f2d7489aed8606cc21653, type: 2}
   - {fileID: 11400000, guid: 033bb768e78c9fa4993ca8206bb27119, type: 2}
+  - {fileID: 11400000, guid: e3b385a98f885dc4796f74c7a390fab9, type: 2}
 --- !u!4 &1569688915
 Transform:
   m_ObjectHideFlags: 0
@@ -6851,7 +6852,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4730441561702616771, guid: 829de7c6c53dcb649b6be0dc9e1925f3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5294137510493835830, guid: 829de7c6c53dcb649b6be0dc9e1925f3, type: 3}
       propertyPath: GlobalObjectIdHash
@@ -7439,7 +7440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3599189078228081255, guid: c8d582487d0ab3b4588ac00c3c02a9d1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3764162281949257106, guid: c8d582487d0ab3b4588ac00c3c02a9d1, type: 3}
       propertyPath: m_RootOrder

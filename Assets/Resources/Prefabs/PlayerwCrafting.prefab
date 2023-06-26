@@ -1339,7 +1339,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7508762028547530241
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1674,7 +1674,6 @@ MonoBehaviour:
   maxHealth: 5
   healthImage: {fileID: 4185701926484871631}
   active: 1
-  healthPoints: {fileID: 2757707424268764331}
 --- !u!1 &5287282596841376580
 GameObject:
   m_ObjectHideFlags: 0
