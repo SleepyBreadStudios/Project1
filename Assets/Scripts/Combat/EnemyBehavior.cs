@@ -153,14 +153,14 @@ public class EnemyBehavior : NetworkBehaviour
         Destroy(gameObject);
     }
 
-    IEnumerator RegenerateTest() {
-        if ((health > 0) && (health < maxHealth)) {
-            yield return new WaitForSeconds(3);
-            health = maxHealth;
-            time = 0.0f;
-            Debug.Log("regenerating");
-        }
-    }
+    // IEnumerator RegenerateTest() {
+    //     if ((health > 0) && (health < maxHealth)) {
+    //         yield return new WaitForSeconds(3);
+    //         health = maxHealth;
+    //         time = 0.0f;
+    //         Debug.Log("regenerating");
+    //     }
+    // }
 
     public void UpdateTime() {
         if (health < 0) {

@@ -183,8 +183,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02bbb527038dc94283b8e1682e642a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 5941722839414245187, guid: 56c1e76cf2d079945b9e2197aa30646f, type: 3}
+  item: {fileID: 6224336565005428086, guid: f1059cdc4aea3b94395d9255fa4ee110, type: 3}
+  health: 3
+  maxHealth: 3
   speed: 0
+  strength: 0
+  defense: 0
+  aggroRange: 0
+  healthBar: {fileID: 0}
 --- !u!58 &5369788728873399710
 CircleCollider2D:
   m_ObjectHideFlags: 0
