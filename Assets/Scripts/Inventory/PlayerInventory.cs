@@ -11,6 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Unity.VisualScripting;
 
 // consider making inventory a scriptable object for save + load
 public class PlayerInventory : PlayerItemManager
@@ -253,6 +254,12 @@ public class PlayerInventory : PlayerItemManager
 
             }
         }
+    }
+
+    public string fetchHotbarItem(int currHotbarSelected)
+    {
+        Debug.Log(inventory[currHotbarSelected].GetItemName());
+        return inventory[currHotbarSelected].GetItemName();
     }
 
     // for updating the selection sprite on the hotbar ui
