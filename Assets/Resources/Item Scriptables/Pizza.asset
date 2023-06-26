@@ -18,3 +18,4 @@ MonoBehaviour:
   maxStack: 1
   startingCondition: 100
   unique: 0
+  itemBehavior: {fileID: 7575205836615590447, guid: ad74c4e91a43d7c449e02002ab951b76, type: 3}

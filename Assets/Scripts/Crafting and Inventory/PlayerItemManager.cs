@@ -71,6 +71,7 @@ public abstract class PlayerItemManager : MonoBehaviour
                 foundEmptySlot.SetItemSlot(slot.item, newStackCount);
                 // tell slot what it's index is in the array
                 foundEmptySlot.SetSlotIndex(inventory.IndexOf(foundEmptySlot));
+                foundEmptySlot.SetItemBehavior(slot.itemBehavior);
                 // account for new inventory size
                 currInventorySize++;
                 OnItemsUpdated.Invoke();
@@ -131,6 +132,7 @@ public abstract class PlayerItemManager : MonoBehaviour
                 foundEmptySlot.SetItemSlot(itemSlot.item, count);
                 // tell slot what it's index is in the array
                 foundEmptySlot.SetSlotIndex(inventory.IndexOf(foundEmptySlot));
+                foundEmptySlot.SetItemBehavior(itemSlot.itemBehavior);
                 // account for new inventory size
                 currInventorySize++;
                 OnItemsUpdated.Invoke();
@@ -225,6 +227,9 @@ public class ItemSlot
     // type of item in inventory slot
     public ItemData item;
 
+    // specific item behavior info
+    public ItemBehavior itemBehavior;
+
     // max num of items that stack can hold
     private int maxStack = 0;
 
@@ -294,6 +299,8 @@ public class ItemSlot
         if(currStack <= 0)
         {
             isEmpty = true;
+            itemBehavior = null;
+            //item = null;
         }
         else
         {
@@ -313,6 +320,11 @@ public class ItemSlot
     {
         slotIndex = newSlotIndex;
         isEmpty = false;
+    }
+
+    public void SetItemBehavior(ItemBehavior itemB)
+    {
+        itemBehavior = itemB;
     }
 
     // is stack full
@@ -339,6 +351,17 @@ public class ItemSlot
             isFull = true;
         }
         isEmpty = false;
+    }
+
+    public void SubFromStack(int num)
+    {
+        currStack -= num;
+        if(currStack <= 0)
+        {
+            isEmpty = true;
+            item = null;
+            itemBehavior = null;
+        }
     }
 
     public int HalveStack()

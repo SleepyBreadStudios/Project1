@@ -1,7 +1,10 @@
 fileFormatVersion: 2
-guid: db005d11213e5da47b9769c2e6c56eee
+guid: 19fa5125b877cce4d93e412f70505d7f
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -3976513882443320507
+    second: biggerpotion_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -93,7 +96,28 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: biggerpotion_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 0
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5437e8041b590d8c0800000000000000
+      internalID: -3976513882443320507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -104,7 +128,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      biggerpotion_0: -3976513882443320507
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

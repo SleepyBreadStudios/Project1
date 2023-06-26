@@ -549,8 +549,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22cfedb61573f604d8046a413e3b1a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 639922924189750656}
   walkSpeed: 0.02
+  playerHealth: 5
+  healthBar: {fileID: 7921748905627304716}
+  animator: {fileID: 639922924189750656}
   defaultPositionRange: {x: -4, y: 4}
   forwardBackPosition:
     m_InternalValue: 0
@@ -559,6 +561,7 @@ MonoBehaviour:
   InventoryUI: {fileID: 9077993733452495051}
   CraftingUI: {fileID: 6008881306774076643}
   HotbarUI: {fileID: 8985791887694057301}
+  HealthUI: {fileID: 876479535891409676}
   m_CameraFollow: {fileID: 0}
   onMenuOpenUpdated: {fileID: 11400000, guid: 10ef557d58acde844bd5f31899c34782, type: 2}
 --- !u!61 &910321720902656555
@@ -1439,9 +1442,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gradient:
     serializedVersion: 2
-    key0: {r: 1, g: 0, b: 0, a: 1}
-    key1: {r: 0.91262484, g: 1, b: 0, a: 1}
-    key2: {r: 0, g: 1, b: 0.34367585, a: 0}
+    key0: {r: 1, g: 0.09377968, b: 0, a: 1}
+    key1: {r: 0.9294118, g: 0.74509805, b: 0.29803923, a: 1}
+    key2: {r: 0.5942029, g: 1, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
@@ -1733,7 +1736,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 76dd7af7efe22e24185fd53143fbaf07, type: 3}
     m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
-  m_Name: Hat
+  m_Name: Potion
   m_EditorClassIdentifier: 
-  itemName: Hat
-  icon: {fileID: 21300000, guid: 5087bdcc637973d41abbd18802fb23d3, type: 3}
-  count: 1
-  maxStack: 1
+  itemName: Potion
+  icon: {fileID: 21300000, guid: 19fa5125b877cce4d93e412f70505d7f, type: 3}
+  count: 4
+  maxStack: 16
   startingCondition: 100
   unique: 0
-  itemBehavior: {fileID: 19471434952195815, guid: 257b02dc00de5484baaa655b1257bc7f, type: 3}
+  itemBehavior: {fileID: 4507912236487110466, guid: 1a7edbdacf754b5489eecec4b71d02ce, type: 3}

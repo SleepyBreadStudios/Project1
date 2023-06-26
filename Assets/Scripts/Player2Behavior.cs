@@ -13,13 +13,18 @@ using System;
 public class Player2Behavior : NetworkBehaviour
 {
 
-    //[SerializeField]
-    //private Camera MainCamera = null;
-
-    public Animator animator;
-
+    //player stats
+    #region
     [SerializeField]
     private float walkSpeed = 0.2f;
+    [SerializeField]
+    private float playerHealth = 5;
+    #endregion
+
+    [SerializeField]
+    private HealthBar healthBar = null;
+
+    public Animator animator;
 
     [SerializeField]
     private Vector2 defaultPositionRange = new Vector2(-4, 4);
@@ -40,6 +45,9 @@ public class Player2Behavior : NetworkBehaviour
 
     [SerializeField]
     private GameObject HotbarUI = null;
+
+    [SerializeField]
+    private GameObject HealthUI = null;
 
     [SerializeField]
     Transform m_CameraFollow;
@@ -79,6 +87,7 @@ public class Player2Behavior : NetworkBehaviour
         InventoryUI.transform.localScale = new Vector3(0, 0, 0);
         CraftingUI.transform.localScale = new Vector3(0, 0, 0);
         HotbarUI.transform.localScale = new Vector3(0, 0, 0);
+        HealthUI.transform.localScale = new Vector3(0, 0, 0);
         transform.localScale = new Vector3(1, 1, 1);
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
@@ -103,9 +112,8 @@ public class Player2Behavior : NetworkBehaviour
         if (IsClient && IsOwner)
         {
             HotbarUI.transform.localScale = new Vector3(1, 1, 1);
-
+            HealthUI.transform.localScale = new Vector3(1, 1, 1);
         }
-
     }
 
     public override void OnNetworkSpawn()
@@ -240,7 +248,7 @@ public class Player2Behavior : NetworkBehaviour
                     // not interacting with crafting table and rightclicking nothing
                     else
                     {
-                        playerInventory.useHotbarItem(currHotbarSelected);
+                        playerInventory.useHotbarItem(currHotbarSelected, GetComponent<Player2Behavior>());
                     }
                 }
                 else
@@ -269,12 +277,12 @@ public class Player2Behavior : NetworkBehaviour
         #region HOTBAR
         // check for numkeys for hotbar
         // don't interact with hotbar if a menu is open
-        if(!menuOpen)
+        if (!menuOpen)
         {
             bool hotbarChanged = false;
             if (Input.mouseScrollDelta.y != 0)
             {
-                if(Input.mouseScrollDelta.y > 0)
+                if (Input.mouseScrollDelta.y > 0)
                 {
                     currHotbarSelected--;
                     if (currHotbarSelected < 0)
@@ -342,7 +350,7 @@ public class Player2Behavior : NetworkBehaviour
                 currHotbarSelected = 0;
                 hotbarChanged = true;
             }
-            if(hotbarChanged)
+            if (hotbarChanged)
             {
                 playerInventory.updateHotbar(currHotbarSelected);
             }
@@ -353,6 +361,12 @@ public class Player2Behavior : NetworkBehaviour
         #endregion
         #endregion
         #endregion
+
+        // test dmg
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            DamagePlayer();
+        }
     }
 
     public void EnableEscMenuPlayer()
@@ -361,6 +375,20 @@ public class Player2Behavior : NetworkBehaviour
         Debug.Log("Esc pressed " + escEnabled);
         menuOpen = escEnabled;
     }
+
+    #region update player status
+    public void HealPlayer()
+    {
+        playerHealth++;
+        healthBar.Heal();
+    }
+
+    public void DamagePlayer()
+    {
+        playerHealth--;
+        healthBar.Damage();
+    }
+    #endregion
 
     [ServerRpc]
     public void UpdateClientPositionServerRpc(float forwardBackward, float leftRight)

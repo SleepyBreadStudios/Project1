@@ -54,6 +54,7 @@ public class CraftingResultSlot : ItemSlotUI, IDropHandler
                 crafting.Craft();
                 //crafting.DeleteFromInventory(SlotIndex);
                 crafting.EmptyResultSlot();
+                crafting.AttemptToCraftItem();
             }
         }
     }

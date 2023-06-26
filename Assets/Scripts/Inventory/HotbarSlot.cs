@@ -41,7 +41,7 @@ public class HotbarSlot : MonoBehaviour
         else
         {
             hotbarSelect.SetActive(true);
-            Debug.Log("doing smthn w slot " + inventory.currHotbarNum);
+            //Debug.Log("doing smthn w slot " + inventory.currHotbarNum);
         }
 
     }

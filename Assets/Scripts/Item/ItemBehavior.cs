@@ -16,10 +16,13 @@ public class ItemBehavior : MonoBehaviour
     public ItemData itemType;
     private Vector2 randLoc;
     private float immunity = 0.0f;
-    private readonly string[] itemPrefabs = {"capsule", "checkmark", "circle", "diamond", "flower", "hexagonpoint", "roundedsquare", "star", "triangle"};
+
+    //private readonly string[] itemPrefabs = {"capsule", "checkmark", "circle", "diamond", "flower", "hexagonpoint", "roundedsquare", "star", "triangle"};
 
     // individual items can have their own count that alters based on players
     private int itemCount = 0;
+
+    private int durability = 100;
 
     public ItemData GetItemType()
     {
@@ -100,13 +103,19 @@ public class ItemBehavior : MonoBehaviour
 
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    //void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    if (other.gameObject.CompareTag("Item") && immunity > 10.0f)
+    //    {
+    //        string toLoad = "Items/" + itemPrefabs[Random.Range(0, 10)];
+    //        GameObject newItem = Instantiate(Resources.Load("Projectile", typeof(GameObject)), transform.position, Quaternion.identity) as GameObject;
+    //        this.Delete();
+    //    }
+    //}
+
+    public virtual bool GetItemEffect(Player2Behavior playerBehavior)
     {
-        if (other.gameObject.CompareTag("Item") && immunity > 10.0f)
-        {
-            string toLoad = "Items/" + itemPrefabs[Random.Range(0, 10)];
-            GameObject newItem = Instantiate(Resources.Load("Projectile", typeof(GameObject)), transform.position, Quaternion.identity) as GameObject;
-            this.Delete();
-        }
+        Debug.Log("Attempting to use item from hotbar. This item does nothing in hotbar");
+        return false;
     }
 }

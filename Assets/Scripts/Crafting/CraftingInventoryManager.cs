@@ -129,6 +129,7 @@ public class CraftingInventoryManager : PlayerItemManager
                 foundEmptySlot.SetItemSlot(itemSlot.item, count);
                 // tell slot what it's index is in the array
                 foundEmptySlot.SetSlotIndex(inventory.IndexOf(foundEmptySlot));
+                foundEmptySlot.SetItemBehavior(itemSlot.itemBehavior);
                 // account for new inventory size
                 currInventorySize++;
                 OnItemsUpdated.Invoke();
@@ -294,6 +295,7 @@ public class CraftingInventoryManager : PlayerItemManager
             }
             
             inventory[maxInventorySize - 1].SetItemSlot(recipe.GetCraftedItem(), lowestCount);
+            inventory[maxInventorySize - 1].SetItemBehavior(recipe.GetCraftedItem().itemBehavior);
             resultAmount = lowestCount;
             OnItemsUpdated.Invoke();
         }

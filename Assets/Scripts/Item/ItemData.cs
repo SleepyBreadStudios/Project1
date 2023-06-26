@@ -32,6 +32,10 @@ public class ItemData : ScriptableObject
 
     [SerializeField]
     private bool unique = false;
+
+    // default for new items
+    [SerializeField]
+    public ItemBehavior itemBehavior = null;
     
     // getter method
     public string GetName()
@@ -53,4 +57,5 @@ public class ItemData : ScriptableObject
     {
         return unique;
     }
+
 }

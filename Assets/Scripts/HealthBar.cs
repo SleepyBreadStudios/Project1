@@ -53,10 +53,17 @@ public class HealthBar : MonoBehaviour
 
     public void Heal() 
     {
-        if (Input.GetKeyDown(KeyCode.H)) {
-            if (currentHealth < maxHealth) {
-                currentHealth++;
-            }
+        if (currentHealth < maxHealth) 
+        {
+            currentHealth++;
+        }
+    }
+
+    public void Damage()
+    {
+        if(currentHealth > 0)
+        {
+            currentHealth--;
         }
     }
 
@@ -73,12 +80,20 @@ public class HealthBar : MonoBehaviour
     private void Update() 
     {
         Activate();
-        Heal();
+        //Heal();
         // Testing health decrementing
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            currentHealth--;
+        //if (Input.GetKeyDown(KeyCode.Space)) {
+            //currentHealth--;
+        //}
+        // Testing healing
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            if (currentHealth < maxHealth)
+            {
+                currentHealth++;
+            }
         }
-        
+
         healthPoints.text = currentHealth + " / " + maxHealth;
         lerpSpeed = 3f * Time.deltaTime;
         healthImage.fillAmount = Mathf.Lerp(healthImage.fillAmount, currentHealth / maxHealth, lerpSpeed);

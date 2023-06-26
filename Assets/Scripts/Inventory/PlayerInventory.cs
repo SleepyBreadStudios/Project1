@@ -22,10 +22,6 @@ public class PlayerInventory : PlayerItemManager
     //[SerializeField] private VoidEvent onInventoryItemsUpdated = null;
     // num of different stacked items it can hold
 
-    //[SerializeField]
-
-    // inventory list
-    private List<ItemSlot> hotbar = new();
 
     // possibly use an array for inventory
     // private StackObject[] inventory = new StackObject[maxInventorySize];
@@ -116,6 +112,7 @@ public class PlayerInventory : PlayerItemManager
                 foundEmptySlot.SetItemSlot(nItem, count);
                 // tell slot what it's index is in the array
                 foundEmptySlot.SetSlotIndex(inventory.IndexOf(foundEmptySlot));
+                foundEmptySlot.SetItemBehavior(nBehavior);
                 // account for new inventory size
                 currInventorySize++;
                 OnItemsUpdated.Invoke();
@@ -181,9 +178,6 @@ public class PlayerInventory : PlayerItemManager
         playerCrafting.RemoveItemFromCrafting(craftingIndex);
         playerCrafting.AddSlotByRef(inventorySlot, craftingIndex);
        
-
-        
-
         OnItemsUpdated.Invoke();
         // since swapping with crafting, need to attempt to craft
         playerCrafting.AttemptToCraftItem();
@@ -213,7 +207,8 @@ public class PlayerInventory : PlayerItemManager
         OnItemsUpdated.Invoke();
     }
 
-    public void useHotbarItem(int currHotbarSelected)
+    // ask for player that is asking to use the item so that player can be properly updated
+    public void useHotbarItem(int currHotbarSelected, Player2Behavior playerBehavior)
     {
         // adjust for array starting at 0 
         if (currHotbarSelected == 0)
@@ -233,7 +228,14 @@ public class PlayerInventory : PlayerItemManager
         else
         {
             // this is where we trigger the actual effect of the item
-            Debug.Log("Do something here");
+            //Debug.Log("Do something here");
+            // all derived classes & base class will return whether the effect is
+            // a one time use and will affect the inventory
+            if(inventory[currHotbarSelected].itemBehavior.GetItemEffect(playerBehavior))
+            {
+                inventory[currHotbarSelected].SubFromStack(1);
+                OnItemsUpdated.Invoke();
+            }
         }
     }
 
@@ -259,10 +261,6 @@ public class PlayerInventory : PlayerItemManager
         for (int i = 0; i < maxInventorySize; i++)
         {
             inventory.Add(new ItemSlot());
-        }
-        for(int i = 0; i < 11; i++)
-        {
-            hotbar.Add(inventory[i]);
         }
     }
 }

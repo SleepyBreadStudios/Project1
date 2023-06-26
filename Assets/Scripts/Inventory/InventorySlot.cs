@@ -83,7 +83,7 @@ public class InventorySlot : ItemSlotUI, IDropHandler
 
     public override void UpdateSlotUI()
     {
-        if (ItemSlot.item == null)
+        if (ItemSlot.item == null || ItemSlot.IsEmptySlot())
         {
             EnableSlotUI(false);
             return;

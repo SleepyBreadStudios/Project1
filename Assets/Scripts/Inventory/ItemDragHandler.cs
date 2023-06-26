@@ -54,13 +54,13 @@ public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            Debug.Log("Right click");
+            //Debug.Log("Right click");
             itemSlotUI.SplitStack();
         }
 
         if (eventData.button == PointerEventData.InputButton.Left && Input.GetKey(KeyCode.LeftShift))
         {
-            Debug.Log("Shift click");
+            //Debug.Log("Shift click");
             itemSlotUI.QuickMoveStack();
         }
     }
