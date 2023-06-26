@@ -16,4 +16,4 @@ MonoBehaviour:
   icon: {fileID: 5936356172364887011, guid: 63b7deeb99d18dc4da44f834a34d5908, type: 3}
   health: 5
   maxHealth: 5
-  itemDrop: {fileID: 6616707134031558949, guid: c7c757b4de7f5fc4fa77365d3970b052, type: 3}
+  itemDrop: {fileID: 4730441561702616771, guid: 829de7c6c53dcb649b6be0dc9e1925f3, type: 3}

@@ -221,11 +221,10 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
-  currentHealth: 0
-  maxHealth: 0
+  currentHealth: 3
+  maxHealth: 3
   healthImage: {fileID: 9061647057961791911}
   active: 0
-  healthPoints: {fileID: 0}
 --- !u!1 &5909226124758451408
 GameObject:
   m_ObjectHideFlags: 0

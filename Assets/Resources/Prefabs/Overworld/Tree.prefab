@@ -123,7 +123,6 @@ MonoBehaviour:
   maxHealth: 0
   healthImage: {fileID: 2492833766107409852}
   active: 0
-  healthPoints: {fileID: 0}
 --- !u!1 &6654719521496490200
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,9 +137,9 @@ GameObject:
   - component: {fileID: 6727407506531084077}
   - component: {fileID: 9175279308856540106}
   - component: {fileID: 5201323993930362162}
-  - component: {fileID: 2527410168814654084}
   - component: {fileID: 5369788728873399710}
   - component: {fileID: 6201064855050590419}
+  - component: {fileID: 2147128700785200811}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Enemy
@@ -297,26 +296,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2527410168814654084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6654719521496490200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d02bbb527038dc94283b8e1682e642a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 3599189078228081255, guid: c8d582487d0ab3b4588ac00c3c02a9d1, type: 3}
-  health: 3
-  maxHealth: 3
-  speed: 0
-  strength: 0
-  defense: 0
-  aggroRange: 0
-  healthBar: {fileID: 699713224405034244}
 --- !u!58 &5369788728873399710
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -406,6 +385,21 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &2147128700785200811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6654719521496490200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f81c0f5b0dcfe5747a8a78c8dd2a49f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 3599189078228081255, guid: c8d582487d0ab3b4588ac00c3c02a9d1, type: 3}
+  health: 3
+  maxHealth: 3
 --- !u!1 &8040240720763066436
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,7 +418,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2276477320982031339
 RectTransform:
   m_ObjectHideFlags: 0

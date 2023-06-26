@@ -129,15 +129,16 @@ public class EnemyBehavior : NetworkBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Hit!");
-        if (other.gameObject.CompareTag("Player"))
-        {
-            Knockback(other.transform.position);
+        // if (other.gameObject.CompareTag("Player"))
+        // {
+        //     Knockback(other.transform.position);
             if (other.gameObject.CompareTag("PlayerProjectile") ||
-                other.gameObject.CompareTag("Weapon"))
+                other.gameObject.CompareTag("Weapon") || other.gameObject.CompareTag("Projectile"))
             {
                 DamageServerRpc();
+                //Debug.Log("Hitting");
             }
-        }
+        // }
     }
 
     [ServerRpc]
@@ -178,10 +179,10 @@ public class EnemyBehavior : NetworkBehaviour
     //     }
     // }
 
-    public void UpdateTime() {
-        if (health < 0) {
-            time++;
-        }
-        Debug.Log(time);
-    }
+    // public void UpdateTime() {
+    //     if (health < 0) {
+    //         time++;
+    //     }
+    //     Debug.Log(time);
+    // }
 }
