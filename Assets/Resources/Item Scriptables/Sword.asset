@@ -18,8 +18,4 @@ MonoBehaviour:
   maxStack: 1
   startingCondition: 100
   unique: 0
-<<<<<<< HEAD
-  itemBehavior: {fileID: 0}
-=======
   itemBehavior: {fileID: 4196661257262029218, guid: 4e2d3020f127de84c993c5393deb267f, type: 3}
->>>>>>> 98e42ca76882e9f6393e4a72b41409b53da2f4a4
