@@ -231,10 +231,22 @@ public class PlayerInventory : PlayerItemManager
             //Debug.Log("Do something here");
             // all derived classes & base class will return whether the effect is
             // a one time use and will affect the inventory
-            if(inventory[currHotbarSelected].itemBehavior.GetItemEffect(playerBehavior))
+            string effectFound = inventory[currHotbarSelected].itemBehavior.GetItemEffect(playerBehavior);
+            switch (effectFound)
             {
-                inventory[currHotbarSelected].SubFromStack(1);
-                OnItemsUpdated.Invoke();
+                case "NoEffect":
+                    break;
+                case "Consumable":
+                    inventory[currHotbarSelected].SubFromStack(1);
+                    OnItemsUpdated.Invoke();
+                    break;
+                case "Durability":
+                    //inventory[currHotbarSelected].UpdateDurability();
+                    OnItemsUpdated.Invoke();
+                    break;
+                default:
+                    break;
+
             }
         }
     }

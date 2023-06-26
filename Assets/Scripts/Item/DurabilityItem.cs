@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConsumableItem : ItemBehavior
+public class DurabilityItem : ItemBehavior
 {
-
     public override string GetItemEffect(Player2Behavior playerBehavior)
     {
-        Debug.Log("Attempting to use a consumable item");
+        Debug.Log("Attempting to use a durability item");
         // for testing health potion rn
         playerBehavior.HealPlayer();
-        // tell inventory to consume item on use
-        return "Consumable";
+
+        DepleteDurability(5);
+        // tell inventory what to do with item
+        return "Durability";
     }
 }

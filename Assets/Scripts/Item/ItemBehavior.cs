@@ -22,7 +22,13 @@ public class ItemBehavior : MonoBehaviour
     // individual items can have their own count that alters based on players
     private int itemCount = 0;
 
-    private int durability = 100;
+    private int itemDurability = 100;
+
+    void Start()
+    {
+        itemCount = itemType.GetCount();
+        itemDurability = itemType.GetStartingCondition();
+    }
 
     public ItemData GetItemType()
     {
@@ -37,6 +43,16 @@ public class ItemBehavior : MonoBehaviour
     public void SetCount(int newCount)
     {
         itemCount = newCount;
+    }
+
+    public int GetDurability()
+    {
+        return itemDurability;
+    }
+
+    public void DepleteDurability(int num)
+    {
+        itemDurability -= num;
     }
 
     // on pick up delete
@@ -82,12 +98,6 @@ public class ItemBehavior : MonoBehaviour
         randLoc = new Vector2(randx, randy);
     }
 
-    void Start()
-    {
-        itemCount = itemType.GetCount();
-        //move();
-    }
-
     void Update()
     {
         // immunity timer up to determine whether object can get collision deleted
@@ -113,9 +123,9 @@ public class ItemBehavior : MonoBehaviour
     //    }
     //}
 
-    public virtual bool GetItemEffect(Player2Behavior playerBehavior)
+    public virtual string GetItemEffect(Player2Behavior playerBehavior)
     {
         Debug.Log("Attempting to use item from hotbar. This item does nothing in hotbar");
-        return false;
+        return "NoEffect";
     }
 }

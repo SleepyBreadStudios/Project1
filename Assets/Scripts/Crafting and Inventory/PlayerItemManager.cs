@@ -227,7 +227,7 @@ public class ItemSlot
     // type of item in inventory slot
     public ItemData item;
 
-    // specific item behavior info
+    // specific item behavior info for what slot is curr holding
     public ItemBehavior itemBehavior;
 
     // max num of items that stack can hold
@@ -343,6 +343,7 @@ public class ItemSlot
         return isEmpty;
     }
 
+    // add num to current stack
     public void AddToStack(int num)
     {
         currStack += num;
@@ -353,6 +354,7 @@ public class ItemSlot
         isEmpty = false;
     }
 
+    // subtract num from current stack
     public void SubFromStack(int num)
     {
         currStack -= num;
@@ -364,6 +366,32 @@ public class ItemSlot
         }
     }
 
+    //// update durability which is stored in item behavior
+    //public void UpdateDurability()
+    //{
+    //    durability = itemBehavior.GetDurability();
+    //    if(durability <= 0)
+    //    {
+    //        isEmpty = true;
+    //        item = null;
+    //        itemBehavior = null;
+    //    }
+    //}
+
+    public int GetDurability()
+    {
+        int durability = itemBehavior.GetDurability();
+        if (durability <= 0)
+        {
+            isEmpty = true;
+            item = null;
+            itemBehavior = null;
+        }
+        //Debug.Log("Durability: " + durability);
+        return durability;
+    }
+
+    // return the amount of current stack halved
     public int HalveStack()
     {
         // rounded up

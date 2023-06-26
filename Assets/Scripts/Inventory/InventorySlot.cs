@@ -88,6 +88,17 @@ public class InventorySlot : ItemSlotUI, IDropHandler
             EnableSlotUI(false);
             return;
         }
+        // refactoring needed for durability changing transparency
+        var color = itemIconImage.color;
+        float durability = 0.01f * ItemSlot.GetDurability();
+        color.a = durability;
+        itemIconImage.color = color;
+
+        if(durability <= 0)
+        {
+            EnableSlotUI(false);
+            return;
+        }
 
         EnableSlotUI(true);
 

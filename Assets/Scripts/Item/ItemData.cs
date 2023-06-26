@@ -58,4 +58,8 @@ public class ItemData : ScriptableObject
         return unique;
     }
 
+    public int GetStartingCondition()
+    {
+        return startingCondition;
+    }
 }
