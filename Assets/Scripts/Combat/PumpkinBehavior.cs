@@ -1,9 +1,10 @@
 ﻿/******************************************************************************
- * Enemy behavior file. Meant to be inherited by other enemy types.
+ * Pumpkin behavior file. Inherits Enemy Behavior
  * 
  * Authors: Alicia T, Jason N, Jino C
  *****************************************************************************/
 //#define Debug
+using NUnit.Framework.Internal;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -11,28 +12,30 @@ using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-// consider making abstract
 public class PumpkinBehavior : EnemyBehavior
 {
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     public bool isJumping;
+    private bool idleLock;
+
+    // stuff needed for random move
+    private Vector2 dest;
 
     [SerializeField]
-    // speed value
-    private int speed;
-
-    // Function to allow item drops in enemy
+    private float moveBias = 0.8f;
 
     void Start()
     {
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         animator = gameObject.GetComponent<Animator>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         isJumping = false;
+        idleLock = false;
+
+        dest = transform.position;
 
         // have to be SUPER CAREFUL there are no exceptions during runtime, otherwise this WILL NOT run
-        InvokeRepeating("JumpTo", 0.0f, 2.0f);
+        InvokeRepeating("FindPlayer", 0.0f, 2.0f);
     }
 
     void Update()
@@ -40,7 +43,36 @@ public class PumpkinBehavior : EnemyBehavior
         if (isJumping)
         {
             MoveToPlayer();
+        } 
+        else if (!idleLock) 
+        {
+            Move();
         }
+    }
+
+    public void Move()
+    {
+        float currX = transform.position.x;
+        float currY = transform.position.y;
+        if (currX == dest.x && currY == dest.y)
+        {
+            float randX = Random.Range(currX - moveBias, currX + moveBias);
+            float randY = Random.Range(currY - moveBias, currY + moveBias);
+
+            if (Random.Range(1, 1001) > 999)
+            {
+                if (randX - currX < 0)
+                {
+                    spriteRenderer.flipX = false;
+                }
+                else if (randX - currX > 0)
+                {
+                    spriteRenderer.flipX = true;
+                }
+                dest = new Vector2(randX, randY);
+            }
+        }
+        transform.position = Vector3.MoveTowards(transform.position, dest, Time.deltaTime * getSpeed());
     }
 
     // new move method, moves towards player
@@ -57,21 +89,23 @@ public class PumpkinBehavior : EnemyBehavior
             {
                 spriteRenderer.flipX = true;
             }
-            transform.position = Vector2.MoveTowards(transform.position, playerLoc, Time.deltaTime * speed);
+            transform.position = Vector2.MoveTowards(transform.position, playerLoc, Time.deltaTime * getSpeed());
         }
     }
 
-    // calls jump animation
-    public void JumpTo()
+    // tests for nearest player in radius and locks on to them
+    public void FindPlayer()
     {
         if (GameObject.FindWithTag("Player") != null)
         {
             Vector2 playerLoc = GameObject.FindWithTag("Player").transform.position;
-            if (Vector2.Distance(transform.position, playerLoc) < 5)
+            if (Vector2.Distance(transform.position, playerLoc) < getAggroRange())
             {
+                idleLock = true;
                 animator.SetTrigger("jump");
             } else
             {
+                idleLock = false;
                 isJumping = false;
                 animator.ResetTrigger("jump");
             }

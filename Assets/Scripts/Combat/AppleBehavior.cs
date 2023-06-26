@@ -1,5 +1,5 @@
 ﻿/******************************************************************************
- * Enemy behavior file. Meant to be inherited by other enemy types.
+ * Apple behavior file. Inherits Enemy Behavior
  * 
  * Authors: Alicia T, Jason N, Jino C
  *****************************************************************************/
@@ -12,19 +12,17 @@ using UnityEngine;
 using UnityEngine.LowLevel;
 using UnityEngine.UI;
 
-
-// consider making abstract
 public class AppleBehavior : EnemyBehavior
 {
-    private Vector2 dest;
-    public bool isShooting;
-    private float moveBias = 0.8f;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    public bool isShooting;
+
+    // stuff needed for random move
+    private Vector2 dest;
 
     [SerializeField]
-    // speed value
-    private int speed;
+    private float moveBias = 0.8f;
 
     [SerializeField]
     // seed
@@ -32,44 +30,46 @@ public class AppleBehavior : EnemyBehavior
 
     void Start()
     {
-        dest = transform.position;
-        isShooting = false;
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         animator = gameObject.GetComponent<Animator>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        isShooting = false;
+
+        dest = transform.position;
+
         InvokeRepeating("FindPlayer", 0.0f, 4.0f);
     }
 
     void Update()
     {
-        Move();
+        if (!isShooting)
+        {
+            Move();
+        }
     }
 
     public void Move()
     {
-        if(!isShooting)
+        float currX = transform.position.x;
+        float currY = transform.position.y;
+        if (currX == dest.x && currY == dest.y)
         {
-            float currX = transform.position.x;
-            float currY = transform.position.y;
-            if (currX == dest.x && currY == dest.y)
-            {
-                float randX = Random.Range(currX - moveBias, currX + moveBias);
-                float randY = Random.Range(currY - moveBias, currY + moveBias);
+            float randX = Random.Range(currX - moveBias, currX + moveBias);
+            float randY = Random.Range(currY - moveBias, currY + moveBias);
 
-                if (Random.Range(1, 1001) > 999)
+            if (Random.Range(1, 1001) > 999)
+            {
+                if (randX - currX < 0)
                 {
-                    if (randX - currX < 0)
-                    {
-                        spriteRenderer.flipX = false;
-                    }
-                    else if (randX - currX > 0)
-                    {
-                        spriteRenderer.flipX = true;
-                    }
-                    dest = new Vector2(randX, randY);
+                    spriteRenderer.flipX = false;
                 }
+                else if (randX - currX > 0)
+                {
+                    spriteRenderer.flipX = true;
+                }
+                dest = new Vector2(randX, randY);
             }
-            transform.position = Vector3.MoveTowards(transform.position, dest, Time.deltaTime * speed);
         }
+        transform.position = Vector3.MoveTowards(transform.position, dest, Time.deltaTime * getSpeed());
     }
 
     public void FindPlayer()
@@ -77,7 +77,7 @@ public class AppleBehavior : EnemyBehavior
         if (GameObject.FindWithTag("Player") != null)
         {
             Vector2 playerLoc = GameObject.FindWithTag("Player").transform.position;
-            if (Vector2.Distance(transform.position, playerLoc) < 8)
+            if (Vector2.Distance(transform.position, playerLoc) < getAggroRange())
             {
                 if (playerLoc.x - transform.position.x < 0)
                 {

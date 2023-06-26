@@ -242,9 +242,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcae93922135e61469459535fde71858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  item: {fileID: 1891140179815386372, guid: 0cdf3919ff7fcfe4ead4d01200196704, type: 3}
   health: 3
   maxHealth: 3
+  speed: 1
+  strength: 2
+  defense: 0
+  aggroRange: 5
   healthBar: {fileID: 0}
   isJumping: 0
-  speed: 1
+  moveBias: 0.8
