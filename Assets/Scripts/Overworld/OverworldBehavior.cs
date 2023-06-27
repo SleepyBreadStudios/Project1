@@ -19,14 +19,23 @@ public class OverworldBehavior : NetworkBehaviour
 
     [SerializeField]
     // health value
-    private int health = 3;
+    private float health = 3;
 
     [SerializeField]
-    private int maxHealth = 3;
+    private float maxHealth = 3;
 
     public GameObject GetItem()
     {
         return item;
+    }
+
+    public Color newColor;
+
+    private SpriteRenderer sprite;
+
+    void Start()
+    {
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     public void Delete()
@@ -66,6 +75,8 @@ public class OverworldBehavior : NetworkBehaviour
     public void DamageServerRpc()
     {
         health--;
+        float alpha = health / maxHealth;
+        sprite.color = new Color (1f, 1f, 1f, alpha);
         if (health <= 0)
         {
             ItemDrop();

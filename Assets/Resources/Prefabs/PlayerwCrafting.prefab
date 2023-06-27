@@ -551,7 +551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 0.02
-  playerHealth: 5
+  playerHealth: 100
   healthBar: {fileID: 7921748905627304716}
   animator: {fileID: 639922924189750656}
   defaultPositionRange: {x: -4, y: 4}
@@ -1339,7 +1339,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7508762028547530241
 RectTransform:
   m_ObjectHideFlags: 0
