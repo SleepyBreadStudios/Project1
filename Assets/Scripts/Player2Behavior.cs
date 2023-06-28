@@ -379,7 +379,8 @@ public class Player2Behavior : NetworkBehaviour
             DamagePlayer();
         }
 
-                // shoot projectile
+        // shoot projectile
+        /*
         if (Input.GetMouseButtonDown(0) && !inventoryEnabled)
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -390,7 +391,7 @@ public class Player2Behavior : NetworkBehaviour
 
             // set orientation
          
-        }
+        }*/
     }
 
     public void EnableEscMenuPlayer()

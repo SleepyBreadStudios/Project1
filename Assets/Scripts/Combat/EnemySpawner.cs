@@ -57,8 +57,6 @@ public class EnemySpawner : NetworkBehaviour
             }
         }
 
-        Debug.Log("Spawner counting: " + count);
-
         // if count is less than limit, spawn an enemy inside spawning radius
         if (count < limit)
         {

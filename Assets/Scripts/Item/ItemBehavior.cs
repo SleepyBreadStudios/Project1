@@ -104,12 +104,6 @@ public class ItemBehavior : MonoBehaviour
     {
         // immunity timer up to determine whether object can get collision deleted
         immunity += Time.deltaTime;
-
-        // Random movement of objects to test performance of code
-        if (transform.position.x == randLoc.x && transform.position.y == randLoc.y)
-        {
-            //move(); // Commented out so that items don't move around after killing an enemy
-        } 
         
         //transform.position = Vector3.MoveTowards(transform.position, randLoc, Time.deltaTime * (float)0.3);
 

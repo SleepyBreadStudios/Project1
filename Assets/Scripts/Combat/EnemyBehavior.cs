@@ -108,6 +108,11 @@ public class EnemyBehavior : NetworkBehaviour
         }
     }
 
+    public void attacked(int damage, float knockback, Vector2 player)
+    {
+        DamageServerRpc(damage);
+    }
+
     private void Awake()
     {
         healthBar = GetComponentInChildren<HealthBar>();
@@ -128,17 +133,16 @@ public class EnemyBehavior : NetworkBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Hit!");
         // if (other.gameObject.CompareTag("Player"))
-        // {
-        //     Knockback(other.transform.position);
+        /*/ {
+             Knockback(other.transform.position);
             if (other.gameObject.CompareTag("PlayerProjectile") ||
                 other.gameObject.CompareTag("Weapon") || other.gameObject.CompareTag("Projectile"))
             {
                 DamageServerRpc();
                 //Debug.Log("Hitting");
             }
-        // }
+        // }*/
     }
 
     [ServerRpc]
@@ -148,9 +152,12 @@ public class EnemyBehavior : NetworkBehaviour
     }
 
     [ServerRpc]
-    public void DamageServerRpc()
+    public void DamageServerRpc(int damage)
     {
-        health--;
+        for (int i = 0; i < damage; i ++)
+        {
+            health--;
+        }
         healthBar.UpdateHealth(health);
         if (health <= 0)
         {
@@ -159,10 +166,10 @@ public class EnemyBehavior : NetworkBehaviour
         }
     }
 
-    public void Knockback(Vector2 applier)
+    [ServerRpc]
+    public void Knockback(Vector2 applier, float force)
     {
-        Vector2 calc = transform.position;
-        rb.AddForce(calc - applier);
+        
     }
 
     public override void OnNetworkDespawn()

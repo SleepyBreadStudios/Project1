@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3080671228834001039}
   - component: {fileID: 7659676654401774584}
   - component: {fileID: 4869521088793685863}
-  - component: {fileID: 5733719223321816502}
+  - component: {fileID: 5732627154995292706}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Weapon
@@ -228,7 +228,7 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
---- !u!114 &5733719223321816502
+--- !u!114 &5732627154995292706
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -237,8 +237,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6751606706311733416}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 932f7bf55412ac64dbaf7e3bf86f6acb, type: 3}
+  m_Script: {fileID: 11500000, guid: d833791a8b7a0584e9b895336a880189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: {fileID: 11400000, guid: 8f848d1864c1c714e80132f75615213d, type: 2}
   leftOrRight: 
+  strength: 1
+  knockback: 1
+  reload: 1
