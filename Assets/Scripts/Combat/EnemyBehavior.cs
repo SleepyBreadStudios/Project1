@@ -166,11 +166,11 @@ public class EnemyBehavior : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
-    public void Knockback(Vector2 applier, float force)
-    {
+    // [ServerRpc]
+    // public void Knockback(Vector2 applier, float force)
+    // {
         
-    }
+    // }
 
     public override void OnNetworkDespawn()
     {

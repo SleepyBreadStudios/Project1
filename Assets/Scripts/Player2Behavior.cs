@@ -63,7 +63,10 @@ public class Player2Behavior : NetworkBehaviour
     private bool menuOpen = false;
     private bool escEnabled = false;
 
+    // Escape menu access
     private EscapeMenu escMenu = null;
+
+    // Death menu access
 
     private Vector3 originalInvPos = new Vector3(0,0,0);
 
@@ -102,15 +105,6 @@ public class Player2Behavior : NetworkBehaviour
         // grab original position of inventory for resetting
         originalInvPos = InventoryUI.transform.position;
 
-        // Sets random color when players spawn
-        // float rand = UnityEngine.Random.Range(0, 256);
-        // float rand2 = UnityEngine.Random.Range(0, 256);
-        // float rand3 = UnityEngine.Random.Range(0, 256);
-        // rand = rand / 255.0f;
-        // rand2 = rand2 / 255.0f;
-        // rand3 = rand3 / 255.0f;
-
-        // gameObject.GetComponent<Renderer>().material.color = new Color(rand, rand2, rand3);
         craftingObject = GameObject.Find("CraftingTable");
         escMenu = GameObject.Find("MenuCanvas").GetComponent<EscapeMenu>();
         //MainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -380,7 +374,7 @@ public class Player2Behavior : NetworkBehaviour
         }
 
         // shoot projectile
-        /*
+        
         if (Input.GetMouseButtonDown(0) && !inventoryEnabled)
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -391,7 +385,7 @@ public class Player2Behavior : NetworkBehaviour
 
             // set orientation
          
-        }*/
+        }
     }
 
     public void EnableEscMenuPlayer()
@@ -412,6 +406,9 @@ public class Player2Behavior : NetworkBehaviour
     {
         playerHealth--;
         healthBar.Damage();
+        if (playerHealth <= 0) {
+            Destroy(this.gameObject);
+        }
     }
     #endregion
 

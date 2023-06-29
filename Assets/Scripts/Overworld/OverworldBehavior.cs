@@ -17,25 +17,26 @@ public class OverworldBehavior : NetworkBehaviour
 
     private GameObject itemObj;
 
-    [SerializeField]
-    // health value
-    private float health = 3;
+    private bool isBeingAttacked = false;
 
     [SerializeField]
-    private float maxHealth = 3;
+    // health value
+    private float health;
+
+    [SerializeField]
+    private float maxHealth;
 
     public GameObject GetItem()
     {
         return item;
     }
 
-    public Color newColor;
-
     private SpriteRenderer sprite;
 
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
+
     }
 
     public void Delete()
@@ -44,16 +45,31 @@ public class OverworldBehavior : NetworkBehaviour
     }
 
         // Function to allow item drops in enemy
-    public void ItemDrop() {
+    public void ItemDrop() 
+    {
         itemObj = Instantiate(item, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity) as GameObject;
         itemObj.GetComponent<NetworkObject>().Spawn(true);
 
     }
 
+    // Overworld objects regenerate health after 3 seconds of not being hit
+    public IEnumerator Regenerate() 
+    {
+
+        yield return new WaitForSeconds(3);
+        isBeingAttacked = false;
+        if (health < maxHealth) {
+            health = maxHealth;
+            sprite.color = new Color (1f, 1f, 1f, 1f);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-
+        if (isBeingAttacked) {
+            StartCoroutine(Regenerate());  
+        }     
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -77,6 +93,8 @@ public class OverworldBehavior : NetworkBehaviour
         health--;
         float alpha = health / maxHealth;
         sprite.color = new Color (1f, 1f, 1f, alpha);
+        isBeingAttacked = true;
+
         if (health <= 0)
         {
             ItemDrop();

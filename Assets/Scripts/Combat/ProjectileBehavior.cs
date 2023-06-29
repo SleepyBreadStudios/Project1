@@ -15,13 +15,20 @@ using UnityEngine.UI;
 // consider making abstract
 public class ProjectileBehavior : NetworkBehaviour
 {
-    private Vector2 randLoc;
+    // private Vector2 randLoc;
 
     [SerializeField]
     private float speed;
 
-    [SerializeField]
-    private string target;
+    // [SerializeField]
+    // private string target;
+
+    // [SerializeField]
+    // private string target2;
+
+
+    // To be tested for efficiency
+    //private List<string>
 
     void Start()
     {
@@ -35,7 +42,8 @@ public class ProjectileBehavior : NetworkBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag(target))
+
+        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Overworld"))
         {
             Destroy(this.gameObject);
         }
