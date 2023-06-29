@@ -136,12 +136,17 @@ public class EnemyBehavior : NetworkBehaviour
     {
         if (other.gameObject.CompareTag("Weapon"))
         {
-            DamageServerRpc(other.gameObject.GetComponent<WeaponBehavior>().getStrength());
+            if (other.gameObject.GetComponent<WeaponBehavior>() != null)
+            {
+                DamageServerRpc(other.gameObject.GetComponent<WeaponBehavior>().getStrength());
+            }
         }
         else if (other.gameObject.CompareTag("PlayerProjectile"))
         {
-            Debug.Log("Hit by player projectile");
-            DamageServerRpc(other.gameObject.GetComponent<ProjectileBehavior>().getStrength());
+            if (other.gameObject.GetComponent<ProjectileBehavior>() != null)
+            {
+                DamageServerRpc(other.gameObject.GetComponent<ProjectileBehavior>().getStrength());
+            }
         }
     }
 
@@ -154,7 +159,6 @@ public class EnemyBehavior : NetworkBehaviour
     [ServerRpc]
     public void DamageServerRpc(int damage)
     {
-        Debug.Log("Taking " + damage + " damage");
         for (int i = 0; i < damage; i ++)
         {
             health--;

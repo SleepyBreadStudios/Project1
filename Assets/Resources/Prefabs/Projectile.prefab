@@ -146,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   strength: 1
+  target: Enemy
 --- !u!50 &2808833652070697932
 Rigidbody2D:
   serializedVersion: 4

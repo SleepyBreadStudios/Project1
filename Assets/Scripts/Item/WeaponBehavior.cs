@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WeaponBehavior : ItemBehavior
 {
+    private bool held;
+    
     [SerializeField]
     private int strength;
 
@@ -28,9 +30,15 @@ public class WeaponBehavior : ItemBehavior
         return reload; 
     }
 
+    public bool isHeld()
+    {
+        return held;
+    }
+
     protected override void Start()
     {
         base.Start();
         leftOrRight = "left";
+        held = false;
     }
 }

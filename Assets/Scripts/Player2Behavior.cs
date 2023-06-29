@@ -440,12 +440,27 @@ public class Player2Behavior : NetworkBehaviour
         Debug.Log("Player collision detected");
         Debug.Log("Item found: " + collision.gameObject.GetComponent<ItemBehavior>().GetItemType().GetName());
 #endif
-        if (collision.CompareTag("Item") || collision.CompareTag("Weapon"))
+        if (collision.CompareTag("Item"))
         {
             bool delete = playerInventory.AddItem(collision.gameObject.GetComponent<ItemBehavior>(), collision.gameObject.GetComponent<ItemBehavior>().GetItemType());
             if (delete)
             {
                 collision.gameObject.GetComponent<ItemBehavior>().Delete();
+            }
+        }
+
+        if (collision.CompareTag("Weapon"))
+        {
+            if (collision.gameObject.GetComponent<WeaponBehavior>() != null)
+            {
+                if (!collision.gameObject.GetComponent<WeaponBehavior>().isHeld())
+                {
+                    bool delete = playerInventory.AddItem(collision.gameObject.GetComponent<ItemBehavior>(), collision.gameObject.GetComponent<ItemBehavior>().GetItemType());
+                    if (delete)
+                    {
+                        collision.gameObject.GetComponent<ItemBehavior>().Delete();
+                    }
+                }
             }
         }
 

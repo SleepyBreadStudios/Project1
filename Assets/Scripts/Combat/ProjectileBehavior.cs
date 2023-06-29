@@ -23,8 +23,8 @@ public class ProjectileBehavior : NetworkBehaviour
     [SerializeField]
     private int strength;
 
-    // [SerializeField]
-    // private string target;
+    [SerializeField]
+    private string target;
 
     // [SerializeField]
     // private string target2;
@@ -46,7 +46,7 @@ public class ProjectileBehavior : NetworkBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Overworld"))
+        if (other.gameObject.CompareTag(target) || other.gameObject.CompareTag("Overworld"))
         {
             Destroy(this.gameObject);
         }
