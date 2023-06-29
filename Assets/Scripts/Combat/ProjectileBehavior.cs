@@ -20,6 +20,9 @@ public class ProjectileBehavior : NetworkBehaviour
     [SerializeField]
     private float speed;
 
+    [SerializeField]
+    private int strength;
+
     // [SerializeField]
     // private string target;
 
@@ -30,9 +33,9 @@ public class ProjectileBehavior : NetworkBehaviour
     // To be tested for efficiency
     //private List<string>
 
-    void Start()
+    public int getStrength()
     {
-        speed = 10.0f;
+        return strength;
     }
 
     void Update()

@@ -8,6 +8,7 @@ using NUnit.Framework.Internal;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -133,16 +134,15 @@ public class EnemyBehavior : NetworkBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // if (other.gameObject.CompareTag("Player"))
-        /*/ {
-             Knockback(other.transform.position);
-            if (other.gameObject.CompareTag("PlayerProjectile") ||
-                other.gameObject.CompareTag("Weapon") || other.gameObject.CompareTag("Projectile"))
-            {
-                DamageServerRpc();
-                //Debug.Log("Hitting");
-            }
-        // }*/
+        if (other.gameObject.CompareTag("Weapon"))
+        {
+            DamageServerRpc(other.gameObject.GetComponent<WeaponBehavior>().getStrength());
+        }
+        else if (other.gameObject.CompareTag("PlayerProjectile"))
+        {
+            Debug.Log("Hit by player projectile");
+            DamageServerRpc(other.gameObject.GetComponent<ProjectileBehavior>().getStrength());
+        }
     }
 
     [ServerRpc]
@@ -154,6 +154,7 @@ public class EnemyBehavior : NetworkBehaviour
     [ServerRpc]
     public void DamageServerRpc(int damage)
     {
+        Debug.Log("Taking " + damage + " damage");
         for (int i = 0; i < damage; i ++)
         {
             health--;
@@ -166,11 +167,11 @@ public class EnemyBehavior : NetworkBehaviour
         }
     }
 
-    // [ServerRpc]
-    // public void Knockback(Vector2 applier, float force)
-    // {
+    [ServerRpc]
+    public void KnockbackServerRpc(Vector2 applier, float force)
+    {
         
-    // }
+    }
 
     public override void OnNetworkDespawn()
     {

@@ -12,6 +12,7 @@ TagManager:
   - CraftingOverworld
   - Weapon
   - Overworld
+  - PlayerProjectile
   layers:
   - Default
   - TransparentFX
