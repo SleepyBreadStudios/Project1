@@ -1670,10 +1670,11 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
-  currentHealth: 5
-  maxHealth: 5
+  currentHealth: 0
+  maxHealth: 0
   healthImage: {fileID: 4185701926484871631}
   active: 1
+  healthPoints: {fileID: 2757707424268764331}
 --- !u!1 &5287282596841376580
 GameObject:
   m_ObjectHideFlags: 0
@@ -1927,7 +1928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

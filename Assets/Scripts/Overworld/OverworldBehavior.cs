@@ -36,7 +36,6 @@ public class OverworldBehavior : NetworkBehaviour
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
-
     }
 
     public void Delete()
@@ -68,8 +67,10 @@ public class OverworldBehavior : NetworkBehaviour
     void Update()
     {
         if (isBeingAttacked) {
-            StartCoroutine(Regenerate());  
-        }     
+            StartCoroutine("Regenerate"); 
+        } else {
+            StopCoroutine("Regenerate");
+        }    
     }
 
     void OnTriggerEnter2D(Collider2D other)

@@ -67,6 +67,7 @@ public class Player2Behavior : NetworkBehaviour
     private EscapeMenu escMenu = null;
 
     // Death menu access
+    private DeathMenu deathMenu = null;
 
     private Vector3 originalInvPos = new Vector3(0,0,0);
 
@@ -107,12 +108,14 @@ public class Player2Behavior : NetworkBehaviour
 
         craftingObject = GameObject.Find("CraftingTable");
         escMenu = GameObject.Find("MenuCanvas").GetComponent<EscapeMenu>();
+        deathMenu = GameObject.Find("MenuCanvas").GetComponent<DeathMenu>();
         //MainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         if (IsClient && IsOwner)
         {
             HotbarUI.transform.localScale = new Vector3(1, 1, 1);
             HealthUI.transform.localScale = new Vector3(1, 1, 1);
         }
+        healthBar.SetHealth(playerHealth);
     }
 
     public override void OnNetworkSpawn()
@@ -404,7 +407,7 @@ public class Player2Behavior : NetworkBehaviour
 
     public void DamagePlayer()
     {
-        playerHealth--;
+        playerHealth-= 3; // For testing
         healthBar.Damage();
         if (playerHealth <= 0) {
             Destroy(this.gameObject);

@@ -24,8 +24,8 @@ public class HealthBar : MonoBehaviour
     [SerializeField]
     public bool active = false;
 
-    //[SerializeField]
-    //public Text healthPoints;
+    [SerializeField]
+    public Text healthPoints;
 
     float lerpSpeed;
 
@@ -94,7 +94,7 @@ public class HealthBar : MonoBehaviour
             }
         }
 
-        //healthPoints.text = currentHealth + " / " + maxHealth;
+        healthPoints.text = currentHealth + " / " + maxHealth;
         lerpSpeed = 3f * Time.deltaTime;
         healthImage.fillAmount = Mathf.Lerp(healthImage.fillAmount, currentHealth / maxHealth, lerpSpeed);
         HealthColor();
