@@ -321,14 +321,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5909226124758451408}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -426,7 +426,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcae93922135e61469459535fde71858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 1891140179815386372, guid: 0cdf3919ff7fcfe4ead4d01200196704, type: 3}
+  OnBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDone:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 797592511094102729}
+  dropTable:
+  - {fileID: 1891140179815386372, guid: 0cdf3919ff7fcfe4ead4d01200196704, type: 3}
+  dropChance:
+  - 50
   health: 3
   maxHealth: 3
   speed: 3

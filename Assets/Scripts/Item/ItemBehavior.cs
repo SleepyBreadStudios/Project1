@@ -6,12 +6,13 @@
 //#define Debug
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 // consider making abstract
-public class ItemBehavior : MonoBehaviour
+public class ItemBehavior : NetworkBehaviour
 {
     public ItemData itemType;
     private Vector2 randLoc;
@@ -90,6 +91,12 @@ public class ItemBehavior : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    public void Hide()
+    {
+        this.gameObject.GetComponent<Renderer>().enabled = false;
+        this.gameObject.GetComponent<Collider2D>().enabled = false;
+    }
+
     public void move()
     {
         float randy = Random.Range
@@ -100,7 +107,7 @@ public class ItemBehavior : MonoBehaviour
         randLoc = new Vector2(randx, randy);
     }
 
-    void Update()
+    protected virtual void Update()
     {
         // immunity timer up to determine whether object can get collision deleted
         immunity += Time.deltaTime;

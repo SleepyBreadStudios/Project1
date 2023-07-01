@@ -6,50 +6,24 @@ using UnityEngine;
 
 public class Dagger : WeaponBehavior
 {
-    private bool isHeld = false;
-    private Vector2 playerLoc;
-    private Vector2 mousePos;
+    // this class is purely to determine what the weapon does when triggered.
+    // inheriting WeaponBehavior takes care of pretty much everything else.
 
-    public override string GetItemEffect(Player2Behavior playerBehavior)
-    {
-        DepleteDurability(5);
-        // tell inventory what to do with item
-
-        isHeld = true;
-        playerLoc = playerBehavior.transform.position;
-        mousePos = Input.mousePosition;
-
-        Debug.Log("Item used at: " + playerLoc);
-        Debug.Log("Item looking at: " + mousePos);
-
-        return "Weapon";
-    }
-
-    protected override void Start()
-    {
-        base.Start();
-        leftOrRight = "left";
-    }
+    [SerializeField] private GameObject pivot;
 
     void Update()
     {
-        if (isHeld)
+        base.Update();
+        if (isHeld())
         {
-            
+            transform.RotateAround(pivot.transform.position, Vector3.back, 400 * Time.deltaTime);
+            StartCoroutine(Lifetime());
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    IEnumerator Lifetime()
     {
-        // if (other.gameObject.CompareTag("Player"))
-        /*/ {
-             Knockback(other.transform.position);
-            if (other.gameObject.CompareTag("PlayerProjectile") ||
-                other.gameObject.CompareTag("Weapon") || other.gameObject.CompareTag("Projectile"))
-            {
-                DamageServerRpc();
-                //Debug.Log("Hitting");
-            }
-        // }*/
+        yield return new WaitForSeconds(0.2f);
+        this.Delete();
     }
 }

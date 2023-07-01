@@ -384,7 +384,7 @@ public class Player2Behavior : NetworkBehaviour
 
             string tag = playerInventory.fetchHotbarItem(currHotbarSelected);
 
-            ProjectileServerRpc(mousePos);
+            //ProjectileServerRpc(mousePos);
 
             // set orientation
          
@@ -461,7 +461,7 @@ public class Player2Behavior : NetworkBehaviour
                     bool delete = playerInventory.AddItem(collision.gameObject.GetComponent<ItemBehavior>(), collision.gameObject.GetComponent<ItemBehavior>().GetItemType());
                     if (delete)
                     {
-                        collision.gameObject.GetComponent<ItemBehavior>().Delete();
+                        collision.gameObject.GetComponent<WeaponBehavior>().Hide();
                     }
                 }
             }
@@ -470,6 +470,14 @@ public class Player2Behavior : NetworkBehaviour
         if (collision.CompareTag("Enemy"))
         {
             DamagePlayer();
+        }
+    }
+
+    public void Flip(bool check)
+    {
+        if (spriteRenderer.flipX != check)
+        {
+            spriteRenderer.flipX = check;
         }
     }
 }

@@ -114,7 +114,7 @@ public class AppleBehavior : EnemyBehavior
         {
             Vector2 playerLoc = GameObject.FindWithTag("Player").transform.position;
             Vector2 appleLoc = this.transform.position;
-            GameObject seedInstance = Instantiate(seed, appleLoc, Quaternion.identity) as GameObject;
+            GameObject seedInstance = Instantiate(seed, appleLoc, Quaternion.identity);
 
             // IMPORTANT: get network to recognize object
             seedInstance.GetComponent<NetworkObject>().Spawn(true);

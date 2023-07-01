@@ -10,21 +10,25 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 
 // consider making abstract
 public class EnemyBehavior : NetworkBehaviour
 {
     private string enemyName = null;
-
-    private Rigidbody2D rb;
+    public UnityEvent OnBegin, OnDone;
 
     [SerializeField]
-    // type of drops the enemy drops when it dies(?)
-    private GameObject item = null;
+    private Rigidbody2D rb;
 
-    private GameObject itemObj = null;
+    // type of drops the enemy drops when it dies(?)
+    [SerializeField] private List<GameObject> dropTable = new List<GameObject>();
+    // chances correspond to above list, float entered is the percentage chance
+    // i.e. 59.1f is 59.1%
+    [SerializeField] private List<float> dropChance = new List<float>();
 
     [SerializeField]
     // health value
@@ -98,14 +102,13 @@ public class EnemyBehavior : NetworkBehaviour
 
     // Function to allow item drops in enemy
     public void ItemDrop() {
-        if (item.name == "Enemy3") {
-            for (int i = 0; i < 10; i ++) {
-                itemObj = Instantiate(item, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity) as GameObject;
-                itemObj.GetComponent<NetworkObject>().Spawn(true);
+        for (int i = 0; i < dropTable.Count; i++)
+        {
+            if (dropChance[i] >= Random.Range(0, 100))
+            {
+                GameObject drop = Instantiate(dropTable[i], new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+                drop.GetComponent<NetworkObject>().Spawn(true);
             }
-        } else {
-            itemObj = Instantiate(item, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity) as GameObject;
-            itemObj.GetComponent<NetworkObject>().Spawn(true);
         }
     }
 
@@ -123,8 +126,6 @@ public class EnemyBehavior : NetworkBehaviour
     {
         healthBar.SetHealth(maxHealth);
         LoadServerRpc();
-
-        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -136,9 +137,11 @@ public class EnemyBehavior : NetworkBehaviour
     {
         if (other.gameObject.CompareTag("Weapon"))
         {
-            if (other.gameObject.GetComponent<WeaponBehavior>() != null)
+            WeaponBehavior weaponBehavior = other.gameObject.GetComponent<WeaponBehavior>();
+            if (weaponBehavior != null)
             {
-                DamageServerRpc(other.gameObject.GetComponent<WeaponBehavior>().getStrength());
+                DamageServerRpc(weaponBehavior.getStrength());
+                KnockbackServerRpc(other.transform.position, weaponBehavior.getKnockback());
             }
         }
         else if (other.gameObject.CompareTag("PlayerProjectile"))
@@ -174,7 +177,18 @@ public class EnemyBehavior : NetworkBehaviour
     [ServerRpc]
     public void KnockbackServerRpc(Vector2 applier, float force)
     {
-        
+        StopAllCoroutines();
+        OnBegin?.Invoke();
+        Vector2 direction = ((Vector2)transform.position - applier).normalized;
+        rb.AddForce(direction * force, ForceMode2D.Impulse);
+        StartCoroutine(ResetKB());
+    }
+
+    private IEnumerator ResetKB()
+    {
+        yield return new WaitForSeconds(0.15f);
+        rb.velocity = Vector2.zero;
+        OnDone?.Invoke();
     }
 
     public override void OnNetworkDespawn()
