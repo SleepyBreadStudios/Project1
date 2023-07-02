@@ -551,7 +551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 0.02
-  playerHealth: 100
+  playerHealth: 20
   healthBar: {fileID: 7921748905627304716}
   animator: {fileID: 639922924189750656}
   defaultPositionRange: {x: -4, y: 4}

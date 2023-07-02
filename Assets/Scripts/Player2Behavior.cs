@@ -9,6 +9,9 @@ using UnityEngine;
 using Cinemachine;
 using DapperDino.Events.CustomEvents;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+
 
 public class Player2Behavior : NetworkBehaviour
 {
@@ -18,7 +21,9 @@ public class Player2Behavior : NetworkBehaviour
     [SerializeField]
     private float walkSpeed = 0.2f;
     [SerializeField]
-    private float playerHealth = 5;
+    private float playerHealth;
+
+    private float maxHealth;
     #endregion
 
     [SerializeField]
@@ -69,6 +74,8 @@ public class Player2Behavior : NetworkBehaviour
     // Death menu access
     private DeathMenu deathMenu = null;
 
+    private bool isDead = false;
+
     private Vector3 originalInvPos = new Vector3(0,0,0);
 
     // client caches positions
@@ -89,7 +96,7 @@ public class Player2Behavior : NetworkBehaviour
 
     void Start()
     {
-        //transform.position = new Vector3(Random.Range(defaultPositionRange.x, defaultPositionRange.y), 0,
+        // transform.position = new Vector3(Random.Range(defaultPositionRange.x, defaultPositionRange.y), 0,
         //       Random.Range(defaultPositionRange.x, defaultPositionRange.y));
         transform.position = new Vector3(0, 0, 0);
         playerInventory = gameObject.GetComponent<PlayerInventory>();
@@ -116,6 +123,7 @@ public class Player2Behavior : NetworkBehaviour
             HealthUI.transform.localScale = new Vector3(1, 1, 1);
         }
         healthBar.SetHealth(playerHealth);
+        maxHealth = playerHealth;
     }
 
     public override void OnNetworkSpawn()
@@ -156,41 +164,44 @@ public class Player2Behavior : NetworkBehaviour
         // don't allow player input if the escape menu is open
         if (!escEnabled)
         {
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-            {
-                forwardBackward += walkSpeed;
-                animator.SetFloat("speed", walkSpeed);
-            }
-            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-            {
-                forwardBackward -= walkSpeed;
-                animator.SetFloat("speed", walkSpeed);
-            }
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-            {
-                leftRight -= walkSpeed;
-                animator.SetFloat("speed", walkSpeed);
-                spriteRenderer.flipX = false;
-            }
-            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-            {
-                leftRight += walkSpeed;
-                animator.SetFloat("speed", walkSpeed);
-                spriteRenderer.flipX = true;
-            }
-            if (forwardBackward == 0 && leftRight == 0)
-            {
-                animator.SetFloat("speed", 0);
-            }
+            if (!isDead) {
+                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+                {
+                    forwardBackward += walkSpeed;
+                    animator.SetFloat("speed", walkSpeed);
+                }
+                if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+                {
+                    forwardBackward -= walkSpeed;
+                    animator.SetFloat("speed", walkSpeed);
+                }
+                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+                {
+                    leftRight -= walkSpeed;
+                    animator.SetFloat("speed", walkSpeed);
+                    spriteRenderer.flipX = false;
+                }
+                if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+                {
+                    leftRight += walkSpeed;
+                    animator.SetFloat("speed", walkSpeed);
+                    spriteRenderer.flipX = true;
+                }
+                if (forwardBackward == 0 && leftRight == 0)
+                {
+                    animator.SetFloat("speed", 0);
+                }
 
-            if (oldForwardBackwardPosition != forwardBackward ||
-                oldLeftRightPosition != leftRight)
-            {
-                UpdateClientPositionServerRpc(forwardBackward, leftRight);
-                oldForwardBackwardPosition = forwardBackward;
-                oldLeftRightPosition = leftRight;
-                //animator.SetFloat("speed", walkSpeed);
-            }
+                if (oldForwardBackwardPosition != forwardBackward ||
+                    oldLeftRightPosition != leftRight)
+                {
+                    UpdateClientPositionServerRpc(forwardBackward, leftRight);
+                    oldForwardBackwardPosition = forwardBackward;
+                    oldLeftRightPosition = leftRight;
+                    //animator.SetFloat("speed", walkSpeed);
+                }
+            
+
             #endregion
             #region INVENTORY/CRAFTING
             // access inventory
@@ -389,6 +400,7 @@ public class Player2Behavior : NetworkBehaviour
             // set orientation
          
         }
+        }
     }
 
     public void EnableEscMenuPlayer()
@@ -407,10 +419,11 @@ public class Player2Behavior : NetworkBehaviour
 
     public void DamagePlayer()
     {
-        playerHealth-= 3; // For testing
+        playerHealth--; // For testing
         healthBar.Damage();
         if (playerHealth <= 0) {
-            Destroy(this.gameObject);
+            Deactivate();
+            StartCoroutine("Respawn");
         }
     }
     #endregion
@@ -479,5 +492,45 @@ public class Player2Behavior : NetworkBehaviour
         {
             spriteRenderer.flipX = check;
         }
+    }
+
+    // Respawns the player after 3 seconds
+    /*
+    Want to add in item drops from the player here 
+    Need to test if this works in multiplayer
+    */
+    IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(3.0f);
+        transform.position = new Vector3(0, 0, 0);
+        isDead = false;
+        InventoryUI.SetActive(true);
+        CraftingUI.SetActive(true);
+        HotbarUI.SetActive(true);
+        HealthUI.SetActive(true);
+        spriteRenderer.enabled = true;
+        playerHealth = maxHealth;
+        healthBar.SetHealth(playerHealth);
+        StopCoroutine("Respawn");
+    }
+
+    // TESTING: Deactivates set of the player's UI including inventory, crafting, etc.
+    public void Deactivate()
+    {
+
+        //playerInventory = gameObject.GetComponent<PlayerInventory>();
+        InventoryUI.SetActive(false);
+        CraftingUI.SetActive(false);
+        HotbarUI.SetActive(false);
+        HealthUI.SetActive(false);
+
+        spriteRenderer.enabled = false;
+        isDead = true;
+
+        // // for esc menu to know when to open and when not to
+        // OnMenuOpenUpdated += onMenuOpenUpdated.Raise;
+
+        // // grab original position of inventory for resetting
+        // originalInvPos = InventoryUI.transform.position;
     }
 }
