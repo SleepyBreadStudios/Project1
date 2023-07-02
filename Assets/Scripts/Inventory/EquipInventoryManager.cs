@@ -46,11 +46,6 @@ public class EquipInventoryManager : PlayerItemManager
                 // if not already wearing head equip
                 if (inventory[headIndex].item == null)
                 {
-                    //var headSlot = inventory[headIndex];
-                    //headSlot.SetItemSlot(itemSlot.item, count);
-                    //// tell slot what it's index is in the array
-                    //headSlot.SetSlotIndex(headIndex);
-                    //headSlot.SetItemBehavior(itemSlot.itemBehavior);
                     inventory[headIndex] = itemSlot;
                     // account for new inventory size
                     currInventorySize++;
@@ -73,11 +68,7 @@ public class EquipInventoryManager : PlayerItemManager
                 Debug.Log("Chest equip");
                 if (inventory[chestIndex].item == null)
                 {
-                    var chestSlot = inventory[chestIndex];
-                    chestSlot.SetItemSlot(itemSlot.item, count);
-                    // tell slot what it's index is in the array
-                    chestSlot.SetSlotIndex(chestIndex);
-                    chestSlot.SetItemBehavior(itemSlot.itemBehavior);
+                    inventory[chestIndex] = itemSlot;
                     // account for new inventory size
                     currInventorySize++;
                     OnItemsUpdated.Invoke();
@@ -99,11 +90,7 @@ public class EquipInventoryManager : PlayerItemManager
                 Debug.Log("Leg equip");
                 if (inventory[legIndex].item == null)
                 {
-                    var legSlot = inventory[legIndex];
-                    legSlot.SetItemSlot(itemSlot.item, count);
-                    // tell slot what it's index is in the array
-                    legSlot.SetSlotIndex(legIndex);
-                    legSlot.SetItemBehavior(itemSlot.itemBehavior);
+                    inventory[legIndex] = itemSlot;
                     // account for new inventory size
                     currInventorySize++;
                     OnItemsUpdated.Invoke();
@@ -123,7 +110,26 @@ public class EquipInventoryManager : PlayerItemManager
                 }
             case "Accessory":
                 Debug.Log("Accessory equip");
-                break;
+                if (inventory[accIndex].item == null)
+                {
+                    inventory[accIndex] = itemSlot;
+                    // account for new inventory size
+                    currInventorySize++;
+                    OnItemsUpdated.Invoke();
+                    return true;
+                }
+                else
+                {
+                    // swap the slots 
+                    // update player inventory
+                    var originalSlot = inventory[accIndex];
+                    playerInventory.AddSlotByRef(originalSlot, slotIndex);
+                    inventory[accIndex] = itemSlot;
+                    OnItemsUpdated.Invoke();
+                    // not because it failed but because we don't want to delete the item
+                    // after we add it to inventory
+                    return false;
+                }
             default:
                 Debug.Log("This shouldn't be called " + equipType);
                 break;
