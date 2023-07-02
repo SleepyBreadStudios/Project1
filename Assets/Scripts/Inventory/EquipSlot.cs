@@ -1,5 +1,5 @@
 /******************************************************************************
- * Crafting slot class. Inherits from ItemSlotUI. Handles crafting UI.
+ * Equip slot class. Inherits from ItemSlotUI. Handles equipment UI.
  * 
  * Authors: Alicia T, Jason N, Jino C
  *****************************************************************************/
@@ -11,13 +11,16 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class CraftingSlot : ItemSlotUI, IDropHandler
+public class EquipSlot : ItemSlotUI, IDropHandler
 {
     [SerializeField]
     private CraftingInventoryManager crafting = null;
 
     [SerializeField]
     private PlayerInventory inventory = null;
+
+    [SerializeField]
+    private EquipInventoryManager equipment = null;
 
     [SerializeField]
     private TextMeshProUGUI itemQuantityText = null;
@@ -27,54 +30,55 @@ public class CraftingSlot : ItemSlotUI, IDropHandler
     //    get { return ItemSlot.item; }
     //}
 
-    public ItemSlot ItemSlot => crafting.GetSlotByIndex(SlotIndex);
+    public ItemSlot ItemSlot => equipment.GetSlotByIndex(SlotIndex);
 
     public override void OnDrop(PointerEventData eventData)
     {
         ItemDragHandler itemDragHandler = eventData.pointerDrag.GetComponent<ItemDragHandler>();
-        Debug.Log("Attempting to place item in crafting");
+
         // swap stack positions
         if (itemDragHandler.ItemSlotUI.SlotType == "InventorySlot")
         {
             if ((itemDragHandler.ItemSlotUI as InventorySlot) != null)
             {
-                crafting.SwapWInventory(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
+                equipment.SwapWInventory(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
             }
         }
-        else if(itemDragHandler.ItemSlotUI.SlotType == "CraftingSlot")
-        {
-            if ((itemDragHandler.ItemSlotUI as CraftingSlot) != null)
-            {
-                crafting.Swap(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
-            }
-        }
-        else if (itemDragHandler.ItemSlotUI.SlotType == "CraftingResultSlot")
-        {
-            if ((itemDragHandler.ItemSlotUI as CraftingResultSlot) != null)
-            {
-                crafting.SwapWResult(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
-            }
-        }
+        // these should not be possible !
+        //else if (itemDragHandler.ItemSlotUI.SlotType == "CraftingSlot")
+        //{
+        //    if ((itemDragHandler.ItemSlotUI as CraftingSlot) != null)
+        //    {
+        //        equipment.SwapWCrafting(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
+        //    }
+        //}
+        //else if (itemDragHandler.ItemSlotUI.SlotType == "CraftingResultSlot")
+        //{
+        //    if ((itemDragHandler.ItemSlotUI as CraftingResultSlot) != null)
+        //    {
+        //        equipment.SwapWResult(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
+        //    }
+        //}
         else if (itemDragHandler.ItemSlotUI.SlotType == "EquipSlot")
         {
             if ((itemDragHandler.ItemSlotUI as EquipSlot) != null)
             {
-                inventory.SwapWEquip(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
+                equipment.Swap(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
             }
         }
         else
         {
             Debug.Log("Dragging from something that isn't an inventory slot or crafting slot? Error, not intended behavior");
         }
-
     }
 
+    // do nothing
     public override void SplitStack()
     {
-        crafting.SplitStack(SlotIndex);
+        Debug.Log("Attempting to split stack equipment inventory");
     }
 
-    // move stack from crafting slot to inventory with shift click
+    // move stack from equipment slot to inventory with shift click
     public override void QuickMoveStack()
     {
         if (inventory.inventoryShiftClick)
@@ -83,16 +87,26 @@ public class CraftingSlot : ItemSlotUI, IDropHandler
             {
                 // item successfully moved from crafting
                 // empty crafting slot
-
-                crafting.DeleteFromInventory(SlotIndex);
+                equipment.DeleteFromInventory(SlotIndex);
             }
         }
-        //crafting.SwapWInventory(,SlotIndex);
+
     }
 
     public override void UpdateSlotUI()
     {
-        if (ItemSlot.item == null)
+        if (ItemSlot.item == null || ItemSlot.IsEmptySlot())
+        {
+            EnableSlotUI(false);
+            return;
+        }
+        // refactoring needed for durability changing transparency
+        var color = itemIconImage.color;
+        float durability = 0.01f * ItemSlot.GetDurability();
+        color.a = durability;
+        itemIconImage.color = color;
+
+        if (durability <= 0)
         {
             EnableSlotUI(false);
             return;
@@ -110,13 +124,13 @@ public class CraftingSlot : ItemSlotUI, IDropHandler
         itemQuantityText.enabled = enable;
     }
 
-    //public void DragDelete(int slotIndex)
-    //{
-    //    inventory.DeleteFromInventory(slotIndex);
-    //}
+    public void DragDelete(int slotIndex)
+    {
+        equipment.DeleteFromInventory(slotIndex);
+    }
 
     private void Awake()
     {
-        SlotType = "CraftingSlot";
+        SlotType = "EquipSlot";
     }
 }

@@ -340,6 +340,7 @@ public class CraftingInventoryManager : PlayerItemManager
         for (int i = 0; i < maxInventorySize; i++)
         {
             inventory.Add(new ItemSlot());
+            //inventory[i].SetSlotIndex(i);
         }
         //resultSlot = inventory[maxInventorySize - 1];
         craftingManager = GameObject.Find("CraftingManager").GetComponent<CraftingManager>();

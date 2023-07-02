@@ -17,6 +17,9 @@ public class InventorySlot : ItemSlotUI, IDropHandler
     private CraftingInventoryManager crafting = null;
 
     [SerializeField]
+    private EquipInventoryManager equipment = null;
+
+    [SerializeField]
     private PlayerInventory inventory = null;
 
     [SerializeField]
@@ -55,6 +58,13 @@ public class InventorySlot : ItemSlotUI, IDropHandler
                 inventory.SwapWResult(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
             }
         }
+        else if (itemDragHandler.ItemSlotUI.SlotType == "EquipSlot")
+        {
+            if ((itemDragHandler.ItemSlotUI as EquipSlot) != null)
+            {
+                inventory.SwapWEquip(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
+            }
+        }
         else
         {
             Debug.Log("Dragging from something that isn't an inventory slot or crafting slot? Error, not intended behavior");
@@ -66,15 +76,24 @@ public class InventorySlot : ItemSlotUI, IDropHandler
         inventory.SplitStack(SlotIndex);
     }
 
-    // move stack from  inventory slot to crafting with shift click
+    // move stack from  inventory slot to crafting or equipment with shift click
     public override void QuickMoveStack()
     {
-        if(inventory.inventoryShiftClick)
+        if(inventory.inventoryShiftClick && inventory.craftingShiftClick)
         {
             if (crafting.AddStack(ItemSlot))
             {
-                // item successfully moved from crafting
-                // empty crafting slot
+                // item successfully moved to crafting
+                // empty inventory slot
+                inventory.DeleteFromInventory(SlotIndex);
+            }
+        }
+        else if (inventory.inventoryShiftClick && !inventory.craftingShiftClick)
+        {
+            if (equipment.AddStack(ItemSlot, SlotIndex))
+            {
+                // item successfully moved to equipment
+                // empty inventory slot
                 inventory.DeleteFromInventory(SlotIndex);
             }
         }

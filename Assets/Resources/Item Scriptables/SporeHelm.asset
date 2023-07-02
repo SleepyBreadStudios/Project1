@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
-  m_Name: Sword
+  m_Name: SporeHelm
   m_EditorClassIdentifier: 
-  itemName: Sword
-  icon: {fileID: 21300000, guid: aafe7d1ded081d34da09de2b11303291, type: 3}
+  itemName: SporeHelm
+  icon: {fileID: 21300000, guid: b0538623dfb03c44395a4e6887e3638f, type: 3}
   count: 1
   maxStack: 1
   startingCondition: 100
   unique: 0
-  itemBehavior: {fileID: 5732627154995292706, guid: 4e2d3020f127de84c993c5393deb267f, type: 3}
-  equipType: 
+  itemBehavior: {fileID: 0}
+  equipType: Head

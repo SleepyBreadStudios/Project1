@@ -19,7 +19,7 @@ public class Player2Behavior : NetworkBehaviour
     //player stats
     #region
     [SerializeField]
-    private float walkSpeed = 0.2f;
+    private float walkSpeed = 0.02f;
     [SerializeField]
     private float playerHealth;
 
@@ -53,6 +53,9 @@ public class Player2Behavior : NetworkBehaviour
 
     [SerializeField]
     private GameObject HealthUI = null;
+
+    [SerializeField]
+    private GameObject EquipUI = null;
 
     [SerializeField]
     private GameObject projectile = null;
@@ -104,6 +107,7 @@ public class Player2Behavior : NetworkBehaviour
         CraftingUI.transform.localScale = new Vector3(0, 0, 0);
         HotbarUI.transform.localScale = new Vector3(0, 0, 0);
         HealthUI.transform.localScale = new Vector3(0, 0, 0);
+        EquipUI.transform.localScale = new Vector3(0, 0, 0);
         transform.localScale = new Vector3(1, 1, 1);
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
@@ -211,20 +215,23 @@ public class Player2Behavior : NetworkBehaviour
                 {
                     // close
                     InventoryUI.transform.localScale = new Vector3(0, 0, 0);
+                    EquipUI.transform.localScale = new Vector3(0, 0, 0);
                     InventoryUI.transform.position = originalInvPos;
                     HotbarUI.transform.localScale = new Vector3(1, 1, 1);
                     CraftingUI.transform.localScale = new Vector3(0, 0, 0);
                     inventoryEnabled = false;
                     craftingEnabled = false;
                     menuOpen = false;
-                    playerInventory.inventoryTransferEnabled(false);
+                    playerInventory.inventoryTransferEnabled(false, false);
                 }
                 else
                 {
                     InventoryUI.transform.localScale = new Vector3(1, 1, 1);
+                    EquipUI.transform.localScale = new Vector3(1, 1, 1);
                     HotbarUI.transform.localScale = new Vector3(0, 0, 0);
                     inventoryEnabled = true;
                     menuOpen = true;
+                    playerInventory.inventoryTransferEnabled(true, false);
                 }
                 OnMenuOpenUpdated.Invoke();
             }
@@ -246,11 +253,13 @@ public class Player2Behavior : NetworkBehaviour
                             InventoryUI.transform.position = new Vector3(InventoryUI.transform.position.x - 450, InventoryUI.transform.position.y, InventoryUI.transform.position.z);
                             // open crafting
                             CraftingUI.transform.localScale = new Vector3(1, 1, 1);
+                            // close hotbar and equip 
                             HotbarUI.transform.localScale = new Vector3(0, 0, 0);
+                            EquipUI.transform.localScale = new Vector3(0, 0, 0);
                             inventoryEnabled = true;
                             craftingEnabled = true;
                             menuOpen = true;
-                            playerInventory.inventoryTransferEnabled(true);
+                            playerInventory.inventoryTransferEnabled(true, true);
                             OnMenuOpenUpdated.Invoke();
                         }
                         else
@@ -289,7 +298,7 @@ public class Player2Behavior : NetworkBehaviour
                 craftingEnabled = false;
                 HotbarUI.transform.localScale = new Vector3(1, 1, 1);
                 menuOpen = false;
-                playerInventory.inventoryTransferEnabled(false);
+                playerInventory.inventoryTransferEnabled(false, false);
                 OnMenuOpenUpdated.Invoke();
             }
         }

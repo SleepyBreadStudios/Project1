@@ -20,6 +20,9 @@ public class PlayerInventory : PlayerItemManager
 
     [SerializeField]
     private CraftingInventoryManager playerCrafting = null;
+
+    [SerializeField]
+    private EquipInventoryManager playerEquipment = null;
     //[SerializeField] private VoidEvent onInventoryItemsUpdated = null;
     // num of different stacked items it can hold
 
@@ -39,6 +42,7 @@ public class PlayerInventory : PlayerItemManager
     public int currHotbarNum = 1;
 
     public bool inventoryShiftClick = false;
+    public bool craftingShiftClick = false;
 
     // add item to player inventory
     public bool AddItem(ItemBehavior nBehavior, ItemData nItem)
@@ -132,6 +136,7 @@ public class PlayerInventory : PlayerItemManager
         return false;
     }
 
+    #region Swap
     public void SwapWCrafting(int craftingIndex, int inventoryIndex)
     {
         ItemSlot inventorySlot = inventory[inventoryIndex];
@@ -184,6 +189,40 @@ public class PlayerInventory : PlayerItemManager
         playerCrafting.AttemptToCraftItem();
     }
 
+    public void SwapWEquip(int equipIndex, int inventoryIndex)
+    {
+        ItemSlot inventorySlot = inventory[inventoryIndex];
+        ItemSlot equipSlot = playerEquipment.GetSlotByIndex(equipIndex);
+
+        if (inventorySlot.item != null)
+        {
+            // if swapping with an item that is of the same type, swap
+            if(equipSlot.item.equipType == inventorySlot.item.equipType)
+            {
+                Debug.Log(equipSlot.item.equipType);
+                Debug.Log(inventorySlot.item.equipType);
+                inventory[inventoryIndex] = equipSlot;
+                playerEquipment.AddSlotByRef(inventorySlot, equipIndex);
+                OnItemsUpdated.Invoke();
+            }
+            // don't swap if they aren't the same
+            return;
+        }
+        else
+        {
+            // the slot is being swapped with an empty slot
+            // update with new size
+            currInventorySize++;
+            // tell inventory it has one less item now
+            playerEquipment.UpdateInventory();
+        }
+
+        // swap empty w slot
+        inventory[inventoryIndex] = equipSlot;
+        playerEquipment.AddSlotByRef(inventorySlot, equipIndex);
+        OnItemsUpdated.Invoke();
+    }
+
     public void SwapWResult(int resultIndex, int inventoryIndex)
     {
         ItemSlot inventorySlot = inventory[inventoryIndex];
@@ -207,7 +246,9 @@ public class PlayerInventory : PlayerItemManager
 
         OnItemsUpdated.Invoke();
     }
+    #endregion
 
+    #region Hotbar
     // ask for player that is asking to use the item so that player can be properly updated
     public void useHotbarItem(int currHotbarSelected, Player2Behavior playerBehavior, string lor)
     {
@@ -269,11 +310,13 @@ public class PlayerInventory : PlayerItemManager
         currHotbarNum = currHotbarSelected;
         OnHotbarUpdated.Invoke();
     }
+    #endregion
 
     // called by player behavior
-    public void inventoryTransferEnabled(bool enable)
+    public void inventoryTransferEnabled(bool inventory, bool crafting)
     {
-        inventoryShiftClick = enable;
+        inventoryShiftClick = inventory;
+        craftingShiftClick = crafting;
     }
 
     // init inventory before anything
@@ -284,6 +327,7 @@ public class PlayerInventory : PlayerItemManager
         for (int i = 0; i < maxInventorySize; i++)
         {
             inventory.Add(new ItemSlot());
+            //inventory[i].SetSlotIndex(i);
         }
     }
 }

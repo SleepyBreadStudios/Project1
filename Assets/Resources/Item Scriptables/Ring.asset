@@ -19,3 +19,4 @@ MonoBehaviour:
   startingCondition: 100
   unique: 0
   itemBehavior: {fileID: 6532133295205337323, guid: 4afd4258eac1fa44dabeea5129d7254a, type: 3}
+  equipType: Accessory

@@ -188,7 +188,9 @@ public abstract class PlayerItemManager : MonoBehaviour
 
         // if not swap the slots
         inventory[indexOne] = secondSlot;
+        //secondSlot.SetSlotIndex(indexOne);
         inventory[indexTwo] = firstSlot;
+        //firstSlot.SetSlotIndex(indexTwo);
 
         OnItemsUpdated.Invoke();
     }
@@ -200,6 +202,7 @@ public abstract class PlayerItemManager : MonoBehaviour
 
         // delete object
         inventory[slotIndex] = new ItemSlot();
+        //inventory[slotIndex].SetSlotIndex(slotIndex);
         currInventorySize--;
 
         OnItemsUpdated.Invoke();
@@ -208,6 +211,7 @@ public abstract class PlayerItemManager : MonoBehaviour
     public virtual void AddSlotByRef(ItemSlot itemSlot, int index)
     {
         inventory[index] = itemSlot;
+        //itemSlot.SetSlotIndex(index);
         if (itemSlot.item != null)
         {
             //currInventorySize++;

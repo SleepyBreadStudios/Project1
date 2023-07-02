@@ -36,6 +36,9 @@ public class ItemData : ScriptableObject
     // default for new items
     [SerializeField]
     public ItemBehavior itemBehavior = null;
+
+    [SerializeField]
+    public string equipType = null;
     
     // getter method
     public string GetName()
