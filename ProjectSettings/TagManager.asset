@@ -15,6 +15,7 @@ TagManager:
   - PlayerProjectile
   - CraftingObject
   - Bush
+  - Pond
   layers:
   - Default
   - TransparentFX

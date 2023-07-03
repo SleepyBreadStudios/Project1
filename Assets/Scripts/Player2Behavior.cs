@@ -282,6 +282,12 @@ public class Player2Behavior : NetworkBehaviour
 								hit.collider.gameObject.GetComponent<BushBehavior>().HarvestBerries();
 								return;
 							}
+							// right clicking pond?
+							else if (hit.collider.tag == "Pond")
+							{
+								hit.collider.gameObject.GetComponent<PondBehavior>().Fish();
+								return;
+							}
 						}
 						playerInventory.useHotbarItem(currHotbarSelected, GetComponent<Player2Behavior>(), "right");
 					}
