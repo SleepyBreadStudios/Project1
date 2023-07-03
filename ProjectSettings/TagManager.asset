@@ -16,6 +16,7 @@ TagManager:
   - CraftingObject
   - Bush
   - Pond
+  - Mob
   layers:
   - Default
   - TransparentFX
