@@ -48,7 +48,6 @@ public class OverworldBehavior : NetworkBehaviour
     {
         itemObj = Instantiate(item, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity) as GameObject;
         itemObj.GetComponent<NetworkObject>().Spawn(true);
-
     }
 
     // Overworld objects regenerate health after 3 seconds of not being hit
