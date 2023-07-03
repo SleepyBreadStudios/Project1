@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Singing_mushroom_0: 6567477670649132024
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
