@@ -20,3 +20,4 @@ MonoBehaviour:
   unique: 0
   itemBehavior: {fileID: 3328120825221899835, guid: 5b3bcdfdc43f01943af3bfe21d67a657, type: 3}
   equipType: Leg
+  defense: 2

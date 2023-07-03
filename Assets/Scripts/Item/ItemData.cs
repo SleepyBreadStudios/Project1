@@ -37,8 +37,13 @@ public class ItemData : ScriptableObject
     [SerializeField]
     public ItemBehavior itemBehavior = null;
 
+    // consider making equips their own inherited scriptable
+    // so other scriptables don't have these variables they don't use
     [SerializeField]
-    public string equipType = null;
+    private string equipType = null;
+
+    [SerializeField]
+    private float defense;
     
     // getter method
     public string GetName()
@@ -49,6 +54,16 @@ public class ItemData : ScriptableObject
     public int GetCount()
     {
         return count;
+    }
+
+    public float GetDefense()
+    {
+        return defense;
+    }
+
+    public string GetEquipType()
+    {
+        return equipType;
     }
 
     public int GetMaxStackAmount()

@@ -86,6 +86,8 @@ public class EquipSlot : ItemSlotUI, IDropHandler
             if (inventory.AddStack(ItemSlot))
             {
                 // item successfully moved from crafting
+                // update def 
+                equipment.CalculateCurrDef();
                 // empty crafting slot
                 equipment.DeleteFromInventory(SlotIndex);
             }

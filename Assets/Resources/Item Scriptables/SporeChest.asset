@@ -20,3 +20,4 @@ MonoBehaviour:
   unique: 0
   itemBehavior: {fileID: 7432340853674103563, guid: c50e4de7aec7c0f41944619a3eac576e, type: 3}
   equipType: Chest
+  defense: 3

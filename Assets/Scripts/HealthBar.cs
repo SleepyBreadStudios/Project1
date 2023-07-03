@@ -67,6 +67,14 @@ public class HealthBar : MonoBehaviour
         }
     }
 
+    public void Damage(float damageAmount)
+    {
+        if(currentHealth > 0)
+        {
+            currentHealth -= damageAmount;
+        }
+    }
+
     // Activates the health bar when the current health is less than max (for enemies)
     private void Activate() 
     {

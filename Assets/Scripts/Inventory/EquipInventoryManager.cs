@@ -15,6 +15,9 @@ public class EquipInventoryManager : PlayerItemManager
     [SerializeField]
     private PlayerInventory playerInventory = null;
 
+    [SerializeField]
+    private Player2Behavior player = null;
+
     //public bool inventoryShiftClick = false;
 
     private int headIndex = 0;
@@ -29,7 +32,7 @@ public class EquipInventoryManager : PlayerItemManager
 
     public bool AddStack(ItemSlot itemSlot, int slotIndex)
     {
-        string equipType = itemSlot.item.equipType;
+        string equipType = itemSlot.item.GetEquipType();
         // if it is not an equipment don't move into equipment
         if(equipType == null || equipType == "")
         {
@@ -50,6 +53,7 @@ public class EquipInventoryManager : PlayerItemManager
                     // account for new inventory size
                     currInventorySize++;
                     OnItemsUpdated.Invoke();
+                    OnEquipUpdated.Invoke();
                     return true;
                 }
                 else
@@ -60,6 +64,7 @@ public class EquipInventoryManager : PlayerItemManager
                     playerInventory.AddSlotByRef(originalSlot, slotIndex);
                     inventory[headIndex] = itemSlot;
                     OnItemsUpdated.Invoke();
+                    OnEquipUpdated.Invoke();
                     // not because it failed but because we don't want to delete the item
                     // after we add it to inventory
                     return false;
@@ -72,6 +77,7 @@ public class EquipInventoryManager : PlayerItemManager
                     // account for new inventory size
                     currInventorySize++;
                     OnItemsUpdated.Invoke();
+                    OnEquipUpdated.Invoke();
                     return true;
                 }
                 else
@@ -82,6 +88,7 @@ public class EquipInventoryManager : PlayerItemManager
                     playerInventory.AddSlotByRef(originalSlot, slotIndex);
                     inventory[chestIndex] = itemSlot;
                     OnItemsUpdated.Invoke();
+                    OnEquipUpdated.Invoke();
                     // not because it failed but because we don't want to delete the item
                     // after we add it to inventory
                     return false;
@@ -94,6 +101,7 @@ public class EquipInventoryManager : PlayerItemManager
                     // account for new inventory size
                     currInventorySize++;
                     OnItemsUpdated.Invoke();
+                    OnEquipUpdated.Invoke();
                     return true;
                 }
                 else
@@ -104,6 +112,7 @@ public class EquipInventoryManager : PlayerItemManager
                     playerInventory.AddSlotByRef(originalSlot, slotIndex);
                     inventory[legIndex] = itemSlot;
                     OnItemsUpdated.Invoke();
+                    OnEquipUpdated.Invoke();
                     // not because it failed but because we don't want to delete the item
                     // after we add it to inventory
                     return false;
@@ -116,6 +125,7 @@ public class EquipInventoryManager : PlayerItemManager
                     // account for new inventory size
                     currInventorySize++;
                     OnItemsUpdated.Invoke();
+                    OnEquipUpdated.Invoke();
                     return true;
                 }
                 else
@@ -126,6 +136,7 @@ public class EquipInventoryManager : PlayerItemManager
                     playerInventory.AddSlotByRef(originalSlot, slotIndex);
                     inventory[accIndex] = itemSlot;
                     OnItemsUpdated.Invoke();
+                    OnEquipUpdated.Invoke();
                     // not because it failed but because we don't want to delete the item
                     // after we add it to inventory
                     return false;
@@ -142,7 +153,7 @@ public class EquipInventoryManager : PlayerItemManager
         ItemSlot equipSlot = inventory[equipIndex];
         ItemSlot inventorySlot = playerInventory.GetSlotByIndex(inventoryIndex);
 
-        string equipType = inventorySlot.item.equipType;
+        string equipType = inventorySlot.item.GetEquipType();
         if (equipType == null)
         {
             // if not an equipment don't move into equipment inventory
@@ -201,12 +212,26 @@ public class EquipInventoryManager : PlayerItemManager
         }
 
         OnItemsUpdated.Invoke();
+        OnEquipUpdated.Invoke();
     }
 
     // do nothing
     public override void Swap(int indexOne, int indexTwo)
     {
         Debug.Log("Attempting to drag equipment into wrong slots");
+    }
+
+    public void CalculateCurrDef()
+    {
+        float count = 0;
+        for (int i = 0; i <= 3; i++)
+        {
+            if(inventory[i].item != null)
+            {
+                count += inventory[i].item.GetDefense();
+            }
+        }
+        player.UpdateDefense(count);
     }
 
     private void Awake()

@@ -18,5 +18,6 @@ MonoBehaviour:
   maxStack: 1
   startingCondition: 100
   unique: 0
-  itemBehavior: {fileID: 0}
+  itemBehavior: {fileID: 7090151288004344192, guid: 1e141fe8052d3e0438d38b8d836e78d5, type: 3}
   equipType: Head
+  defense: 1

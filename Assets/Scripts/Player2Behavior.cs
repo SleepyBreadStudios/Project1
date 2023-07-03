@@ -24,9 +24,11 @@ public class Player2Behavior : NetworkBehaviour
     private float playerHealth;
 
     private float maxHealth;
+
+    private float playerDefense;
     #endregion
 
-    [SerializeField]
+[SerializeField]
     private HealthBar healthBar = null;
 
     public Animator animator;
@@ -96,6 +98,8 @@ public class Player2Behavior : NetworkBehaviour
     // for telling the escape menu that other menus are open
     [SerializeField] private VoidEvent onMenuOpenUpdated = null;
     public Action OnMenuOpenUpdated = delegate { }; 
+
+
 
     void Start()
     {
@@ -294,6 +298,7 @@ public class Player2Behavior : NetworkBehaviour
                 InventoryUI.transform.localScale = new Vector3(0, 0, 0);
                 InventoryUI.transform.position = originalInvPos;
                 CraftingUI.transform.localScale = new Vector3(0, 0, 0);
+                EquipUI.transform.localScale = new Vector3(0, 0, 0);
                 inventoryEnabled = false;
                 craftingEnabled = false;
                 HotbarUI.transform.localScale = new Vector3(1, 1, 1);
@@ -430,10 +435,37 @@ public class Player2Behavior : NetworkBehaviour
     {
         playerHealth--; // For testing
         healthBar.Damage();
-        if (playerHealth <= 0) {
+        if (playerHealth <= 0)
+        {
             Deactivate();
             StartCoroutine("Respawn");
         }
+    }
+
+    public void DamagePlayer(float damageAmount)
+    {
+        //playerHealth -= damageAmount; // For testing
+        // apply defense
+        // round up 
+        float reducedDef = Mathf.Ceil(playerDefense / 2);
+        float reducedDamage = damageAmount - reducedDef;
+        if(reducedDamage < 1)
+        {
+            // player always take one damage no matter how much armor they have
+            reducedDamage = 1;
+        }
+        playerHealth -= reducedDamage;
+        healthBar.Damage(reducedDamage);
+        if (playerHealth <= 0)
+        {
+            Deactivate();
+            StartCoroutine("Respawn");
+        }
+    }
+
+    public void UpdateDefense(float newDef)
+    {
+        playerDefense = newDef;
     }
     #endregion
 
@@ -491,7 +523,16 @@ public class Player2Behavior : NetworkBehaviour
 
         if (collision.CompareTag("Enemy"))
         {
-            DamagePlayer();
+            if (collision.gameObject.GetComponent<EnemyBehavior>() != null)
+            {
+                // either enemy or
+                DamagePlayer(collision.gameObject.GetComponent<EnemyBehavior>().getStrength());
+            }
+            else
+            {
+                // projectile
+                DamagePlayer(collision.gameObject.GetComponent<ProjectileBehavior>().getStrength());
+            }
         }
     }
 

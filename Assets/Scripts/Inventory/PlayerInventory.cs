@@ -18,6 +18,7 @@ public class PlayerInventory : PlayerItemManager
 {
     [SerializeField] private VoidEvent onHotbarUpdated = null;
 
+
     [SerializeField]
     private CraftingInventoryManager playerCrafting = null;
 
@@ -197,13 +198,14 @@ public class PlayerInventory : PlayerItemManager
         if (inventorySlot.item != null)
         {
             // if swapping with an item that is of the same type, swap
-            if(equipSlot.item.equipType == inventorySlot.item.equipType)
+            if(equipSlot.item.GetEquipType() == inventorySlot.item.GetEquipType())
             {
-                Debug.Log(equipSlot.item.equipType);
-                Debug.Log(inventorySlot.item.equipType);
+                Debug.Log(equipSlot.item.GetEquipType());
+                Debug.Log(inventorySlot.item.GetEquipType());
                 inventory[inventoryIndex] = equipSlot;
                 playerEquipment.AddSlotByRef(inventorySlot, equipIndex);
                 OnItemsUpdated.Invoke();
+                OnEquipUpdated.Invoke();
             }
             // don't swap if they aren't the same
             return;
@@ -221,6 +223,7 @@ public class PlayerInventory : PlayerItemManager
         inventory[inventoryIndex] = equipSlot;
         playerEquipment.AddSlotByRef(inventorySlot, equipIndex);
         OnItemsUpdated.Invoke();
+        OnEquipUpdated.Invoke();
     }
 
     public void SwapWResult(int resultIndex, int inventoryIndex)
@@ -329,5 +332,17 @@ public class PlayerInventory : PlayerItemManager
             inventory.Add(new ItemSlot());
             //inventory[i].SetSlotIndex(i);
         }
+    }
+
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        OnHotbarUpdated += onHotbarUpdated.Raise;
+    }
+
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        OnHotbarUpdated -= onHotbarUpdated.Raise;
     }
 }

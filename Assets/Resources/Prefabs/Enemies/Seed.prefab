@@ -221,5 +221,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
-  strength: 1
+  strength: 4
   target: Player

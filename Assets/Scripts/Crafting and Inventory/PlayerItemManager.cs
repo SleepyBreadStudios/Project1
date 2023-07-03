@@ -15,6 +15,7 @@ using System.Linq;
 public abstract class PlayerItemManager : MonoBehaviour
 {
     [SerializeField] private VoidEvent onInventoryItemsUpdated = null;
+    [SerializeField] private VoidEvent onEquipUpdated = null;
 
     // num of different stacked items it can hold
     [SerializeField]
@@ -30,6 +31,7 @@ public abstract class PlayerItemManager : MonoBehaviour
     public ItemSlot GetSlotByIndex(int index) => inventory[index];
 
     public Action OnItemsUpdated = delegate { };
+    public Action OnEquipUpdated = delegate { };
 
     // getter method
     public virtual bool IsInventoryFull()
@@ -46,9 +48,17 @@ public abstract class PlayerItemManager : MonoBehaviour
             return false;
     }
 
-    public virtual void OnEnable() => OnItemsUpdated += onInventoryItemsUpdated.Raise;
+    public virtual void OnEnable()
+    {
+        OnItemsUpdated += onInventoryItemsUpdated.Raise;
+        OnEquipUpdated += onEquipUpdated.Raise;
+    }
 
-    public virtual void OnDisable() => OnItemsUpdated -= onInventoryItemsUpdated.Raise;
+    public virtual void OnDisable()
+    {
+        OnItemsUpdated -= onInventoryItemsUpdated.Raise;
+        OnEquipUpdated -= onEquipUpdated.Raise;
+    }
 
     public virtual void SplitStack(int slotIndex)
     {
