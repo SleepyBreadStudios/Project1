@@ -6,6 +6,7 @@
 //#define Debug
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UI;
 using Cinemachine;
 using DapperDino.Events.CustomEvents;
 using System;
@@ -78,6 +79,16 @@ public class Player2Behavior : NetworkBehaviour
 
 	// Death menu access
 	private DeathMenu deathMenu = null;
+
+	// Respawn UI
+	[SerializeField]
+	private GameObject RespawnUI = null;
+
+	// Respawn timer
+	[SerializeField]
+	private Text Timer;
+
+	public float TimeLeft = 4.0f;
 
 	private bool isDead = false;
 
@@ -174,6 +185,10 @@ public class Player2Behavior : NetworkBehaviour
 		{
 			if (!isDead)
 			{
+				// Resetting rsepawn conditions
+				RespawnUI.SetActive(false);
+				TimeLeft = 4.0f;
+				
 				if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
 				{
 					forwardBackward += walkSpeed;
@@ -300,6 +315,9 @@ public class Player2Behavior : NetworkBehaviour
 						playerInventory.useHotbarItem(currHotbarSelected, GetComponent<Player2Behavior>(), "left");
 					}
 				}
+			} else { // while dead
+				TimeLeft -= Time.deltaTime;
+				updateTime(TimeLeft);
 			}
 			//// check if interacting with craftingtable
 			//if (!craftingEnabled)
@@ -355,7 +373,7 @@ public class Player2Behavior : NetworkBehaviour
 					playerInventory.inventoryTransferEnabled(false, false);
 					OnMenuOpenUpdated.Invoke();
 				}
-			}
+			} 
 			#region HOTBAR
 			// check for numkeys for hotbar
 			// don't interact with hotbar if a menu is open
@@ -505,9 +523,11 @@ public class Player2Behavior : NetworkBehaviour
 		}
 		playerHealth -= reducedDamage;
 		healthBar.Damage(reducedDamage);
+		animator.Play("Player_Hurt");
 		if (playerHealth <= 0)
 		{
 			Deactivate();
+			RespawnUI.SetActive(true);
 			StartCoroutine("Respawn");
 		}
 	}
@@ -631,5 +651,10 @@ public class Player2Behavior : NetworkBehaviour
 
 		// // grab original position of inventory for resetting
 		// originalInvPos = InventoryUI.transform.position;
+	}
+
+	public void updateTime(float time) {
+		float seconds = Mathf.FloorToInt(time % 60);
+		Timer.text = seconds.ToString();
 	}
 }
