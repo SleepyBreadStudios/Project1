@@ -222,3 +222,4 @@ MonoBehaviour:
   item: {fileID: 4730441561702616771, guid: 829de7c6c53dcb649b6be0dc9e1925f3, type: 3}
   health: 5
   maxHealth: 5
+  ToolRequired: Pickaxe

@@ -26,6 +26,8 @@ public class WeaponBehavior : ItemBehavior
     [SerializeField] private float knockback;
     [SerializeField] private float reload;
 
+    [SerializeField] private string weaponType;
+
     // getters and setters
     public int getStrength()
     {
@@ -106,4 +108,9 @@ public class WeaponBehavior : ItemBehavior
         base.Update();
         startTime = Time.time;
     }
+
+    public string GetWeaponType()
+	{
+        return weaponType;
+	}
 }

@@ -123,6 +123,7 @@ MonoBehaviour:
   maxHealth: 0
   healthImage: {fileID: 4828594979632767038}
   active: 0
+  healthPoints: {fileID: 0}
 --- !u!1 &5806210373116962889
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,3 +510,4 @@ MonoBehaviour:
   item: {fileID: 3599189078228081255, guid: c8d582487d0ab3b4588ac00c3c02a9d1, type: 3}
   health: 3
   maxHealth: 3
+  ToolRequired: Axe

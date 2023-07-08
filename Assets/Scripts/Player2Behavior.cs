@@ -308,7 +308,7 @@ public class Player2Behavior : NetworkBehaviour
 					}
 					
 				}
-				if (Input.GetMouseButtonDown(0))
+				if (Input.GetMouseButton(0))
 				{
 					if (!menuOpen)
 					{
@@ -319,44 +319,6 @@ public class Player2Behavior : NetworkBehaviour
 				TimeLeft -= Time.deltaTime;
 				updateTime(TimeLeft);
 			}
-			//// check if interacting with craftingtable
-			//if (!craftingEnabled)
-			//{
-			//    RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-			//    if (hit.collider != null && hit.collider.tag == "CraftingObject")
-			//    {
-			//        if (Vector3.Distance(hit.collider.gameObject.transform.position, transform.position) <= 4)
-			//        {
-			//            Debug.Log("Right clicked crafting table, opening menu");
-			//            // adjust position and size of inventory
-			//            InventoryUI.transform.localScale = new Vector3(.8f, .8f, .8f);
-			//            InventoryUI.transform.position = new Vector3(InventoryUI.transform.position.x - 450, InventoryUI.transform.position.y, InventoryUI.transform.position.z);
-			//            // open crafting
-			//            CraftingUI.transform.localScale = new Vector3(1, 1, 1);
-			//            // close hotbar and equip 
-			//            HotbarUI.transform.localScale = new Vector3(0, 0, 0);
-			//            EquipUI.transform.localScale = new Vector3(0, 0, 0);
-			//            inventoryEnabled = true;
-			//            craftingEnabled = true;
-			//            menuOpen = true;
-			//            playerInventory.inventoryTransferEnabled(true, true);
-			//            OnMenuOpenUpdated.Invoke();
-			//        }
-			//        else
-			//        {
-			//            Debug.Log("too far from crafting table");
-			//        }
-			//    }
-			//    // not interacting with crafting table or any menus and rightclicking nothing
-			//    else if (!menuOpen)
-			//    {
-			//        playerInventory.useHotbarItem(currHotbarSelected, GetComponent<Player2Behavior>(), "right");
-			//    }
-			//}
-			//else
-			//{
-			//    //Debug.Log("Crafting table already open");
-			//}
 			// close ui menus if they're open
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
@@ -575,7 +537,7 @@ public class Player2Behavior : NetworkBehaviour
 			}
 		}
 
-		if (collision.CompareTag("Weapon"))
+		if (collision.CompareTag("Weapon") || collision.CompareTag("Tool"))
 		{
 			if (collision.gameObject.GetComponent<WeaponBehavior>() != null)
 			{

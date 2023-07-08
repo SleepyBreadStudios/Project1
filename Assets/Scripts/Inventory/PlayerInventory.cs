@@ -302,7 +302,15 @@ public class PlayerInventory : PlayerItemManager
 
     public string fetchHotbarItem(int currHotbarSelected)
     {
-        Debug.Log(inventory[currHotbarSelected].GetItemName());
+        if (currHotbarSelected == 0)
+        {
+            currHotbarSelected = 9;
+        }
+        else
+        {
+            currHotbarSelected--;
+        }
+        //Debug.Log(inventory[currHotbarSelected].GetItemName());
         return inventory[currHotbarSelected].GetItemName();
     }
 

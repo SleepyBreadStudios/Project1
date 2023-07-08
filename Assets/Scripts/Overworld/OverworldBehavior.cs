@@ -26,6 +26,9 @@ public class OverworldBehavior : NetworkBehaviour
     [SerializeField]
     private float maxHealth;
 
+    [SerializeField]
+    private string ToolRequired = "";
+
     public GameObject GetItem()
     {
         return item;
@@ -54,7 +57,7 @@ public class OverworldBehavior : NetworkBehaviour
     public IEnumerator Regenerate() 
     {
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
         isBeingAttacked = false;
         if (health < maxHealth) {
             health = maxHealth;
@@ -74,10 +77,12 @@ public class OverworldBehavior : NetworkBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("PlayerProjectile") ||
-            other.gameObject.CompareTag("Weapon") || other.gameObject.CompareTag("Projectile"))
+        if (other.gameObject.CompareTag("Tool"))
         {
-            DamageServerRpc();
+            if(other.gameObject.GetComponent<WeaponBehavior>().GetWeaponType() == ToolRequired)
+			{
+                DamageServerRpc();
+            }
         }
     }
 
