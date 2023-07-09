@@ -16,7 +16,6 @@ using System.Collections.Generic;
 
 public class Player2Behavior : NetworkBehaviour
 {
-
 	//player stats
 	#region
 	[SerializeField]
@@ -92,6 +91,8 @@ public class Player2Behavior : NetworkBehaviour
 
 	private bool isDead = false;
 
+	private bool isMoving = true;
+
 	private Vector3 originalInvPos = new Vector3(0, 0, 0);
 
 	// client caches positions
@@ -143,6 +144,7 @@ public class Player2Behavior : NetworkBehaviour
 		}
 		healthBar.SetHealth(playerHealth);
 		maxHealth = playerHealth;
+
 	}
 
 	public override void OnNetworkSpawn()
@@ -188,7 +190,7 @@ public class Player2Behavior : NetworkBehaviour
 				// Resetting rsepawn conditions
 				RespawnUI.SetActive(false);
 				TimeLeft = 4.0f;
-				
+
 				if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
 				{
 					forwardBackward += walkSpeed;
@@ -566,6 +568,8 @@ public class Player2Behavior : NetworkBehaviour
 			}
 		}
 	}
+
+
 
 	public void Flip(bool check)
 	{

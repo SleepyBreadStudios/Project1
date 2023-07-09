@@ -18,6 +18,7 @@ TagManager:
   - Pond
   - Mob
   - Tool
+  - Forest
   layers:
   - Default
   - TransparentFX
