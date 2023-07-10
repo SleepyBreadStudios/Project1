@@ -20,6 +20,7 @@ TagManager:
   - Tool
   - Forest
   - Wall
+  - UI
   layers:
   - Default
   - TransparentFX

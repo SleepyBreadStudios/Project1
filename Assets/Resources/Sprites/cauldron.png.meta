@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: 1b9898c86f354b94f80f2b8bdf2f84b2
+guid: bfd3d42a3808047478b3a7f3b6fc3e6d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 91296281568634548
-    second: gentle trees 80x96 v01_0
+      213: 5995131313967039915
+    second: cauldron_0
+  - first:
+      213: 5972536094127468480
+    second: cauldron_1
+  - first:
+      213: 2980815869077768690
+    second: cauldron_2
+  - first:
+      213: 2410794038291087095
+    second: cauldron_3
+  - first:
+      213: -5543641126295464005
+    second: cauldron_4
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -37,7 +49,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 20
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +87,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -122,13 +134,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: gentle trees 80x96 v01_0
+      name: cauldron_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 2
-        width: 160
-        height: 94
+        y: 0
+        width: 30
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -136,8 +148,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4b666300c79544100800000000000000
-      internalID: 91296281568634548
+      spriteID: ba583de9a2cf23350800000000000000
+      internalID: 5995131313967039915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cauldron_1
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 0
+        width: 30
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cfaaaa0fe5b2e250800000000000000
+      internalID: 5972536094127468480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cauldron_2
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 0
+        width: 31
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f94a396d3cfd5920800000000000000
+      internalID: 2980815869077768690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cauldron_3
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fe38f6a76cd47120800000000000000
+      internalID: 2410794038291087095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cauldron_4
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 30
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb799e064c70113b0800000000000000
+      internalID: -5543641126295464005
       vertices: []
       indices: 
       edges: []
@@ -153,7 +249,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      gentle trees 80x96 v01_0: 91296281568634548
+      cauldron_0: 5995131313967039915
+      cauldron_1: 5972536094127468480
+      cauldron_2: 2980815869077768690
+      cauldron_3: 2410794038291087095
+      cauldron_4: -5543641126295464005
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
