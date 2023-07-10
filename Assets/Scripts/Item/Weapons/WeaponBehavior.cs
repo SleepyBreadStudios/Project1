@@ -85,7 +85,7 @@ public class WeaponBehavior : ItemBehavior
             var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(weaponActive.transform.position);
             var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             weaponActive.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            weaponActive.transform.Translate(startX, startY, 0);
+            weaponActive.transform.Translate(startX + (float) 0.25, startY, 0);
             weaponActive.transform.parent = playerBehavior.transform;
 
             if (weaponActive.GetComponent<WeaponBehavior>() != null)

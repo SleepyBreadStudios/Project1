@@ -16,6 +16,8 @@ using System.Collections.Generic;
 
 public class Player2Behavior : NetworkBehaviour
 {
+
+	private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
 	//player stats
 	#region
 	[SerializeField]
@@ -115,6 +117,7 @@ public class Player2Behavior : NetworkBehaviour
 
 	void Start()
 	{
+
 		// transform.position = new Vector3(Random.Range(defaultPositionRange.x, defaultPositionRange.y), 0,
 		//       Random.Range(defaultPositionRange.x, defaultPositionRange.y));
 		transform.position = new Vector3(0, 0, 0);
@@ -566,6 +569,11 @@ public class Player2Behavior : NetworkBehaviour
 				// projectile
 				DamagePlayer(collision.gameObject.GetComponent<ProjectileBehavior>().getStrength());
 			}
+		}
+
+		if (collision.CompareTag("Overworld"))
+		{
+
 		}
 	}
 
