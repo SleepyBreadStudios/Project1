@@ -16,11 +16,15 @@ using UnityEngine.UI;
 
 
 // consider making abstract
-public class EnemyBehavior : NetworkBehaviour
+public class CauldronBehavior : NetworkBehaviour
 {
     private string enemyName = null;
     public UnityEvent OnBegin, OnDone;
-    private bool doomed;
+    private List<GameObject> spawned;
+    private int previous;
+    private Animator animator;
+    private bool isSpawning;
+
 
     [SerializeField]
     private Rigidbody2D rb;
@@ -59,46 +63,14 @@ public class EnemyBehavior : NetworkBehaviour
     [SerializeField]
     HealthBar healthBar;
 
-    // getter method
-    public string getName()
-    {
-        return enemyName;
-    }
+    [SerializeField]
+    private GameObject pumpkin;
 
-    public int getHealth()
-    {
-        return health;
-    }
+    [SerializeField]
+    private GameObject apple;
 
-    // public ItemData getDrop()
-    // {
-    //     return item;
-    // }
-
-    public int getSpeed()
-    {
-        return speed;
-    }
-
-    public int getStrength()
-    {
-        return strength;
-    }
-
-    public int getDefense()
-    {
-        return defense;
-    }
-
-    public float getAggroRange()
-    {
-        return aggroRange;
-    }
-
-    public bool getDoomed()
-    {
-        return doomed;
-    }
+    [SerializeField]
+    private GameObject carrot;
 
     public void Delete()
     {
@@ -131,31 +103,44 @@ public class EnemyBehavior : NetworkBehaviour
     void Start()
     {
         healthBar.SetHealth(maxHealth);
-        doomed = false;
         LoadServerRpc();
+        spawned = new List<GameObject>();
+        animator = gameObject.GetComponent<Animator>();
+        isSpawning = false;
+        InvokeRepeating("SpawnEnemies", 0.0f, 5.0f);
     }
 
     void Update()
     {
         //StartCoroutine(RegenerateTest());
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Weapon"))
+        foreach (GameObject e in spawned)
         {
-            WeaponBehavior weaponBehavior = other.gameObject.GetComponent<WeaponBehavior>();
-            if (weaponBehavior != null)
+            if (e.GetComponent<EnemyBehavior>() != null)
             {
-                DamageServerRpc(weaponBehavior.getStrength());
-                KnockbackServerRpc(other.transform.position, weaponBehavior.getKnockback());
+                if (e.GetComponent<EnemyBehavior>().getDoomed())
+                {
+                    DamageServerRpc(1);
+                }
             }
         }
-        else if (other.gameObject.CompareTag("PlayerProjectile"))
+    }
+
+    public void SpawnEnemies()
+    {
+        if (!isSpawning)
         {
-            if (other.gameObject.GetComponent<ProjectileBehavior>() != null)
+            if (GameObject.FindWithTag("Player") != null)
             {
-                DamageServerRpc(other.gameObject.GetComponent<ProjectileBehavior>().getStrength());
+                GameObject[] playerLoc = GameObject.FindGameObjectsWithTag("Player");
+                foreach (GameObject player in playerLoc)
+                {
+                    Vector2 loc = player.transform.position;
+                    if (Vector2.Distance(transform.position, loc) < aggroRange)
+                    {
+                        isSpawning = true;
+                        animator.SetTrigger("pew");
+                    }
+                }
             }
         }
     }
@@ -176,7 +161,12 @@ public class EnemyBehavior : NetworkBehaviour
         healthBar.UpdateHealth(health);
         if (health <= 0)
         {
-            doomed = true;
+            animator.SetTrigger("death");
+            foreach (GameObject e in spawned)
+            {
+                e.GetComponent<NetworkObject>().Despawn(true);
+                Destroy(e);
+            }
             ItemDrop();
             GetComponent<NetworkObject>().Despawn(true);
         }
@@ -192,6 +182,31 @@ public class EnemyBehavior : NetworkBehaviour
         StartCoroutine(ResetKB());
     }
 
+    [ServerRpc]
+    public void SpawnServerRpc()
+    {
+        GameObject e = null;
+        Vector2 loc = transform.position;
+        Vector2 randomLoc = new Vector2(loc.x + Random.Range(0.5f, 2.0f), loc.y + Random.Range(0.5f, 2.0f));
+        int rand = Random.Range(1, 4);
+        if (rand == 1)
+        {
+            e = Instantiate(pumpkin, randomLoc, Quaternion.identity);
+        }
+        else if (rand == 2)
+        {
+            e = Instantiate(apple, randomLoc, Quaternion.identity);
+        }
+        else if (rand == 3)
+        {
+            e = Instantiate(carrot, randomLoc, Quaternion.identity);
+        }
+
+        // IMPORTANT: get network to recognize object
+        e.GetComponent<NetworkObject>().Spawn(true);
+        spawned.Add(e);
+    }
+
     private IEnumerator ResetKB()
     {
         yield return new WaitForSeconds(0.15f);
@@ -202,6 +217,12 @@ public class EnemyBehavior : NetworkBehaviour
     public override void OnNetworkDespawn()
     {
         Destroy(gameObject);
+    }
+
+    public void PewFinish()
+    {
+        isSpawning = false;
+        animator.ResetTrigger("pew");
     }
 
     // IEnumerator RegenerateTest() {
