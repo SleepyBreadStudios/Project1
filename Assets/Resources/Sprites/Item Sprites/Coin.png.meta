@@ -98,6 +98,7 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+<<<<<<< HEAD
   - serializedVersion: 3
     buildTarget: Server
     maxTextureSize: 2048
@@ -122,6 +123,8 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+=======
+>>>>>>> 342714c2c178e3acea850c53ba2746aabc0a0cc6
   spriteSheet:
     serializedVersion: 2
     sprites: []

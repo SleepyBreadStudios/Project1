@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Prefabs/Enemies/Carrot.prefab.meta
 guid: 53e20e3d1a2372441b56b861a1fd6cc2
+========
+guid: f1af43fef24478e46b9fed3682e86277
+>>>>>>>> 342714c2c178e3acea850c53ba2746aabc0a0cc6:Assets/Resources/Prefabs/Items/Heartberry.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

@@ -1,8 +1,15 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Animation/Carrot.controller.meta
 guid: 6dfb60e7bf658d8428b371cd3772792c
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 9100000
+========
+guid: 94564404ebdb03a4fa515543dc7b02c8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+>>>>>>>> 342714c2c178e3acea850c53ba2746aabc0a0cc6:Assets/Resources/Item Scriptables/Heartberry.asset.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

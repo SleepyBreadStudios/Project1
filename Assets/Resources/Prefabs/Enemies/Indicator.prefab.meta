@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Prefabs/Enemies/Indicator.prefab.meta
 guid: 460e052072729aa4d9e0d230efd4f5f4
+========
+guid: 140529172841a394c8ea5b410873a264
+>>>>>>>> 342714c2c178e3acea850c53ba2746aabc0a0cc6:Assets/Resources/Prefabs/Items/Stone.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
