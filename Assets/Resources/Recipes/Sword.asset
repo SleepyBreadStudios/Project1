@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fd869100de05f40ac51990b5bed79f, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  recipeContents: WoodDiamond
+  recipeContents: WoodStoneStone
   recipeList:
   - Wood
-  - Diamond
+  - Stone
+  - Stone
   craftedItem: {fileID: 11400000, guid: 8f848d1864c1c714e80132f75615213d, type: 2}
-  numOfItems: 2
+  numOfItems: 3

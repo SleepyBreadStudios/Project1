@@ -59,6 +59,22 @@ public class HealthBar : MonoBehaviour
         }
     }
 
+    public void Heal(float healAmount)
+	{
+        if(currentHealth < maxHealth)
+		{
+            var newHealth = currentHealth + healAmount;
+            if(newHealth >= maxHealth)
+			{
+                currentHealth = maxHealth;
+			}
+            else
+			{
+                currentHealth = newHealth;
+			}
+		}
+	}
+
     public void Damage()
     {
         if(currentHealth > 0)

@@ -36,7 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 63
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &402814521929198275
 MonoBehaviour:
@@ -128,7 +128,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fbc009e50fe34b418631b3f89cf5811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 7626162337272567780, guid: 08e3be5067792a145a4dffd142ee8814, type: 3}
+  item: {fileID: 3135274733432999643, guid: f1af43fef24478e46b9fed3682e86277, type: 3}
   bushReady: {fileID: 21300000, guid: e8352c825069acc4f852995e5ab13e07, type: 3}
   bushHarvested: {fileID: 21300000, guid: 99c5a77765b787545ab8a86396646837, type: 3}
   spawnRadius: 0.8

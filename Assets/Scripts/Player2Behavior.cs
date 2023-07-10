@@ -19,7 +19,7 @@ public class Player2Behavior : NetworkBehaviour
 
 	private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
 	//player stats
-	#region
+	#region player stats
 	[SerializeField]
 	private float walkSpeed = 0.02f;
 	[SerializeField]
@@ -463,6 +463,20 @@ public class Player2Behavior : NetworkBehaviour
 	{
 		playerHealth++;
 		healthBar.Heal();
+	}
+
+	public void HealPlayer(float healAmount)
+	{
+		var newHealth = playerHealth + healAmount;
+		if(newHealth >= maxHealth)
+		{
+			playerHealth = maxHealth;
+		}
+		else
+		{
+			playerHealth = newHealth;
+		}
+		healthBar.Heal(healAmount);
 	}
 
 	public void DamagePlayer()

@@ -37,7 +37,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2087789181824075882
 SpriteRenderer:
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f81c0f5b0dcfe5747a8a78c8dd2a49f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 4730441561702616771, guid: 829de7c6c53dcb649b6be0dc9e1925f3, type: 3}
+  item: {fileID: 362871707719027167, guid: 140529172841a394c8ea5b410873a264, type: 3}
   health: 5
   maxHealth: 5
   ToolRequired: Pickaxe

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1b9898c86f354b94f80f2b8bdf2f84b2
+guid: 85736336903512e45a6a29862058f8f7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 91296281568634548
-    second: gentle trees 80x96 v01_0
+      213: -8962799312905799938
+    second: heartberry_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 10
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -98,13 +98,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: gentle trees 80x96 v01_0
+      name: heartberry_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 2
-        width: 160
-        height: 94
+        y: 0
+        width: 11
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,8 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4b666300c79544100800000000000000
-      internalID: 91296281568634548
+      spriteID: ef67229038dbd9380800000000000000
+      internalID: -8962799312905799938
       vertices: []
       indices: 
       edges: []
@@ -129,7 +129,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      gentle trees 80x96 v01_0: 91296281568634548
+      heartberry_0: -8962799312905799938
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

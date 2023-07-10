@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
-  m_Name: Fish
+  m_Name: Heartberry
   m_EditorClassIdentifier: 
-  itemName: Fish
-  icon: {fileID: 21300000, guid: 78040fcc3a5ca0646b20e131d68b3660, type: 3}
+  itemName: Heartberry
+  icon: {fileID: -8962799312905799938, guid: 85736336903512e45a6a29862058f8f7, type: 3}
   count: 1
   maxStack: 99
   startingCondition: 100
   unique: 0
-  itemBehavior: {fileID: 3985703394864266806, guid: 26e6990da07bfa641b0b9373b8a313ba, type: 3}
+  itemBehavior: {fileID: 2659520249460144726, guid: f1af43fef24478e46b9fed3682e86277, type: 3}
   equipType: 
   defense: 0
