@@ -221,3 +221,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: {fileID: 11400000, guid: 78b9e62d30206c3459296771a86fdee2, type: 2}
   leftOrRight: right
+  AmountToHeal: 4

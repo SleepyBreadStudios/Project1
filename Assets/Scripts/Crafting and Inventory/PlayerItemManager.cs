@@ -394,6 +394,11 @@ public class ItemSlot
 
     public int GetDurability()
     {
+        if(itemBehavior == null)
+		{
+            // fix this
+            return 100;
+		}
         int durability = itemBehavior.GetDurability();
         if (durability <= 0)
         {

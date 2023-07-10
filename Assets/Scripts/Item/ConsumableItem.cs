@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class ConsumableItem : ItemBehavior
 {
+    [SerializeField]
+    private float AmountToHeal;
 
     public override string GetItemEffect(Player2Behavior playerBehavior)
     {
         Debug.Log("Attempting to use a consumable item");
         // for testing health potion rn
-        playerBehavior.HealPlayer();
+        playerBehavior.HealPlayer(AmountToHeal);
         // tell inventory to consume item on use
         return "Consumable";
     }
