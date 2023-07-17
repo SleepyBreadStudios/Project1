@@ -219,6 +219,7 @@ MonoBehaviour:
   itemIconImage: {fileID: 5755623834325375636}
   SlotType: 
   crafting: {fileID: 0}
+  inventory: {fileID: 0}
   itemQuantityText: {fileID: 8604291261751818926}
 --- !u!222 &7926925579953269427
 CanvasRenderer:
@@ -271,7 +272,7 @@ GameObject:
   - component: {fileID: 5755623834325375636}
   - component: {fileID: 8353952230996247879}
   - component: {fileID: 7676041183431655309}
-  - component: {fileID: 2582512859035846073}
+  - component: {fileID: 6013047083580024521}
   m_Layer: 0
   m_Name: IconImage
   m_TagString: Untagged
@@ -370,7 +371,7 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &2582512859035846073
+--- !u!114 &6013047083580024521
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -379,7 +380,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8881831925620664976}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 901cf697b174ddc4c958a6961dc494fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 81fb72e4585b2ea44b81bfcd242e1a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemSlotUI: {fileID: 51881576596004030}
+  onMouseStartHoverItem: {fileID: 11400000, guid: 1741650416e3d5b41b25f41a1168cbc1, type: 2}
+  onMouseEndHoverItem: {fileID: 11400000, guid: e8e08c3a8e3c9ef4987322fb04861c1a, type: 2}

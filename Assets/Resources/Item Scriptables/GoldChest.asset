@@ -23,4 +23,4 @@ MonoBehaviour:
   equipType: Chest
   defense: 5
   useText: Equip for 5 defense
-  itemDescription: default item - no description yet
+  itemDescription: Shiny chest

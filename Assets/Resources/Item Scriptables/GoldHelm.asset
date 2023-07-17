@@ -23,4 +23,4 @@ MonoBehaviour:
   equipType: Head
   defense: 3
   useText: Equip for 3 defense
-  itemDescription: default item - no description yet
+  itemDescription: Shiny hat
