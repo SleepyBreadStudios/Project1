@@ -26,6 +26,10 @@ public class ProjectileBehavior : NetworkBehaviour
     [SerializeField]
     private string target;
 
+    [SerializeField]
+    // set to null or 0 for infinite projectiles
+    private float lifetime;
+
     // [SerializeField]
     // private string target2;
 
@@ -38,6 +42,15 @@ public class ProjectileBehavior : NetworkBehaviour
         return strength;
     }
 
+    private void Start()
+    {
+        if (lifetime > 0)
+        {
+            
+            Destroy(gameObject, lifetime);
+        }
+    }
+
     void Update()
     {
         transform.position += transform.up * Time.deltaTime * speed;
@@ -48,7 +61,7 @@ public class ProjectileBehavior : NetworkBehaviour
 
         if (other.gameObject.CompareTag(target) || other.gameObject.CompareTag("Overworld"))
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 

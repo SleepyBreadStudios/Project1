@@ -113,6 +113,7 @@ public class CauldronBehavior : NetworkBehaviour
     void Update()
     {
         //StartCoroutine(RegenerateTest());
+        Debug.Log("List length: " + spawned.Count);
         foreach (GameObject e in spawned)
         {
             if (e.GetComponent<EnemyBehavior>() != null)
@@ -154,6 +155,7 @@ public class CauldronBehavior : NetworkBehaviour
     [ServerRpc]
     public void DamageServerRpc(int damage)
     {
+        Debug.Log("Taking " + damage + " damage");
         for (int i = 0; i < damage; i ++)
         {
             health--;
