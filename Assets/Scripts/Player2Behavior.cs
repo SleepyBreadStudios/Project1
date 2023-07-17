@@ -593,12 +593,20 @@ public class Player2Behavior : NetworkBehaviour
 		if (collision.CompareTag("Snow")) {
 			Debug.Log("SNOW SLOW");
 			walkSpeed = 0.01f;
-
+			StartCoroutine("SnowDOT");
 		}
 	}
 
+	// private void OnTriggerStay2D(Collider2D collider) 
+	// {
+	// 	if (collider.CompareTag("Snow")) {
+	// 		StartCoroutine("SnowDOT");
+	// 	}
+	// }
+
 	private void OnTriggerExit2D(Collider2D collider) {
 		walkSpeed = 0.02f; // Speed returns back to normal upon exiting snow
+		StopCoroutine("SnowDOT");
 	}
 
 
@@ -629,6 +637,13 @@ public class Player2Behavior : NetworkBehaviour
 		playerHealth = maxHealth;
 		healthBar.SetHealth(playerHealth);
 		StopCoroutine("Respawn");
+	}
+
+	IEnumerator SnowDOT()
+	{
+		yield return new WaitForSeconds(5.0f);
+		DamagePlayer(1);
+		StartCoroutine("SnowDOT");
 	}
 
 	// TESTING: Deactivates set of the player's UI including inventory, crafting, etc.
