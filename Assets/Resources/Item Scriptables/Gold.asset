@@ -13,9 +13,14 @@ MonoBehaviour:
   m_Name: Gold
   m_EditorClassIdentifier: 
   itemName: Gold
+  displayName: Gold
   icon: {fileID: 21300000, guid: d2c0dc76eca05bb4eb4f3fc4a37f258d, type: 3}
   count: 1
   maxStack: 1
   startingCondition: 100
   unique: 0
   itemBehavior: {fileID: 458378354425202369, guid: 08e3be5067792a145a4dffd142ee8814, type: 3}
+  equipType: 
+  defense: 0
+  useText: Crafting material
+  itemDescription: A shiny crafting material

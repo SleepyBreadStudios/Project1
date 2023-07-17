@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Heartberry
   m_EditorClassIdentifier: 
   itemName: Heartberry
+  displayName: Heartberry
   icon: {fileID: -8962799312905799938, guid: 85736336903512e45a6a29862058f8f7, type: 3}
   count: 1
   maxStack: 99
@@ -21,3 +22,5 @@ MonoBehaviour:
   itemBehavior: {fileID: 2659520249460144726, guid: f1af43fef24478e46b9fed3682e86277, type: 3}
   equipType: 
   defense: 0
+  useText: Restores 1 health to the player
+  itemDescription: a sweet berry to heal your soul

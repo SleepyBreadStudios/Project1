@@ -13,9 +13,14 @@ MonoBehaviour:
   m_Name: MagicEssence
   m_EditorClassIdentifier: 
   itemName: MagicEssence
+  displayName: Magic Essence
   icon: {fileID: 21300000, guid: 8a14f58b4b600a24ab3fcf9cb3bc82fb, type: 3}
   count: 1
   maxStack: 99
   startingCondition: 100
   unique: 0
   itemBehavior: {fileID: 3227364006791259837, guid: 1676b12460b37b344bd922c7eaafcd74, type: 3}
+  equipType: 
+  defense: 0
+  useText: Crafting material
+  itemDescription: The magic extracted from a soul

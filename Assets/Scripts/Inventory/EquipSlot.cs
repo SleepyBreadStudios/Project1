@@ -25,10 +25,11 @@ public class EquipSlot : ItemSlotUI, IDropHandler
     [SerializeField]
     private TextMeshProUGUI itemQuantityText = null;
 
-    //override HotbarItem SlotItem
-    //{
-    //    get { return ItemSlot.item; }
-    //}
+    public override ItemSlot SlotItem
+    {
+        get { return ItemSlot; }
+        set { }
+    }
 
     public ItemSlot ItemSlot => equipment.GetSlotByIndex(SlotIndex);
 
@@ -134,5 +135,6 @@ public class EquipSlot : ItemSlotUI, IDropHandler
     private void Awake()
     {
         SlotType = "EquipSlot";
+        //ItemSlot = equipment.GetSlotByIndex(SlotIndex);
     }
 }

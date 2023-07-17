@@ -10,6 +10,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text;
 using System.Linq;
 
 public abstract class PlayerItemManager : MonoBehaviour
@@ -285,6 +286,20 @@ public class ItemSlot
             return "";
         }
     }
+
+    public string GetItemDisplayName()
+	{
+        return item.GetDisplayName();
+	}
+
+    public string GetInfoDisplayText()
+	{
+        StringBuilder builder = new StringBuilder();
+
+        builder.Append("<color=green>Use: ").Append(item.GetUseText()).Append("</color>").AppendLine();
+        builder.Append(item.GetItemDesc());
+        return builder.ToString();
+	}
 
     public int GetMaxStack()
     {

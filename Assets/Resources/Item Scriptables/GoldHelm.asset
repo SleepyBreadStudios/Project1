@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GoldHelm
   m_EditorClassIdentifier: 
   itemName: GoldHelm
+  displayName: Gold Helmet
   icon: {fileID: 21300000, guid: b0538623dfb03c44395a4e6887e3638f, type: 3}
   count: 1
   maxStack: 1
@@ -21,3 +22,5 @@ MonoBehaviour:
   itemBehavior: {fileID: 1744472342479635797, guid: 89d1f030a1cc6e246b5eaa4368c1e95b, type: 3}
   equipType: Head
   defense: 3
+  useText: Equip for 3 defense
+  itemDescription: default item - no description yet

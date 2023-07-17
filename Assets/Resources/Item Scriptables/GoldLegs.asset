@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GoldLegs
   m_EditorClassIdentifier: 
   itemName: GoldLegs
+  displayName: Gold Legs
   icon: {fileID: 21300000, guid: fa9f3bd4fe56f314480b7ad5014459fb, type: 3}
   count: 1
   maxStack: 1
@@ -21,3 +22,5 @@ MonoBehaviour:
   itemBehavior: {fileID: 2080287421719423958, guid: 8e82fd341741d404391cef061c4deccb, type: 3}
   equipType: Leg
   defense: 4
+  useText: Equip for 4 defense
+  itemDescription: default item - no description yet

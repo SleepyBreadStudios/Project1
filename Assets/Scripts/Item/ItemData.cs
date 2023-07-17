@@ -16,6 +16,9 @@ public class ItemData : ScriptableObject
     private string itemName = null;
 
     [SerializeField]
+    private string displayName = null;
+
+    [SerializeField]
     public Sprite icon = null;
 
     // for if an item drops as multiple
@@ -44,7 +47,13 @@ public class ItemData : ScriptableObject
 
     [SerializeField]
     private float defense;
-    
+
+    [SerializeField]
+    private string useText = "none";
+
+    [SerializeField]
+    private string itemDescription = "default item - no description yet";
+
     // getter method
     public string GetName()
     {
@@ -80,4 +89,19 @@ public class ItemData : ScriptableObject
     {
         return startingCondition;
     }
+
+    public string GetUseText()
+	{
+        return useText;
+	}
+
+    public string GetItemDesc()
+	{
+        return itemDescription;
+	}
+
+    public string GetDisplayName()
+	{
+        return displayName;
+	}
 }

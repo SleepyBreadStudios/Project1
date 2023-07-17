@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: 
   itemName: Axe
+  displayName: Axe
   icon: {fileID: 21300000, guid: 88c6f7a94efba594c86429bbbbbdca3a, type: 3}
   count: 1
   maxStack: 1
@@ -21,3 +22,5 @@ MonoBehaviour:
   itemBehavior: {fileID: 3328069391896398731, guid: bcb3e652d80186747a36f74faac6c5fb, type: 3}
   equipType: 
   defense: 0
+  useText: Swing to break trees
+  itemDescription: Live out your lumberjack dreams

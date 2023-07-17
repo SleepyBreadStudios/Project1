@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SporeChest
   m_EditorClassIdentifier: 
   itemName: SporeChest
+  displayName: Mushroom Bowtie
   icon: {fileID: 21300000, guid: 261ff99de378ad84daab584d11cd5b56, type: 3}
   count: 1
   maxStack: 1
@@ -21,3 +22,5 @@ MonoBehaviour:
   itemBehavior: {fileID: 7432340853674103563, guid: c50e4de7aec7c0f41944619a3eac576e, type: 3}
   equipType: Chest
   defense: 3
+  useText: Equip to gain 3 defense
+  itemDescription: The fanciness of this bowtie makes you feel extra protected

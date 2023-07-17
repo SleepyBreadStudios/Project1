@@ -9,7 +9,9 @@ public class ConsumableItem : ItemBehavior
 
     public override string GetItemEffect(Player2Behavior playerBehavior)
     {
+#if Debug
         Debug.Log("Attempting to use a consumable item");
+#endif
         // for testing health potion rn
         playerBehavior.HealPlayer(AmountToHeal);
         // tell inventory to consume item on use

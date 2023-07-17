@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ring
   m_EditorClassIdentifier: 
   itemName: Ring
+  displayName: Ring
   icon: {fileID: 21300000, guid: ec3f5c9d06947e7458e9626551938feb, type: 3}
   count: 1
   maxStack: 1
@@ -21,3 +22,6 @@ MonoBehaviour:
   itemBehavior: {fileID: 6532133295205337323, guid: 4afd4258eac1fa44dabeea5129d7254a, type: 3}
   equipType: Accessory
   defense: 1
+  useText: Equip to gain 1 defense
+  itemDescription: Protects your singular finger from damage, but any protection
+    helps

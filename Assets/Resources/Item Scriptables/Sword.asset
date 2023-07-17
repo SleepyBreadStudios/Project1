@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   itemName: Sword
+  displayName: Sword
   icon: {fileID: 21300000, guid: aafe7d1ded081d34da09de2b11303291, type: 3}
   count: 1
   maxStack: 1
@@ -20,3 +21,7 @@ MonoBehaviour:
   unique: 0
   itemBehavior: {fileID: 5732627154995292706, guid: 4e2d3020f127de84c993c5393deb267f, type: 3}
   equipType: 
+  defense: 0
+  useText: Swing to deal damage
+  itemDescription: An obstacle remover, annoyance eraser, and all around fun thing
+    to swing.

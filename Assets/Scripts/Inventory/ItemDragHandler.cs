@@ -4,16 +4,19 @@
  * Authors: Alicia T, Jason N, Jino C
  *****************************************************************************/
 
+using DapperDino.Events.CustomEvents;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(CanvasGroup))]
-public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler, IPointerExitHandler
+public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler, IPointerExitHandler, IPointerEnterHandler
 {
     [SerializeField]
     protected ItemSlotUI itemSlotUI = null;
+    [SerializeField] protected HoverItemEvent onMouseStartHoverItem = null;
+    [SerializeField] protected VoidEvent onMouseEndHoverItem = null;
 
     private CanvasGroup canvasGroup = null;
     private Transform originalParent = null;
@@ -32,6 +35,7 @@ public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
         if(isHovering)
         {
             // raise event
+            onMouseEndHoverItem.Raise();
             isHovering = false;
         }
     }
@@ -85,15 +89,19 @@ public class ItemDragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
         }
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public virtual void OnPointerEnter(PointerEventData eventData)
     {
         // raise event
+        //Debug.Log("Hovering!");
+        onMouseStartHoverItem.Raise(ItemSlotUI.SlotItem);
         isHovering = true;
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public virtual void OnPointerExit(PointerEventData eventData)
     {
         // raise event
+        //Debug.Log("Stopped hovering");
+        onMouseEndHoverItem.Raise();
         isHovering = false;
     }
 }

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Stone
   m_EditorClassIdentifier: 
   itemName: Stone
+  displayName: Rock
   icon: {fileID: 21300000, guid: 99bbc83bebbd36849b732a06e55ad60e, type: 3}
   count: 1
   maxStack: 99
@@ -21,3 +22,5 @@ MonoBehaviour:
   itemBehavior: {fileID: 5137949135195844542, guid: 140529172841a394c8ea5b410873a264, type: 3}
   equipType: 
   defense: 0
+  useText: Crafting material
+  itemDescription: A rock.

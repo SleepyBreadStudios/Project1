@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SporeHelm
   m_EditorClassIdentifier: 
   itemName: SporeHelm
+  displayName: Mushroom Hat
   icon: {fileID: 21300000, guid: b0538623dfb03c44395a4e6887e3638f, type: 3}
   count: 1
   maxStack: 1
@@ -21,3 +22,5 @@ MonoBehaviour:
   itemBehavior: {fileID: 7090151288004344192, guid: 1e141fe8052d3e0438d38b8d836e78d5, type: 3}
   equipType: Head
   defense: 1
+  useText: Equip to gain 1 defense
+  itemDescription: Spongy hat to keep your noggin safe

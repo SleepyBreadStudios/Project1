@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Pickaxe
   m_EditorClassIdentifier: 
   itemName: StonePickaxe
+  displayName: Pickaxe
   icon: {fileID: 21300000, guid: 1172dd6a6479f594aaabb493e03637ca, type: 3}
   count: 1
   maxStack: 1
@@ -21,3 +22,5 @@ MonoBehaviour:
   itemBehavior: {fileID: 7629159985579803037, guid: db28a789044d30b43ad26919efd9a4ef, type: 3}
   equipType: 
   defense: 0
+  useText: Swing to break rocks
+  itemDescription: For breaking rocks not hearts :)

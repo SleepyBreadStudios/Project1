@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GoldSword
   m_EditorClassIdentifier: 
   itemName: GoldSword
+  displayName: Gold Sword
   icon: {fileID: 21300000, guid: e2cd34a762609d648881cf7268bb5324, type: 3}
   count: 1
   maxStack: 1
@@ -21,3 +22,5 @@ MonoBehaviour:
   itemBehavior: {fileID: 7543494692277857403, guid: 343c77d78153483479f12f49633d8c7f, type: 3}
   equipType: 
   defense: 0
+  useText: Swing to deal damage
+  itemDescription: Like a regular sword but shinier and somehow hits harder

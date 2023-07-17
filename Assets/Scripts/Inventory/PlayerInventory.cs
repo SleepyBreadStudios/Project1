@@ -267,7 +267,9 @@ public class PlayerInventory : PlayerItemManager
 
         if(inventory[currHotbarSelected].item == null || lor != inventory[currHotbarSelected].itemBehavior.leftOrRight)
         {
+#if Debug
             Debug.Log("Hotbar slot empty, it's an item that doesn't do anything, or clicked wrong interact button");
+#endif
             return;
         }
         else
@@ -321,7 +323,7 @@ public class PlayerInventory : PlayerItemManager
         currHotbarNum = currHotbarSelected;
         OnHotbarUpdated.Invoke();
     }
-    #endregion
+#endregion
 
     // called by player behavior
     public void inventoryTransferEnabled(bool inventory, bool crafting)

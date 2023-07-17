@@ -19,8 +19,10 @@ public abstract class ItemSlotUI : MonoBehaviour, IDropHandler
 
     public string SlotType;
 
-    //public abstract HotbarItem SlotItem { get; set; }
+    public abstract ItemSlot SlotItem { get; set; }
 
+    //public ItemSlot ItemSlot = null;
+    
     private void OnEnable()
     {
         UpdateSlotUI();

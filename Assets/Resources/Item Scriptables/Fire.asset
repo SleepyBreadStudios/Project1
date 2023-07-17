@@ -13,9 +13,14 @@ MonoBehaviour:
   m_Name: Fire
   m_EditorClassIdentifier: 
   itemName: Fire
+  displayName: Fire
   icon: {fileID: 21300000, guid: 80e159dab3e6f1142bc5062eb184ccaf, type: 3}
   count: 1
   maxStack: 9
   startingCondition: 100
   unique: 0
   itemBehavior: {fileID: 2413786390355093075, guid: 0cdf3919ff7fcfe4ead4d01200196704, type: 3}
+  equipType: 
+  defense: 0
+  useText: Crafting material
+  itemDescription: Hot!

@@ -22,10 +22,11 @@ public class CraftingResultSlot : ItemSlotUI, IDropHandler
     [SerializeField]
     private TextMeshProUGUI itemQuantityText = null;
 
-    //override HotbarItem SlotItem
-    //{
-    //    get { return ItemSlot.item; }
-    //}
+    public override ItemSlot SlotItem
+    {
+        get { return ItemSlot; }
+        set { }
+    }
 
     public ItemSlot ItemSlot => crafting.GetSlotByIndex(SlotIndex);
 

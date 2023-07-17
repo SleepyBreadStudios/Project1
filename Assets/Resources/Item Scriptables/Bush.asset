@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Bush
   m_EditorClassIdentifier: 
   itemName: Bush
+  displayName: Bush
   icon: {fileID: 21300000, guid: e8352c825069acc4f852995e5ab13e07, type: 3}
   count: 1
   maxStack: 99
@@ -21,3 +22,5 @@ MonoBehaviour:
   itemBehavior: {fileID: 0}
   equipType: 
   defense: 0
+  useText: none
+  itemDescription: default item - no description yet

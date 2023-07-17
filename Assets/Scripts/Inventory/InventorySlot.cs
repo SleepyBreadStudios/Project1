@@ -25,14 +25,15 @@ public class InventorySlot : ItemSlotUI, IDropHandler
     [SerializeField]
     private TextMeshProUGUI itemQuantityText = null;
 
-    //override HotbarItem SlotItem
-    //{
-    //    get { return ItemSlot.item; }
-    //}
+	public override ItemSlot SlotItem
+    {
+		get { return ItemSlot; }
+        set { }
+	}
 
-    public ItemSlot ItemSlot => inventory.GetSlotByIndex(SlotIndex);
+	public ItemSlot ItemSlot => inventory.GetSlotByIndex(SlotIndex);
 
-    public override void OnDrop(PointerEventData eventData)
+	public override void OnDrop(PointerEventData eventData)
     {
         ItemDragHandler itemDragHandler = eventData.pointerDrag.GetComponent<ItemDragHandler>();
 
@@ -136,8 +137,15 @@ public class InventorySlot : ItemSlotUI, IDropHandler
         inventory.DeleteFromInventory(slotIndex);
     }
 
+    //public override void OnDrop(PointerEventData eventData)
+    //{
+
+
+    //}
+
     private void Awake()
     {
         SlotType = "InventorySlot";
-    }
+        //ItemSlot => inventory.GetSlotByIndex(SlotIndex);
+}
 }
