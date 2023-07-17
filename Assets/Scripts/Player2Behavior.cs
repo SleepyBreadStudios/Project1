@@ -585,8 +585,14 @@ public class Player2Behavior : NetworkBehaviour
 			}
 		}
 
-		if (collision.CompareTag("Overworld"))
-		{
+		// if (collision.CompareTag("Overworld"))
+		// {
+
+		// }
+
+		if (collision.CompareTag("Snow")) {
+			Debug.Log("SNOW SLOW");
+			walkSpeed = 0.01f;
 
 		}
 	}

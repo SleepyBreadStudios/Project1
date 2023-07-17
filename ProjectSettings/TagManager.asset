@@ -21,6 +21,7 @@ TagManager:
   - Forest
   - Wall
   - UI
+  - Snow
   layers:
   - Default
   - TransparentFX
