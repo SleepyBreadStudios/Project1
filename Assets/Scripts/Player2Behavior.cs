@@ -597,6 +597,10 @@ public class Player2Behavior : NetworkBehaviour
 		}
 	}
 
+	private void OnTriggerExit2D(Collider2D collider) {
+		walkSpeed = 0.02f; // Speed returns back to normal upon exiting snow
+	}
+
 
 
 	public void Flip(bool check)
