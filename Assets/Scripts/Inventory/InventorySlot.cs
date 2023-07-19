@@ -86,6 +86,7 @@ public class InventorySlot : ItemSlotUI, IDropHandler
             {
                 // item successfully moved to crafting
                 // empty inventory slot
+                //Debug.Log("should be moved");
                 inventory.DeleteFromInventory(SlotIndex);
             }
         }

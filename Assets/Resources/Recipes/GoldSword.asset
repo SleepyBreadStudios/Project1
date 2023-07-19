@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fd869100de05f40ac51990b5bed79f, type: 3}
   m_Name: GoldSword
   m_EditorClassIdentifier: 
-  recipeContents: WoodGoldGold
-  recipeList:
-  - Wood
-  - Gold
-  - Gold
+  recipeContents: WoodGold
+  inspectorRecipeList:
+  - item: Wood
+    count: 1
+  - item: Gold
+    count: 3
   craftedItem: {fileID: 11400000, guid: d1801728cb0afd94285e82888daa8baf, type: 2}
-  numOfItems: 3
+  numOfItems: 2
+  recipeKeys: []

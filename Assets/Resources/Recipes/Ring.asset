@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fd869100de05f40ac51990b5bed79f, type: 3}
   m_Name: Ring
   m_EditorClassIdentifier: 
-  recipeContents: GoldGoldGoldDiamond
-  recipeList:
-  - Gold
-  - Gold
-  - Gold
-  - Diamond
+  recipeContents: GoldDiamond
+  inspectorRecipeList:
+  - item: Gold
+    count: 3
+  - item: Diamond
+    count: 1
   craftedItem: {fileID: 11400000, guid: 527668900423ec74a86a688bb8c242d1, type: 2}
-  numOfItems: 4
+  numOfItems: 2
+  recipeKeys: []

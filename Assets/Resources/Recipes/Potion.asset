@@ -12,11 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fd869100de05f40ac51990b5bed79f, type: 3}
   m_Name: Potion
   m_EditorClassIdentifier: 
-  recipeContents: MagicEssenceHeartberryFishFire
-  recipeList:
+  recipeContents: MagicEssenceHeartberryFish
+  inspectorRecipeList:
+  - item: MagicEssence
+    count: 1
+  - item: Heartberry
+    count: 2
+  - item: Fish
+    count: 1
+  craftedItem: {fileID: 11400000, guid: 78b9e62d30206c3459296771a86fdee2, type: 2}
+  numOfItems: 3
+  recipeKeys:
   - MagicEssence
   - Heartberry
   - Fish
-  - Fire
-  craftedItem: {fileID: 11400000, guid: 78b9e62d30206c3459296771a86fdee2, type: 2}
-  numOfItems: 4

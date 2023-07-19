@@ -20,11 +20,15 @@ public class CraftingInventoryManager : PlayerItemManager
     [SerializeField]
     private CraftingManager craftingManager = null;
 
+    [SerializeField]
+    public CraftingItem[] currentlyCraftingList = new CraftingItem[5] { null, null, null, null, null };
+
     //[SerializeField]
     //public ItemSlot resultSlot = null;
 
-    [SerializeField]
-    List<string> craftingStringForm = new();
+    //[SerializeField]
+    Dictionary<string, int> craftingStringForm = new();
+    //List<string> craftingStringForm = new();
 
     private int resultAmount = 0;
 
@@ -46,33 +50,34 @@ public class CraftingInventoryManager : PlayerItemManager
 
     public virtual void SplitStack(int slotIndex)
     {
-        Debug.Log("Attempting to split stack");
-        ItemSlot slot = inventory[slotIndex];
+        Debug.Log("Attempting to split crafting stack");
+        Debug.Log("Currently do not do this");
+        //ItemSlot slot = inventory[slotIndex];
         // if can hold another stack
-        if (!IsInventoryFull())
-        {
-            // halve the stack
-            int newStackCount = slot.HalveStack();
-            if (newStackCount == 0)
-            {
-                return;
-            }
-            // look for empty slot
-            var foundEmptySlot = inventory.Find(stackItem => stackItem.IsEmptySlot() == true);
-            if (foundEmptySlot != null)
-            {
-                // change first empty inventory slot to hold item picked up
-                foundEmptySlot.SetItemSlot(slot.item, newStackCount);
-                // tell slot what it's index is in the array
-                foundEmptySlot.SetSlotIndex(inventory.IndexOf(foundEmptySlot));
-                // account for new inventory size
-                currInventorySize++;
-                OnItemsUpdated.Invoke();
-                craftingStringForm.Add(slot.GetItemName());
-                AttemptToCraftItem();
-                // override this in crafting so that it updates the string form
-            }
-        }
+        //if (!IsInventoryFull())
+        //{
+        //    // halve the stack
+        //    int newStackCount = slot.HalveStack();
+        //    if (newStackCount == 0)
+        //    {
+        //        return;
+        //    }
+        //    // look for empty slot
+        //    var foundEmptySlot = inventory.Find(stackItem => stackItem.IsEmptySlot() == true);
+        //    if (foundEmptySlot != null)
+        //    {
+        //        // change first empty inventory slot to hold item picked up
+        //        foundEmptySlot.SetItemSlot(slot.item, newStackCount);
+        //        // tell slot what it's index is in the array
+        //        foundEmptySlot.SetSlotIndex(inventory.IndexOf(foundEmptySlot));
+        //        // account for new inventory size
+        //        currInventorySize++;
+        //        OnItemsUpdated.Invoke();
+        //        //craftingStringForm.Add(slot.GetItemName(), newStackCount);
+        //        AttemptToCraftItem();
+        //        // override this in crafting so that it updates the string form
+        //    }
+        //}
     }
 
     public override bool AddStack(ItemSlot itemSlot)
@@ -99,7 +104,9 @@ public class CraftingInventoryManager : PlayerItemManager
                         foundStack.AddToStack(count);
                         OnItemsUpdated.Invoke();
                         // don't need to add to crafting string if combining stacks
-                        //craftingStringForm.Add(itemSlot.GetItemName());
+                        // but update count for combined stack
+                        //craftingStringForm[itemSlot.GetItemName()] = foundStack.GetCurrStack();
+                        currentlyCraftingList[inventory.IndexOf(foundStack)].count = foundStack.GetCurrStack();
                         AttemptToCraftItem();
 #if Debug
                     Debug.Log("Successfully added item, inventory count now: " + currInventorySize);
@@ -114,6 +121,7 @@ public class CraftingInventoryManager : PlayerItemManager
 #endif
                         // add what fits
                         foundStack.AddToStack(remainingSpace);
+                        currentlyCraftingList[inventory.IndexOf(foundStack)].count = foundStack.GetCurrStack();
                         OnItemsUpdated.Invoke();
                         // then attempt to make a new stack with the rest
                         count -= remainingSpace;
@@ -133,7 +141,8 @@ public class CraftingInventoryManager : PlayerItemManager
                 // account for new inventory size
                 currInventorySize++;
                 OnItemsUpdated.Invoke();
-                craftingStringForm.Add(itemSlot.GetItemName());
+                //craftingStringForm.Add(itemSlot.GetItemName(), count);
+                currentlyCraftingList[inventory.IndexOf(foundEmptySlot)] = new CraftingItem(itemSlot.GetItemName(), count);
                 AttemptToCraftItem();
                 return true;
             }
@@ -163,6 +172,9 @@ public class CraftingInventoryManager : PlayerItemManager
                 {
                     // combine stacks
                     craftingSlot.AddToStack(inventorySlot.GetCurrStack());
+                    //craftingStringForm[inventorySlot.GetItemName()] = craftingSlot.GetCurrStack();
+                    currentlyCraftingList[craftingIndex].count = craftingSlot.GetCurrStack();
+                    AttemptToCraftItem();
 
                     // set inventory slot to an empty slot
                     // same as deleting basically
@@ -178,7 +190,7 @@ public class CraftingInventoryManager : PlayerItemManager
             }
             // prepare for swap
             // remove old item name from crafting
-            craftingStringForm.Remove(inventory[craftingIndex].GetItemName());
+            //craftingStringForm.Remove(inventory[craftingIndex].GetItemName());
         }
         else
         {
@@ -192,7 +204,10 @@ public class CraftingInventoryManager : PlayerItemManager
         // swap the slots 
         inventory[craftingIndex] = inventorySlot;
         // add to crafting string as well
-        craftingStringForm.Add(inventorySlot.GetItemName());
+        //craftingStringForm.Add(inventorySlot.GetItemName(), inventorySlot.GetCurrStack());
+        var v = currentlyCraftingList[craftingIndex];
+        v = null;
+        currentlyCraftingList[craftingIndex] = new CraftingItem(inventorySlot.GetItemName(), inventorySlot.GetCurrStack());
         // update player inventory
         playerInventory.AddSlotByRef(craftingSlot, inventoryIndex);
 
@@ -206,6 +221,25 @@ public class CraftingInventoryManager : PlayerItemManager
     public override void Swap(int indexOne, int indexTwo)
     {
         base.Swap(indexOne, indexTwo);
+        //var itemAtOne = currentlyCraftingList[indexOne];
+        //var itemAtTwo = currentlyCraftingList[indexTwo];
+        if(inventory[indexOne].IsEmptySlot())
+		{
+            currentlyCraftingList[indexOne] = new CraftingItem();
+        }
+        else
+		{
+            currentlyCraftingList[indexOne] = new CraftingItem(inventory[indexOne].GetItemName(), inventory[indexOne].GetCurrStack());
+        }
+        if(inventory[indexTwo].IsEmptySlot())
+		{
+            currentlyCraftingList[indexTwo] = new CraftingItem();
+        }
+        else
+		{
+            currentlyCraftingList[indexTwo] = new CraftingItem(inventory[indexTwo].GetItemName(), inventory[indexTwo].GetCurrStack());
+        }
+        
         AttemptToCraftItem();
     }
 
@@ -227,8 +261,10 @@ public class CraftingInventoryManager : PlayerItemManager
         Craft();
 
         // add to crafting string as well
-        craftingStringForm.Add(resultSlot.GetItemName());
+        //craftingStringForm.Add(resultSlot.GetItemName(), resultSlot.GetCurrStack());
+        currentlyCraftingList[craftingIndex] = new CraftingItem(resultSlot.GetItemName(), resultSlot.GetCurrStack());
         currInventorySize++;
+        AttemptToCraftItem();
 
         // update result slot with empty slot
         inventory[resultIndex] = new ItemSlot();
@@ -241,7 +277,12 @@ public class CraftingInventoryManager : PlayerItemManager
         // if slotIndex passed in is out of bounds
         if (slotIndex < 0 || slotIndex > inventory.Count - 1) { return; }
         // update crafting string to reflect removal
-        craftingStringForm.Remove(inventory[slotIndex].GetItemName());
+        //if(craftingStringForm)
+        //craftingStringForm.Remove(inventory[slotIndex].GetItemName());
+       // var itemToRemove = currentlyCraftingList.Single(craftingItem => craftingItem.index == slotIndex);
+        var v = currentlyCraftingList[slotIndex];
+        v = null;
+        currentlyCraftingList[slotIndex] = null;
         // delete as normal
         base.DeleteFromInventory(slotIndex);
         AttemptToCraftItem();
@@ -260,7 +301,8 @@ public class CraftingInventoryManager : PlayerItemManager
         // if it's not an empty item
         if(itemSlot.item != null)
         {
-            craftingStringForm.Add(itemSlot.GetItemName());
+            //craftingStringForm.Add(itemSlot.GetItemName(), itemSlot.GetCurrStack());
+            currentlyCraftingList[index] = (new CraftingItem(itemSlot.GetItemName(), itemSlot.GetCurrStack()));
         }
 
         AttemptToCraftItem();
@@ -268,7 +310,10 @@ public class CraftingInventoryManager : PlayerItemManager
 
     public void RemoveItemFromCrafting(int slotIndex)
     {
-        craftingStringForm.Remove(inventory[slotIndex].GetItemName());
+        var v = currentlyCraftingList[slotIndex];
+        v = null;
+        currentlyCraftingList[slotIndex] = v;
+        //craftingStringForm.Remove(inventory[slotIndex].GetItemName());
     }
 
     // every time crafting inventory is updated, check to see if we can make an item
@@ -280,19 +325,26 @@ public class CraftingInventoryManager : PlayerItemManager
         {
             return;
         }
-        Recipe recipe = craftingManager.Craft(craftingStringForm);
-        if(recipe != null)
+        // don't do anything if inventory is empty
+        if(currInventorySize < 1)
+		{
+            return;
+		}
+        var recipePlusCount = craftingManager.Craft(currentlyCraftingList);
+        if (recipePlusCount != null)
         {
-            int lowestCount = 100;
-            // have to check every slot due to being able to drag into any
-            for(int i = 0; i < maxInventorySize; i++)
-            {
-                if(!(inventory[i].IsEmptySlot()))
-                {
-                    if(inventory[i].GetCurrStack() < lowestCount)
-                        lowestCount = inventory[i].GetCurrStack();
-                }
-            }
+            Recipe recipe = recipePlusCount.Item1;
+            int lowestCount = recipePlusCount.Item2;
+            //int lowestCount = 100;
+            //// have to check every slot due to being able to drag into any
+            //for(int i = 0; i < maxInventorySize; i++)
+            //{
+            //    if(!(inventory[i].IsEmptySlot()))
+            //    {
+            //        if(inventory[i].GetCurrStack() < lowestCount)
+            //            lowestCount = inventory[i].GetCurrStack();
+            //    }
+            //}
             
             inventory[maxInventorySize - 1].SetItemSlot(recipe.GetCraftedItem(), lowestCount);
             inventory[maxInventorySize - 1].SetItemBehavior(recipe.GetCraftedItem().itemBehavior);
@@ -313,22 +365,61 @@ public class CraftingInventoryManager : PlayerItemManager
     // Officially craft by updating item stacks to reflect that they've been used
     public void Craft()
     {
+        Debug.Log("CRAFT");
         currentlyCrafting = true;
-        Recipe recipe = craftingManager.Craft(craftingStringForm);
+        var recipePlusCount = craftingManager.Craft(currentlyCraftingList);
+        Recipe recipe = recipePlusCount.Item1;
         for (int i = 0; i < recipe.GetNumItems(); i++)
         {
-            var foundItem = inventory.Find(itemSlot => itemSlot.GetItemName() == recipe.recipeList[i]);
-            //Debug.Log(foundItem.GetItemName());
-            if (foundItem != null)
-            {
-                //Debug.Log("Subtracting by " + resultAmount);
-                foundItem.SetCurrStack(foundItem.GetCurrStack() - resultAmount);
-                if (foundItem.IsEmptySlot())
+
+
+                var foundItem = inventory.Find(itemSlot => itemSlot.GetItemName() == recipe.recipeKeys[i]);
+                //Debug.Log(foundItem.GetItemName());
+                if (foundItem != null)
                 {
-                    DeleteFromInventory(inventory.IndexOf(foundItem));
+                    //Debug.Log("Subtracting by " + resultAmount);
+                    int subCount = recipe.recipeList[foundItem.GetItemName()] * resultAmount;
+
+                // check for if the items are not in the same stack for some reason
+                bool countSufficientlyDepleted = false;
+                while (!countSufficientlyDepleted)
+                {
+                    Debug.Log(foundItem.GetCurrStack() +" "+ subCount);
+                    if (foundItem.GetCurrStack() < subCount)
+                    {
+                        // calculate what's left
+                        subCount = subCount - foundItem.GetCurrStack();
+                        // delete first stack
+                        foundItem.SetCurrStack(0);
+                        if (foundItem.IsEmptySlot())
+                        {
+                            DeleteFromInventory(inventory.IndexOf(foundItem));
+                        }
+                        // loop back to look for item again!
+                        foundItem = inventory.Find(itemSlot => itemSlot.GetItemName() == recipe.recipeKeys[i]);
+                    }
+                    else
+					{
+                        // subtract
+                        Debug.Log(foundItem.GetItemName() + ": " + foundItem.GetCurrStack() + " - " + subCount);
+
+                        foundItem.SetCurrStack(foundItem.GetCurrStack() - subCount);
+                        if (foundItem.IsEmptySlot())
+                        {
+                            DeleteFromInventory(inventory.IndexOf(foundItem));
+                        }
+                        else
+						{
+                            // update crafting w new list
+                            currentlyCraftingList[inventory.IndexOf(foundItem)].count = foundItem.GetCurrStack();
+                        }
+                        countSufficientlyDepleted = true;
+                    }
                 }
             }
-        }
+
+            }
+        
         resultAmount = 0;
         AttemptToCraftItem();
         currentlyCrafting = false;
@@ -344,5 +435,24 @@ public class CraftingInventoryManager : PlayerItemManager
         }
         //resultSlot = inventory[maxInventorySize - 1];
         craftingManager = GameObject.Find("CraftingManager").GetComponent<CraftingManager>();
+    }
+}
+
+[System.Serializable]
+public class CraftingItem
+{
+    public string item = "default";
+    public int count;
+    public int index;
+
+    public CraftingItem()
+	{
+        item = "default";
+	}
+
+    public CraftingItem(string i, int c)
+    {
+        item = i;
+        count = c;
     }
 }

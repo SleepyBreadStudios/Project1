@@ -8,57 +8,26 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu]
 public class Recipe : ScriptableObject
 {
-    //[SerializeField]
-    //private CraftingInventoryManager playerCrafting = null;
-
-    //private int totalItems = 0;
-    //public List<ItemData> items;
-
-    //// Gets the items from the crafting slots
-    //public void GetItems() {
-    //    ItemSlot craftingItem = null;
-    //    for (int i = 0; i < maxInventorySize; i++) {
-    //        craftingItem = inventory[i];
-    //        if (craftingItem.item != null) {
-    //            Debug.Log(craftingItem.item);
-    //            totalItems++;
-    //            items.Add(craftingItem.item);
-    //        }
-    //    }
-    //}
-
-    //// Creates the item for the player and updates respective inventory and crafting slots
-    //// Once an item is crafted, should be sent in the crafted slot
-    //// Checks item present and compares across recipes
-    //public void Craft() {
-    //    if (items.Count == 0) {
-    //        Debug.Log("No items present in crafting slots");
-    //        return;
-    //    }
-
-    //}
-
-    //public bool MakeDiamond() {
-
-    //}
-
-    //public enum CraftableItems {
-    //    None,
-    //    Diamond,
-    //    Pentagon,
-    //    Hexagon,
-    //    Octagon
-    //}
     [SerializeField]
     private string recipeContents = "DefaultString";
 
+    [System.Serializable]
+    public class InspectorRecipe
+	{
+        public string item;
+        public int count;
+	}
+
     [SerializeField]
-    public List<string> recipeList = new();
+    public List<InspectorRecipe> inspectorRecipeList;
+
+    public Dictionary<string, int> recipeList = new();
 
     [SerializeField]
     private ItemData craftedItem = null;
@@ -66,33 +35,113 @@ public class Recipe : ScriptableObject
     [SerializeField]
     private int numOfItems = 0;
 
-    public bool IsRecipeEqual(List<string> craftingInput)
+    // for the strings only of the recipe list
+    public List<string> recipeKeys;
+
+    public bool IsRecipeEqual(CraftingItem[] currCraftingList)//Dictionary<string, int> craftingInput)
     {
+        //Debug.Log("Checking if recipe equal");
+        Dictionary<string, int> craftingInput = new();
+        for(int i = 0; i < currCraftingList.Length; i++)
+		{
+            if (currCraftingList[i] != null)
+            {
+                string item = currCraftingList[i].item;
+                int count = currCraftingList[i].count;
+                if (count != 0)
+                {
+                    // if the dict already has this item in it
+                    if (craftingInput.ContainsKey(item))
+                    {
+                        // add them together
+                        int oldCount = craftingInput[item];
+                        craftingInput[item] = oldCount + count;
+                    }
+                    else
+                    {
+                        craftingInput.Add(item, count);
+                        //Debug.Log(item + ": " + count);
+                    }
+                }
+            }
+          
+		}
+
+        var craftingStrings = craftingInput.Keys.ToList();
         // num of items in the recipe have to be equal to 
         // num of items in the crafting
-        if(craftingInput.Count != numOfItems)
+        if (craftingStrings.Count != numOfItems)
         {
             return false;
         }
-        for(int i = 0; i < craftingInput.Count; i++)
+        for (int i = 0; i < craftingStrings.Count; i++)
         {
             // check if item is used in this recipe
-            if(!(recipeContents.Contains(craftingInput[i])))
+            if(!(recipeContents.Contains(craftingStrings[i])))
             {
                 // if one thing doesn't match it's already not equal
                 return false;
             }
-            // also check if crafting input has all recipe items in case of
-            // duplicate items accounting for recipe amount
-            if(!(craftingInput.Contains(recipeList[i])))
+            else
+			{
+                // check if item count is enough for the recipe
+                // need to have equal or more
+                if (craftingInput[craftingStrings[i]] < recipeList[craftingStrings[i]])
+                {
+                    return false;
+                }
+			}
+        }
+        // also check if crafting input has all recipe items in case of
+        // duplicate items accounting for recipe amount
+        foreach(var key in recipeKeys)
+		{
+            if (!(craftingStrings.Contains(key)))
             {
                 return false;
             }
-        }
+		}
         // if all items were found in the recipe
         // the recipe is true
         return true;
     }
+
+    public int GetCraftableCount(CraftingItem[] currCraftingList)
+	{
+        int lowestCount = 100;
+        Dictionary<string, int> craftingInput = new();
+        for (int i = 0; i < currCraftingList.Length; i++)
+        {
+            if (currCraftingList[i] != null)
+            {
+                string item = currCraftingList[i].item;
+                int count = currCraftingList[i].count;
+                if (count != 0)
+                {
+                    // if the dict already has this item in it
+                    if (craftingInput.ContainsKey(item))
+                    {
+                        // add them together
+                        int oldCount = craftingInput[item];
+                        craftingInput[item] = oldCount + count;
+                    }
+                    else
+                    {
+                        craftingInput.Add(item, count);
+                    }
+                }
+            }
+        }
+        foreach(var (key, value) in craftingInput)
+		{
+            int count = value / recipeList[key];
+            if (count < lowestCount)
+			{
+                lowestCount = count;
+            }
+		}            
+        return lowestCount;
+	}
 
     public ItemData GetCraftedItem()
     {
@@ -102,5 +151,16 @@ public class Recipe : ScriptableObject
     public int GetNumItems()
     {
         return numOfItems;
+    }
+
+    private void OnEnable()
+	{
+        // initialize dictionary
+        for(int i = 0; i < inspectorRecipeList.Count; i++)
+		{
+            recipeList.Add(inspectorRecipeList[i].item, inspectorRecipeList[i].count);
+		}
+        // initialize string only list of recipe
+        recipeKeys = recipeList.Keys.ToList();
     }
 }

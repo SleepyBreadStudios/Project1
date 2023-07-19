@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Fire
   m_EditorClassIdentifier: 
   recipeContents: WoodCoal
-  recipeList:
-  - Wood
-  - Coal
+  inspectorRecipeList:
+  - item: Wood
+    count: 1
+  - item: Coal
+    count: 1
   craftedItem: {fileID: 11400000, guid: 1ea98f094409359459de8d80e3c8c98e, type: 2}
   numOfItems: 2
+  recipeKeys: []

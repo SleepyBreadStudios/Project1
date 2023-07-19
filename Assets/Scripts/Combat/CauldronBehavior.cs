@@ -113,7 +113,7 @@ public class CauldronBehavior : NetworkBehaviour
     void Update()
     {
         //StartCoroutine(RegenerateTest());
-        Debug.Log("List length: " + spawned.Count);
+        //Debug.Log("List length: " + spawned.Count);
         foreach (GameObject e in spawned)
         {
             if (e.GetComponent<EnemyBehavior>() != null)
