@@ -62,6 +62,9 @@ public class Player2Behavior : NetworkBehaviour
 	private GameObject EquipUI = null;
 
 	[SerializeField]
+	private DialogueManager dialogueManager = null; 
+
+	[SerializeField]
 	private GameObject projectile = null;
 
 	public GameObject projectileObj = null;
@@ -74,6 +77,7 @@ public class Player2Behavior : NetworkBehaviour
 	private bool craftingEnabled = false;
 	private bool menuOpen = false;
 	private bool escEnabled = false;
+	private bool dialogueEnabled = false;
 
 	// Escape menu access
 	private EscapeMenu escMenu = null;
@@ -112,7 +116,6 @@ public class Player2Behavior : NetworkBehaviour
 	// for telling the escape menu that other menus are open
 	[SerializeField] private VoidEvent onMenuOpenUpdated = null;
 	public Action OnMenuOpenUpdated = delegate { };
-
 
 
 	void Start()
@@ -186,7 +189,7 @@ public class Player2Behavior : NetworkBehaviour
 		#region KEY PRESSES
 		#region MOVEMENT
 		// don't allow player input if the escape menu is open
-		if (!escEnabled)
+		if (!escEnabled && !dialogueEnabled)
 		{
 			if (!isDead)
 			{
@@ -229,12 +232,12 @@ public class Player2Behavior : NetworkBehaviour
 					oldLeftRightPosition = leftRight;
 					//animator.SetFloat("speed", walkSpeed);
 				}
-
-
 				#endregion
-				#region INVENTORY/CRAFTING
+
+				#region INVENTORY/CRAFTING/INTERACTS
 				// access inventory
-				if (Input.GetKeyDown(KeyCode.I))
+				#region Inventory access w/ E key
+				if (Input.GetKeyDown(KeyCode.E))
 				{
 					if (inventoryEnabled)
 					{
@@ -260,8 +263,9 @@ public class Player2Behavior : NetworkBehaviour
 					}
 					OnMenuOpenUpdated.Invoke();
 				}
-
+				#endregion
 				// right click
+				#region Right click/Interacts
 				if (Input.GetMouseButtonDown(1))
 				{
 					if(!menuOpen)
@@ -269,6 +273,7 @@ public class Player2Behavior : NetworkBehaviour
 						RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 						if (hit.collider != null)
 						{
+							#region Right clicking objects
 							// right click crafting object?
 							if (hit.collider.tag == "CraftingObject")
 							{
@@ -296,6 +301,13 @@ public class Player2Behavior : NetworkBehaviour
 								}
 
 							}
+							else if(hit.collider.tag == "NPC")
+							{
+								EnableDialogue(true);
+								hit.collider.gameObject.GetComponent<NPCBehavior>().Interact(GetComponent<Player2Behavior>(), dialogueManager);
+								return;
+
+							}
 							// right clicking bush?
 							else if (hit.collider.tag == "Bush")
 							{
@@ -308,11 +320,14 @@ public class Player2Behavior : NetworkBehaviour
 								hit.collider.gameObject.GetComponent<PondBehavior>().Fish();
 								return;
 							}
+							#endregion
 						}
 						playerInventory.useHotbarItem(currHotbarSelected, GetComponent<Player2Behavior>(), "right");
 					}
 					
 				}
+				#endregion
+				#region Left click
 				if (Input.GetMouseButton(0))
 				{
 					if (!menuOpen)
@@ -320,6 +335,7 @@ public class Player2Behavior : NetworkBehaviour
 						playerInventory.useHotbarItem(currHotbarSelected, GetComponent<Player2Behavior>(), "left");
 					}
 				}
+				#endregion
 			} else { // while dead
 				TimeLeft -= Time.deltaTime;
 				updateTime(TimeLeft);
@@ -456,6 +472,11 @@ public class Player2Behavior : NetworkBehaviour
 		escEnabled = !escEnabled;
 		Debug.Log("Esc pressed " + escEnabled);
 		menuOpen = escEnabled;
+	}
+
+	public void EnableDialogue(bool enable)
+	{
+		dialogueEnabled = enable;
 	}
 
 	#region update player status
