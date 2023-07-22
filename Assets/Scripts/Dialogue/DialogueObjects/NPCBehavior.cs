@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 public class NPCBehavior : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class NPCBehavior : MonoBehaviour
     /// Different Shop Item dialogues
     /// </summary>
     public Dialogue dialogueText;
+
+    public Dialogue successfulText;
+
+    public Dialogue unsuccessfulText;
 
     public DialogueManager dialogueBox = default;
 
@@ -22,17 +27,40 @@ public class NPCBehavior : MonoBehaviour
     [SerializeField]
     private float kInteractRange = 2.4f;
 
+    [SerializeField]
+    private int materialCost = 10;
+
+    [SerializeField]
+    private string materialName = default;
+
+    [SerializeField]
+    private GameObject itemToSpawn = default;
+
     private Player2Behavior currPlayer = default;
+
+    private bool spawnObject = false;
 
     void Awake()
     {
         //dialogueBox = GameObject.FindGameObjectWithTag("DialogueManager").GetComponent<DialogueManager>();
     }
 
-    //// Update is called once per frame
-    //void Update()
+	//// Update is called once per frame
+	void Update()
+	{
+        if(spawnObject && !currentlyInDialogue)
+		{
+            GameObject newItem = Instantiate(itemToSpawn, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+            newItem.GetComponent<NetworkObject>().Spawn(true);
+            GetComponent<NetworkObject>().Despawn(true);
+            Destroy(gameObject);
+        }
+	}
+
+    // may need to make this script a network behavior
+    //public override void OnNetworkDespawn()
     //{
-        
+    //    Destroy(gameObject);
     //}
 
     // called by player to interact with npc to start dialogue
@@ -52,21 +80,19 @@ public class NPCBehavior : MonoBehaviour
     {
         if (optionNumber == 1)
         {
-            //// if player can afford item, purchase it
-            //if (currentPositionScript.GetPrice() <= ScoreController.totalScore)
-            //{
-            //    ScoreController.AddScore(-currentPositionScript.GetPrice());
-            //    playerInventory.PurchaseItem(currentPositionScript.shopItem, currentPositionScript.GetObjectType());
-            //    currentPositionScript.PurchaseItem();
-            //    Debug.Log(ScoreController.totalScore);
-            //}
-            //// else show dialogue saying that they can't afford it
-            //else
-            //{
-            //    currentlyInOptionSelection = true;
-            //    StartCoroutine(WaitForOptionSelected());
-            //}
+            if(currPlayer.CheckPlayerInventoryForItem(materialName, materialCost))
+			{
+                dialogueBox.StartDialogue(successfulText, GetComponent<NPCBehavior>());
+                currentlyInDialogue = true;
+                spawnObject = true;
+            }
+            else
+			{
+                dialogueBox.StartDialogue(unsuccessfulText, GetComponent<NPCBehavior>());
+                currentlyInDialogue = true;
+            }
         }
+
     }
 
     // Makes sure that when enter is pressed it starts the new dialogue and doesn't read the

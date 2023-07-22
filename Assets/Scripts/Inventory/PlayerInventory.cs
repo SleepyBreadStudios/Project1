@@ -323,7 +323,62 @@ public class PlayerInventory : PlayerItemManager
         currHotbarNum = currHotbarSelected;
         OnHotbarUpdated.Invoke();
     }
-#endregion
+    #endregion
+
+    // called by player behavior for checking if a player has the items needed and the amount needed
+    public bool CheckForItems(string itemName, int cost)
+    {
+        //var indices = [i for i, x in enumerate(inventory) if x.GetItemName() == itemName];
+        // look for all instances of the item
+        var foundItems = inventory.FindAll(itemSlot => itemSlot.GetItemName() == itemName);
+        if (foundItems.Count > 0)
+        {
+            int totalCount = 0;
+            for (int i = 0; i < foundItems.Count; i++)
+            {
+                totalCount += foundItems[i].GetCurrStack();
+            }
+            if (totalCount < cost)
+            {
+                // not enough of the item 
+                return false;
+            }
+            else
+            {
+                // do the actual removing of the items
+                var subCount = cost;
+                //Debug.Log("Current cost: " + subCount);
+                for (int i = 0; i < foundItems.Count; i++)
+                {
+                    if (foundItems[i].GetCurrStack() < subCount)
+                    {
+                        subCount = subCount - foundItems[i].GetCurrStack();
+                        // delete stack
+                        foundItems[i].SetCurrStack(0);
+                        if (foundItems[i].IsEmptySlot())
+                        {
+                            DeleteFromInventory(inventory.IndexOf(foundItems[i]));
+                        }
+                    }
+                    else
+                    {
+                        //Debug.Log(foundItems[i].GetCurrStack() + " - " + subCount);
+                        foundItems[i].SetCurrStack(foundItems[i].GetCurrStack() - subCount);
+                        if (foundItems[i].IsEmptySlot())
+                        {
+                            DeleteFromInventory(inventory.IndexOf(foundItems[i]));
+                        }
+                        OnItemsUpdated.Invoke();
+                        return true;
+                    }
+                }
+                Debug.Log("Error: should not get to this point");
+                return false;
+            }
+        }
+        // item not found
+        return false;
+    }
 
     // called by player behavior
     public void inventoryTransferEnabled(bool inventory, bool crafting)
@@ -355,4 +410,5 @@ public class PlayerInventory : PlayerItemManager
         base.OnDisable();
         OnHotbarUpdated -= onHotbarUpdated.Raise;
     }
+
 }

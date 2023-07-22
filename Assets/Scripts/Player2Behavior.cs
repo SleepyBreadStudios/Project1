@@ -540,6 +540,12 @@ public class Player2Behavior : NetworkBehaviour
 	}
 	#endregion
 
+	// wrapper method to ask inventory if they have the item that is being looked for
+	public bool CheckPlayerInventoryForItem(string itemName, int cost)
+	{
+		return playerInventory.CheckForItems(itemName, cost);
+	}
+
 	[ServerRpc]
 	public void UpdateClientPositionServerRpc(float forwardBackward, float leftRight)
 	{
