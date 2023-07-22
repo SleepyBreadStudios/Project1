@@ -436,7 +436,9 @@ MonoBehaviour:
   rb: {fileID: 797592511094102729}
   dropTable:
   - {fileID: 1891140179815386372, guid: 0cdf3919ff7fcfe4ead4d01200196704, type: 3}
+  - {fileID: 2269600949024442516, guid: 841a2a352a2c1b245bc37cb656d58181, type: 3}
   dropChance:
+  - 50
   - 50
   health: 3
   maxHealth: 3

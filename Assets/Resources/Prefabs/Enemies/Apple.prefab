@@ -456,7 +456,7 @@ MonoBehaviour:
       m_Calls: []
   rb: {fileID: 797592511094102729}
   dropTable:
-  - {fileID: 4798766307938537059, guid: 1676b12460b37b344bd922c7eaafcd74, type: 3}
+  - {fileID: 1539392890242005409, guid: d0783286f189cc74689514b9b7e810e2, type: 3}
   dropChance:
   - 50
   health: 2

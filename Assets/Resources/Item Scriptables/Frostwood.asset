@@ -23,4 +23,5 @@ MonoBehaviour:
   equipType: 
   defense: 0
   useText: Crafting material
-  itemDescription: 'Wood but cold '
+  itemDescription: Frozen wood. The lifespan of the tree can be determined by the
+    number of ice crystals on it.
