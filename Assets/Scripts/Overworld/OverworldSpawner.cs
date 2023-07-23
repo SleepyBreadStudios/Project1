@@ -14,28 +14,42 @@ public class OverworldSpawner : NetworkBehaviour
 
     [SerializeField]
     private GameObject structure = null;
-    
-    [SerializeField]
-    private GameObject structure2 = null;
+
+    private GameObject bounds;
 
     // Allows to set number of objects to spawn in world
     [SerializeField]
     private int numOfSpawns = 0;
 
     void Start() {
-        
+        spawnObject();
     }
 
-    public void Spawn()
+    // public void Spawn()
+    // {
+    //     StartCoroutine(spawnObject(4.0f, structure));
+    //     StartCoroutine(spawnObject(4.0f, structure2));
+    // }
+
+    // private IEnumerator spawnObject(float interval, GameObject s) {
+    //     yield return new WaitForSeconds(interval);
+    //     GameObject newObject = Instantiate(s, new Vector3(Random.Range(-10f, 10), Random.Range(-10f, 10f), 0), Quaternion.identity);
+    //     newObject.GetComponent<NetworkObject>().Spawn();
+    //     StartCoroutine(spawnObject(4.0f, s));
+    // }
+
+    public void spawnObject()
     {
-        StartCoroutine(spawnObject(4.0f, structure));
-        StartCoroutine(spawnObject(4.0f, structure2));
-    }
+        MeshCollider c = bounds.GetComponent<MeshCollider>();
+        float screenX, screenY;
+        Vector2 pos;
+        for (int i = 0; i < numOfSpawns; i++) {
+            screenX = Random.Range(c.bounds.min.x, c.bounds.max.x);
+            screenY = Random.Range(c.bounds.min.y, c.bounds.max.y);
+            pos = new Vector2(screenX, screenY);
 
-    private IEnumerator spawnObject(float interval, GameObject s) {
-        yield return new WaitForSeconds(interval);
-        GameObject newObject = Instantiate(s, new Vector3(Random.Range(-10f, 10), Random.Range(-10f, 10f), 0), Quaternion.identity);
-        newObject.GetComponent<NetworkObject>().Spawn();
-        StartCoroutine(spawnObject(4.0f, s));
+            Instantiate(structure, pos, structure.transform.rotation);
+
+        }
     }
 }

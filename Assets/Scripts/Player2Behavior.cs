@@ -670,6 +670,7 @@ public class Player2Behavior : NetworkBehaviour
 	{
 		yield return new WaitForSeconds(5.0f);
 		DamagePlayer(1);
+		animator.Play("Player_Cold");
 		StartCoroutine("SnowDOT");
 	}
 

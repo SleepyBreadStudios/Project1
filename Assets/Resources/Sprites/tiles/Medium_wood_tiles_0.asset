@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Medium_wood_tiles_0
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 1545007092482000669, guid: 86bc68621d7c51242a0ecebec5d06994, type: 3}
+  m_Sprite: {fileID: 1545007092482000669, guid: c5b9668a195f63b4ea8e2027c10d6f7c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

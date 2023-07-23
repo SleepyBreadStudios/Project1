@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 37
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5738401770435824497
 SpriteRenderer:
@@ -101,8 +101,8 @@ MonoBehaviour:
   enemyPrefab: {fileID: 5909226124758451408, guid: 4749a1c3b91fc2940b4a97125c26f333, type: 3}
   spawnRadius: 5
   pollRadius: 15
-  pollRate: 6
-  limit: 50
+  pollRate: 15
+  limit: 20
 --- !u!114 &5185862690464323752
 MonoBehaviour:
   m_ObjectHideFlags: 0
