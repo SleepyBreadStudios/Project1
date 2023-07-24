@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using Unity.Netcode;
 
 public class InventorySlot : ItemSlotUI, IDropHandler
 {
@@ -135,6 +136,14 @@ public class InventorySlot : ItemSlotUI, IDropHandler
 
     public void DragDelete(int slotIndex)
     {
+        ItemSlot itemSlot = inventory.GetSlotByIndex(slotIndex);
+
+        //Debug.Log(itemSlot.GetItemName());
+        // update to drop better range
+        GameObject newItem = Instantiate(Resources.Load("Prefabs/Items/" + itemSlot.GetItemName()), new Vector2(inventory.playerBehavior.GetTransformX() - 1, inventory.playerBehavior.GetTransformY()), Quaternion.identity) as GameObject;
+        newItem.GetComponent<NetworkObject>().Spawn(true);
+        //Debug.Log(itemSlot.GetCurrStack());
+        newItem.GetComponent<ItemBehavior>().SetCount(itemSlot.GetCurrStack());
         inventory.DeleteFromInventory(slotIndex);
     }
 

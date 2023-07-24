@@ -80,7 +80,7 @@ public class Player2Behavior : NetworkBehaviour
 	private bool dialogueEnabled = false;
 
 	// Escape menu access
-	private EscapeMenu escMenu = null;
+	//private EscapeMenu escMenu = null;
 
 	// Death menu access
 	private DeathMenu deathMenu = null;
@@ -140,8 +140,8 @@ public class Player2Behavior : NetworkBehaviour
 		originalInvPos = InventoryUI.transform.position;
 
 		//craftingObject = GameObject.Find("CraftingTable");
-		escMenu = GameObject.Find("MenuCanvas").GetComponent<EscapeMenu>();
-		deathMenu = GameObject.Find("MenuCanvas").GetComponent<DeathMenu>();
+		//escMenu = GameObject.Find("MenuCanvas").GetComponent<EscapeMenu>();
+		//deathMenu = GameObject.Find("MenuCanvas").GetComponent<DeathMenu>();
 		//MainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
 		if (IsClient && IsOwner)
 		{
@@ -477,6 +477,16 @@ public class Player2Behavior : NetworkBehaviour
 	public void EnableDialogue(bool enable)
 	{
 		dialogueEnabled = enable;
+	}
+
+	public float GetTransformX()
+	{
+		return transform.position.x;
+	}
+
+	public float GetTransformY()
+	{
+		return transform.position.y;
 	}
 
 	#region update player status

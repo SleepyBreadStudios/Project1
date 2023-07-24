@@ -24,6 +24,9 @@ public class PlayerInventory : PlayerItemManager
 
     [SerializeField]
     private EquipInventoryManager playerEquipment = null;
+
+    [SerializeField]
+    public Player2Behavior playerBehavior = null;
     //[SerializeField] private VoidEvent onInventoryItemsUpdated = null;
     // num of different stacked items it can hold
 

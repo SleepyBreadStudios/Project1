@@ -21,13 +21,14 @@ public class ItemBehavior : NetworkBehaviour
     //private readonly string[] itemPrefabs = {"capsule", "checkmark", "circle", "diamond", "flower", "hexagonpoint", "roundedsquare", "star", "triangle"};
 
     // individual items can have their own count that alters based on players
+    [SerializeField]
     private int itemCount = 0;
 
     private int itemDurability = 100;
 
     public string leftOrRight = "";
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         itemCount = itemType.GetCount();
         itemDurability = itemType.GetStartingCondition();
@@ -40,12 +41,15 @@ public class ItemBehavior : NetworkBehaviour
 
     public int GetCount()
     {
+        //Debug.Log("Get " + itemCount);
         return itemCount;
     }
 
     public void SetCount(int newCount)
     {
         itemCount = newCount;
+        //Debug.Log(itemCount);
+        GetCount();
     }
 
     public int GetDurability()

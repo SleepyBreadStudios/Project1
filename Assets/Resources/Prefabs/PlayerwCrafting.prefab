@@ -963,6 +963,7 @@ MonoBehaviour:
   onHotbarUpdated: {fileID: 11400000, guid: 30edbe458b097ab41a4d6b4d33b9739b, type: 2}
   playerCrafting: {fileID: 1635490780126689059}
   playerEquipment: {fileID: 4087091005946665511}
+  playerBehavior: {fileID: 3175410834743141282}
   currHotbarNum: 1
   inventoryShiftClick: 0
   craftingShiftClick: 0
@@ -1118,7 +1119,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1894587074917157277}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -1141,7 +1142,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

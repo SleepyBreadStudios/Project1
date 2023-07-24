@@ -20,7 +20,7 @@ namespace DapperDino.Items.Inventories
                 if (eventData.hovered.Count == 0)
                 {
                     InventorySlot thisSlot = ItemSlotUI as InventorySlot;
-                    // delete item from inventory
+                    // drop item from inventory
                     thisSlot.DragDelete(thisSlot.SlotIndex);
                 }
             }

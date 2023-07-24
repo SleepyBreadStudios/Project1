@@ -18,9 +18,9 @@ public class ConsumableItem : ItemBehavior
         return "Consumable";
     }
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         leftOrRight = "right";
     }
 }
