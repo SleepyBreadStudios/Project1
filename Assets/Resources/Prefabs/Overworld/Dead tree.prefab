@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 8856652632934816412}
   m_Layer: 0
   m_Name: Dead tree
-  m_TagString: Untagged
+  m_TagString: Overworld
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,7 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 53
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7065977903637285323
 SpriteRenderer:
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f81c0f5b0dcfe5747a8a78c8dd2a49f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  item: {fileID: 6304730611714531225, guid: 127f9e1e08a753d4ca2b0b49b9b09704, type: 3}
   health: 5
   maxHealth: 5
   ToolRequired: Axe

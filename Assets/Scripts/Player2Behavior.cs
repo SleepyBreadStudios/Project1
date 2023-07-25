@@ -80,10 +80,10 @@ public class Player2Behavior : NetworkBehaviour
 	private bool dialogueEnabled = false;
 
 	// Escape menu access
-	//private EscapeMenu escMenu = null;
+	private EscapeMenu escMenu = null;
 
 	// Death menu access
-	private DeathMenu deathMenu = null;
+	//private DeathMenu deathMenu = null;
 
 	// Respawn UI
 	[SerializeField]
@@ -97,7 +97,8 @@ public class Player2Behavior : NetworkBehaviour
 
 	private bool isDead = false;
 
-	private bool isMoving = true;
+	// Commented out because not used
+	//private bool isMoving = true;
 
 	private Vector3 originalInvPos = new Vector3(0, 0, 0);
 
@@ -140,7 +141,7 @@ public class Player2Behavior : NetworkBehaviour
 		originalInvPos = InventoryUI.transform.position;
 
 		//craftingObject = GameObject.Find("CraftingTable");
-		//escMenu = GameObject.Find("MenuCanvas").GetComponent<EscapeMenu>();
+		escMenu = GameObject.Find("MenuCanvas").GetComponent<EscapeMenu>();
 		//deathMenu = GameObject.Find("MenuCanvas").GetComponent<DeathMenu>();
 		//MainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
 		if (IsClient && IsOwner)

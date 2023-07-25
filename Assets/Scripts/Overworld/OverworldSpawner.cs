@@ -15,7 +15,7 @@ public class OverworldSpawner : NetworkBehaviour
     [SerializeField]
     private GameObject structure = null;
 
-    private GameObject bounds;
+    public GameObject bounds;
 
     // Allows to set number of objects to spawn in world
     [SerializeField]
@@ -50,6 +50,15 @@ public class OverworldSpawner : NetworkBehaviour
 
             Instantiate(structure, pos, structure.transform.rotation);
 
+        }
+    }
+
+
+    private void DestroyObjects()
+    {
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("Overworld"))
+        {
+            Destroy(o);
         }
     }
 }
