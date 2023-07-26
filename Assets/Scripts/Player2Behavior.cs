@@ -77,10 +77,14 @@ public class Player2Behavior : NetworkBehaviour
 	private bool craftingEnabled = false;
 	private bool menuOpen = false;
 	private bool escEnabled = false;
+	private bool codeEnabled = false;
 	private bool dialogueEnabled = false;
 
 	// Escape menu access
 	private EscapeMenu escMenu = null;
+	
+	// Code menu access
+	private HostCode codeMenu = null;
 
 	// Death menu access
 	//private DeathMenu deathMenu = null;
@@ -142,6 +146,7 @@ public class Player2Behavior : NetworkBehaviour
 
 		//craftingObject = GameObject.Find("CraftingTable");
 		escMenu = GameObject.Find("MenuCanvas").GetComponent<EscapeMenu>();
+		codeMenu = GameObject.Find("MenuCanvas").GetComponent<HostCode>();
 		//deathMenu = GameObject.Find("MenuCanvas").GetComponent<DeathMenu>();
 		//MainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
 		if (IsClient && IsOwner)
@@ -190,7 +195,7 @@ public class Player2Behavior : NetworkBehaviour
 		#region KEY PRESSES
 		#region MOVEMENT
 		// don't allow player input if the escape menu is open
-		if (!escEnabled && !dialogueEnabled)
+		if (!escEnabled && !dialogueEnabled && !codeEnabled)
 		{
 			if (!isDead)
 			{
@@ -355,6 +360,7 @@ public class Player2Behavior : NetworkBehaviour
 					HotbarUI.transform.localScale = new Vector3(1, 1, 1);
 					menuOpen = false;
 					playerInventory.inventoryTransferEnabled(false, false);
+					EnableEscMenuPlayer();
 					OnMenuOpenUpdated.Invoke();
 				}
 			} 
@@ -472,6 +478,7 @@ public class Player2Behavior : NetworkBehaviour
 	{
 		escEnabled = !escEnabled;
 		Debug.Log("Esc pressed " + escEnabled);
+		codeEnabled = !codeEnabled;
 		menuOpen = escEnabled;
 	}
 
