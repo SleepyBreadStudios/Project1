@@ -12,8 +12,7 @@ using UnityEngine.UI;
 public class OverworldSpawner : NetworkBehaviour
 {
 
-    [SerializeField]
-    private GameObject structure = null;
+    public List<GameObject> structure;
 
     public GameObject bounds;
 
@@ -42,13 +41,16 @@ public class OverworldSpawner : NetworkBehaviour
     {
         MeshCollider c = bounds.GetComponent<MeshCollider>();
         float screenX, screenY;
+        GameObject spawn;
         Vector2 pos;
         for (int i = 0; i < numOfSpawns; i++) {
+            int rand = Random.Range(0, structure.Count);
+            spawn = structure[rand];
             screenX = Random.Range(c.bounds.min.x, c.bounds.max.x);
             screenY = Random.Range(c.bounds.min.y, c.bounds.max.y);
             pos = new Vector2(screenX, screenY);
 
-            Instantiate(structure, pos, structure.transform.rotation);
+            Instantiate(spawn, pos, spawn.transform.rotation);
 
         }
     }
