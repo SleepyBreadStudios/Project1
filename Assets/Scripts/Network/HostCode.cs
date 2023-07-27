@@ -14,10 +14,38 @@ public class HostCode : MonoBehaviour
     [SerializeField]
     public Text joinCode;
 
+    // [SerializeField] private VoidEvent onEscUpdated = null;
+
+    // public Action OnEscUpdated = delegate { };
+    // // Boolean that checks if the menu is active or not
+    // public static bool activeMenu = false;
+
+    // public bool playerMenusNotOpen = true;
+
+    // // Menu UI to be displayed
+    // public GameObject menuUI;
+
+    // void Awake()
+    // {
+    //     OnEscUpdated += onEscUpdated.Raise;
+    // }
+
     public void Update()
     {
         //code.text = UIManager.UI.joinCode.text;
         //joinCode.text = UIManager.UI.joinCode.text;
         joinCode.text = RelayManager.relay.joinCode;
+        // if (Input.GetKeyDown(KeyCode.Escape) && playerMenusNotOpen)
+        // {
+        //     if (activeMenu)
+        //     {
+        //         Resume();
+        //     }
+        //     else
+        //     {
+        //         DisplayMenu();
+        //     }
+        // }
     }
+    
 }

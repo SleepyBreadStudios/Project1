@@ -650,8 +650,10 @@ public class Player2Behavior : NetworkBehaviour
 	// }
 
 	private void OnTriggerExit2D(Collider2D collider) {
-		walkSpeed = 0.02f; // Speed returns back to normal upon exiting snow
-		StopCoroutine("SnowDOT");
+		if (collider.CompareTag("Snow")) {
+			walkSpeed = 0.02f; // Speed returns back to normal upon exiting snow
+			StopCoroutine("SnowDOT");
+		}
 	}
 
 
@@ -706,7 +708,7 @@ public class Player2Behavior : NetworkBehaviour
 		isDead = true;
 
 		// // for esc menu to know when to open and when not to
-		// OnMenuOpenUpdated += onMenuOpenUpdated.Raise;
+		//OnMenuOpenUpdated += onMenuOpenUpdated.Raise;
 
 		// // grab original position of inventory for resetting
 		// originalInvPos = InventoryUI.transform.position;
