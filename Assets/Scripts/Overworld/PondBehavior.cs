@@ -23,6 +23,9 @@ public class PondBehavior : NetworkBehaviour
     [SerializeField]
     private Sprite pondCurrFish = null;
 
+    // num to update sprite cross server
+    private NetworkVariable<float> spriteNum = new NetworkVariable<float>();
+
     [SerializeField]
     private float spawnRadius = 2.0f;
 
@@ -34,15 +37,17 @@ public class PondBehavior : NetworkBehaviour
 
     private bool withinFishTime = false;
 
+    private Player2Behavior currPlayer = null;
+
     public GameObject GetItem()
     {
         return item;
     }
 
-    void Start()
-    {
-        sprite = GetComponent<SpriteRenderer>();
-    }
+    //void Start()
+    //{
+    //    sprite = GetComponent<SpriteRenderer>();
+    //}
 
     void Update()
     {
@@ -50,24 +55,46 @@ public class PondBehavior : NetworkBehaviour
         {
             StopCoroutine("StartFishTimer");
             StopCoroutine("StartFishCountdown");
-            sprite.sprite = pond;
+            spriteNum.Value = 0;
         }
 
     }
 
-    public void Fish()
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        sprite = gameObject.GetComponent<SpriteRenderer>();
+        spriteNum.Value = 0;
+        spriteNum.OnValueChanged += UpdateSprite;
+    }
+
+
+    public void Fish(Player2Behavior player)
     {
         if (withinFishTime)
         {
+            if(player != currPlayer)
+			{
+                Debug.Log("This is a different player than who started the fishing!");
+			}
             ItemDrop();
             currFishing = false;
-            sprite.sprite = pond;
+            //sprite.sprite = pond;
+            //StopCoroutine("StartFishCountdown");
+            spriteNum.Value = 0;
             withinFishTime = false;
+            currPlayer = null;
+            return;
         }
         if (!currFishing)
         {
+            if(currPlayer != player)
+			{
+                currPlayer = player;
+            }                
             StartCoroutine("StartFishTimer");
-            sprite.sprite = pondCurrFish;
+            //sprite.sprite = pondCurrFish;
+            spriteNum.Value = 1;
             currFishing = true;
         }
     }
@@ -76,17 +103,19 @@ public class PondBehavior : NetworkBehaviour
     {
         itemObj = Instantiate(item, new Vector3(Random.Range(transform.position.x - spawnRadius, transform.position.x + spawnRadius),
             Random.Range(transform.position.y - spawnRadius, transform.position.y + spawnRadius), -1), Quaternion.identity) as GameObject;
-        itemObj.GetComponent<NetworkObject>().Spawn(true);
+		itemObj.GetComponent<NetworkObject>().Spawn(true);
+        spriteNum.Value = 0;
     }
 
-    // Regenerating object
-    public IEnumerator StartFishTimer()
+	// Regenerating object
+	public IEnumerator StartFishTimer()
     {
         yield return new WaitForSeconds(Random.Range(0.5f, 3f));
         withinFishTime = true;
         Debug.Log("Counting for fish");
         StartCoroutine("StartFishCountdown");
-        sprite.sprite = pondFish;
+        spriteNum.Value = 2;
+        //sprite.sprite = pondFish;
     }
 
     public IEnumerator StartFishCountdown()
@@ -94,7 +123,24 @@ public class PondBehavior : NetworkBehaviour
         yield return new WaitForSeconds(countdown);
         withinFishTime = false;
         currFishing = false;
+        //spriteNum.Value = 0;
         //sprite.sprite = pond;
         //StopCoroutine("StartFishTimer");
     }
+
+    public void UpdateSprite(float oldValue, float newValue)
+	{
+        if(newValue == 0)
+		{
+            sprite.sprite = pond;
+        }
+        else if (newValue == 1)
+		{
+            sprite.sprite = pondCurrFish;
+        }
+        else if(newValue == 2)
+		{
+            sprite.sprite = pondFish;
+		}
+	}
 }

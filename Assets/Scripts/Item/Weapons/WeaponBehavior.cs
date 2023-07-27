@@ -70,12 +70,12 @@ public class WeaponBehavior : ItemBehavior
             if (mousePos.x - playerBehavior.transform.position.x < 0)
             {
                 Debug.Log("Ping! " + (mousePos.x - playerBehavior.transform.position.x));
-                playerBehavior.Flip(false);
+                playerBehavior.Flip(true, false);
             }
             else if (mousePos.x - playerBehavior.transform.position.x > 0)
             {
                 Debug.Log("Pong! " + (mousePos.x - playerBehavior.transform.position.x));
-                playerBehavior.Flip(true);
+                playerBehavior.Flip(false, true);
             }
 
             weaponActive = Instantiate(prefab, playerBehavior.transform.position, Quaternion.identity);

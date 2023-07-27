@@ -28,15 +28,25 @@ public class BushBehavior : NetworkBehaviour
     private float RespawnTime;
 
     private bool currRegenerating = false;
+    // num to update sprite cross server
+    private NetworkVariable<float> spriteNum = new NetworkVariable<float>();
 
     public GameObject GetItem()
     {
         return item;
     }
 
-    void Start()
+    //void Start()
+    //{
+    //    sprite = GetComponent<SpriteRenderer>();
+    //}
+
+    public override void OnNetworkSpawn()
     {
-        sprite = GetComponent<SpriteRenderer>();
+        base.OnNetworkSpawn();
+        sprite = gameObject.GetComponent<SpriteRenderer>();
+        spriteNum.Value = 1;
+        spriteNum.OnValueChanged += UpdateSprite;
     }
 
     public void HarvestBerries()
@@ -47,7 +57,9 @@ public class BushBehavior : NetworkBehaviour
 		}
         currRegenerating = true;
         ItemDrop();
-        sprite.sprite = bushHarvested;
+
+        //sprite.sprite = bushHarvested;
+        spriteNum.Value = 0;
         StartCoroutine("Regenerate");
     }
 
@@ -63,6 +75,19 @@ public class BushBehavior : NetworkBehaviour
     {
         yield return new WaitForSeconds(2);
         currRegenerating = false;
-        sprite.sprite = bushReady;
+        //sprite.sprite = bushReady;
+        spriteNum.Value = 1;
+    }
+
+    public void UpdateSprite(float oldValue, float newValue)
+    {
+        if (newValue == 0)
+        {
+            sprite.sprite = bushHarvested;
+        }
+        else if (newValue == 1)
+        {
+            sprite.sprite = bushReady;
+        }
     }
 }

@@ -128,7 +128,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Snow_golem_front_0: -688826965431712554
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

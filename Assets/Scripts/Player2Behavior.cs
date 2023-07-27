@@ -44,6 +44,8 @@ public class Player2Behavior : NetworkBehaviour
 	[SerializeField]
 	private NetworkVariable<float> leftRightPosition = new NetworkVariable<float>();
 
+	private NetworkVariable<bool> flippedX = new NetworkVariable<bool>();
+
 	PlayerInventory playerInventory = null;
 
 	[SerializeField]
@@ -136,7 +138,7 @@ public class Player2Behavior : NetworkBehaviour
 		HealthUI.transform.localScale = new Vector3(0, 0, 0);
 		EquipUI.transform.localScale = new Vector3(0, 0, 0);
 		transform.localScale = new Vector3(1, 1, 1);
-		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+		
 
 		// for esc menu to know when to open and when not to
 		OnMenuOpenUpdated += onMenuOpenUpdated.Raise;
@@ -162,6 +164,9 @@ public class Player2Behavior : NetworkBehaviour
 	public override void OnNetworkSpawn()
 	{
 		base.OnNetworkSpawn();
+		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+		flippedX.Value = false;
+		flippedX.OnValueChanged += Flip;
 
 		if (IsClient && IsOwner)
 		{
@@ -194,6 +199,12 @@ public class Player2Behavior : NetworkBehaviour
 
 		#region KEY PRESSES
 		#region MOVEMENT
+		if(menuOpen)
+		{
+			Debug.Log("Stop moving");
+			UpdateClientPositionServerRpc(0, 0);
+			animator.SetFloat("speed", 0);
+		}
 		// don't allow player input if the escape menu is open
 		if (!escEnabled && !dialogueEnabled && !codeEnabled)
 		{
@@ -217,13 +228,15 @@ public class Player2Behavior : NetworkBehaviour
 				{
 					leftRight -= walkSpeed;
 					animator.SetFloat("speed", walkSpeed);
-					spriteRenderer.flipX = false;
+					//spriteRenderer.flipX = false;
+					flippedX.Value = false;
 				}
 				if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
 				{
 					leftRight += walkSpeed;
 					animator.SetFloat("speed", walkSpeed);
-					spriteRenderer.flipX = true;
+					//spriteRenderer.flipX = true;
+					flippedX.Value = true;
 				}
 				if (forwardBackward == 0 && leftRight == 0)
 				{
@@ -236,6 +249,7 @@ public class Player2Behavior : NetworkBehaviour
 					UpdateClientPositionServerRpc(forwardBackward, leftRight);
 					oldForwardBackwardPosition = forwardBackward;
 					oldLeftRightPosition = leftRight;
+					
 					//animator.SetFloat("speed", walkSpeed);
 				}
 				#endregion
@@ -311,6 +325,7 @@ public class Player2Behavior : NetworkBehaviour
 							{
 								EnableDialogue(true);
 								hit.collider.gameObject.GetComponent<NPCBehavior>().Interact(GetComponent<Player2Behavior>(), dialogueManager);
+								menuOpen = true;
 								return;
 
 							}
@@ -323,7 +338,7 @@ public class Player2Behavior : NetworkBehaviour
 							// right clicking pond?
 							else if (hit.collider.tag == "Pond")
 							{
-								hit.collider.gameObject.GetComponent<PondBehavior>().Fish();
+								hit.collider.gameObject.GetComponent<PondBehavior>().Fish(GetComponent<Player2Behavior>());
 								return;
 							}
 							#endregion
@@ -485,6 +500,7 @@ public class Player2Behavior : NetworkBehaviour
 	public void EnableDialogue(bool enable)
 	{
 		dialogueEnabled = enable;
+		menuOpen = enable;
 	}
 
 	public float GetTransformX()
@@ -658,11 +674,11 @@ public class Player2Behavior : NetworkBehaviour
 
 
 
-	public void Flip(bool check)
+	public void Flip(bool oldValue, bool newValue)
 	{
-		if (spriteRenderer.flipX != check)
+		if (spriteRenderer.flipX != newValue)
 		{
-			spriteRenderer.flipX = check;
+			spriteRenderer.flipX = newValue;
 		}
 	}
 

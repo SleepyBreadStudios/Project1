@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.9411765}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9547,6 +9547,10 @@ PrefabInstance:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 1025459570113205275}
+    - target: {fileID: 3964846574630766765, guid: 49a745897ab474d468276f2095ce6b2b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -5387500624950246716, guid: eb4fff5126d4fad4cb098679ae0f7345, type: 3}
     - target: {fileID: 4834947242319281517, guid: 49a745897ab474d468276f2095ce6b2b, type: 3}
       propertyPath: m_Name
       value: EquipSlot (2)
@@ -16010,6 +16014,10 @@ PrefabInstance:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 1025459570113205275}
+    - target: {fileID: 3964846574630766765, guid: 49a745897ab474d468276f2095ce6b2b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -7673635284645830280, guid: 221f657bd3a6fb140b755ac69357d2bb, type: 3}
     - target: {fileID: 4834947242319281517, guid: 49a745897ab474d468276f2095ce6b2b, type: 3}
       propertyPath: m_Name
       value: EquipSlot (3)
@@ -20717,6 +20725,10 @@ PrefabInstance:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 1025459570113205275}
+    - target: {fileID: 3964846574630766765, guid: 49a745897ab474d468276f2095ce6b2b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -7749447389892622172, guid: 6017d480eb1d62e47978dc47855847ce, type: 3}
     - target: {fileID: 4834947242319281517, guid: 49a745897ab474d468276f2095ce6b2b, type: 3}
       propertyPath: m_Name
       value: EquipSlot (1)
@@ -21402,6 +21414,10 @@ PrefabInstance:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 1025459570113205275}
+    - target: {fileID: 3964846574630766765, guid: 49a745897ab474d468276f2095ce6b2b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -4153578426249856241, guid: 0ab5cf8cb9823a649b0dc0b0ee0b7844, type: 3}
     - target: {fileID: 4834947242319281517, guid: 49a745897ab474d468276f2095ce6b2b, type: 3}
       propertyPath: m_Name
       value: EquipSlot
