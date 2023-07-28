@@ -222,7 +222,7 @@ public class Player2Behavior : NetworkBehaviour
 		//	animator.SetFloat("speed", 0);
 		//}
 		// don't allow player input if the escape menu is open
-		if (!escEnabled && !dialogueEnabled && !codeEnabled)
+		if (!escEnabled && !dialogueEnabled)
 		{
 			if (!isDead)
 			{
@@ -602,7 +602,7 @@ public class Player2Behavior : NetworkBehaviour
 		if (playerHealth <= 0)
 		{
 			Deactivate();
-			RespawnUI.SetActive(true);
+			//RespawnUI.SetActive(true);
 			StartCoroutine("Respawn");
 		}
 	}
@@ -855,7 +855,7 @@ public class Player2Behavior : NetworkBehaviour
 		isDead = true;
 
 		// // for esc menu to know when to open and when not to
-		//OnMenuOpenUpdated += onMenuOpenUpdated.Raise;
+		OnMenuOpenUpdated += onMenuOpenUpdated.Raise;
 
 		// // grab original position of inventory for resetting
 		// originalInvPos = InventoryUI.transform.position;

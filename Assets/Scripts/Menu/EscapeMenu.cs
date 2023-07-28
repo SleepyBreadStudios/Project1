@@ -24,7 +24,7 @@ public class EscapeMenu : MonoBehaviour
     // Menu UI to be displayed
     public GameObject menuUI;
 
-    public GameObject codeUI;
+    //public GameObject codeUI;
 
     void Awake()
     {
@@ -52,7 +52,7 @@ public class EscapeMenu : MonoBehaviour
         menuUI.SetActive(false);
         //Time.timeScale = 1f; // Shouldn't affect regardless of single or multiplayer
         activeMenu = false;
-        codeUI.SetActive(false);
+        //codeUI.SetActive(false);
         OnEscUpdated.Invoke();
     }
 
@@ -62,7 +62,7 @@ public class EscapeMenu : MonoBehaviour
         menuUI.SetActive(true);
         //Time.timeScale = 0f; // Freezes the game but should only occur if in Singleplayer
         activeMenu = true;
-        codeUI.SetActive(true);
+        //codeUI.SetActive(true);
         OnEscUpdated.Invoke();
     }
 
