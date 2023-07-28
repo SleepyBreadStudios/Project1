@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fd869100de05f40ac51990b5bed79f, type: 3}
   m_Name: FrostChest
   m_EditorClassIdentifier: 
-  recipeContents: DefaultString
+  recipeContents: SnowPotionFrostwood
   inspectorRecipeList:
-  - item: Snow Potion
+  - item: SnowPotion
     count: 3
   - item: Frostwood
     count: 5

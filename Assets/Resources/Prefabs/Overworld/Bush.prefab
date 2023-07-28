@@ -223,4 +223,4 @@ MonoBehaviour:
   bushReady: {fileID: 21300000, guid: e8352c825069acc4f852995e5ab13e07, type: 3}
   bushHarvested: {fileID: 21300000, guid: 99c5a77765b787545ab8a86396646837, type: 3}
   spawnRadius: 0.8
-  RespawnTime: 0
+  RespawnTime: 30

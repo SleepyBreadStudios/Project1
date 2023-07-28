@@ -351,6 +351,11 @@ public class Player2Behavior : NetworkBehaviour
 								hit.collider.gameObject.GetComponent<PondBehavior>().Fish(GetComponent<Player2Behavior>());
 								return;
 							}
+							// right clicking mushroom?
+							else if (hit.collider.tag == "Mushroom")
+							{
+								hit.collider.gameObject.GetComponent<MushroomBehavior>().HarvestSpores();
+							}
 							#endregion
 						}
 						playerInventory.useHotbarItem(currHotbarSelected, GetComponent<Player2Behavior>(), "right");

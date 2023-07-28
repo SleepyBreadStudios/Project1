@@ -16,11 +16,11 @@ MonoBehaviour:
   inspectorRecipeList:
   - item: Gold
     count: 5
-  - item: Carrot husk
+  - item: CarrotHusk
     count: 3
-  - item: Pumpkin rind
+  - item: PumpkinRind
     count: 2
-  - item: Apple core
+  - item: AppleCore
     count: 2
   craftedItem: {fileID: 11400000, guid: f7c1d313ce38ae541b3687c6ded67bf2, type: 2}
   numOfItems: 4

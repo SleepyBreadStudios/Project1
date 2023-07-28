@@ -73,7 +73,7 @@ public class BushBehavior : NetworkBehaviour
     // Regenerating object
     public IEnumerator Regenerate()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(RespawnTime);
         currRegenerating = false;
         //sprite.sprite = bushReady;
         spriteNum.Value = 1;

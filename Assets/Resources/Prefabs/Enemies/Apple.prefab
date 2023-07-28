@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2561357299060517084}
   - component: {fileID: 6887931992651315742}
   - component: {fileID: 3951622243771164848}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 2053113340181064221}
   - component: {fileID: 9061647057961791911}
   - component: {fileID: 9054926393187670398}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 3748506796218396243}
   - component: {fileID: 2102259053585343050}
   - component: {fileID: 4499706666441355999}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Apple
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -504,7 +504,7 @@ GameObject:
   - component: {fileID: 8652649446417313431}
   - component: {fileID: 7215720340026397917}
   - component: {fileID: 7641600102754499214}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

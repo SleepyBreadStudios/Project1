@@ -14,6 +14,9 @@ using UnityEngine.UI;
 
 public class MushroomBehavior : EnemyBehavior
 {
+    [SerializeField]
+    private GameObject item = null;
+
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private bool isIdle;
@@ -23,6 +26,12 @@ public class MushroomBehavior : EnemyBehavior
 
     [SerializeField]
     private float moveBias = 0.8f;
+
+    // how long it takes for mushroom to regenerate
+    [SerializeField]
+    private float sporeRespawnTime;
+
+    private bool currRegenerating;
 
     void Start()
     {
@@ -113,5 +122,22 @@ public class MushroomBehavior : EnemyBehavior
                 }
             }
         }
+    }
+
+    public void HarvestSpores()
+	{
+        if(!currRegenerating)
+		{
+            GameObject itemObj = Instantiate(item, new Vector3(transform.position.x, transform.position.y, -1), Quaternion.identity) as GameObject;
+            itemObj.GetComponent<NetworkObject>().Spawn(true);
+            StartCoroutine("Regenerate");
+            currRegenerating = true;
+        }
+	}
+
+    public IEnumerator Regenerate()
+    {
+        yield return new WaitForSeconds(sporeRespawnTime);
+        currRegenerating = false;
     }
 }
