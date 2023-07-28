@@ -77,27 +77,73 @@ public class WeaponBehavior : ItemBehavior
                 Debug.Log("Pong! " + (mousePos.x - playerBehavior.transform.position.x));
                 playerBehavior.Flip(false, true);
             }
+                WeaponSwingServerRpc();
 
-            weaponActive = Instantiate(prefab, playerBehavior.transform.position, Quaternion.identity);
-            weaponActive.GetComponent<NetworkObject>().Spawn(true);
-            weaponActive.gameObject.GetComponent<Renderer>().enabled = true;
-            weaponActive.gameObject.GetComponent<Collider2D>().enabled = true;
-            var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(weaponActive.transform.position);
-            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            weaponActive.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            weaponActive.transform.Translate(startX + (float) 0.25, startY, 0);
-            weaponActive.transform.parent = playerBehavior.transform;
-
-            if (weaponActive.GetComponent<WeaponBehavior>() != null)
-            {
-                weaponActive.GetComponent<WeaponBehavior>().setHeld(true);
-            }
+            
         }
 
         return "Weapon";
     }
 
-    protected override void Awake()
+	[ServerRpc(RequireOwnership = false)]
+	public void WeaponSwingServerRpc(ServerRpcParams serverRpcParams = default)
+	{
+		Debug.Log("Swing");
+		var clientId = serverRpcParams.Receive.SenderClientId;
+		// check if clientid is connected
+		if (NetworkManager.ConnectedClients.ContainsKey(clientId))
+		{
+			var client = NetworkManager.ConnectedClients[clientId];
+
+			weaponActive = Instantiate(Resources.Load("Prefabs/Items/" + itemName), client.PlayerObject.transform.position, Quaternion.identity) as GameObject;
+            // new Vector2(client.PlayerObject.transform.position.x + startX + 0.25f, client.PlayerObject.transform.position.y + startY)
+            weaponActive.GetComponent<NetworkObject>().Spawn(true);
+			weaponActive.gameObject.GetComponent<Renderer>().enabled = true;
+            weaponActive.gameObject.GetComponent<Collider2D>().enabled = true;
+            var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(weaponActive.transform.position);
+			var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+			weaponActive.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+			weaponActive.transform.Translate(startX + (float)0.25, startY, 0);
+			weaponActive.transform.parent = client.PlayerObject.transform;
+            
+
+
+            if (weaponActive.GetComponent<WeaponBehavior>() != null)
+			{
+				weaponActive.GetComponent<WeaponBehavior>().setHeld(true);
+			}
+		}
+
+	}
+
+	//[ServerRpc]
+	//public void WeaponSwingServerRpc()
+	//{
+	//    Debug.Log("Swing");
+
+	//    // check if clientid is connected
+	//    if (NetworkManager.ConnectedClients.ContainsKey(OwnerClientId))
+	//    {
+	//        var client = NetworkManager.ConnectedClients[OwnerClientId];
+
+	//        weaponActive = Instantiate(prefab, client.PlayerObject.transform.position, Quaternion.identity);
+	//        weaponActive.GetComponent<NetworkObject>().Spawn(true);
+	//        weaponActive.gameObject.GetComponent<Renderer>().enabled = true;
+	//        weaponActive.gameObject.GetComponent<Collider2D>().enabled = true;
+	//        var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(weaponActive.transform.position);
+	//        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+	//        weaponActive.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+	//        weaponActive.transform.Translate(startX + (float)0.25, startY, 0);
+	//        weaponActive.transform.parent = client.PlayerObject.transform;
+
+	//        if (weaponActive.GetComponent<WeaponBehavior>() != null)
+	//        {
+	//            weaponActive.GetComponent<WeaponBehavior>().setHeld(true);
+	//        }
+	//    }
+	//}
+
+	protected override void Awake()
     {
         base.Awake();
         leftOrRight = "left";
@@ -113,4 +159,5 @@ public class WeaponBehavior : ItemBehavior
 	{
         return weaponType;
 	}
+
 }

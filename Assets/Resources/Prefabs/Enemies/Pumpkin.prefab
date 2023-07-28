@@ -438,10 +438,28 @@ MonoBehaviour:
   - {fileID: 1891140179815386372, guid: 0cdf3919ff7fcfe4ead4d01200196704, type: 3}
   - {fileID: 2269600949024442516, guid: 841a2a352a2c1b245bc37cb656d58181, type: 3}
   - {fileID: 4798766307938537059, guid: 1676b12460b37b344bd922c7eaafcd74, type: 3}
+  - {fileID: 4432664316242536429, guid: 7a4b5225afd99024a8e59c2d002f11e5, type: 3}
+  - {fileID: 8561137990481344694, guid: f8989b9ac2e9e5747916bc7e4d408eeb, type: 3}
+  - {fileID: 691156706714313331, guid: 7084e0bc4eef6e4499759d7c72eda435, type: 3}
+  - {fileID: 769196456530744328, guid: 6fdaae24d7688ea49bc6d8ffe28edbe5, type: 3}
+  - {fileID: 8833101434124162276, guid: ba791bbb640c90b4a8a0f46dd99fce78, type: 3}
+  - {fileID: 6934226965379914243, guid: 7ead4165aff8be94c9b16e5b5776727a, type: 3}
+  - {fileID: 3360225541718799570, guid: 80ef580b38b64844f84e44e72aed1c98, type: 3}
+  - {fileID: 8433339978993067302, guid: 71901e18ec6e13949856acdd1b136d6d, type: 3}
+  - {fileID: 8575983762674333999, guid: 5c442d4ede0ebb4478e2ac1dfbd86ee3, type: 3}
   dropChance:
   - 50
   - 50
   - 100
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10
   health: 3
   maxHealth: 3
   speed: 3

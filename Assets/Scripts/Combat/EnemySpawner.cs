@@ -71,7 +71,7 @@ public class EnemySpawner : NetworkBehaviour
         StartCoroutine(SpawnEnemy(interval, enemy));
     }*/
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void SpawnServerRpc()
     {
         float x = transform.position.x;

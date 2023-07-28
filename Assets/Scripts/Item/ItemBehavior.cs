@@ -18,6 +18,9 @@ public class ItemBehavior : NetworkBehaviour
     private Vector2 randLoc;
     private float immunity = 0.0f;
 
+    [SerializeField]
+    protected string itemName;
+
     //private readonly string[] itemPrefabs = {"capsule", "checkmark", "circle", "diamond", "flower", "hexagonpoint", "roundedsquare", "star", "triangle"};
 
     // individual items can have their own count that alters based on players
@@ -30,9 +33,11 @@ public class ItemBehavior : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+        base.OnNetworkSpawn();
         itemCount.Value = itemType.GetCount();
         //itemCount.OnValueChanged += UpdateCount;
         itemDurability = itemType.GetStartingCondition();
+        itemName = itemType.GetName();
     }
 
     protected virtual void Awake()
