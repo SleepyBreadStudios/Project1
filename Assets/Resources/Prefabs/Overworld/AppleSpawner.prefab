@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5185862690464323752}
   - component: {fileID: 5255934023791760634}
   - component: {fileID: 4087634120019631661}
+  - component: {fileID: 2453884098632061460}
   m_Layer: 0
   m_Name: AppleSpawner
   m_TagString: Untagged
@@ -34,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 1, z: 0}
 --- !u!212 &5738401770435824497
 SpriteRenderer:
@@ -247,3 +248,19 @@ PolygonCollider2D:
       - {x: 0.024999999, y: -0.775}
       - {x: 0.125, y: -0.835}
   m_UseDelaunayMesh: 0
+--- !u!114 &2453884098632061460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6130051730302897867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f81c0f5b0dcfe5747a8a78c8dd2a49f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 3599189078228081255, guid: c8d582487d0ab3b4588ac00c3c02a9d1, type: 3}
+  health: 3
+  maxHealth: 3
+  ToolRequired: Axe
