@@ -507,10 +507,10 @@ public class Player2Behavior : NetworkBehaviour
 			#endregion
 
 			// test dmg
-			if (Input.GetKeyDown(KeyCode.Space))
-			{
-				DamagePlayer();
-			}
+			//if (Input.GetKeyDown(KeyCode.Space))
+			//{
+			//	DamagePlayer();
+			//}
 
 			// shoot projectile
 

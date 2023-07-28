@@ -107,9 +107,9 @@ public class OverworldBehavior : NetworkBehaviour
         }
     }
 
-    public override void OnNetworkDespawn()
-    {
-        Destroy(gameObject);
-    }
+    //public override void OnNetworkDespawn()
+    //{
+    //    Destroy(gameObject);
+    //}
     
 }
