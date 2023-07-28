@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1608008618213066179}
   - component: {fileID: 1367956812962929981}
   - component: {fileID: 1461528262006594840}
-  - component: {fileID: 3985703394864266806}
+  - component: {fileID: 156744769376796349}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Item
@@ -226,7 +226,7 @@ PolygonCollider2D:
       - {x: 0.8, y: 0.6}
       - {x: 0.1, y: 0.7}
   m_UseDelaunayMesh: 0
---- !u!114 &3985703394864266806
+--- !u!114 &156744769376796349
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,9 +235,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8103103625018479042}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08e9dd720fc73024abb5bba8fa797980, type: 3}
+  m_Script: {fileID: 11500000, guid: 3488d8948fb9e0e47888186719fde98f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: {fileID: 11400000, guid: 8c7e177579d6c9d4f9ac24efd250e6ce, type: 2}
+  itemCount: 0
   leftOrRight: right
   AmountToHeal: 1

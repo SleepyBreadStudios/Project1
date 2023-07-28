@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: FrostChest
   m_EditorClassIdentifier: 
   itemName: Frost Chest
-  displayName: Frost Chest
-  icon: {fileID: 0}
+  displayName: Frost Scarf
+  icon: {fileID: 21300000, guid: 0a47f84ca69dcaa499f8696b470fb188, type: 3}
   count: 1
   maxStack: 1
   startingCondition: 100
   unique: 0
-  itemBehavior: {fileID: 0}
-  equipType: 
+  itemBehavior: {fileID: 8041100672224108795, guid: 080b3ade540c593419bcd709dcf5e6b5, type: 3}
+  equipType: Chest
   defense: 4
   useText: Equip for 4 defense
   itemDescription: Wearing this armor would make you colder no?

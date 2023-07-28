@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
+  m_Name: FrostPotion
+  m_EditorClassIdentifier: 
+  itemName: FrostPotion
+  displayName: Frost Potion
+  icon: {fileID: 21300000, guid: 692a96b41b804034e9aacb7e602be8ff, type: 3}
+  count: 1
+  maxStack: 16
+  startingCondition: 100
+  unique: 0
+  itemBehavior: {fileID: 5249906287857783439, guid: 5e4a52780e1795b4790ba5ca8eb21f83, type: 3}
+  equipType: 
+  defense: 0
+  useText: Provides 30 seconds of cold resistance
+  itemDescription: By ingesting the cold you become one with the ice. How cool! :)

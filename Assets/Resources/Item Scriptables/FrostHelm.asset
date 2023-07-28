@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: FrostHelm
   m_EditorClassIdentifier: 
   itemName: Frost Helm
-  displayName: Frost Helm
-  icon: {fileID: 0}
+  displayName: Frost Goggles
+  icon: {fileID: 21300000, guid: 06f8e29a6a85b4d46a98b35c6a300d73, type: 3}
   count: 1
   maxStack: 1
   startingCondition: 100
   unique: 0
-  itemBehavior: {fileID: 0}
+  itemBehavior: {fileID: 2444755442974366232, guid: 6a943f6af50eb1a40bd4407b820c392c, type: 3}
   equipType: Head
   defense: 2
   useText: Equip for 2 defense

@@ -1103,6 +1103,10 @@ MonoBehaviour:
   currInventorySize: 0
   playerInventory: {fileID: 1025459570113205275}
   player: {fileID: 3175410834743141282}
+  FrostItems:
+  - {fileID: 11400000, guid: aa5f34711e805f94895e22627c72d482, type: 2}
+  - {fileID: 11400000, guid: 20211717832944f4d8f8e306f4c3de56, type: 2}
+  - {fileID: 11400000, guid: 87ba3462fd647ea46875e1137d67f0d5, type: 2}
 --- !u!114 &2331978589639944914
 MonoBehaviour:
   m_ObjectHideFlags: 0

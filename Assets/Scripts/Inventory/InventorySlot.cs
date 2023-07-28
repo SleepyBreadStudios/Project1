@@ -65,6 +65,8 @@ public class InventorySlot : ItemSlotUI, IDropHandler
             if ((itemDragHandler.ItemSlotUI as EquipSlot) != null)
             {
                 inventory.SwapWEquip(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
+                equipment.CheckResistCold();
+                equipment.CalculateCurrDef();
             }
         }
         else
@@ -95,9 +97,12 @@ public class InventorySlot : ItemSlotUI, IDropHandler
         {
             if (equipment.AddStack(ItemSlot, SlotIndex))
             {
+                inventory.DeleteFromInventory(SlotIndex);
                 // item successfully moved to equipment
                 // empty inventory slot
-                inventory.DeleteFromInventory(SlotIndex);
+                equipment.CalculateCurrDef();
+                equipment.CheckResistCold();
+          
             }
         }
 

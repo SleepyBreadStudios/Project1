@@ -15,11 +15,11 @@ MonoBehaviour:
   itemName: Potion
   displayName: Small Health Potion
   icon: {fileID: 21300000, guid: 19fa5125b877cce4d93e412f70505d7f, type: 3}
-  count: 4
+  count: 1
   maxStack: 16
   startingCondition: 100
   unique: 0
-  itemBehavior: {fileID: 4507912236487110466, guid: 1a7edbdacf754b5489eecec4b71d02ce, type: 3}
+  itemBehavior: {fileID: 2440169828667194929, guid: 1a7edbdacf754b5489eecec4b71d02ce, type: 3}
   equipType: 
   defense: 0
   useText: Restores 5 health to the player

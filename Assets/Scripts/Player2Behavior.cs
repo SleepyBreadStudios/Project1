@@ -88,6 +88,10 @@ public class Player2Behavior : NetworkBehaviour
 	private bool codeEnabled = false;
 	private bool dialogueEnabled = false;
 
+	[SerializeField]
+	private bool resistColdEnabled = false;
+	private bool potResistCold = false;
+
 	// Escape menu access
 	private EscapeMenu escMenu = null;
 	
@@ -108,6 +112,11 @@ public class Player2Behavior : NetworkBehaviour
 	public float TimeLeft = 4.0f;
 
 	private bool isDead = false;
+
+	// for potion durations - methods will set this as needed
+	private float tempPotDuration;
+
+	private bool playerInSnow = false;
 
 	// Commented out because not used
 	//private bool isMoving = true;
@@ -284,6 +293,7 @@ public class Player2Behavior : NetworkBehaviour
 					{
 						InventoryUI.transform.localScale = new Vector3(1, 1, 1);
 						EquipUI.transform.localScale = new Vector3(1, 1, 1);
+						HotbarUI.transform.localScale = new Vector3(0, 0, 0);
 						HotbarUI.transform.localScale = new Vector3(0, 0, 0);
 						RecipeUI.transform.localScale = new Vector3(0, 0, 0);
 						inventoryEnabled = true;
@@ -601,6 +611,51 @@ public class Player2Behavior : NetworkBehaviour
 	{
 		playerDefense = newDef;
 	}
+
+	public void ResistCold(bool enable)
+	{
+		// don't bother with updating resist cold if a pot is in progress
+		if(potResistCold)
+		{
+			return;
+		}
+		resistColdEnabled = enable;
+		CheckInSnow();
+	}
+
+	public void ResistColdDuration(float duration)
+	{
+		ResistCold(true);
+		tempPotDuration = duration;
+		potResistCold = true;
+		StartCoroutine("StartResistTimer");
+		Debug.Log("Drank a cold potion");
+		CheckInSnow();
+	}
+
+	public IEnumerator StartResistTimer()
+	{
+		yield return new WaitForSeconds(tempPotDuration);
+		potResistCold = false;
+		Debug.Log("Cold potion depleted");
+		ResistCold(false);
+		CheckInSnow();
+	}
+
+	// check if in snow and update based on that
+	// in case of putting on armor mid biome or taking off
+	public void CheckInSnow()
+	{
+		if(playerInSnow && !resistColdEnabled)
+		{
+			EnterSnow();
+		}
+		else if(playerInSnow && resistColdEnabled)
+		{
+			walkSpeed = 0.02f;
+		}
+	}
+
 	#endregion
 
 	public void OpenRecipe(List<string> recipeText)
@@ -689,9 +744,7 @@ public class Player2Behavior : NetworkBehaviour
 		// }
 
 		if (collision.CompareTag("Snow")) {
-			Debug.Log("SNOW SLOW");
-			walkSpeed = 0.01f;
-			StartCoroutine("SnowDOT");
+			EnterSnow();
 		}
 	}
 
@@ -704,11 +757,31 @@ public class Player2Behavior : NetworkBehaviour
 
 	private void OnTriggerExit2D(Collider2D collider) {
 		if (collider.CompareTag("Snow")) {
-			walkSpeed = 0.02f; // Speed returns back to normal upon exiting snow
-			StopCoroutine("SnowDOT");
+			ExitSnow();
 		}
 	}
 
+	public void EnterSnow()
+	{
+		playerInSnow = true;
+		if (!resistColdEnabled)
+		{
+			Debug.Log("SNOW SLOW");
+			walkSpeed = 0.01f;
+			StartCoroutine("SnowDOT");
+		}
+		else
+		{
+			walkSpeed = 0.02f; 
+		}
+	}
+
+	public void ExitSnow()
+	{
+		playerInSnow = false;
+		walkSpeed = 0.02f; // Speed returns back to normal upon exiting snow
+		StopCoroutine("SnowDOT");
+	}
 
 
 	public void Flip(bool oldValue, bool newValue)
@@ -748,9 +821,16 @@ public class Player2Behavior : NetworkBehaviour
 	IEnumerator SnowDOT()
 	{
 		yield return new WaitForSeconds(5.0f);
-		DamagePlayer(1);
-		animator.Play("Player_Cold");
-		StartCoroutine("SnowDOT");
+		if(!resistColdEnabled)
+		{
+			DamagePlayer(1);
+			animator.Play("Player_Cold");
+			StartCoroutine("SnowDOT");
+		}
+		else
+		{
+			Debug.Log("Yay snow resistance");
+		}
 	}
 
 	// TESTING: Deactivates set of the player's UI including inventory, crafting, etc.

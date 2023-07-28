@@ -43,6 +43,8 @@ public class EquipSlot : ItemSlotUI, IDropHandler
             if ((itemDragHandler.ItemSlotUI as InventorySlot) != null)
             {
                 equipment.SwapWInventory(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
+                equipment.CalculateCurrDef();
+                equipment.CheckResistCold();
             }
         }
         // these should not be possible !
@@ -65,6 +67,8 @@ public class EquipSlot : ItemSlotUI, IDropHandler
             if ((itemDragHandler.ItemSlotUI as EquipSlot) != null)
             {
                 equipment.Swap(itemDragHandler.ItemSlotUI.SlotIndex, SlotIndex);
+                equipment.CalculateCurrDef();
+                equipment.CheckResistCold();
             }
         }
         else
@@ -86,11 +90,14 @@ public class EquipSlot : ItemSlotUI, IDropHandler
         {
             if (inventory.AddStack(ItemSlot))
             {
+                // empty crafting slot
+                equipment.DeleteFromInventory(SlotIndex);
                 // item successfully moved from crafting
                 // update def 
                 equipment.CalculateCurrDef();
-                // empty crafting slot
-                equipment.DeleteFromInventory(SlotIndex);
+                equipment.CheckResistCold();
+                
+                
             }
         }
 

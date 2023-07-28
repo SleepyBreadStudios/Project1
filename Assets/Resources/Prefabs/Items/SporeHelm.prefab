@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7522235019283981562}
   - component: {fileID: 6881455180387853819}
   - component: {fileID: 5193069611873142363}
-  - component: {fileID: 8747256367161589727}
+  - component: {fileID: 7108842255512043059}
   m_Layer: 0
   m_Name: SporeHelm
   m_TagString: Item
@@ -36,7 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 60
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6151109164840281896
 SpriteRenderer:
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: {fileID: 11400000, guid: bcb911cb6c4ad564fa141e869b9aafad, type: 2}
+  itemCount: 0
   leftOrRight: 
 --- !u!114 &750326655009764198
 MonoBehaviour:
@@ -185,8 +186,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!58 &8747256367161589727
-CircleCollider2D:
+--- !u!60 &7108842255512043059
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -220,4 +221,21 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.7916667
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.5833334, y: 1.5833334}
+    newSize: {x: 1.5833334, y: 1.25}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.5311846, y: 0.5668249}
+      - {x: -0.78642577, y: 0.332548}
+      - {x: -0.817872, y: -0.5096967}
+      - {x: 0.8073899, y: -0.4992147}
+      - {x: 0.80738974, y: 0.3721149}
+      - {x: 0.49816722, y: 0.5773071}
+  m_UseDelaunayMesh: 0

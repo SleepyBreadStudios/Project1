@@ -24,6 +24,9 @@ public class EquipInventoryManager : PlayerItemManager
     private int chestIndex = 1;
     private int legIndex = 2;
     private int accIndex = 3;
+
+    [SerializeField]
+    private List<ItemData> FrostItems = null;
     // do nothing
     public override void SplitStack(int slotIndex)
     {
@@ -54,6 +57,8 @@ public class EquipInventoryManager : PlayerItemManager
                     currInventorySize++;
                     OnItemsUpdated.Invoke();
                     OnEquipUpdated.Invoke();
+                    CheckResistCold();
+                    CalculateCurrDef();
                     return true;
                 }
                 else
@@ -65,6 +70,8 @@ public class EquipInventoryManager : PlayerItemManager
                     inventory[headIndex] = itemSlot;
                     OnItemsUpdated.Invoke();
                     OnEquipUpdated.Invoke();
+                    CheckResistCold();
+                    CalculateCurrDef();
                     // not because it failed but because we don't want to delete the item
                     // after we add it to inventory
                     return false;
@@ -78,6 +85,8 @@ public class EquipInventoryManager : PlayerItemManager
                     currInventorySize++;
                     OnItemsUpdated.Invoke();
                     OnEquipUpdated.Invoke();
+                    CheckResistCold();
+                    CalculateCurrDef();
                     return true;
                 }
                 else
@@ -89,6 +98,8 @@ public class EquipInventoryManager : PlayerItemManager
                     inventory[chestIndex] = itemSlot;
                     OnItemsUpdated.Invoke();
                     OnEquipUpdated.Invoke();
+                    CheckResistCold();
+                    CalculateCurrDef();
                     // not because it failed but because we don't want to delete the item
                     // after we add it to inventory
                     return false;
@@ -102,6 +113,8 @@ public class EquipInventoryManager : PlayerItemManager
                     currInventorySize++;
                     OnItemsUpdated.Invoke();
                     OnEquipUpdated.Invoke();
+                    CheckResistCold();
+                    CalculateCurrDef();
                     return true;
                 }
                 else
@@ -113,6 +126,8 @@ public class EquipInventoryManager : PlayerItemManager
                     inventory[legIndex] = itemSlot;
                     OnItemsUpdated.Invoke();
                     OnEquipUpdated.Invoke();
+                    CheckResistCold();
+                    CalculateCurrDef();
                     // not because it failed but because we don't want to delete the item
                     // after we add it to inventory
                     return false;
@@ -126,6 +141,8 @@ public class EquipInventoryManager : PlayerItemManager
                     currInventorySize++;
                     OnItemsUpdated.Invoke();
                     OnEquipUpdated.Invoke();
+                    CheckResistCold();
+                    CalculateCurrDef();
                     return true;
                 }
                 else
@@ -137,6 +154,8 @@ public class EquipInventoryManager : PlayerItemManager
                     inventory[accIndex] = itemSlot;
                     OnItemsUpdated.Invoke();
                     OnEquipUpdated.Invoke();
+                    CheckResistCold();
+                    CalculateCurrDef();
                     // not because it failed but because we don't want to delete the item
                     // after we add it to inventory
                     return false;
@@ -210,7 +229,8 @@ public class EquipInventoryManager : PlayerItemManager
                 playerInventory.AddSlotByRef(equipSlot, inventoryIndex);
             }
         }
-
+        CheckResistCold();
+        CalculateCurrDef();
         OnItemsUpdated.Invoke();
         OnEquipUpdated.Invoke();
     }
@@ -221,6 +241,7 @@ public class EquipInventoryManager : PlayerItemManager
         Debug.Log("Attempting to drag equipment into wrong slots");
     }
 
+    // combine these two methods into one helper call - called in equip slot and inventory slot
     public void CalculateCurrDef()
     {
         float count = 0;
@@ -232,6 +253,51 @@ public class EquipInventoryManager : PlayerItemManager
             }
         }
         player.UpdateDefense(count);
+    }
+
+    public bool CheckResistCold()
+	{
+        //Debug.Log("hello");
+        // check if have accessory on
+        Debug.Log("Resisting cold?");
+        var tempSize = currInventorySize;
+        if(!inventory[3].IsEmptySlot())
+		{
+            tempSize--;
+            Debug.Log("Accessory worn, subtracting from total");
+		}
+        if(tempSize != FrostItems.Count)
+		{
+            Debug.Log("Inventory size: " + tempSize);
+            Debug.Log("Frost gear size: " + FrostItems.Count);
+            player.ResistCold(false);
+            // less than what is required
+            return false;
+		}
+        Debug.Log("1 Inventory size: " + tempSize);
+        Debug.Log("2 Inventory size: " + currInventorySize);
+        for (int i = 0; i < FrostItems.Count; i++)
+        {
+            if (inventory[i].item != null)
+            {
+                if(!FrostItems.Contains(inventory[i].item))
+				{
+                    // if don't have one of the set, no resistance
+                    player.ResistCold(false);
+                    return false;
+				}
+                //count += inventory[i].item.GetDefense();  
+            }
+            else
+			{
+                // if any are null then set not complete and no resistance
+                player.ResistCold(false);
+                return false;
+			}
+        }
+        Debug.Log("Resist cold = true");
+        player.ResistCold(true);
+        return true;
     }
 
     private void Awake()

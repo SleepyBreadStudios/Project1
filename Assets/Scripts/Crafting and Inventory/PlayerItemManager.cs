@@ -227,6 +227,11 @@ public abstract class PlayerItemManager : MonoBehaviour
         {
             //currInventorySize++;
         }
+        if(itemSlot.item == null)
+		{
+            currInventorySize--;
+		}
+
         OnItemsUpdated.Invoke();
     }
 

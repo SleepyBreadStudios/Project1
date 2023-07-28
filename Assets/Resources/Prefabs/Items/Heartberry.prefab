@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 4178443315099561712}
   - component: {fileID: 4958617626795767438}
   - component: {fileID: 606777683190331589}
-  - component: {fileID: 7388596827926250022}
   - component: {fileID: 2274675020447159623}
+  - component: {fileID: -8639677421227309342}
   m_Layer: 0
   m_Name: Heartberry
   m_TagString: Item
@@ -171,21 +171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7388596827926250022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3135274733432999643}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08e9dd720fc73024abb5bba8fa797980, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemType: {fileID: 11400000, guid: 94564404ebdb03a4fa515543dc7b02c8, type: 2}
-  leftOrRight: right
-  AmountToHeal: 1
 --- !u!58 &2274675020447159623
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -222,3 +207,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.55
+--- !u!114 &-8639677421227309342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3135274733432999643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3488d8948fb9e0e47888186719fde98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: {fileID: 11400000, guid: 94564404ebdb03a4fa515543dc7b02c8, type: 2}
+  itemCount: 0
+  leftOrRight: right
+  AmountToHeal: 1

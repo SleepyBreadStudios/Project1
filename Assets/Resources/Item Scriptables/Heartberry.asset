@@ -19,7 +19,7 @@ MonoBehaviour:
   maxStack: 99
   startingCondition: 100
   unique: 0
-  itemBehavior: {fileID: 7388596827926250022, guid: f1af43fef24478e46b9fed3682e86277, type: 3}
+  itemBehavior: {fileID: -8639677421227309342, guid: f1af43fef24478e46b9fed3682e86277, type: 3}
   equipType: 
   defense: 0
   useText: Restores 1 health to the player
