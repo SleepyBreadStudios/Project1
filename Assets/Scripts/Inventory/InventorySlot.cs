@@ -145,11 +145,18 @@ public class InventorySlot : ItemSlotUI, IDropHandler
 
         //Debug.Log(itemSlot.GetItemName());
         // update to drop better range
-        GameObject newItem = Instantiate(Resources.Load("Prefabs/Items/" + itemSlot.GetItemName()), new Vector2(inventory.playerBehavior.GetTransformX() - 1, inventory.playerBehavior.GetTransformY()), Quaternion.identity) as GameObject;
+        SpawnDroppedItemServerRpc(itemSlot.GetItemName(), itemSlot.GetCurrStack());
+
+        inventory.DeleteFromInventory(slotIndex);
+    }
+
+    [ServerRpc]
+    public void SpawnDroppedItemServerRpc(string itemName, int itemCount)
+	{
+        GameObject newItem = Instantiate(Resources.Load("Prefabs/Items/" + itemName), new Vector2(inventory.playerBehavior.GetTransformX() - 1, inventory.playerBehavior.GetTransformY()), Quaternion.identity) as GameObject;
         newItem.GetComponent<NetworkObject>().Spawn(true);
         //Debug.Log(itemSlot.GetCurrStack());
-        newItem.GetComponent<ItemBehavior>().SetCount(itemSlot.GetCurrStack());
-        inventory.DeleteFromInventory(slotIndex);
+        newItem.GetComponent<ItemBehavior>().SetCount(itemCount);
     }
 
     //public override void OnDrop(PointerEventData eventData)

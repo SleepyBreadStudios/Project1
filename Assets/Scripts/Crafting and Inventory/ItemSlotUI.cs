@@ -9,8 +9,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Unity.Netcode;
 
-public abstract class ItemSlotUI : MonoBehaviour, IDropHandler
+public abstract class ItemSlotUI : NetworkBehaviour, IDropHandler
 {
     [SerializeField]
     protected Image itemIconImage = null;

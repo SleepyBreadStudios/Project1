@@ -56,7 +56,10 @@ public class BushBehavior : NetworkBehaviour
             return;
 		}
         currRegenerating = true;
-        ItemDrop();
+        if(IsServer)
+		{
+            ItemDrop();
+        }
 
         //sprite.sprite = bushHarvested;
         spriteNum.Value = 0;

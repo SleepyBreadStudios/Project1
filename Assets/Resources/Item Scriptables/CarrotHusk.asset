@@ -10,18 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
-  m_Name: Apple core
+  m_Name: CarrotHusk
   m_EditorClassIdentifier: 
-  itemName: AppleCore
-  displayName: Apple Core
-  icon: {fileID: 21300000, guid: 173f582ebb75d72469ad8027b22d8b5a, type: 3}
+  itemName: CarrotHusk
+  displayName: Carrot Husk
+  icon: {fileID: 21300000, guid: 83b5be5a97e101e42b3e97c08e9e3d99, type: 3}
   count: 1
   maxStack: 99
   startingCondition: 100
   unique: 0
-  itemBehavior: {fileID: 7885888704769493722, guid: d0783286f189cc74689514b9b7e810e2, type: 3}
+  itemBehavior: {fileID: 6606204988927445211, guid: 6ad0d44c3271d6848a5aaa2f31c38a73, type: 3}
   equipType: 
   defense: 0
   useText: Crafting material
-  itemDescription: The core of an apple. It must have been used to keep the doctors
-    away.
+  itemDescription: A carrot. What happened to it's size?

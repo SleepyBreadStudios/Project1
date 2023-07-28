@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7653951697535992567}
   - component: {fileID: 1477644719941960296}
   - component: {fileID: 1185146963209651669}
+  - component: {fileID: 2561006186411093982}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Overworld
@@ -34,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 82
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 1, z: 0}
 --- !u!212 &3146909004755249960
 SpriteRenderer:
@@ -138,7 +139,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5876442049078357144}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -168,7 +169,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.15}
     oldSize: {x: 8.46, y: 10.02}
     newSize: {x: 8.46, y: 10.02}
     adaptiveTilingThreshold: 0.5
@@ -253,3 +254,80 @@ MonoBehaviour:
   health: 3
   maxHealth: 3
   ToolRequired: Axe
+--- !u!68 &2561006186411093982
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5876442049078357144}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -1.3013178, y: 1.5174406}
+  - {x: -0.5947436, y: 1.0019227}
+  - {x: -0.56986225, y: 0.5390315}
+  - {x: -0.8141183, y: 0.02579552}
+  - {x: -2.0062878, y: -0.63117033}
+  - {x: -1.8784246, y: -0.7202001}
+  - {x: -0.94600874, y: -0.7045396}
+  - {x: -1.3720169, y: -1.4141684}
+  - {x: -1.1985496, y: -1.5117363}
+  - {x: -0.76400465, y: -1.4927305}
+  - {x: -0.26550415, y: -1.168912}
+  - {x: 0.11165901, y: -0.9532066}
+  - {x: 0.92303526, y: -1.3773528}
+  - {x: 1.304792, y: -1.5324064}
+  - {x: 1.5847093, y: -1.409126}
+  - {x: 1.1290221, y: -0.991686}
+  - {x: 2.1977906, y: -0.97258526}
+  - {x: 2.1650991, y: -0.7924438}
+  - {x: 1.3050189, y: -0.39579132}
+  - {x: 1.0854095, y: -0.061573237}
+  - {x: 1.1284591, y: 0.13510185}
+  - {x: 1.2116153, y: 0.4655553}
+  - {x: 1.2503784, y: 0.73033535}
+  - {x: 1.136561, y: 1.1674606}
+  - {x: 1.2917666, y: 1.5564249}
+  - {x: 1.1588767, y: 1.7426121}
+  - {x: 1.021336, y: 1.8452704}
+  - {x: 0.699767, y: 1.5549519}
+  - {x: 0.39245588, y: 1.6340625}
+  - {x: 0.19098833, y: 1.733382}
+  - {x: -0.048248842, y: 1.6945889}
+  - {x: -0.33667064, y: 1.6103489}
+  - {x: -0.5519954, y: 1.8504169}
+  - {x: -0.5843623, y: 1.5858195}
+  - {x: -1.0510318, y: 1.735894}
+  - {x: -1.314906, y: 1.5398533}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0

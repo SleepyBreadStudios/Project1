@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
   m_Name: FrostLegs
   m_EditorClassIdentifier: 
-  itemName: Frost Legs
+  itemName: FrostLegs
   displayName: Frost Pants
   icon: {fileID: 21300000, guid: e99d7750459e9064c99b8754a10f8741, type: 3}
   count: 1

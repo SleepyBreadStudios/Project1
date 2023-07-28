@@ -8,8 +8,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.Netcode;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : NetworkBehaviour
 {
     private Queue<string> sentences;
 
@@ -79,7 +80,7 @@ public class DialogueManager : MonoBehaviour
     private NPCBehavior npc = default;
 
     // Start is called before the first frame update
-    void Start()
+    public override void OnNetworkSpawn()
     {
         // Set up option triangle UI 
         optionTransform = optionUI.GetComponent<RectTransform>();

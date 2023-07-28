@@ -22,15 +22,21 @@ public class ItemBehavior : NetworkBehaviour
 
     // individual items can have their own count that alters based on players
     [SerializeField]
-    private int itemCount = 0;
+    private NetworkVariable<int> itemCount = new NetworkVariable<int>();
 
     private int itemDurability = 100;
 
     public string leftOrRight = "";
 
+    public override void OnNetworkSpawn()
+    {
+        itemCount.Value = itemType.GetCount();
+        //itemCount.OnValueChanged += UpdateCount;
+        itemDurability = itemType.GetStartingCondition();
+    }
+
     protected virtual void Awake()
     {
-        itemCount = itemType.GetCount();
         itemDurability = itemType.GetStartingCondition();
     }
 
@@ -42,12 +48,12 @@ public class ItemBehavior : NetworkBehaviour
     public int GetCount()
     {
         //Debug.Log("Get " + itemCount);
-        return itemCount;
+        return itemCount.Value;
     }
 
     public void SetCount(int newCount)
     {
-        itemCount = newCount;
+        itemCount.Value = newCount;
         //Debug.Log(itemCount);
         GetCount();
     }
@@ -90,7 +96,26 @@ public class ItemBehavior : NetworkBehaviour
     */
 
     // on pick up delete, determined by player based on whether item was able to be picked up or not
+ //   public void UpdateCount(float oldValue, newValue)
+	//{
+ //           if (itemCount.Value != newValue)
+ //           {
+ //               itemCount.Value = newValue;
+ //           }
+ //   }
+
     public void Delete()
+    {
+        DespawnServerRpc();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void DespawnServerRpc()
+	{
+        GetComponent<NetworkObject>().Despawn(true);
+	}
+
+    public override void OnNetworkDespawn()
     {
         Destroy(this.gameObject);
     }

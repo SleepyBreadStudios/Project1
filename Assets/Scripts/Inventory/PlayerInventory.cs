@@ -55,9 +55,11 @@ public class PlayerInventory : PlayerItemManager
         int count = nBehavior.GetCount();
 #if Debug
         Debug.Log("Attempting to add item to inventory, inventory count now: " + currInventorySize);
+        Debug.Log("Count of item: " + count);
 #endif
+
         // check if item is unique
-        if(nItem.GetUnique())
+        if (nItem.GetUnique())
         {
             // if it is, check if we have the item in the inventory yet
             var foundUnique = inventory.Find(stackItem => stackItem.item == nItem);

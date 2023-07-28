@@ -702,7 +702,12 @@ public class Player2Behavior : NetworkBehaviour
 #endif
 		if (collision.CompareTag("Item"))
 		{
-			bool delete = playerInventory.AddItem(collision.gameObject.GetComponent<ItemBehavior>(), collision.gameObject.GetComponent<ItemBehavior>().GetItemType());
+			bool delete = false;
+			if(IsClient && IsOwner)
+			{
+				delete = playerInventory.AddItem(collision.gameObject.GetComponent<ItemBehavior>(), collision.gameObject.GetComponent<ItemBehavior>().GetItemType());
+			}
+			
 			if (delete)
 			{
 				collision.gameObject.GetComponent<ItemBehavior>().Delete();
@@ -801,22 +806,26 @@ public class Player2Behavior : NetworkBehaviour
 	{
 		yield return new WaitForSeconds(3.0f);
 		transform.position = new Vector3(0, 0, 0);
-		isDead = false;
-		menuOpen = false;
-		craftingEnabled = false;
-		inventoryEnabled = false;
-		InventoryUI.SetActive(true);
-		CraftingUI.SetActive(true);
-		HotbarUI.SetActive(true);
-		HotbarUI.transform.localScale = new Vector3(1, 1, 1);
-		HealthUI.SetActive(true);
-		EquipUI.SetActive(true);
-		RecipeUI.SetActive(true);
+		if (IsClient && IsOwner)
+		{
+			isDead = false;
+			menuOpen = false;
+			craftingEnabled = false;
+			inventoryEnabled = false;
+			InventoryUI.SetActive(true);
+			CraftingUI.SetActive(true);
+			HotbarUI.SetActive(true);
+			HotbarUI.transform.localScale = new Vector3(1, 1, 1);
+			HealthUI.SetActive(true);
+			EquipUI.SetActive(true);
+			RecipeUI.SetActive(true);
+		}
 		spriteRenderer.enabled = true;
 		playerHealth = maxHealth;
 		healthBar.SetHealth(playerHealth);
 		StopCoroutine("Respawn");
 	}
+
 
 	IEnumerator SnowDOT()
 	{
@@ -838,21 +847,25 @@ public class Player2Behavior : NetworkBehaviour
 	{
 
 		//playerInventory = gameObject.GetComponent<PlayerInventory>();
-		InventoryUI.SetActive(false);
-		CraftingUI.SetActive(false);
-		HotbarUI.SetActive(false);
-		HealthUI.SetActive(false);
-		EquipUI.SetActive(false);
-		RecipeUI.SetActive(false);
-		// make sure everything is not showing 
-		InventoryUI.transform.localScale = new Vector3(0, 0, 0);
-		InventoryUI.transform.position = originalInvPos;
-		CraftingUI.transform.localScale = new Vector3(0, 0, 0);
-		EquipUI.transform.localScale = new Vector3(0, 0, 0);
-		RecipeUI.transform.localScale = new Vector3(0, 0, 0);
+		if (IsClient && IsOwner)
+		{
+			InventoryUI.SetActive(false);
+			CraftingUI.SetActive(false);
+			HotbarUI.SetActive(false);
+			HealthUI.SetActive(false);
+			EquipUI.SetActive(false);
+			RecipeUI.SetActive(false);
+			// make sure everything is not showing 
+			InventoryUI.transform.localScale = new Vector3(0, 0, 0);
+			InventoryUI.transform.position = originalInvPos;
+			CraftingUI.transform.localScale = new Vector3(0, 0, 0);
+			EquipUI.transform.localScale = new Vector3(0, 0, 0);
+			RecipeUI.transform.localScale = new Vector3(0, 0, 0);
+			isDead = true;
+		}
 
 		spriteRenderer.enabled = false;
-		isDead = true;
+		
 
 		// // for esc menu to know when to open and when not to
 		OnMenuOpenUpdated += onMenuOpenUpdated.Raise;

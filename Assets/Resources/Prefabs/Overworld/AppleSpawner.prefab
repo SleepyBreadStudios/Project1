@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5255934023791760634}
   - component: {fileID: 4087634120019631661}
   - component: {fileID: 2453884098632061460}
+  - component: {fileID: 1960559333128714191}
   m_Layer: 0
   m_Name: AppleSpawner
   m_TagString: Overworld
@@ -156,7 +157,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6130051730302897867}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -186,7 +187,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.15}
     oldSize: {x: 1.41, y: 1.67}
     newSize: {x: 8.46, y: 10.02}
     adaptiveTilingThreshold: 0.5
@@ -264,3 +265,79 @@ MonoBehaviour:
   health: 3
   maxHealth: 3
   ToolRequired: Axe
+--- !u!68 &1960559333128714191
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6130051730302897867}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.23731309, y: 0.26222417}
+  - {x: -0.10545153, y: 0.1664436}
+  - {x: -0.123399556, y: 0.04003024}
+  - {x: -0.19603577, y: -0.041864306}
+  - {x: -0.33296707, y: -0.10362554}
+  - {x: -0.30886403, y: -0.12543732}
+  - {x: -0.15971114, y: -0.11853971}
+  - {x: -0.1869449, y: -0.18223944}
+  - {x: -0.22449106, y: -0.2310606}
+  - {x: -0.19792116, y: -0.25489163}
+  - {x: -0.13711198, y: -0.25430605}
+  - {x: -0.047295887, y: -0.20326096}
+  - {x: 0.013875738, y: -0.1558659}
+  - {x: 0.20558964, y: -0.25096247}
+  - {x: 0.24933721, y: -0.24876012}
+  - {x: 0.25236654, y: -0.21513739}
+  - {x: 0.18538931, y: -0.15829077}
+  - {x: 0.2633968, y: -0.16208513}
+  - {x: 0.36126345, y: -0.16332236}
+  - {x: 0.35717475, y: -0.1311759}
+  - {x: 0.2736707, y: -0.09147635}
+  - {x: 0.20917854, y: -0.05548087}
+  - {x: 0.18381868, y: 0.0032463907}
+  - {x: 0.20446414, y: 0.07121158}
+  - {x: 0.2021206, y: 0.18199165}
+  - {x: 0.19506869, y: 0.21553873}
+  - {x: 0.22577438, y: 0.28000075}
+  - {x: 0.16446413, y: 0.31752273}
+  - {x: 0.1035319, y: 0.2570274}
+  - {x: 0.016336918, y: 0.30191746}
+  - {x: -0.05715549, y: 0.281903}
+  - {x: -0.09411284, y: 0.29990646}
+  - {x: -0.105398744, y: 0.26410237}
+  - {x: -0.17920943, y: 0.2897524}
+  - {x: -0.23834014, y: 0.26214916}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0

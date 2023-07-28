@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
   m_Name: FrostChest
   m_EditorClassIdentifier: 
-  itemName: Frost Chest
+  itemName: FrostChest
   displayName: Frost Scarf
   icon: {fileID: 21300000, guid: 0a47f84ca69dcaa499f8696b470fb188, type: 3}
   count: 1

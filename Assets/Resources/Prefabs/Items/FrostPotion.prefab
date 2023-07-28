@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2269600949024442516
+--- !u!1 &4564895817255327029
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7420072831278261372}
-  - component: {fileID: 3242865778371649566}
-  - component: {fileID: 8457389468018527978}
-  - component: {fileID: 8074255267081763406}
-  - component: {fileID: 564858871766041684}
-  - component: {fileID: 1116107503406940132}
-  - component: {fileID: 3475586279960363494}
-  - component: {fileID: 3751376683627875801}
+  - component: {fileID: 3088042516414451370}
+  - component: {fileID: 5170031723512480772}
+  - component: {fileID: 8273226382528093980}
+  - component: {fileID: 5510262957333225011}
+  - component: {fileID: 7174272149459998662}
+  - component: {fileID: 5892452749848475586}
+  - component: {fileID: 5249906287857783439}
+  - component: {fileID: -5889230695416629946}
   m_Layer: 0
-  m_Name: Pumpkin rind
+  m_Name: FrostPotion
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7420072831278261372
+--- !u!4 &3088042516414451370
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2269600949024442516}
+  m_GameObject: {fileID: 4564895817255327029}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.32, y: 4.41, z: 1.2451433}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalPosition: {x: 4.24, y: 0.76, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 81
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &3242865778371649566
+--- !u!212 &5170031723512480772
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2269600949024442516}
+  m_GameObject: {fileID: 4564895817255327029}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -78,25 +78,25 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 30b6781da06cee945bf3d4756db805a1, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 692a96b41b804034e9aacb7e602be8ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 1.6, y: 1.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8457389468018527978
+--- !u!114 &8273226382528093980
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2269600949024442516}
+  m_GameObject: {fileID: 4564895817255327029}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
@@ -106,14 +106,14 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!50 &8074255267081763406
+--- !u!50 &5510262957333225011
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2269600949024442516}
+  m_GameObject: {fileID: 4564895817255327029}
   m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -133,13 +133,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &564858871766041684
+--- !u!114 &7174272149459998662
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2269600949024442516}
+  m_GameObject: {fileID: 4564895817255327029}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
@@ -159,39 +159,41 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
---- !u!114 &1116107503406940132
+--- !u!114 &5892452749848475586
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2269600949024442516}
+  m_GameObject: {fileID: 4564895817255327029}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3475586279960363494
+--- !u!114 &5249906287857783439
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2269600949024442516}
+  m_GameObject: {fileID: 4564895817255327029}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eceb5a197c4e06428bb3488dfe27037, type: 3}
+  m_Script: {fileID: 11500000, guid: 08e9dd720fc73024abb5bba8fa797980, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: {fileID: 11400000, guid: 7b1f27319ccc0ce418f7df5d846725b7, type: 2}
-  leftOrRight: 
---- !u!60 &3751376683627875801
+  itemType: {fileID: 11400000, guid: 95875a91cf225d344ad2870cbe4ac937, type: 2}
+  itemCount: 0
+  leftOrRight: right
+  PotionDuration: 30
+--- !u!60 &-5889230695416629946
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2269600949024442516}
+  m_GameObject: {fileID: 4564895817255327029}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -223,19 +225,25 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
-    newSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 1.6, y: 1.6}
+    newSize: {x: 1.6, y: 1.6}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.04, y: 0.08384056}
-      - {x: -0.11102657, y: 0.042813987}
-      - {x: -0.099999994, y: -0.04}
-      - {x: 0.049999997, y: -0.04}
-      - {x: 0.053460166, y: 0.031026574}
-      - {x: 0.025893763, y: 0.06178742}
-      - {x: 0.025893748, y: 0.06178741}
+    - - {x: -0.21465969, y: 0.8380115}
+      - {x: -0.30422154, y: 0.66231877}
+      - {x: -0.716194, y: 0.07006929}
+      - {x: -0.6982358, y: -0.51795834}
+      - {x: -0.5, y: -0.8}
+      - {x: 0.5383741, y: -0.80598617}
+      - {x: 0.68027765, y: -0.652111}
+      - {x: 0.6802767, y: 0.17605539}
+      - {x: 0.21688807, y: 0.8299306}
+    - - {x: 0, y: 0.2}
+      - {x: 0.1, y: 0.1}
+      - {x: -0.1, y: 0.1}
+      - {x: 0, y: 0.1}
   m_UseDelaunayMesh: 0
