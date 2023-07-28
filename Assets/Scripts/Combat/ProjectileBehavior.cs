@@ -42,11 +42,10 @@ public class ProjectileBehavior : NetworkBehaviour
         return strength;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         if (lifetime > 0)
         {
-            
             Destroy(gameObject, lifetime);
         }
     }

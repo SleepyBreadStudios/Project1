@@ -54,8 +54,6 @@ public class EnemyBehavior : NetworkBehaviour
     // defense value
     private float aggroRange;
 
-    private float time = 0.0f;
-
     [SerializeField]
     HealthBar healthBar;
 
