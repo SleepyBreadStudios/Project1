@@ -106,7 +106,7 @@ MonoBehaviour:
   spawnRadius: 5
   pollRadius: 15
   pollRate: 15
-  limit: 3
+  limit: 5
 --- !u!114 &7676653753266903389
 MonoBehaviour:
   m_ObjectHideFlags: 0

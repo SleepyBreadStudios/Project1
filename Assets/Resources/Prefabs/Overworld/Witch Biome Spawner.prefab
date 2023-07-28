@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structure:
   - {fileID: 5876442049078357144, guid: 61afa9ca6a5620b48b24c7ca67dd149c, type: 3}
-  - {fileID: 0}
+  - {fileID: 3086834773428552656, guid: 9f851b886ea8b164cb70bab41dc6c3aa, type: 3}
   - {fileID: 9055794076392955415, guid: 2930f6900c834b946bc3807e82c7b010, type: 3}
   - {fileID: 687582569816266173, guid: b8c88b26245792b4081fcc745a795625, type: 3}
   - {fileID: 5424628842053966021, guid: c6ac8ef3ecb07054b94c5de1e1f412d8, type: 3}
