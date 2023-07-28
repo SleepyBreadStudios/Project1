@@ -35,6 +35,10 @@ public class HostCode : MonoBehaviour
         //code.text = UIManager.UI.joinCode.text;
         //joinCode.text = UIManager.UI.joinCode.text;
         joinCode.text = RelayManager.relay.joinCode;
+        if (joinCode.text == "n/a")
+        {
+            joinCode.text = "";
+        }
         // if (Input.GetKeyDown(KeyCode.Escape) && playerMenusNotOpen)
         // {
         //     if (activeMenu)
