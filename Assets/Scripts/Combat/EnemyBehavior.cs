@@ -198,6 +198,23 @@ public class EnemyBehavior : NetworkBehaviour
         {
             doomed = true;
             ItemDrop();
+            GameObject cauldron = null;
+            GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
+            foreach (GameObject wall in walls)
+            {
+                if (wall.GetComponent<CauldronBehavior>() != null)
+                {
+                    float dist = Vector2.Distance(wall.transform.position, transform.position);
+                    if (dist < 10)
+                    {
+                        cauldron = wall;
+                    }
+                }
+            }
+            if (cauldron != null)
+            {
+                cauldron.GetComponent<CauldronBehavior>().DamageServerRpc(1);
+            }
             GetComponent<NetworkObject>().Despawn(true);
         }
     }

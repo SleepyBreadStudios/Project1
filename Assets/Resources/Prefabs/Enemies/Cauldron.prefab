@@ -207,8 +207,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   rb: {fileID: 0}
-  dropTable: []
-  dropChance: []
+  dropTable:
+  - {fileID: 4564895817255327029, guid: 5e4a52780e1795b4790ba5ca8eb21f83, type: 3}
+  - {fileID: 4564895817255327029, guid: 5e4a52780e1795b4790ba5ca8eb21f83, type: 3}
+  - {fileID: 4564895817255327029, guid: 5e4a52780e1795b4790ba5ca8eb21f83, type: 3}
+  - {fileID: 4564895817255327029, guid: 5e4a52780e1795b4790ba5ca8eb21f83, type: 3}
+  - {fileID: 4564895817255327029, guid: 5e4a52780e1795b4790ba5ca8eb21f83, type: 3}
+  dropChance:
+  - 100
+  - 100
+  - 100
+  - 100
+  - 100
   health: 20
   maxHealth: 20
   speed: 0
@@ -423,8 +433,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 10}
+  m_AnchoredPosition: {x: 150.15, y: 1479.2}
+  m_SizeDelta: {x: 108.9, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4712779629984122403
 CanvasRenderer:

@@ -110,6 +110,9 @@ public class PumpkinBehavior : EnemyBehavior
             idleLock = false;
             isJumping = false;
             animator.ResetTrigger("jump");
+            float randX = Random.Range(transform.position.x - moveBias, transform.position.x + moveBias);
+            float randY = Random.Range(transform.position.y - moveBias, transform.position.y + moveBias);
+            dest = new Vector2(randX, randY);
         }
     }
 
