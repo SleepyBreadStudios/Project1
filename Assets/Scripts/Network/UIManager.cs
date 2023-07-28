@@ -94,7 +94,7 @@ public class UIManager : Singleton<UIManager>
 
             if (NetworkManager.Singleton.StartHost()) {
                 Debug.Log("Host started...");
-                joinCode.text = RelayManager.Instance.joinCode; // Allows the join code to be displayed
+                //joinCode.text = RelayManager.Instance.joinCode; // Allows the join code to be displayed
             }
             else
                 Debug.Log("Unable to start host...");

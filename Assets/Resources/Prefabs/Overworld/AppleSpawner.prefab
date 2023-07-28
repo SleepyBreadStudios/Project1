@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6130051730302897867
+--- !u!1 &3086834773428552656
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,14 +8,14 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2695963681677714451}
-  - component: {fileID: 5738401770435824497}
-  - component: {fileID: 8749688173009106070}
-  - component: {fileID: 5185862690464323752}
-  - component: {fileID: 5255934023791760634}
-  - component: {fileID: 4087634120019631661}
-  - component: {fileID: 2453884098632061460}
-  - component: {fileID: 1960559333128714191}
+  - component: {fileID: 8722899588102088205}
+  - component: {fileID: 1735424466962753294}
+  - component: {fileID: 2598156472385760667}
+  - component: {fileID: 7676653753266903389}
+  - component: {fileID: 554230173585021134}
+  - component: {fileID: 4535789637423780394}
+  - component: {fileID: 2761571707158957926}
+  - component: {fileID: 7832893027733450419}
   m_Layer: 0
   m_Name: AppleSpawner
   m_TagString: Overworld
@@ -23,28 +23,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2695963681677714451
+--- !u!4 &8722899588102088205
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6130051730302897867}
+  m_GameObject: {fileID: 3086834773428552656}
   m_LocalRotation: {x: 0, y: 0.008726558, z: 0, w: 0.999962}
   m_LocalPosition: {x: 9.7429, y: 19.7807, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 1, z: 0}
---- !u!212 &5738401770435824497
+--- !u!212 &1735424466962753294
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6130051730302897867}
+  m_GameObject: {fileID: 3086834773428552656}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -90,13 +90,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8749688173009106070
+--- !u!114 &2598156472385760667
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6130051730302897867}
+  m_GameObject: {fileID: 3086834773428552656}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 021927b4848fdc044a781283e56569bc, type: 3}
@@ -106,14 +106,14 @@ MonoBehaviour:
   spawnRadius: 5
   pollRadius: 15
   pollRate: 15
-  limit: 20
---- !u!114 &5185862690464323752
+  limit: 3
+--- !u!114 &7676653753266903389
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6130051730302897867}
+  m_GameObject: {fileID: 3086834773428552656}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
@@ -123,14 +123,14 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!50 &5255934023791760634
+--- !u!50 &554230173585021134
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6130051730302897867}
+  m_GameObject: {fileID: 3086834773428552656}
   m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -150,13 +150,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &4087634120019631661
+--- !u!60 &4535789637423780394
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6130051730302897867}
+  m_GameObject: {fileID: 3086834773428552656}
   m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
@@ -249,13 +249,13 @@ PolygonCollider2D:
       - {x: 0.024999999, y: -0.775}
       - {x: 0.125, y: -0.835}
   m_UseDelaunayMesh: 0
---- !u!114 &2453884098632061460
+--- !u!114 &2761571707158957926
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6130051730302897867}
+  m_GameObject: {fileID: 3086834773428552656}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f81c0f5b0dcfe5747a8a78c8dd2a49f9, type: 3}
@@ -265,13 +265,13 @@ MonoBehaviour:
   health: 3
   maxHealth: 3
   ToolRequired: Axe
---- !u!68 &1960559333128714191
+--- !u!68 &7832893027733450419
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6130051730302897867}
+  m_GameObject: {fileID: 3086834773428552656}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
