@@ -25,19 +25,19 @@ public class DialogueManager : NetworkBehaviour
     /// Reference to Dialogue box
     /// </summary>
     [SerializeField]
-    private GameObject dialogueBox = default;
+    private GameObject dialogueBox = null;
 
     /// <summary>
     /// Reference to Dialogue box's option triangle
     /// </summary>
     [SerializeField]
-    private GameObject optionUI = default;
+    private GameObject optionUI = null;
 
     /// <summary>
     /// Reference to Dialogue box's advance triangle
     /// </summary>
     [SerializeField]
-    private GameObject advanceUI = default;
+    private GameObject advanceUI = null;
     #endregion
 
     #region tool tip 
@@ -53,6 +53,7 @@ public class DialogueManager : NetworkBehaviour
     //private Animator animator = null;
 
     private bool dialogueStarted = false;
+    private bool dialogueFirstTime = true;
 
     /// <summary>
     /// How fast the dialogue goes
@@ -80,15 +81,16 @@ public class DialogueManager : NetworkBehaviour
     private NPCBehavior npc = default;
 
     // Start is called before the first frame update
-    public override void OnNetworkSpawn()
+    public void SetUpDialogueBox()
     {
         // Set up option triangle UI 
-        optionTransform = optionUI.GetComponent<RectTransform>();
-        originalOptionPosition = optionTransform.anchoredPosition;
-        currentOptionPosition = originalOptionPosition;
 
-        dialogueTransform = text.gameObject.GetComponent<RectTransform>();
-        originalDialoguePosition = dialogueTransform.anchoredPosition;
+            optionTransform = optionUI.GetComponent<RectTransform>();
+            originalOptionPosition = optionTransform.anchoredPosition;
+            currentOptionPosition = originalOptionPosition;
+
+            dialogueTransform = text.gameObject.GetComponent<RectTransform>();
+            originalDialoguePosition = dialogueTransform.anchoredPosition;
 
         originalTextSpeed = dialogueSpeed;
 
@@ -118,13 +120,19 @@ public class DialogueManager : NetworkBehaviour
     /// <param name="gameObject"></param>
     /// <param name="a"></param>
     public void StartDialogue(Dialogue dialogue, NPCBehavior gameObject) //Dialogue dialogue, ShopBehavior gameObject, Animator a)
-    {
+    {    
         npc = gameObject;
         //animator = a
 
         GameObject temp;
         temp = dialogueBox.gameObject;
         temp.SetActive(true);
+
+        if (dialogueFirstTime)
+        {
+            dialogueFirstTime = false;
+            SetUpDialogueBox();
+        }
 
         titleText.text = dialogue.title;
         sentences.Clear();

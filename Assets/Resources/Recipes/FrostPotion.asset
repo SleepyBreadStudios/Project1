@@ -19,7 +19,7 @@ MonoBehaviour:
   - item: Heartberry
     count: 5
   - item: Fish
-    count: 1
+    count: 2
   craftedItem: {fileID: 11400000, guid: 78b9e62d30206c3459296771a86fdee2, type: 2}
   numOfItems: 3
   recipeKeys:
