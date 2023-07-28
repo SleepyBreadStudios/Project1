@@ -230,11 +230,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: {fileID: 11400000, guid: 2622a0e986777a94fa9330930a531419, type: 2}
-  itemCount: 0
+  itemName: 
+  itemCount:
+    m_InternalValue: 0
   leftOrRight: right
   RecipeText:
   - Gold Helm
   - x2 Gold
-  - x1 Carrot Husk
   - x1 Pumpkin Rind
-  - x1 Apple Core

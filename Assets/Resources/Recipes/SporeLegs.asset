@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fd869100de05f40ac51990b5bed79f, type: 3}
   m_Name: SporeLegs
   m_EditorClassIdentifier: 
-  recipeContents: SporesPumpkinRind
+  recipeContents: SporesPumpkinRindAppleCore
   inspectorRecipeList:
   - item: Spores
     count: 5
   - item: PumpkinRind
     count: 2
+  - item: AppleCore
+    count: 2
   craftedItem: {fileID: 11400000, guid: 802cadc595ccc844ea1b1626ba4bd4b5, type: 2}
   numOfItems: 2
   recipeKeys:
-  - Shroom Spore
-  - Pumpkin rind
+  - Spores
+  - PumpkinRind
+  - AppleCore

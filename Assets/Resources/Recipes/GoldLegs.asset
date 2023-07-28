@@ -12,20 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fd869100de05f40ac51990b5bed79f, type: 3}
   m_Name: GoldLegs
   m_EditorClassIdentifier: 
-  recipeContents: GoldCarrotHuskPumpkinRindAppleCore
+  recipeContents: GoldPumpkinRindAppleCore
   inspectorRecipeList:
   - item: Gold
-    count: 2
-  - item: CarrotHusk
     count: 2
   - item: PumpkinRind
     count: 1
   - item: AppleCore
     count: 1
-  craftedItem: {fileID: 11400000, guid: f7c1d313ce38ae541b3687c6ded67bf2, type: 2}
-  numOfItems: 4
+  craftedItem: {fileID: 11400000, guid: 6fa4f7c0d988e6e4d96b4a6bd252a52b, type: 2}
+  numOfItems: 3
   recipeKeys:
   - Gold
-  - Carrot husk
-  - Pumpkin rind
-  - Apple core
+  - PumpkinRind
+  - AppleCore

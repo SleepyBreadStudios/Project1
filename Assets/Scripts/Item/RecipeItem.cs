@@ -9,9 +9,9 @@ public class RecipeItem : ItemBehavior
 
     public override string GetItemEffect(Player2Behavior playerBehavior)
     {
-#if Debug
+//#if Debug
         Debug.Log("Attempting to use a recipe item");
-#endif
+//#endif
         // for testing health potion rn
         playerBehavior.OpenRecipe(RecipeText);
         // tell inventory to consume item on use

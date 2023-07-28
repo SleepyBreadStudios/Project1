@@ -12,20 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fd869100de05f40ac51990b5bed79f, type: 3}
   m_Name: GoldChest
   m_EditorClassIdentifier: 
-  recipeContents: GoldCarrotHuskPumpkinRindAppleCore
+  recipeContents: GoldCarrotHuskAppleCore
   inspectorRecipeList:
   - item: Gold
     count: 5
   - item: CarrotHusk
     count: 3
-  - item: PumpkinRind
-    count: 2
   - item: AppleCore
     count: 2
   craftedItem: {fileID: 11400000, guid: f7c1d313ce38ae541b3687c6ded67bf2, type: 2}
-  numOfItems: 4
+  numOfItems: 3
   recipeKeys:
   - Gold
-  - Carrot husk
-  - Pumpkin rind
-  - Apple core
+  - CarrotHusk
+  - AppleCore

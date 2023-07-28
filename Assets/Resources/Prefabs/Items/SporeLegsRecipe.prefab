@@ -230,9 +230,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: {fileID: 11400000, guid: f0c298a354405bf4ba7eb7049ade2024, type: 2}
-  itemCount: 0
+  itemName: 
+  itemCount:
+    m_InternalValue: 0
   leftOrRight: right
   RecipeText:
   - Mushroom Pants
   - x5 Shroom Spore
   - x2 Pumpkin Rind
+  - x2 Apple Core

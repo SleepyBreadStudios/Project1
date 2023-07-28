@@ -230,11 +230,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: {fileID: 11400000, guid: c2b02937a2b6b7a4893acbef01de9f34, type: 2}
-  itemCount: 0
+  itemName: 
+  itemCount:
+    m_InternalValue: 0
   leftOrRight: right
   RecipeText:
   - Gold Chest
   - x5 Gold
   - x3 Carrot Husk
-  - x2 Pumpkin Rind
   - x2 Apple Core

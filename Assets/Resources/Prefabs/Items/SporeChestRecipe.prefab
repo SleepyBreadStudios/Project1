@@ -155,7 +155,7 @@ MonoBehaviour:
   SyncScaleY: 1
   SyncScaleZ: 1
   PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
+  RotAngleThreshold: 284
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
@@ -230,9 +230,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: {fileID: 11400000, guid: da73b1c898e958445b66325d98cc2787, type: 2}
-  itemCount: 0
+  itemName: 
+  itemCount:
+    m_InternalValue: 0
   leftOrRight: right
   RecipeText:
   - Mushroom Bowtie
   - x10 Shroom Spore
   - x3 Pumpkin Rind
+  - x3 Carrot Husk
