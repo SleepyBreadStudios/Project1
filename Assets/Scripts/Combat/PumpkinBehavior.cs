@@ -35,22 +35,23 @@ public class PumpkinBehavior : EnemyBehavior
         dest = transform.position;
 
         // have to be SUPER CAREFUL there are no exceptions during runtime, otherwise this WILL NOT run
-        InvokeRepeating("FindPlayer", 0.0f, 2.0f);
+        InvokeRepeating("FindPlayerServerRpc", 0.0f, 2.0f);
     }
 
     void Update()
     {
         if (isJumping)
         {
-            MoveToPlayer();
+            MoveToPlayerServerRpc();
         } 
         else if (!idleLock) 
         {
-            Move();
+            MoveServerRpc();
         }
     }
 
-    public void Move()
+    [ServerRpc]
+    public void MoveServerRpc()
     {
         float currX = transform.position.x;
         float currY = transform.position.y;
@@ -76,11 +77,12 @@ public class PumpkinBehavior : EnemyBehavior
     }
 
     // new move method, moves towards player
-    public void MoveToPlayer()
+    [ServerRpc]
+    public void MoveToPlayerServerRpc()
     {
-        if (GameObject.FindWithTag("Player") != null)
+        if (FindClosestPlayer() != null)
         {
-            Vector2 playerLoc = GameObject.FindWithTag("Player").transform.position;
+            Vector2 playerLoc = FindClosestPlayer().transform.position;
             if (playerLoc.x - transform.position.x < 0)
             {
                 spriteRenderer.flipX = false;
@@ -94,29 +96,20 @@ public class PumpkinBehavior : EnemyBehavior
     }
 
     // tests for nearest player in radius and locks on to them
-    public void FindPlayer()
+    [ServerRpc]
+    public void FindPlayerServerRpc()
     {
-        if (GameObject.FindWithTag("Player") != null)
+        if (FindClosestPlayer() != null)
         {
-            GameObject[] playerLoc = GameObject.FindGameObjectsWithTag("Player");
-            foreach (GameObject player in playerLoc)
-            {
-                Vector2 loc = player.transform.position;
-                if (Vector2.Distance(transform.position, loc) < getAggroRange())
-                {
-                    if (Vector2.Distance(transform.position, loc) < getAggroRange())
-                    {
-                        idleLock = true;
-                        animator.SetTrigger("jump");
-                    }
-                    else
-                    {
-                        idleLock = false;
-                        isJumping = false;
-                        animator.ResetTrigger("jump");
-                    }
-                }
-            }
+            idleLock = true;
+            animator.SetTrigger("jump");
+
+        }
+        else
+        {
+            idleLock = false;
+            isJumping = false;
+            animator.ResetTrigger("jump");
         }
     }
 

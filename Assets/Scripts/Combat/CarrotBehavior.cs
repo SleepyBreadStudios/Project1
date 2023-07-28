@@ -46,7 +46,7 @@ public class CarrotBehavior : EnemyBehavior
         dest = transform.position;
 
         // have to be SUPER CAREFUL there are no exceptions during runtime, otherwise this WILL NOT run
-        InvokeRepeating("FindPlayer", 0.0f, 2.0f);
+        InvokeRepeating("FindPlayerServerRpc", 0.0f, 2.0f);
     }
 
     void Update()
@@ -60,11 +60,11 @@ public class CarrotBehavior : EnemyBehavior
         if (c.a <= 0)
         {
             GetComponent<Collider2D>().enabled = false;
-            IndicateServerRpc(target);
+            //IndicateServerRpc(target);
             transform.position = Vector2.MoveTowards(transform.position, target, Time.deltaTime * getSpeed());
             if (transform.position.x == target.x && transform.position.y == target.y)
             {
-                DeindicateServerRpc();
+                //DeindicateServerRpc();
                 c = new Color(c.r, c.g, c.b, 1.0f);
                 GetComponent<Renderer>().material.color = c;
                 GetComponent<Collider2D>().enabled = true;
@@ -79,7 +79,8 @@ public class CarrotBehavior : EnemyBehavior
         }
     }
 
-    public void Move()
+    [ServerRpc]
+    public void MoveServerRpc()
     {
         float currX = transform.position.x;
         float currY = transform.position.y;
@@ -105,35 +106,26 @@ public class CarrotBehavior : EnemyBehavior
     }
 
     // tests for nearest player in radius and locks on to them
-    public void FindPlayer()
+    [ServerRpc]
+    public void FindPlayerServerRpc()
     {
         if (!isSpinning)
         {
-            if (GameObject.FindWithTag("Player") != null)
+            if (FindClosestPlayer() != null)
             {
-                GameObject[] playerLoc = GameObject.FindGameObjectsWithTag("Player");
-                foreach (GameObject player in playerLoc)
+                Vector2 loc = FindClosestPlayer().transform.position;
+                if (loc.x - transform.position.x < 0)
                 {
-                    target = player.transform.position;
-                    if (Vector2.Distance(transform.position, target) < getAggroRange())
-                    {
-                        if (Vector2.Distance(transform.position, target) < getAggroRange())
-                        {
-                            if (target.x - transform.position.x < 0)
-                            {
-                                spriteRenderer.flipX = false;
-                            }
-                            else if (target.x - transform.position.x > 0)
-                            {
-                                spriteRenderer.flipX = true;
-                            }
-
-                            idleLock = true;
-                            isSpinning = true;
-                            animator.SetTrigger("spin");
-                        }
-                    }
+                    spriteRenderer.flipX = false;
                 }
+                else if (loc.x - transform.position.x > 0)
+                {
+                    spriteRenderer.flipX = true;
+                }
+
+                idleLock = true;
+                isSpinning = true;
+                animator.SetTrigger("spin");
             }
         }
     }

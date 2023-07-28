@@ -36,18 +36,19 @@ public class AppleBehavior : EnemyBehavior
 
         dest = transform.position;
 
-        InvokeRepeating("FindPlayer", 0.0f, 4.0f);
+        InvokeRepeating("FindPlayerServerRpc", 0.0f, 4.0f);
     }
 
     void Update()
     {
         if (!isShooting)
         {
-            Move();
+            MoveServerRpc();
         }
     }
 
-    public void Move()
+    [ServerRpc]
+    public void MoveServerRpc()
     {
         float currX = transform.position.x;
         float currY = transform.position.y;
@@ -72,33 +73,27 @@ public class AppleBehavior : EnemyBehavior
         transform.position = Vector3.MoveTowards(transform.position, dest, Time.deltaTime * getSpeed());
     }
 
-    public void FindPlayer()
+    [ServerRpc]
+    public void FindPlayerServerRpc()
     {
-        if (GameObject.FindWithTag("Player") != null)
+        if (FindClosestPlayer() != null)
         {
-            GameObject[] playerLoc = GameObject.FindGameObjectsWithTag("Player");
-            foreach (GameObject player in playerLoc)
+            Vector2 loc = FindClosestPlayer().transform.position;
+            if (loc.x - transform.position.x < 0)
             {
-                Vector2 loc = player.transform.position;
-                if (Vector2.Distance(transform.position, loc) < getAggroRange())
-                {
-                    if (loc.x - transform.position.x < 0)
-                    {
-                        spriteRenderer.flipX = false;
-                    }
-                    else if (loc.x - transform.position.x > 0)
-                    {
-                        spriteRenderer.flipX = true;
-                    }
-                    isShooting = true;
-                    animator.SetTrigger("shoot");
-                }
-                else
-                {
-                    isShooting = false;
-                    animator.ResetTrigger("shoot");
-                }
+                spriteRenderer.flipX = false;
             }
+            else if (loc.x - transform.position.x > 0)
+            {
+                spriteRenderer.flipX = true;
+            }
+            isShooting = true;
+            animator.SetTrigger("shoot");
+        }
+        else
+        {
+            isShooting = false;
+            animator.ResetTrigger("shoot");
         }
     }
 
@@ -110,10 +105,11 @@ public class AppleBehavior : EnemyBehavior
     [ServerRpc]
     public void ShootServerRpc()
     {
-        if (GameObject.FindWithTag("Player") != null)
+        if (FindClosestPlayer() != null)
         {
-            Vector2 playerLoc = GameObject.FindWithTag("Player").transform.position;
-            Vector2 appleLoc = this.transform.position;
+            Vector2 playerLoc = FindClosestPlayer().transform.position;
+            Vector2 appleLoc = transform.position;
+
             GameObject seedInstance = Instantiate(seed, appleLoc, Quaternion.identity);
 
             // IMPORTANT: get network to recognize object
