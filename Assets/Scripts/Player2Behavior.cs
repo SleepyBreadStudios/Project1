@@ -44,7 +44,7 @@ public class Player2Behavior : NetworkBehaviour
 	[SerializeField]
 	private NetworkVariable<float> leftRightPosition = new NetworkVariable<float>();
 
-	private NetworkVariable<bool> flippedX = new NetworkVariable<bool>();
+	private NetworkVariable<bool> flippedX = new NetworkVariable<bool>(default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 	PlayerInventory playerInventory = null;
 
@@ -215,12 +215,12 @@ public class Player2Behavior : NetworkBehaviour
 
 		#region KEY PRESSES
 		#region MOVEMENT
-		if(menuOpen)
-		{
-			//Debug.Log("Stop moving");
-			UpdateClientPositionServerRpc(0, 0);
-			animator.SetFloat("speed", 0);
-		}
+		//if(menuOpen)
+		//{
+		//	//Debug.Log("Stop moving");
+		//	UpdateClientPositionServerRpc(0, 0);
+		//	animator.SetFloat("speed", 0);
+		//}
 		// don't allow player input if the escape menu is open
 		if (!escEnabled && !dialogueEnabled && !codeEnabled)
 		{
