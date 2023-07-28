@@ -23,6 +23,7 @@ TagManager:
   - UI
   - Snow
   - NPC
+  - Mushroom
   layers:
   - Default
   - TransparentFX

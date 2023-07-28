@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
+  m_Name: SporeLegsRecipe
+  m_EditorClassIdentifier: 
+  itemName: SporeLegsRecipe
+  displayName: Mushroom Pants Recipe
+  icon: {fileID: -231845431732081202, guid: de3c63d792c0b3f41873e20d9db58d73, type: 3}
+  count: 1
+  maxStack: 1
+  startingCondition: 100
+  unique: 0
+  itemBehavior: {fileID: 8033849664656531408, guid: 5c442d4ede0ebb4478e2ac1dfbd86ee3, type: 3}
+  equipType: 
+  defense: 0
+  useText: Right click to read recipe
+  itemDescription: 'Someone''s notes on how to make something. '

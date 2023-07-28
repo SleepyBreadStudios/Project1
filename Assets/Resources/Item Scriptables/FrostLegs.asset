@@ -22,5 +22,5 @@ MonoBehaviour:
   itemBehavior: {fileID: 0}
   equipType: 
   defense: 3
-  useText: 3+ Defense
+  useText: Equip for 3 defense
   itemDescription: Cold feet

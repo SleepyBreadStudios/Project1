@@ -22,5 +22,5 @@ MonoBehaviour:
   itemBehavior: {fileID: 7629159985579803037, guid: db28a789044d30b43ad26919efd9a4ef, type: 3}
   equipType: 
   defense: 0
-  useText: Swing to break rocks
+  useText: Left click to break rocks
   itemDescription: For breaking rocks not hearts :)

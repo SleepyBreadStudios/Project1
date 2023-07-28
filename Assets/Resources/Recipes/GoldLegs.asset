@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fd869100de05f40ac51990b5bed79f, type: 3}
   m_Name: GoldLegs
   m_EditorClassIdentifier: 
-  recipeContents: DefaultString
+  recipeContents: GoldCarrotHuskPumpkinRindAppleCore
   inspectorRecipeList:
   - item: Gold
     count: 2

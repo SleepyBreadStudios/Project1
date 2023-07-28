@@ -22,6 +22,6 @@ MonoBehaviour:
   itemBehavior: {fileID: 0}
   equipType: Head
   defense: 2
-  useText: +2 Defense
+  useText: Equip for 2 defense
   itemDescription: Frozen helmet made from the combination of a snow potion and a
     frostwood.

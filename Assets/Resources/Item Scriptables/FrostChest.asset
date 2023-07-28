@@ -22,5 +22,5 @@ MonoBehaviour:
   itemBehavior: {fileID: 0}
   equipType: 
   defense: 4
-  useText: 4+ Defense
+  useText: Equip for 4 defense
   itemDescription: Wearing this armor would make you colder no?

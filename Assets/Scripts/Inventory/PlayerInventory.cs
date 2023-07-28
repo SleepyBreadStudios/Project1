@@ -298,6 +298,8 @@ public class PlayerInventory : PlayerItemManager
                     //inventory[currHotbarSelected].UpdateDurability();
                     OnItemsUpdated.Invoke();
                     break;
+                case "Recipe":
+                    break;
                 default:
                     break;
 

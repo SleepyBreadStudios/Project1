@@ -64,7 +64,13 @@ public class Player2Behavior : NetworkBehaviour
 	private GameObject EquipUI = null;
 
 	[SerializeField]
-	private DialogueManager dialogueManager = null; 
+	private GameObject RecipeUI = null;
+
+	[SerializeField]
+	private DialogueManager dialogueManager = null;
+
+	[SerializeField]
+	private RecipeUIBehavior recipeUImanager = null;
 
 	[SerializeField]
 	private GameObject projectile = null;
@@ -137,6 +143,7 @@ public class Player2Behavior : NetworkBehaviour
 		HotbarUI.transform.localScale = new Vector3(0, 0, 0);
 		HealthUI.transform.localScale = new Vector3(0, 0, 0);
 		EquipUI.transform.localScale = new Vector3(0, 0, 0);
+		RecipeUI.transform.localScale = new Vector3(0, 0, 0);
 		transform.localScale = new Vector3(1, 1, 1);
 		
 
@@ -201,7 +208,7 @@ public class Player2Behavior : NetworkBehaviour
 		#region MOVEMENT
 		if(menuOpen)
 		{
-			Debug.Log("Stop moving");
+			//Debug.Log("Stop moving");
 			UpdateClientPositionServerRpc(0, 0);
 			animator.SetFloat("speed", 0);
 		}
@@ -267,6 +274,7 @@ public class Player2Behavior : NetworkBehaviour
 						InventoryUI.transform.position = originalInvPos;
 						HotbarUI.transform.localScale = new Vector3(1, 1, 1);
 						CraftingUI.transform.localScale = new Vector3(0, 0, 0);
+						RecipeUI.transform.localScale = new Vector3(0, 0, 0);
 						inventoryEnabled = false;
 						craftingEnabled = false;
 						menuOpen = false;
@@ -277,6 +285,7 @@ public class Player2Behavior : NetworkBehaviour
 						InventoryUI.transform.localScale = new Vector3(1, 1, 1);
 						EquipUI.transform.localScale = new Vector3(1, 1, 1);
 						HotbarUI.transform.localScale = new Vector3(0, 0, 0);
+						RecipeUI.transform.localScale = new Vector3(0, 0, 0);
 						inventoryEnabled = true;
 						menuOpen = true;
 						playerInventory.inventoryTransferEnabled(true, false);
@@ -326,6 +335,7 @@ public class Player2Behavior : NetworkBehaviour
 								EnableDialogue(true);
 								hit.collider.gameObject.GetComponent<NPCBehavior>().Interact(GetComponent<Player2Behavior>(), dialogueManager);
 								menuOpen = true;
+								OnMenuOpenUpdated.Invoke();
 								return;
 
 							}
@@ -364,19 +374,33 @@ public class Player2Behavior : NetworkBehaviour
 			// close ui menus if they're open
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
-				if (inventoryEnabled || craftingEnabled)
+				if(escEnabled)
 				{
+					//close escape menu
+					Debug.Log(">:(");
+					EnableEscMenuPlayer();
+				}
+				else if (inventoryEnabled || craftingEnabled || menuOpen)
+				{
+					// close every other menu
 					InventoryUI.transform.localScale = new Vector3(0, 0, 0);
 					InventoryUI.transform.position = originalInvPos;
 					CraftingUI.transform.localScale = new Vector3(0, 0, 0);
 					EquipUI.transform.localScale = new Vector3(0, 0, 0);
+					RecipeUI.transform.localScale = new Vector3(0, 0, 0);
 					inventoryEnabled = false;
 					craftingEnabled = false;
 					HotbarUI.transform.localScale = new Vector3(1, 1, 1);
 					menuOpen = false;
 					playerInventory.inventoryTransferEnabled(false, false);
-					EnableEscMenuPlayer();
+					Debug.Log("CLOSE RECIPE");
 					OnMenuOpenUpdated.Invoke();
+				}
+				else if (!escEnabled)
+				{
+					// open escape menu
+					Debug.Log(":(");
+					EnableEscMenuPlayer();
 				}
 			} 
 			#region HOTBAR
@@ -494,7 +518,7 @@ public class Player2Behavior : NetworkBehaviour
 		escEnabled = !escEnabled;
 		Debug.Log("Esc pressed " + escEnabled);
 		codeEnabled = !codeEnabled;
-		menuOpen = escEnabled;
+
 	}
 
 	public void EnableDialogue(bool enable)
@@ -573,6 +597,14 @@ public class Player2Behavior : NetworkBehaviour
 		playerDefense = newDef;
 	}
 	#endregion
+
+	public void OpenRecipe(List<string> recipeText)
+	{
+		recipeUImanager.DisplayRecipe(recipeText);
+		RecipeUI.transform.localScale = new Vector3(1, 1, 1);
+		menuOpen = true;
+		OnMenuOpenUpdated.Invoke();
+	}
 
 	// wrapper method to ask inventory if they have the item that is being looked for
 	public bool CheckPlayerInventoryForItem(string itemName, int cost)
@@ -692,10 +724,16 @@ public class Player2Behavior : NetworkBehaviour
 		yield return new WaitForSeconds(3.0f);
 		transform.position = new Vector3(0, 0, 0);
 		isDead = false;
+		menuOpen = false;
+		craftingEnabled = false;
+		inventoryEnabled = false;
 		InventoryUI.SetActive(true);
 		CraftingUI.SetActive(true);
 		HotbarUI.SetActive(true);
+		HotbarUI.transform.localScale = new Vector3(1, 1, 1);
 		HealthUI.SetActive(true);
+		EquipUI.SetActive(true);
+		RecipeUI.SetActive(true);
 		spriteRenderer.enabled = true;
 		playerHealth = maxHealth;
 		healthBar.SetHealth(playerHealth);
@@ -719,6 +757,14 @@ public class Player2Behavior : NetworkBehaviour
 		CraftingUI.SetActive(false);
 		HotbarUI.SetActive(false);
 		HealthUI.SetActive(false);
+		EquipUI.SetActive(false);
+		RecipeUI.SetActive(false);
+		// make sure everything is not showing 
+		InventoryUI.transform.localScale = new Vector3(0, 0, 0);
+		InventoryUI.transform.position = originalInvPos;
+		CraftingUI.transform.localScale = new Vector3(0, 0, 0);
+		EquipUI.transform.localScale = new Vector3(0, 0, 0);
+		RecipeUI.transform.localScale = new Vector3(0, 0, 0);
 
 		spriteRenderer.enabled = false;
 		isDead = true;

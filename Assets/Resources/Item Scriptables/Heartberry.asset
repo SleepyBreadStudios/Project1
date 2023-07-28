@@ -19,8 +19,8 @@ MonoBehaviour:
   maxStack: 99
   startingCondition: 100
   unique: 0
-  itemBehavior: {fileID: 2659520249460144726, guid: f1af43fef24478e46b9fed3682e86277, type: 3}
+  itemBehavior: {fileID: 7388596827926250022, guid: f1af43fef24478e46b9fed3682e86277, type: 3}
   equipType: 
   defense: 0
   useText: Restores 1 health to the player
-  itemDescription: a sweet berry to heal your soul
+  itemDescription: A sweet berry to heal your soul

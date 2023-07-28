@@ -22,5 +22,5 @@ MonoBehaviour:
   itemBehavior: {fileID: 7543494692277857403, guid: 343c77d78153483479f12f49633d8c7f, type: 3}
   equipType: 
   defense: 0
-  useText: Swing to deal damage
+  useText: Left click to deal damage
   itemDescription: Like a regular sword but shinier and somehow hits harder

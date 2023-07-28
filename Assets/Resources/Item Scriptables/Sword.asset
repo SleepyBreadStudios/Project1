@@ -22,6 +22,6 @@ MonoBehaviour:
   itemBehavior: {fileID: 5732627154995292706, guid: 4e2d3020f127de84c993c5393deb267f, type: 3}
   equipType: 
   defense: 0
-  useText: Swing to deal damage
+  useText: Left click to deal damage
   itemDescription: An obstacle remover, annoyance eraser, and all around fun thing
     to swing.

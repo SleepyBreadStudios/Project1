@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
   m_Name: Carrot drop
   m_EditorClassIdentifier: 
-  itemName: Carrot husk
-  displayName: Carrot husk
+  itemName: CarrotHusk
+  displayName: Carrot Husk
   icon: {fileID: 21300000, guid: 83b5be5a97e101e42b3e97c08e9e3d99, type: 3}
   count: 1
   maxStack: 99

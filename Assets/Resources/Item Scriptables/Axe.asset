@@ -22,5 +22,5 @@ MonoBehaviour:
   itemBehavior: {fileID: 3328069391896398731, guid: bcb3e652d80186747a36f74faac6c5fb, type: 3}
   equipType: 
   defense: 0
-  useText: Swing to break trees
+  useText: Left click to break trees
   itemDescription: Live out your lumberjack dreams

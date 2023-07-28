@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
+  m_Name: SporeChestRecipe
+  m_EditorClassIdentifier: 
+  itemName: SporeChestRecipe
+  displayName: Mushroom Bowtie Recipe
+  icon: {fileID: -231845431732081202, guid: de3c63d792c0b3f41873e20d9db58d73, type: 3}
+  count: 1
+  maxStack: 1
+  startingCondition: 100
+  unique: 0
+  itemBehavior: {fileID: 7199846673751505513, guid: 80ef580b38b64844f84e44e72aed1c98, type: 3}
+  equipType: 
+  defense: 0
+  useText: Right click to read recipe
+  itemDescription: 'Someone''s notes on how to make something. '
