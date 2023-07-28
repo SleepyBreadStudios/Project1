@@ -158,11 +158,33 @@ public class EnemyBehavior : NetworkBehaviour
         }
     }
 
+    public GameObject FindClosestPlayer()
+    {
+        GameObject closest = null;
+        if (GameObject.FindWithTag("Player") != null)
+        {
+            GameObject[] playerLoc = GameObject.FindGameObjectsWithTag("Player");
+            float smallest = aggroRange;
+            foreach (GameObject player in playerLoc)
+            {
+                Vector2 loc = player.transform.position;
+                float distCalc = Vector2.Distance(transform.position, loc);
+                if (distCalc < smallest)
+                {
+                    smallest = distCalc;
+                    closest = player;
+                }
+            }
+        }
+        return closest;
+    }
+
     [ServerRpc]
     public void LoadServerRpc()
     {
         GetComponent<NetworkObject>().Spawn();
     }
+
 
     [ServerRpc]
     public void DamageServerRpc(int damage)
