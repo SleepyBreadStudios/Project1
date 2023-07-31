@@ -100,9 +100,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 5909226124758451408, guid: 53e20e3d1a2372441b56b861a1fd6cc2, type: 3}
   spawnRadius: 5
-  pollRadius: 15
-  pollRate: 6
-  limit: 10
+  pollRadius: 30
+  pollRate: 15
+  limit: 5
 --- !u!114 &1417238092545232011
 MonoBehaviour:
   m_ObjectHideFlags: 0

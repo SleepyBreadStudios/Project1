@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1600086957394188292}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.6, y: 33.6, z: -0.54194945}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -46,14 +46,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90eff1d506ccaae46b696196718c21e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  structure:
-  - {fileID: 5876442049078357144, guid: 61afa9ca6a5620b48b24c7ca67dd149c, type: 3}
-  - {fileID: 3086834773428552656, guid: 9f851b886ea8b164cb70bab41dc6c3aa, type: 3}
-  - {fileID: 9055794076392955415, guid: 2930f6900c834b946bc3807e82c7b010, type: 3}
-  - {fileID: 687582569816266173, guid: b8c88b26245792b4081fcc745a795625, type: 3}
-  - {fileID: 5424628842053966021, guid: c6ac8ef3ecb07054b94c5de1e1f412d8, type: 3}
-  - {fileID: 8263842946393707740, guid: 8bb4dc89ec591914e8099a1d027f1ba1, type: 3}
-  spawnPoint: {fileID: 0}
+  networkPrefabs:
+  - {fileID: 7676653753266903389, guid: 9f851b886ea8b164cb70bab41dc6c3aa, type: 3}
+  - {fileID: 99488416907183449, guid: 61afa9ca6a5620b48b24c7ca67dd149c, type: 3}
+  - {fileID: 402814521929198275, guid: b8c88b26245792b4081fcc745a795625, type: 3}
+  - {fileID: 1402678330024718567, guid: 2930f6900c834b946bc3807e82c7b010, type: 3}
+  - {fileID: 46298651345954275, guid: 8bb4dc89ec591914e8099a1d027f1ba1, type: 3}
+  - {fileID: 6352424979778590557, guid: c6ac8ef3ecb07054b94c5de1e1f412d8, type: 3}
+  spawnPoint: {fileID: 324434720674192874, guid: 201dae1a602a93248800d870eb39ef6c, type: 3}
   numOfSpawns: 150
 --- !u!114 &1988662362980221500
 MonoBehaviour:

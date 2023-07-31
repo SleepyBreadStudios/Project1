@@ -11,39 +11,66 @@ using UnityEngine.UI;
 
 public class OverworldSpawner : NetworkBehaviour
 {
-    public List<GameObject> structure;
+    public List<NetworkObject> networkPrefabs; // Assign the NetworkObject prefabs in the Unity Editor
+
     public GameObject spawnPoint;
 
     // Allows to set the number of objects to spawn in the world
     [SerializeField]
     private int numOfSpawns = 0;
 
+    // Server-generated random seed to be sent to clients
+    private int randomSeed;
+
     void Start()
     {
+        Debug.Log("Starting overworld");
+        // Only the host generates a new random seed and broadcasts it to clients
+        if (IsServer)
+        {
+            randomSeed = Random.Range(int.MinValue, int.MaxValue);
+            Debug.Log("Is running?");
+            BroadcastRandomSeedServerRpc(randomSeed);
+        }
+
+        // Start spawning objects
         SpawnObjects();
+    }
+
+    [ServerRpc]
+    private void BroadcastRandomSeedServerRpc(int seed)
+    {
+        Debug.Log("SPAWNING");
+        randomSeed = seed;
+        Random.InitState(randomSeed);
+        SpawnObjects(); // Make sure spawning only occurs after the random seed is set
     }
 
     public void SpawnObjects()
     {
         // Use UnityEngine.Bounds instead of custom Bounds
         UnityEngine.Bounds cBounds = spawnPoint.GetComponent<MeshCollider>().bounds;
-        GameObject spawn;
 
         // Create a list to store the positions of already spawned objects
         List<Vector2> spawnedPositions = new List<Vector2>();
 
         for (int i = 0; i < numOfSpawns; i++)
         {
-            int rand = Random.Range(0, structure.Count);
-            spawn = structure[rand];
+            int randomPrefabIndex = Random.Range(0, networkPrefabs.Count);
+            Debug.Log(randomPrefabIndex);
+            NetworkObject selectedPrefab = networkPrefabs[randomPrefabIndex];
+
+            // Use the synchronized random seed to ensure consistent random positions
+            Random.InitState(randomSeed);
 
             // Attempt to find a non-overlapping position
-            Vector2 randomPosition = FindNonOverlappingPosition(cBounds, spawn.transform.localScale, spawnedPositions);
+            Vector2 randomPosition = FindNonOverlappingPosition(cBounds, selectedPrefab.transform.localScale, spawnedPositions);
 
             // Instantiate the object if a suitable position is found
             if (randomPosition != Vector2.zero)
             {
-                Instantiate(spawn, randomPosition, spawn.transform.rotation);
+                // Use NetworkManager.Instantiate to spawn the object on both the host and clients
+                NetworkManager.Instantiate(selectedPrefab.gameObject, randomPosition, selectedPrefab.transform.rotation);
                 spawnedPositions.Add(randomPosition); // Add the position to the list of spawned positions
             }
         }

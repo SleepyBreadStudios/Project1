@@ -263,8 +263,8 @@ public class Player2Behavior : NetworkBehaviour
 					oldLeftRightPosition != leftRight)
 				{
 					UpdateClientPositionServerRpc(forwardBackward, leftRight);
-					oldForwardBackwardPosition = forwardBackward;
-					oldLeftRightPosition = leftRight;
+					oldForwardBackwardPosition = forwardBackward * Time.deltaTime;
+					oldLeftRightPosition = leftRight * Time.deltaTime;
 					
 					//animator.SetFloat("speed", walkSpeed);
 				}
