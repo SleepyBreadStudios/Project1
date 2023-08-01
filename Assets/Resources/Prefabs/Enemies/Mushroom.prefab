@@ -38,7 +38,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: 0.58}
+  m_AnchoredPosition: {x: -0.03, y: 0.72}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1685480090067396830
@@ -199,6 +199,7 @@ GameObject:
   - component: {fileID: 5378673949838583217}
   - component: {fileID: 3748506796218396243}
   - component: {fileID: 940904453657664547}
+  - component: {fileID: 261225056341545316}
   m_Layer: 0
   m_Name: Mushroom
   m_TagString: Mushroom
@@ -215,7 +216,7 @@ Transform:
   m_GameObject: {fileID: 5909226124758451408}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.280375, y: 1.6497167, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7516635490451153192}
@@ -263,7 +264,7 @@ SpriteRenderer:
   m_SortingLayerID: -658090937
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 6567477670649132024, guid: b7448c1d452ec08459e03ac63f909dbb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a64f51a65f6f8764e87b2dcf4933b07f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -420,8 +421,30 @@ MonoBehaviour:
   aggroRange: 4
   healthBar: {fileID: 6280975946706188957}
   item: {fileID: 4448634609639371803, guid: a02ef82eff7c1e3409ff08c0300c2b6a, type: 3}
-  moveBias: 0.8
+  moveBias: 2
   sporeRespawnTime: 2
+--- !u!95 &261225056341545316
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5909226124758451408}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 52f6c73ebc1ae1449ad376291cc8f90c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &9165166746516134102
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,8 +481,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.9}
-  m_SizeDelta: {x: 50, y: 10}
+  m_AnchoredPosition: {x: 1.3, y: 2.9}
+  m_SizeDelta: {x: 36.59, y: 6.86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3282849471307267324
 CanvasRenderer:

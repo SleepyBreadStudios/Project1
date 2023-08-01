@@ -37,6 +37,20 @@ public class OverworldSpawner : NetworkBehaviour
         SpawnObjects();
     }
 
+    public override void OnNetworkSpawn()
+    {
+        // if (IsServer)
+        // {
+        //     randomSeed = Random.Range(int.MinValue, int.MaxValue);
+        //     Debug.Log("Is running?");
+        //     BroadcastRandomSeedServerRpc(randomSeed);
+        // }
+
+        // // Start spawning objects
+        // SpawnObjects();
+        // base.OnNetworkSpawn();
+    }
+
     [ServerRpc]
     private void BroadcastRandomSeedServerRpc(int seed)
     {

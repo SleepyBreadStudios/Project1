@@ -25,7 +25,7 @@ public class MushroomBehavior : EnemyBehavior
     private Vector2 dest;
 
     [SerializeField]
-    private float moveBias = 0.8f;
+    private float moveBias = 2.0f;
 
     // how long it takes for mushroom to regenerate
     [SerializeField]
@@ -43,6 +43,7 @@ public class MushroomBehavior : EnemyBehavior
 
         // have to be SUPER CAREFUL there are no exceptions during runtime, otherwise this WILL NOT run
         InvokeRepeating("FindPlayerServerRpc", 0.0f, 2.0f);
+        StartCoroutine("Spore");
     }
 
     void Update()
@@ -81,6 +82,7 @@ public class MushroomBehavior : EnemyBehavior
             }
         }
         transform.position = Vector3.MoveTowards(transform.position, dest, Time.deltaTime * getSpeed());
+
     }
 
     [ServerRpc]
@@ -100,6 +102,7 @@ public class MushroomBehavior : EnemyBehavior
             }
             transform.position = Vector2.MoveTowards(transform.position, playerLoc, -1 * Time.deltaTime * getSpeed());
         }
+
     }
 
     [ServerRpc]
@@ -131,5 +134,16 @@ public class MushroomBehavior : EnemyBehavior
     {
         yield return new WaitForSeconds(sporeRespawnTime);
         currRegenerating = false;
+    }
+
+    public IEnumerator Spore()
+    {
+        while (true) 
+        {
+            yield return new WaitForSeconds(5.0f);
+            HarvestSpores();
+        }
+        // StartCoroutine("Regenerate");
+        // currRegenerating = true;
     }
 }
