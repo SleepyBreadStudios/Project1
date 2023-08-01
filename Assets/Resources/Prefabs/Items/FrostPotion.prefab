@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 692a96b41b804034e9aacb7e602be8ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -184,7 +184,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: {fileID: 11400000, guid: 95875a91cf225d344ad2870cbe4ac937, type: 2}
-  itemCount: 0
+  itemName: 
+  itemCount:
+    m_InternalValue: 0
   leftOrRight: right
   PotionDuration: 30
 --- !u!60 &-5889230695416629946

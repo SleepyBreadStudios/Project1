@@ -248,7 +248,7 @@ public class PlayerInventory : PlayerItemManager
         currInventorySize++;
 
         // update crafting based on successful crafted item
-        playerCrafting.Craft();
+        playerCrafting.Craft(craftingResultSlot.GetItemName(), craftingResultSlot.itemBehavior, inventory[inventoryIndex]);
         // then update result slot to be empty
         playerCrafting.AddSlotByRef(inventorySlot, resultIndex);
 
@@ -279,6 +279,7 @@ public class PlayerInventory : PlayerItemManager
         }
         else
         {
+            //Debug.Log(inventory[currHotbarSelected].itemBehavior.GetItemName());
             // this is where we trigger the actual effect of the item
             //Debug.Log("Do something here");
             // all derived classes & base class will return whether the effect is

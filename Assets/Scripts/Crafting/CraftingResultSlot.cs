@@ -52,7 +52,13 @@ public class CraftingResultSlot : ItemSlotUI, IDropHandler
             {
                 // item successfully moved from crafting
                 // empty crafting slot
-                crafting.Craft();
+    //            /var foundStack = inventory.FirstOrDefault(stackItem => stackItem == ItemSlot);
+    //            if(foundStack != null)
+				//{
+    //                Debug.Log("Found item");
+				//}
+                crafting.Craft(ItemSlot.GetItemName(), ItemSlot.itemBehavior, ItemSlot);
+                
                 //crafting.DeleteFromInventory(SlotIndex);
                 crafting.EmptyResultSlot();
                 crafting.AttemptToCraftItem();

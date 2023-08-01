@@ -8,8 +8,8 @@ public class WeaponBehavior : ItemBehavior
 {
     // control for enabling/disabling weapon/item behavior
     private bool held = false;
-    private float startTime;
-    private float endTime;
+    private float startTime = 0;
+    private float endTime = 0;
 
     // new version of prefab to use for weapon attack
     private GameObject weaponActive;
@@ -27,6 +27,8 @@ public class WeaponBehavior : ItemBehavior
     [SerializeField] private float reload;
 
     [SerializeField] private string weaponType;
+
+    private bool swing = true;
 
     // getters and setters
     public int getStrength()
@@ -61,29 +63,37 @@ public class WeaponBehavior : ItemBehavior
 
     // to attack, the code makes a NEW clone of the weapon prefab to manipulate it separately
     public override string GetItemEffect(Player2Behavior playerBehavior)
-    {
+	{
+        //startTime = Time.time;
+        //Debug.Log("startTime: " + startTime + " endTime: " + endTime);
         if (startTime >= endTime)
         {
+            Debug.Log("Attempting to swing");
             endTime = startTime + reload;
-
+            //swing = false;
+            //StartCoroutine("StartSwingTimer");
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (mousePos.x - playerBehavior.transform.position.x < 0)
             {
-                Debug.Log("Ping! " + (mousePos.x - playerBehavior.transform.position.x));
+                //Debug.Log("Ping! " + (mousePos.x - playerBehavior.transform.position.x));
                 playerBehavior.Flip(true, false);
             }
             else if (mousePos.x - playerBehavior.transform.position.x > 0)
             {
-                Debug.Log("Pong! " + (mousePos.x - playerBehavior.transform.position.x));
+                //Debug.Log("Pong! " + (mousePos.x - playerBehavior.transform.position.x));
                 playerBehavior.Flip(false, true);
             }
-                WeaponSwingServerRpc();
-
-            
+            //playerBehavior.CallWeaponSwingPlease(GetComponent<WeaponBehavior>());
+            WeaponSwingServerRpc();
         }
-
         return "Weapon";
     }
+
+ //   IEnumerator StartSwingTimer()
+	//{
+ //       yield return new WaitForSeconds(reload);
+ //       swing = true;
+ //   }
 
 	[ServerRpc(RequireOwnership = false)]
 	public void WeaponSwingServerRpc(ServerRpcParams serverRpcParams = default)
@@ -106,8 +116,6 @@ public class WeaponBehavior : ItemBehavior
 			weaponActive.transform.Translate(startX + (float)0.25, startY, 0);
 			weaponActive.transform.parent = client.PlayerObject.transform;
             
-
-
             if (weaponActive.GetComponent<WeaponBehavior>() != null)
 			{
 				weaponActive.GetComponent<WeaponBehavior>().setHeld(true);
@@ -146,8 +154,11 @@ public class WeaponBehavior : ItemBehavior
 	protected override void Awake()
     {
         base.Awake();
+        startTime = 0;
+        endTime = 0;
         leftOrRight = "left";
     }
+
 
     protected override void Update()
     {

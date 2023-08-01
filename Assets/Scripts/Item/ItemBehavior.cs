@@ -31,6 +31,9 @@ public class ItemBehavior : NetworkBehaviour
 
     public string leftOrRight = "";
 
+    [SerializeField]
+    public bool toolSwing;
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
@@ -55,6 +58,16 @@ public class ItemBehavior : NetworkBehaviour
         //Debug.Log("Get " + itemCount);
         return itemCount.Value;
     }
+
+    public string GetItemName()
+	{
+        return itemName;
+	}
+
+    public bool IsTool()
+	{
+        return toolSwing;
+	}
 
     public void SetCount(int newCount)
     {

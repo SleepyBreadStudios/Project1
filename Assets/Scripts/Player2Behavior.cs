@@ -215,12 +215,12 @@ public class Player2Behavior : NetworkBehaviour
 
 		#region KEY PRESSES
 		#region MOVEMENT
-		//if(menuOpen)
-		//{
-		//	//Debug.Log("Stop moving");
-		//	UpdateClientPositionServerRpc(0, 0);
-		//	animator.SetFloat("speed", 0);
-		//}
+		if (menuOpen)
+		{
+			//Debug.Log("Stop moving");
+			UpdateClientPositionServerRpc(0, 0);
+			animator.SetFloat("speed", 0);
+		}
 		// don't allow player input if the escape menu is open
 		if (!escEnabled && !dialogueEnabled)
 		{
@@ -343,6 +343,12 @@ public class Player2Behavior : NetworkBehaviour
 							else if(hit.collider.tag == "NPC")
 							{
 								EnableDialogue(true);
+								InventoryUI.transform.localScale = new Vector3(0, 0, 0);
+								InventoryUI.transform.position = originalInvPos;
+								CraftingUI.transform.localScale = new Vector3(0, 0, 0);
+								EquipUI.transform.localScale = new Vector3(0, 0, 0);
+								RecipeUI.transform.localScale = new Vector3(0, 0, 0);
+								HotbarUI.transform.localScale = new Vector3(0, 0, 0);
 								hit.collider.gameObject.GetComponent<NPCBehavior>().Interact(GetComponent<Player2Behavior>(), dialogueManager);
 								menuOpen = true;
 								OnMenuOpenUpdated.Invoke();
@@ -378,6 +384,7 @@ public class Player2Behavior : NetworkBehaviour
 				{
 					if (!menuOpen)
 					{
+						//Debug.Log("DOING SMTHN?");
 						playerInventory.useHotbarItem(currHotbarSelected, GetComponent<Player2Behavior>(), "left");
 					}
 				}
@@ -540,6 +547,10 @@ public class Player2Behavior : NetworkBehaviour
 	{
 		dialogueEnabled = enable;
 		menuOpen = enable;
+		if(!enable)
+		{
+			HotbarUI.transform.localScale = new Vector3(1, 1, 1);
+		}
 	}
 
 	public float GetTransformX()
@@ -717,7 +728,7 @@ public class Player2Behavior : NetworkBehaviour
 				if (!collision.gameObject.GetComponent<WeaponBehavior>().isHeld())
 				{
 					bool delete = playerInventory.AddItem(collision.gameObject.GetComponent<ItemBehavior>(), collision.gameObject.GetComponent<ItemBehavior>().GetItemType());
-					if (delete)
+					if (delete) 
 					{
 						collision.gameObject.GetComponent<WeaponBehavior>().Hide();
 					}

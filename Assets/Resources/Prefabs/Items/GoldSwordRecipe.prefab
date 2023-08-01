@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -231845431732081202, guid: de3c63d792c0b3f41873e20d9db58d73, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -230,7 +230,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: {fileID: 11400000, guid: 4dc033c91347cd34096965b606bcd78f, type: 2}
-  itemCount: 0
+  itemName: 
+  itemCount:
+    m_InternalValue: 0
   leftOrRight: right
   RecipeText:
   - Gold Sword

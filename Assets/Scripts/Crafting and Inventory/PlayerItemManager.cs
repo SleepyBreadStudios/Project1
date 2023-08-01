@@ -139,12 +139,13 @@ public abstract class PlayerItemManager : MonoBehaviour
             var foundEmptySlot = inventory.Find(stackItem => stackItem.IsEmptySlot() == true);
             if (foundEmptySlot != null)
             {
-                // change first empty inventory slot to hold item picked up
-                foundEmptySlot.SetItemSlot(itemSlot.item, count);
-                // tell slot what it's index is in the array
-                foundEmptySlot.SetSlotIndex(inventory.IndexOf(foundEmptySlot));
-                foundEmptySlot.SetItemBehavior(itemSlot.itemBehavior);
+                //// change first empty inventory slot to hold item picked up
+                //foundEmptySlot.SetItemSlot(itemSlot.item, count);
+                //// tell slot what it's index is in the array
+                //foundEmptySlot.SetSlotIndex(inventory.IndexOf(foundEmptySlot));
+                //foundEmptySlot.SetItemBehavior(itemSlot.itemBehavior);
                 // account for new inventory size
+                inventory[inventory.IndexOf(foundEmptySlot)] = itemSlot;
                 currInventorySize++;
                 OnItemsUpdated.Invoke();
                 // override this in crafting so that it updates the string form
@@ -360,6 +361,7 @@ public class ItemSlot
     {
         itemBehavior = itemB;
     }
+
 
     // is stack full
     public bool IsFullStack()

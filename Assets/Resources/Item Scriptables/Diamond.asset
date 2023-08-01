@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Diamond
   icon: {fileID: 21300000, guid: 6b3b8ef492edc304f9230dc368e8af5c, type: 3}
   count: 1
-  maxStack: 1
+  maxStack: 9
   startingCondition: 100
   unique: 0
   itemBehavior: {fileID: 8477120273651379386, guid: 27bcfa2c9c395d649a11ba59e21338a3, type: 3}

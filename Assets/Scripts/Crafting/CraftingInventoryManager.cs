@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Unity.Netcode;
 //using System.Threading.Tasks;
 
 public class CraftingInventoryManager : PlayerItemManager
@@ -258,7 +259,7 @@ public class CraftingInventoryManager : PlayerItemManager
         // if not swap the empty slot and full slot
         inventory[craftingIndex] = resultSlot;
         // update crafting based on successful crafted item
-        Craft();
+        Craft(resultSlot.GetItemName(), resultSlot.itemBehavior, inventory[craftingIndex]);
 
         // add to crafting string as well
         //craftingStringForm.Add(resultSlot.GetItemName(), resultSlot.GetCurrStack());
@@ -363,10 +364,11 @@ public class CraftingInventoryManager : PlayerItemManager
     }
 
     // Officially craft by updating item stacks to reflect that they've been used
-    public void Craft()
+    public void Craft(string weaponName, ItemBehavior itemBehavior, ItemSlot itemSlot)
     {
         Debug.Log("CRAFT");
         currentlyCrafting = true;
+        InstantiateIfWeapon(weaponName, itemBehavior, itemSlot);
         var recipePlusCount = craftingManager.Craft(currentlyCraftingList);
         Recipe recipe = recipePlusCount.Item1;
         for (int i = 0; i < recipe.GetNumItems(); i++)
@@ -423,6 +425,18 @@ public class CraftingInventoryManager : PlayerItemManager
         resultAmount = 0;
         AttemptToCraftItem();
         currentlyCrafting = false;
+    }
+
+    public void InstantiateIfWeapon(string weaponName, ItemBehavior itemBehavior, ItemSlot itemSlot)
+	{
+        if(itemBehavior.IsTool())
+		{
+            GameObject weaponActive = Instantiate(Resources.Load("Prefabs/Items/" + weaponName), gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
+            //playerInventory.AddItem(collision.gameObject.GetComponent<ItemBehavior>(), collision.gameObject.GetComponent<ItemBehavior>().GetItemType());
+            weaponActive.GetComponent<NetworkObject>().Spawn(true);
+            itemSlot.SetItemBehavior(weaponActive.GetComponent<WeaponBehavior>());
+            weaponActive.GetComponent<WeaponBehavior>().Hide();
+        }
     }
 
     private void Awake()
