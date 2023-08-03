@@ -79,7 +79,7 @@ public class CarrotBehavior : EnemyBehavior
         }
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void MoveServerRpc()
     {
         float currX = transform.position.x;
@@ -106,7 +106,7 @@ public class CarrotBehavior : EnemyBehavior
     }
 
     // tests for nearest player in radius and locks on to them
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void FindPlayerServerRpc()
     {
         if (!isSpinning)

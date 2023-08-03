@@ -263,8 +263,8 @@ public class Player2Behavior : NetworkBehaviour
 					oldLeftRightPosition != leftRight)
 				{
 					UpdateClientPositionServerRpc(forwardBackward, leftRight);
-					oldForwardBackwardPosition = forwardBackward * Time.deltaTime;
-					oldLeftRightPosition = leftRight * Time.deltaTime;
+					oldForwardBackwardPosition = forwardBackward; // * Time.deltaTime;
+					oldLeftRightPosition = leftRight; //* Time.deltaTime;
 					
 					//animator.SetFloat("speed", walkSpeed);
 				}
@@ -712,52 +712,68 @@ public class Player2Behavior : NetworkBehaviour
         Debug.Log("Player collision detected");
         Debug.Log("Item found: " + collision.gameObject.GetComponent<ItemBehavior>().GetItemType().GetName());
 #endif
-		if (collision.CompareTag("Item"))
+		bool hideWeapon = false;
+		if(IsOwner && IsClient)
 		{
-			bool delete = playerInventory.AddItem(collision.gameObject.GetComponent<ItemBehavior>(), collision.gameObject.GetComponent<ItemBehavior>().GetItemType());
-			if (delete)
-			{
-				collision.gameObject.GetComponent<ItemBehavior>().Delete();
-			}
-		}
 
-		if (collision.CompareTag("Weapon") || collision.CompareTag("Tool"))
-		{
-			if (collision.gameObject.GetComponent<WeaponBehavior>() != null)
+			if (collision.CompareTag("Item"))
 			{
-				if (!collision.gameObject.GetComponent<WeaponBehavior>().isHeld())
+
+				bool delete = playerInventory.AddItem(collision.gameObject.GetComponent<ItemBehavior>(), collision.gameObject.GetComponent<ItemBehavior>().GetItemType());
+				if (delete)
 				{
-					bool delete = playerInventory.AddItem(collision.gameObject.GetComponent<ItemBehavior>(), collision.gameObject.GetComponent<ItemBehavior>().GetItemType());
-					if (delete) 
+					collision.gameObject.GetComponent<ItemBehavior>().Delete();
+				}
+			}
+
+			if (collision.CompareTag("Weapon") || collision.CompareTag("Tool"))
+			{
+				if (collision.gameObject.GetComponent<WeaponBehavior>() != null)
+				{
+					if (!collision.gameObject.GetComponent<WeaponBehavior>().isHeld())
 					{
-						collision.gameObject.GetComponent<WeaponBehavior>().Hide();
+						bool delete = playerInventory.AddItem(collision.gameObject.GetComponent<ItemBehavior>(), collision.gameObject.GetComponent<ItemBehavior>().GetItemType());
+						if (delete)
+						{
+							collision.gameObject.GetComponent<WeaponBehavior>().Hide();
+							hideWeapon = true;
+						}
 					}
 				}
 			}
-		}
 
-		if (collision.CompareTag("Enemy"))
-		{
-			if (collision.gameObject.GetComponent<EnemyBehavior>() != null)
+			if (collision.CompareTag("Enemy"))
 			{
-				// either enemy or
-				DamagePlayer(collision.gameObject.GetComponent<EnemyBehavior>().getStrength());
+				if (collision.gameObject.GetComponent<EnemyBehavior>() != null)
+				{
+					// either enemy or
+					DamagePlayer(collision.gameObject.GetComponent<EnemyBehavior>().getStrength());
+				}
+				else
+				{
+					// projectile
+					DamagePlayer(collision.gameObject.GetComponent<ProjectileBehavior>().getStrength());
+				}
 			}
-			else
+			
+			// if (collision.CompareTag("Overworld"))
+			// {
+
+			// }
+
+			if (collision.CompareTag("Snow"))
 			{
-				// projectile
-				DamagePlayer(collision.gameObject.GetComponent<ProjectileBehavior>().getStrength());
+				EnterSnow();
 			}
 		}
-
-		// if (collision.CompareTag("Overworld"))
-		// {
-
-		// }
-
-		if (collision.CompareTag("Snow")) {
-			EnterSnow();
-		}
+		//if(IsServer)
+		//{
+		//	if(hideWeapon)
+		//	{
+		//		collision.gameObject.GetComponent<WeaponBehavior>().Hide();
+		//	}
+		//}
+		
 	}
 
 	// private void OnTriggerStay2D(Collider2D collider) 

@@ -84,7 +84,8 @@ public class WeaponBehavior : ItemBehavior
                 playerBehavior.Flip(false, true);
             }
             //playerBehavior.CallWeaponSwingPlease(GetComponent<WeaponBehavior>());
-            WeaponSwingServerRpc();
+            //Debug.Log(Input.mousePosition);
+            WeaponSwingServerRpc(Input.mousePosition);
         }
         return "Weapon";
     }
@@ -96,21 +97,24 @@ public class WeaponBehavior : ItemBehavior
  //   }
 
 	[ServerRpc(RequireOwnership = false)]
-	public void WeaponSwingServerRpc(ServerRpcParams serverRpcParams = default)
+	public void WeaponSwingServerRpc(Vector3 mousePos, ServerRpcParams serverRpcParams = default)
 	{
 		Debug.Log("Swing");
+        Debug.Log("Mouse: " + mousePos);
 		var clientId = serverRpcParams.Receive.SenderClientId;
 		// check if clientid is connected
 		if (NetworkManager.ConnectedClients.ContainsKey(clientId))
 		{
 			var client = NetworkManager.ConnectedClients[clientId];
 
-			weaponActive = Instantiate(Resources.Load("Prefabs/Items/" + itemName), client.PlayerObject.transform.position, Quaternion.identity) as GameObject;
+			weaponActive = Instantiate(Resources.Load("Prefabs/Items/Held" + itemName), client.PlayerObject.transform.position, Quaternion.identity) as GameObject;
             // new Vector2(client.PlayerObject.transform.position.x + startX + 0.25f, client.PlayerObject.transform.position.y + startY)
             weaponActive.GetComponent<NetworkObject>().Spawn(true);
 			weaponActive.gameObject.GetComponent<Renderer>().enabled = true;
             weaponActive.gameObject.GetComponent<Collider2D>().enabled = true;
-            var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(weaponActive.transform.position);
+            var dir = mousePos - Camera.main.WorldToScreenPoint(weaponActive.transform.position);
+            //Debug.Log("dir: " + dir);
+            Debug.Log(Camera.main.WorldToScreenPoint(weaponActive.transform.position));
 			var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 			weaponActive.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 			weaponActive.transform.Translate(startX + (float)0.25, startY, 0);

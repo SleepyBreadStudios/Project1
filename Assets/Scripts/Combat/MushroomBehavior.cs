@@ -58,7 +58,7 @@ public class MushroomBehavior : EnemyBehavior
         }
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void MoveServerRpc()
     {
         float currX = transform.position.x;
@@ -85,7 +85,7 @@ public class MushroomBehavior : EnemyBehavior
 
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     // new move method, moves towards player
     public void MoveAwayPlayerServerRpc()
     {
@@ -105,7 +105,7 @@ public class MushroomBehavior : EnemyBehavior
 
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     // tests for nearest player in radius and locks on to them
     public void FindPlayerServerRpc()
     {
@@ -122,9 +122,12 @@ public class MushroomBehavior : EnemyBehavior
     public void HarvestSpores()
 	{
         if(!currRegenerating)
-		{
-            GameObject itemObj = Instantiate(item, new Vector3(transform.position.x, transform.position.y, -1), Quaternion.identity) as GameObject;
-            itemObj.GetComponent<NetworkObject>().Spawn(true);
+        {
+            if (IsServer)
+            {
+                GameObject itemObj = Instantiate(item, new Vector3(transform.position.x, transform.position.y, -1), Quaternion.identity) as GameObject;
+                itemObj.GetComponent<NetworkObject>().Spawn(true);
+            }
             StartCoroutine("Regenerate");
             currRegenerating = true;
         }

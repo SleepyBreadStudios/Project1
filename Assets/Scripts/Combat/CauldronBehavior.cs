@@ -146,7 +146,7 @@ public class CauldronBehavior : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void LoadServerRpc()
     {
         GetComponent<NetworkObject>().Spawn();

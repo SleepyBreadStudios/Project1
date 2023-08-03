@@ -4,7 +4,7 @@
  * 
  * Authors: Alicia T, Jason N, Jino C
  *****************************************************************************/
-//#define Debug
+#define Debug
 using DapperDino.Events.CustomEvents;
 using System;
 using System.Collections;
@@ -273,7 +273,7 @@ public class PlayerInventory : PlayerItemManager
         if(inventory[currHotbarSelected].item == null || lor != inventory[currHotbarSelected].itemBehavior.leftOrRight)
         {
 #if Debug
-            Debug.Log("Hotbar slot empty, it's an item that doesn't do anything, or clicked wrong interact button");
+            //Debug.Log("Hotbar slot empty, it's an item that doesn't do anything, or clicked wrong interact button");
 #endif
             return;
         }

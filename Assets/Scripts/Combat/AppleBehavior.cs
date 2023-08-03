@@ -47,7 +47,7 @@ public class AppleBehavior : EnemyBehavior
         }
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void MoveServerRpc()
     {
         float currX = transform.position.x;
@@ -73,7 +73,7 @@ public class AppleBehavior : EnemyBehavior
         transform.position = Vector3.MoveTowards(transform.position, dest, Time.deltaTime * getSpeed());
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void FindPlayerServerRpc()
     {
         if (FindClosestPlayer() != null)
@@ -102,7 +102,7 @@ public class AppleBehavior : EnemyBehavior
         animator.ResetTrigger("shoot");
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void ShootServerRpc()
     {
         if (FindClosestPlayer() != null)

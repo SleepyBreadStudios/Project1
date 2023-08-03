@@ -24,6 +24,7 @@ TagManager:
   - Snow
   - NPC
   - Mushroom
+  - HeldTool
   layers:
   - Default
   - TransparentFX

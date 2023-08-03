@@ -50,7 +50,7 @@ public class PumpkinBehavior : EnemyBehavior
         }
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void MoveServerRpc()
     {
         float currX = transform.position.x;
@@ -77,7 +77,7 @@ public class PumpkinBehavior : EnemyBehavior
     }
 
     // new move method, moves towards player
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void MoveToPlayerServerRpc()
     {
         if (FindClosestPlayer() != null)
@@ -96,7 +96,7 @@ public class PumpkinBehavior : EnemyBehavior
     }
 
     // tests for nearest player in radius and locks on to them
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void FindPlayerServerRpc()
     {
         if (FindClosestPlayer() != null)
