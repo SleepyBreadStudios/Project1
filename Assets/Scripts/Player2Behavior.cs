@@ -229,7 +229,6 @@ public class Player2Behavior : NetworkBehaviour
 				// Resetting rsepawn conditions
 				RespawnUI.SetActive(false);
 				TimeLeft = 4.0f;
-
 				if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
 				{
 					forwardBackward += walkSpeed;
@@ -262,6 +261,12 @@ public class Player2Behavior : NetworkBehaviour
 				if (oldForwardBackwardPosition != forwardBackward ||
 					oldLeftRightPosition != leftRight)
 				{
+					Debug.Log("forwardBackward post change: " + forwardBackward);
+					Debug.Log("leftRight post change: " + leftRight);
+					forwardBackward = forwardBackward * Time.fixedDeltaTime;
+					leftRight = leftRight * Time.fixedDeltaTime;
+					Debug.Log("forwardBackward post multiply: " + forwardBackward);
+					Debug.Log("leftRight post multiply: " + leftRight);
 					UpdateClientPositionServerRpc(forwardBackward, leftRight);
 					oldForwardBackwardPosition = forwardBackward; // * Time.deltaTime;
 					oldLeftRightPosition = leftRight; //* Time.deltaTime;
@@ -538,7 +543,7 @@ public class Player2Behavior : NetworkBehaviour
 	public void EnableEscMenuPlayer()
 	{
 		escEnabled = !escEnabled;
-		Debug.Log("Esc pressed " + escEnabled);
+		//Debug.Log("Esc pressed " + escEnabled);
 		codeEnabled = !codeEnabled;
 
 	}
@@ -795,19 +800,19 @@ public class Player2Behavior : NetworkBehaviour
 		if (!resistColdEnabled)
 		{
 			Debug.Log("SNOW SLOW");
-			walkSpeed = 0.01f;
+			walkSpeed = 0.6f;
 			StartCoroutine("SnowDOT");
 		}
 		else
 		{
-			walkSpeed = 0.02f; 
+			walkSpeed = 1f; 
 		}
 	}
 
 	public void ExitSnow()
 	{
 		playerInSnow = false;
-		walkSpeed = 0.02f; // Speed returns back to normal upon exiting snow
+		walkSpeed = 1f; // Speed returns back to normal upon exiting snow
 		StopCoroutine("SnowDOT");
 	}
 
