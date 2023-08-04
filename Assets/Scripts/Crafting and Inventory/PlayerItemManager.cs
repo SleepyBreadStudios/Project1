@@ -12,8 +12,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
 using System.Linq;
+using Unity.Netcode;
 
-public abstract class PlayerItemManager : MonoBehaviour
+public abstract class PlayerItemManager : NetworkBehaviour
 {
     [SerializeField] private VoidEvent onInventoryItemsUpdated = null;
     [SerializeField] private VoidEvent onEquipUpdated = null;

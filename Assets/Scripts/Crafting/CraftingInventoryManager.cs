@@ -431,7 +431,7 @@ public class CraftingInventoryManager : PlayerItemManager
 	{
         if(itemBehavior.IsTool())
 		{
-            GameObject weaponActive = Instantiate(Resources.Load("Prefabs/Items/" + weaponName), gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
+            GameObject weaponActive = NetworkManager.Instantiate(Resources.Load("Prefabs/Items/" + weaponName), gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
             //playerInventory.AddItem(collision.gameObject.GetComponent<ItemBehavior>(), collision.gameObject.GetComponent<ItemBehavior>().GetItemType());
             weaponActive.GetComponent<NetworkObject>().Spawn(true);
             itemSlot.SetItemBehavior(weaponActive.GetComponent<WeaponBehavior>());

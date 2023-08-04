@@ -744,7 +744,6 @@ public class Player2Behavior : NetworkBehaviour
 		bool hideWeapon = false;
 		if(IsOwner && IsClient)
 		{
-
 			if (collision.CompareTag("Item"))
 			{
 

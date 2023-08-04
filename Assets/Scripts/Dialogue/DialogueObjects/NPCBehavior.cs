@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
-public class NPCBehavior : MonoBehaviour
+public class NPCBehavior : NetworkBehaviour
 {
     #region Dialogue
     /// <summary>
@@ -50,13 +50,28 @@ public class NPCBehavior : MonoBehaviour
 	{
         if(spawnObject && !currentlyInDialogue)
 		{
-            GameObject newItem = Instantiate(itemToSpawn, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-            newItem.GetComponent<NetworkObject>().Spawn(true);
-            GetComponent<NetworkObject>().Despawn(true);
-            Destroy(gameObject);
+            SpawnObjectServerRpc();
+            Delete();
         }
 	}
 
+    public void Delete()
+    {
+        DespawnServerRpc();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void DespawnServerRpc()
+    {
+        GetComponent<NetworkObject>().Despawn(true);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SpawnObjectServerRpc()
+    {
+        GameObject newItem = Instantiate(itemToSpawn, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        newItem.GetComponent<NetworkObject>().Spawn(true);
+    }
     // may need to make this script a network behavior
     //public override void OnNetworkDespawn()
     //{
