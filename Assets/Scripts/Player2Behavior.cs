@@ -138,6 +138,8 @@ public class Player2Behavior : NetworkBehaviour
 	// Track hotbar selection
 	private int currHotbarSelected = 1;
 
+	private Vector3 craftingTablePos;
+
 	// for telling the escape menu that other menus are open
 	[SerializeField] private VoidEvent onMenuOpenUpdated = null;
 	public Action OnMenuOpenUpdated = delegate { };
@@ -279,6 +281,21 @@ public class Player2Behavior : NetworkBehaviour
 				#endregion
 
 				#region INVENTORY/CRAFTING/INTERACTS
+				if(craftingEnabled)
+				{
+					if((Vector3.Distance(craftingTablePos, transform.position) > 3))
+					{
+						InventoryUI.transform.localScale = new Vector3(0, 0, 0);
+						EquipUI.transform.localScale = new Vector3(0, 0, 0);
+						InventoryUI.transform.position = originalInvPos;
+						HotbarUI.transform.localScale = new Vector3(1, 1, 1);
+						CraftingUI.transform.localScale = new Vector3(0, 0, 0);
+						inventoryEnabled = false;
+						craftingEnabled = false;
+						menuOpen = false;
+						playerInventory.inventoryTransferEnabled(false, false);
+					}
+				}
 				// access inventory
 				#region Inventory access w/ E key
 				if (Input.GetKeyDown(KeyCode.E))
@@ -324,6 +341,7 @@ public class Player2Behavior : NetworkBehaviour
 							// right click crafting object?
 							if (hit.collider.tag == "CraftingObject")
 							{
+								craftingTablePos = hit.collider.gameObject.transform.position;
 								if (Vector3.Distance(hit.collider.gameObject.transform.position, transform.position) <= 3)
 								{
 									Debug.Log("Right clicked crafting table, opening menu");

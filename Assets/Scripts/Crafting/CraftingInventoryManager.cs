@@ -27,6 +27,8 @@ public class CraftingInventoryManager : PlayerItemManager
     //[SerializeField]
     //public ItemSlot resultSlot = null;
 
+    public ItemBehavior weaponBehavior;
+
     //[SerializeField]
     Dictionary<string, int> craftingStringForm = new();
     //List<string> craftingStringForm = new();
@@ -427,17 +429,66 @@ public class CraftingInventoryManager : PlayerItemManager
         currentlyCrafting = false;
     }
 
+    //GameObject weaponActive = NetworkManager.Instantiate(Resources.Load("Prefabs/Items/" + weaponName), gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
+    //playerInventory.AddItem(collision.gameObject.GetComponent<ItemBehavior>(), collision.gameObject.GetComponent<ItemBehavior>().GetItemType());
+    //NetworkServer.SpawnWithClientAuthority(weaponActive);
+    //NetworkServer.Spawn(weaponActive);
+
     public void InstantiateIfWeapon(string weaponName, ItemBehavior itemBehavior, ItemSlot itemSlot)
 	{
         if(itemBehavior.IsTool())
 		{
-            GameObject weaponActive = NetworkManager.Instantiate(Resources.Load("Prefabs/Items/" + weaponName), gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
-            //playerInventory.AddItem(collision.gameObject.GetComponent<ItemBehavior>(), collision.gameObject.GetComponent<ItemBehavior>().GetItemType());
-            weaponActive.GetComponent<NetworkObject>().Spawn(true);
-            itemSlot.SetItemBehavior(weaponActive.GetComponent<WeaponBehavior>());
-            weaponActive.GetComponent<WeaponBehavior>().Hide();
+            SpawnToolServerRpc(weaponName);
+
+            //FindAnyObjectByType()
+            //         if (GameObject.Find(weaponName + "(Clone)") == null)
+            //{
+            //             Debug.Log(weaponName + "(Clone)");
+            //             Debug.Log("NULL");
+            //}
+            //         else
+            //{
+            Debug.Log("Calling spawn helper");
+            var tup = Tuple.Create(itemSlot, weaponName);
+            StartCoroutine("SpawnHelper", tup);
+            //}
+            
+
         }
     }
+
+    IEnumerator SpawnHelper(Tuple<ItemSlot , string> tup)
+	{
+        Debug.Log("Called spawn helper");
+        yield return new WaitForSeconds(1);
+        Debug.Log("Code running after wait");
+        var weaponName = tup.Item2;
+        var itemSlot = tup.Item1;
+        if (GameObject.Find(weaponName + "(Clone)") == null)
+		{
+            Debug.Log(":(");
+		}
+        Debug.Log("Setting item behavior");
+            itemSlot.SetItemBehavior(GameObject.Find(weaponName + "(Clone)").GetComponent<WeaponBehavior>());
+    }
+
+    [ServerRpc]
+    public void SpawnToolServerRpc(string weaponName)
+	{
+        GameObject weaponActive = NetworkManager.Instantiate(Resources.Load("Prefabs/Items/" + weaponName), gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
+        weaponActive.GetComponent<NetworkObject>().Spawn(true);
+
+        GiveClientItemBehaviorClientRpc(weaponActive);
+    }
+
+    [ClientRpc]
+    public void GiveClientItemBehaviorClientRpc(NetworkObjectReference target)
+	{
+        NetworkObject targetObj = target;
+        targetObj.GetComponent<WeaponBehavior>().Hide();
+        weaponBehavior = targetObj.GetComponent<WeaponBehavior>();
+    }
+
 
     private void Awake()
     {

@@ -360,6 +360,10 @@ public class ItemSlot
 
     public void SetItemBehavior(ItemBehavior itemB)
     {
+  //      if(itemB == null)
+		//{
+  //          Debug.Log("Is Null");
+		//}
         itemBehavior = itemB;
     }
 
