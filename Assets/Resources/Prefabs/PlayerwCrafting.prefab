@@ -1408,7 +1408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22cfedb61573f604d8046a413e3b1a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 2
+  walkSpeed: 1
   playerHealth: 20
   healthBar: {fileID: 7921748905627304716}
   animator: {fileID: 639922924189750656}
