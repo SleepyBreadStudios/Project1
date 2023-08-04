@@ -25,7 +25,7 @@ public class MushroomBehavior : EnemyBehavior
     private Vector2 dest;
 
     [SerializeField]
-    private float moveBias = 2.0f;
+    private float moveBias = 5.0f;
 
     // how long it takes for mushroom to regenerate
     [SerializeField]
@@ -143,7 +143,7 @@ public class MushroomBehavior : EnemyBehavior
     {
         while (true) 
         {
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(15.0f);
             HarvestSpores();
         }
         // StartCoroutine("Regenerate");
