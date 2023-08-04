@@ -132,6 +132,9 @@ public class Player2Behavior : NetworkBehaviour
 	// for flipping sprite
 	private SpriteRenderer spriteRenderer;
 
+	// for hiding weapons/tools
+	private SpriteRenderer tempSprite;
+
 	// Track hotbar selection
 	private int currHotbarSelected = 1;
 
@@ -424,52 +427,52 @@ public class Player2Behavior : NetworkBehaviour
 					}
 					hotbarChanged = true;
 				}
-				if (Input.GetKey(KeyCode.Alpha1))
+				if (Input.GetKeyDown(KeyCode.Alpha1))
 				{
 					currHotbarSelected = 1;
 					hotbarChanged = true;
 				}
-				else if (Input.GetKey(KeyCode.Alpha2))
+				else if (Input.GetKeyDown(KeyCode.Alpha2))
 				{
 					currHotbarSelected = 2;
 					hotbarChanged = true;
 				}
-				else if (Input.GetKey(KeyCode.Alpha3))
+				else if (Input.GetKeyDown(KeyCode.Alpha3))
 				{
 					currHotbarSelected = 3;
 					hotbarChanged = true;
 				}
-				else if (Input.GetKey(KeyCode.Alpha4))
+				else if (Input.GetKeyDown(KeyCode.Alpha4))
 				{
 					currHotbarSelected = 4;
 					hotbarChanged = true;
 				}
-				else if (Input.GetKey(KeyCode.Alpha5))
+				else if (Input.GetKeyDown(KeyCode.Alpha5))
 				{
 					currHotbarSelected = 5;
 					hotbarChanged = true;
 				}
-				else if (Input.GetKey(KeyCode.Alpha6))
+				else if (Input.GetKeyDown(KeyCode.Alpha6))
 				{
 					currHotbarSelected = 6;
 					hotbarChanged = true;
 				}
-				else if (Input.GetKey(KeyCode.Alpha7))
+				else if (Input.GetKeyDown(KeyCode.Alpha7))
 				{
 					currHotbarSelected = 7;
 					hotbarChanged = true;
 				}
-				else if (Input.GetKey(KeyCode.Alpha8))
+				else if (Input.GetKeyDown(KeyCode.Alpha8))
 				{
 					currHotbarSelected = 8;
 					hotbarChanged = true;
 				}
-				else if (Input.GetKey(KeyCode.Alpha9))
+				else if (Input.GetKeyDown(KeyCode.Alpha9))
 				{
 					currHotbarSelected = 9;
 					hotbarChanged = true;
 				}
-				else if (Input.GetKey(KeyCode.Alpha0))
+				else if (Input.GetKeyDown(KeyCode.Alpha0))
 				{
 					currHotbarSelected = 0;
 					hotbarChanged = true;
@@ -542,7 +545,7 @@ public class Player2Behavior : NetworkBehaviour
 	public void EnableEscMenuPlayer()
 	{
 		escEnabled = !escEnabled;
-		//Debug.Log("Esc pressed " + escEnabled);
+		Debug.Log("Esc pressed " + escEnabled);
 		codeEnabled = !codeEnabled;
 
 	}
@@ -741,6 +744,7 @@ public class Player2Behavior : NetworkBehaviour
 						{
 							collision.gameObject.GetComponent<WeaponBehavior>().Hide();
 							hideWeapon = true;
+							tempSprite = collision.gameObject.GetComponent<SpriteRenderer>();
 						}
 					}
 				}
@@ -770,14 +774,22 @@ public class Player2Behavior : NetworkBehaviour
 				EnterSnow();
 			}
 		}
-		//if(IsServer)
-		//{
-		//	if(hideWeapon)
-		//	{
-		//		collision.gameObject.GetComponent<WeaponBehavior>().Hide();
-		//	}
-		//}
-		
+		if (IsServer)
+		{
+			if (hideWeapon)
+			{
+				//collision.gameObject.GetComponent<WeaponBehavior>().Hide();\
+				
+				HideObjectClientRpc();
+			}
+		}
+
+	}
+
+	[ClientRpc]
+	public void HideObjectClientRpc()
+	{
+		tempSprite.enabled = false;
 	}
 
 	// private void OnTriggerStay2D(Collider2D collider) 
@@ -799,7 +811,7 @@ public class Player2Behavior : NetworkBehaviour
 		if (!resistColdEnabled)
 		{
 			Debug.Log("SNOW SLOW");
-			walkSpeed = 0.6f;
+			//walkSpeed = 0.6f;
 			StartCoroutine("SnowDOT");
 		}
 		else
@@ -811,7 +823,7 @@ public class Player2Behavior : NetworkBehaviour
 	public void ExitSnow()
 	{
 		playerInSnow = false;
-		walkSpeed = 1f; // Speed returns back to normal upon exiting snow
+		//walkSpeed = 1f; // Speed returns back to normal upon exiting snow
 		StopCoroutine("SnowDOT");
 	}
 
