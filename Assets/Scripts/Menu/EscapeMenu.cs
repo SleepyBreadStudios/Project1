@@ -43,6 +43,8 @@ public class EscapeMenu : MonoBehaviour
             {
                 DisplayMenu();
             }
+        } else {
+            OnEscUpdated.Invoke();
         }
     }
 
