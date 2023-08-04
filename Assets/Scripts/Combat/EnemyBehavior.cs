@@ -105,16 +105,26 @@ public class EnemyBehavior : NetworkBehaviour
 
 
     // Function to allow item drops in enemy
-    public void ItemDrop() {
+    public void ItemDrop()
+    {
+        float dropRadius = 1.0f; // Set the radius within which the items will be dropped
         for (int i = 0; i < dropTable.Count; i++)
         {
             if (dropChance[i] >= Random.Range(0, 100))
             {
-                GameObject drop = Instantiate(dropTable[i], new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+                // Generate a random offset within the dropRadius
+                Vector2 randomOffset = Random.insideUnitCircle * dropRadius;
+
+                // Instantiate the drop with the random offset from the object's position
+                Vector2 dropPosition = new Vector2(transform.position.x, transform.position.y) + randomOffset;
+                GameObject drop = Instantiate(dropTable[i], dropPosition, Quaternion.identity);
+
+                // Use GetComponent<NetworkObject>().Spawn(true) to spawn the drop on both the host and clients
                 drop.GetComponent<NetworkObject>().Spawn(true);
             }
         }
     }
+
 
     public void attacked(int damage, float knockback, Vector2 player)
     {
