@@ -36,17 +36,18 @@ public class EscapeMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && playerMenusNotOpen)
         {
             Debug.Log("Is closed?");
+            playerMenusNotOpen = false;
             if (activeMenu)
             {
                 Resume();
             }
             else
             {
+                
                 DisplayMenu();
             }
         } else if (Input.GetKeyDown(KeyCode.Escape) && !playerMenusNotOpen) {
-            Debug.Log("Is open?");
-            Resume();
+            OnEscUpdated.Invoke();
         }
     }
 
@@ -56,6 +57,7 @@ public class EscapeMenu : MonoBehaviour
         menuUI.SetActive(false);
         //Time.timeScale = 1f; // Shouldn't affect regardless of single or multiplayer
         activeMenu = false;
+        playerMenusNotOpen = true;
         //codeUI.SetActive(false);
         OnEscUpdated.Invoke();
     }
@@ -67,6 +69,7 @@ public class EscapeMenu : MonoBehaviour
         //Time.timeScale = 0f; // Freezes the game but should only occur if in Singleplayer
         activeMenu = true;
         //codeUI.SetActive(true);
+        //playerMenusNotOpen = false;
         OnEscUpdated.Invoke();
     }
 
