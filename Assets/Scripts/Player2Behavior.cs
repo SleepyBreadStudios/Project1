@@ -765,7 +765,8 @@ public class Player2Behavior : NetworkBehaviour
 						{
 							collision.gameObject.GetComponent<WeaponBehavior>().Hide();
 							hideWeapon = true;
-							tempSprite = collision.gameObject.GetComponent<SpriteRenderer>();
+							HideObjectServerRpc(collision.gameObject);
+							//tempSprite = collision.gameObject.GetComponent<SpriteRenderer>();
 						}
 					}
 				}
@@ -795,22 +796,22 @@ public class Player2Behavior : NetworkBehaviour
 				EnterSnow();
 			}
 		}
-		if (IsServer)
-		{
-			if (hideWeapon)
-			{
-				//collision.gameObject.GetComponent<WeaponBehavior>().Hide();\
-				
-				HideObjectClientRpc();
-			}
-		}
+	}
 
+	// wrapper method to tell server to tell clients to hide the object
+	[ServerRpc]
+	public void HideObjectServerRpc(NetworkObjectReference target)
+	{
+		HideObjectClientRpc(target);
+		//enabled = false;
 	}
 
 	[ClientRpc]
-	public void HideObjectClientRpc()
+	public void HideObjectClientRpc(NetworkObjectReference target)
 	{
-		tempSprite.enabled = false;
+		NetworkObject targetObj = target;
+		targetObj.GetComponent<WeaponBehavior>().Hide();
+		//enabled = false;
 	}
 
 	// private void OnTriggerStay2D(Collider2D collider) 
