@@ -324,7 +324,7 @@ public class Player2Behavior : NetworkBehaviour
 							// right click crafting object?
 							if (hit.collider.tag == "CraftingObject")
 							{
-								if (Vector3.Distance(hit.collider.gameObject.transform.position, transform.position) <= 4)
+								if (Vector3.Distance(hit.collider.gameObject.transform.position, transform.position) <= 3)
 								{
 									Debug.Log("Right clicked crafting table, opening menu");
 									// adjust position and size of inventory
@@ -350,36 +350,58 @@ public class Player2Behavior : NetworkBehaviour
 							}
 							else if(hit.collider.tag == "NPC")
 							{
-								EnableDialogue(true);
-								InventoryUI.transform.localScale = new Vector3(0, 0, 0);
-								InventoryUI.transform.position = originalInvPos;
-								CraftingUI.transform.localScale = new Vector3(0, 0, 0);
-								EquipUI.transform.localScale = new Vector3(0, 0, 0);
-								RecipeUI.transform.localScale = new Vector3(0, 0, 0);
-								HotbarUI.transform.localScale = new Vector3(0, 0, 0);
-								hit.collider.gameObject.GetComponent<NPCBehavior>().Interact(GetComponent<Player2Behavior>(), dialogueManager);
-								menuOpen = true;
-								OnMenuOpenUpdated.Invoke();
-								return;
+								if (Vector3.Distance(hit.collider.gameObject.transform.position, transform.position) <= 3)
+								{
+									EnableDialogue(true);
+									InventoryUI.transform.localScale = new Vector3(0, 0, 0);
+									InventoryUI.transform.position = originalInvPos;
+									CraftingUI.transform.localScale = new Vector3(0, 0, 0);
+									EquipUI.transform.localScale = new Vector3(0, 0, 0);
+									RecipeUI.transform.localScale = new Vector3(0, 0, 0);
+									HotbarUI.transform.localScale = new Vector3(0, 0, 0);
+									hit.collider.gameObject.GetComponent<NPCBehavior>().Interact(GetComponent<Player2Behavior>(), dialogueManager);
+									menuOpen = true;
+									OnMenuOpenUpdated.Invoke();
+									return;
+								}
+								else
+								{
+									Debug.Log("too far from npc");
+								}
 
 							}
 							// right clicking bush?
 							else if (hit.collider.tag == "Bush")
 							{
-								hit.collider.gameObject.GetComponent<BushBehavior>().HarvestBerries();
-								return;
+								if (Vector3.Distance(hit.collider.gameObject.transform.position, transform.position) <= 3)
+								{
+									hit.collider.gameObject.GetComponent<BushBehavior>().HarvestBerries();
+									return;
+								}
+								else
+								{
+									Debug.Log("too far from bush");
+								}
 							}
 							// right clicking pond?
 							else if (hit.collider.tag == "Pond")
 							{
-								hit.collider.gameObject.GetComponent<PondBehavior>().Fish(GetComponent<Player2Behavior>());
-								return;
+	
+								if (Vector3.Distance(hit.collider.gameObject.transform.position, transform.position) <= 3)
+								{
+									hit.collider.gameObject.GetComponent<PondBehavior>().Fish(GetComponent<Player2Behavior>());
+									return;
+								}
+								else
+								{
+									Debug.Log("too far from pond");
+								}
 							}
 							// right clicking mushroom?
-							else if (hit.collider.tag == "Mushroom")
-							{
-								hit.collider.gameObject.GetComponent<MushroomBehavior>().HarvestSpores();
-							}
+							//else if (hit.collider.tag == "Mushroom")
+							//{
+							//	hit.collider.gameObject.GetComponent<MushroomBehavior>().HarvestSpores();
+							//}
 							#endregion
 						}
 						playerInventory.useHotbarItem(currHotbarSelected, GetComponent<Player2Behavior>(), "right");
