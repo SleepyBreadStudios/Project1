@@ -138,9 +138,17 @@ public class OverworldSpawner : NetworkBehaviour
 
     private void DestroyObjects()
     {
-        foreach (GameObject o in GameObject.FindGameObjectsWithTag("Overworld"))
+        // Get all NetworkObjects in the scene
+        NetworkObject[] networkObjects = FindObjectsOfType<NetworkObject>();
+
+        foreach (NetworkObject networkObject in networkObjects)
         {
-            Destroy(o);
+            // Check if the networkObject is tagged as "Overworld" (you can change this tag as needed)
+            if (networkObject.gameObject.CompareTag("Overworld"))
+            {
+                // Use the Despawn method to properly despawn the object across all clients
+                networkObject.Despawn(true);
+            }
         }
     }
 }
