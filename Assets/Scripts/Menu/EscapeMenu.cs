@@ -35,6 +35,7 @@ public class EscapeMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && playerMenusNotOpen)
         {
+            Debug.Log("Is closed?");
             if (activeMenu)
             {
                 Resume();
@@ -43,8 +44,9 @@ public class EscapeMenu : MonoBehaviour
             {
                 DisplayMenu();
             }
-        } else {
-            //OnEscUpdated.Invoke();
+        } else if (Input.GetKeyDown(KeyCode.Escape) && !playerMenusNotOpen) {
+            Debug.Log("Is open?");
+            Resume();
         }
     }
 
