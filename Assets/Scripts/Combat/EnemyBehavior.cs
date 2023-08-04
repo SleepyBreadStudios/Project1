@@ -140,13 +140,20 @@ public class EnemyBehavior : NetworkBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Weapon"))
+        if (other.gameObject.CompareTag("Weapon") || other.gameObject.CompareTag("HeldWeapon"))
         {
             WeaponBehavior weaponBehavior = other.gameObject.GetComponent<WeaponBehavior>();
             if (weaponBehavior != null)
             {
                 DamageServerRpc(weaponBehavior.getStrength());
                 KnockbackServerRpc(other.transform.position, weaponBehavior.getKnockback());
+            }
+
+            HeldDaggerBehavior heldBehavior = other.gameObject.GetComponent<HeldDaggerBehavior>();
+            if (heldBehavior != null)
+            {
+                DamageServerRpc(heldBehavior.getStrength());
+                KnockbackServerRpc(other.transform.position, heldBehavior.getKnockback());
             }
         }
         else if (other.gameObject.CompareTag("PlayerProjectile"))

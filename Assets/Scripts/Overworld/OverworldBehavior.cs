@@ -77,9 +77,9 @@ public class OverworldBehavior : NetworkBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Tool"))
+        if (other.gameObject.CompareTag("HeldTool")) 
         {
-            if(other.gameObject.GetComponent<WeaponBehavior>().GetWeaponType() == ToolRequired)
+            if(other.gameObject.GetComponent<HeldDaggerBehavior>().GetWeaponType() == ToolRequired)
 			{
                 DamageServerRpc();
             }

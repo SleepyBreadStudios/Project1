@@ -261,12 +261,12 @@ public class Player2Behavior : NetworkBehaviour
 				if (oldForwardBackwardPosition != forwardBackward ||
 					oldLeftRightPosition != leftRight)
 				{
-					Debug.Log("forwardBackward post change: " + forwardBackward);
-					Debug.Log("leftRight post change: " + leftRight);
+					//Debug.Log("forwardBackward post change: " + forwardBackward);
+					//Debug.Log("leftRight post change: " + leftRight);
 					forwardBackward = forwardBackward * Time.fixedDeltaTime;
 					leftRight = leftRight * Time.fixedDeltaTime;
-					Debug.Log("forwardBackward post multiply: " + forwardBackward);
-					Debug.Log("leftRight post multiply: " + leftRight);
+					//Debug.Log("forwardBackward post multiply: " + forwardBackward);
+					//Debug.Log("leftRight post multiply: " + leftRight);
 					UpdateClientPositionServerRpc(forwardBackward, leftRight);
 					oldForwardBackwardPosition = forwardBackward; // * Time.deltaTime;
 					oldLeftRightPosition = leftRight; //* Time.deltaTime;
@@ -398,6 +398,89 @@ public class Player2Behavior : NetworkBehaviour
 				TimeLeft -= Time.deltaTime;
 				updateTime(TimeLeft);
 			}
+			#region HOTBAR
+			// check for numkeys for hotbar
+			// don't interact with hotbar if a menu is open
+			if (!menuOpen)
+			{
+				bool hotbarChanged = false;
+				if (Input.mouseScrollDelta.y != 0)
+				{
+					if (Input.mouseScrollDelta.y > 0)
+					{
+						currHotbarSelected--;
+						if (currHotbarSelected < 0)
+						{
+							currHotbarSelected = 9;
+						}
+					}
+					else
+					{
+						currHotbarSelected++;
+						if (currHotbarSelected > 9)
+						{
+							currHotbarSelected = 0;
+						}
+					}
+					hotbarChanged = true;
+				}
+				if (Input.GetKey(KeyCode.Alpha1))
+				{
+					currHotbarSelected = 1;
+					hotbarChanged = true;
+				}
+				else if (Input.GetKey(KeyCode.Alpha2))
+				{
+					currHotbarSelected = 2;
+					hotbarChanged = true;
+				}
+				else if (Input.GetKey(KeyCode.Alpha3))
+				{
+					currHotbarSelected = 3;
+					hotbarChanged = true;
+				}
+				else if (Input.GetKey(KeyCode.Alpha4))
+				{
+					currHotbarSelected = 4;
+					hotbarChanged = true;
+				}
+				else if (Input.GetKey(KeyCode.Alpha5))
+				{
+					currHotbarSelected = 5;
+					hotbarChanged = true;
+				}
+				else if (Input.GetKey(KeyCode.Alpha6))
+				{
+					currHotbarSelected = 6;
+					hotbarChanged = true;
+				}
+				else if (Input.GetKey(KeyCode.Alpha7))
+				{
+					currHotbarSelected = 7;
+					hotbarChanged = true;
+				}
+				else if (Input.GetKey(KeyCode.Alpha8))
+				{
+					currHotbarSelected = 8;
+					hotbarChanged = true;
+				}
+				else if (Input.GetKey(KeyCode.Alpha9))
+				{
+					currHotbarSelected = 9;
+					hotbarChanged = true;
+				}
+				else if (Input.GetKey(KeyCode.Alpha0))
+				{
+					currHotbarSelected = 0;
+					hotbarChanged = true;
+				}
+				if (hotbarChanged)
+				{
+					//Debug.Log(currHotbarSelected);
+					playerInventory.updateHotbar(currHotbarSelected);
+				}
+			}
+			#endregion
 			// close ui menus if they're open
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
@@ -430,91 +513,7 @@ public class Player2Behavior : NetworkBehaviour
 					EnableEscMenuPlayer();
 				}
 			} 
-			#region HOTBAR
-			// check for numkeys for hotbar
-			// don't interact with hotbar if a menu is open
-			if (!menuOpen)
-			{
-				bool hotbarChanged = false;
-				if (Input.mouseScrollDelta.y != 0)
-				{
-					if (Input.mouseScrollDelta.y > 0)
-					{
-						currHotbarSelected--;
-						if (currHotbarSelected < 0)
-						{
-							currHotbarSelected = 9;
-						}
-					}
-					else
-					{
-						currHotbarSelected++;
-						if (currHotbarSelected > 9)
-						{
-							currHotbarSelected = 0;
-						}
-					}
-					hotbarChanged = true;
-				}
-				if (Input.GetKeyDown(KeyCode.Alpha1))
-				{
-					currHotbarSelected = 1;
-					hotbarChanged = true;
-				}
-				else if (Input.GetKeyDown(KeyCode.Alpha2))
-				{
-					currHotbarSelected = 2;
-					hotbarChanged = true;
-				}
-				else if (Input.GetKeyDown(KeyCode.Alpha3))
-				{
-					currHotbarSelected = 3;
-					hotbarChanged = true;
-				}
-				else if (Input.GetKeyDown(KeyCode.Alpha4))
-				{
-					currHotbarSelected = 4;
-					hotbarChanged = true;
-				}
-				else if (Input.GetKeyDown(KeyCode.Alpha5))
-				{
-					currHotbarSelected = 5;
-					hotbarChanged = true;
-				}
-				else if (Input.GetKeyDown(KeyCode.Alpha6))
-				{
-					currHotbarSelected = 6;
-					hotbarChanged = true;
-				}
-				else if (Input.GetKeyDown(KeyCode.Alpha7))
-				{
-					currHotbarSelected = 7;
-					hotbarChanged = true;
-				}
-				else if (Input.GetKeyDown(KeyCode.Alpha8))
-				{
-					currHotbarSelected = 8;
-					hotbarChanged = true;
-				}
-				else if (Input.GetKeyDown(KeyCode.Alpha9))
-				{
-					currHotbarSelected = 9;
-					hotbarChanged = true;
-				}
-				else if (Input.GetKeyDown(KeyCode.Alpha0))
-				{
-					currHotbarSelected = 0;
-					hotbarChanged = true;
-				}
-				if (hotbarChanged)
-				{
-					playerInventory.updateHotbar(currHotbarSelected);
-				}
-			}
 
-
-
-			#endregion
 			#endregion
 			#endregion
 

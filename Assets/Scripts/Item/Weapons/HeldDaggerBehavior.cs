@@ -11,6 +11,11 @@ public class HeldDaggerBehavior : NetworkBehaviour
 
     [SerializeField] private GameObject pivot;
 
+    [SerializeField] private string weaponType;
+    [SerializeField] private int strength;
+    [SerializeField] private float knockback;
+    [SerializeField] private float reload;
+
     private bool rotate = false;
 
     void Update()
@@ -48,6 +53,27 @@ public class HeldDaggerBehavior : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         rotate = true;
+    }
+
+    public string GetWeaponType()
+    {
+        return weaponType;
+    }
+
+    // getters and setters
+    public int getStrength()
+    {
+        return strength;
+    }
+
+    public float getKnockback()
+    {
+        return knockback;
+    }
+
+    public float getReload()
+    {
+        return reload;
     }
 
 }

@@ -25,6 +25,7 @@ TagManager:
   - NPC
   - Mushroom
   - HeldTool
+  - HeldWeapon
   layers:
   - Default
   - TransparentFX

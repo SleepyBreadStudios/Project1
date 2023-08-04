@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72272a9eea253aa41a2c06f334f0913d, type: 3}
   m_Name: Pickaxe
   m_EditorClassIdentifier: 
-  itemName: StonePickaxe
+  itemName: Pickaxe
   displayName: Pickaxe
   icon: {fileID: 21300000, guid: 1172dd6a6479f594aaabb493e03637ca, type: 3}
   count: 1
