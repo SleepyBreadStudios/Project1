@@ -28,14 +28,6 @@ AnimationClip:
       value: {fileID: -5164730789955816838, guid: 9cd0551d434e47e4cb6283aa1593f4ea, type: 3}
     - time: 1
       value: {fileID: 4461436408205090986, guid: 9cd0551d434e47e4cb6283aa1593f4ea, type: 3}
-    - time: 1.2
-      value: {fileID: -5164730789955816838, guid: 9cd0551d434e47e4cb6283aa1593f4ea, type: 3}
-    - time: 1.4
-      value: {fileID: 4461436408205090986, guid: 9cd0551d434e47e4cb6283aa1593f4ea, type: 3}
-    - time: 1.6
-      value: {fileID: -5164730789955816838, guid: 9cd0551d434e47e4cb6283aa1593f4ea, type: 3}
-    - time: 1.8
-      value: {fileID: 4461436408205090986, guid: 9cd0551d434e47e4cb6283aa1593f4ea, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -62,16 +54,12 @@ AnimationClip:
     - {fileID: -270901426560336850, guid: 9cd0551d434e47e4cb6283aa1593f4ea, type: 3}
     - {fileID: -5164730789955816838, guid: 9cd0551d434e47e4cb6283aa1593f4ea, type: 3}
     - {fileID: 4461436408205090986, guid: 9cd0551d434e47e4cb6283aa1593f4ea, type: 3}
-    - {fileID: -5164730789955816838, guid: 9cd0551d434e47e4cb6283aa1593f4ea, type: 3}
-    - {fileID: 4461436408205090986, guid: 9cd0551d434e47e4cb6283aa1593f4ea, type: 3}
-    - {fileID: -5164730789955816838, guid: 9cd0551d434e47e4cb6283aa1593f4ea, type: 3}
-    - {fileID: 4461436408205090986, guid: 9cd0551d434e47e4cb6283aa1593f4ea, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 2
+    m_StopTime: 1.2
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -98,21 +86,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.2
-    functionName: ShootServerRpc
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 1.6
-    functionName: ShootServerRpc
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 2
+  - time: 1
     functionName: Reload
     data: 
     objectReferenceParameter: {fileID: 0}

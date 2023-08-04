@@ -54,7 +54,7 @@ public class CarrotBehavior : EnemyBehavior
         Color c = GetComponent<Renderer>().material.color;
         if (isSpinning)
         {
-            c = new Color(c.r, c.g, c.b, c.a - (0.5f * Time.deltaTime));
+            c = new Color(c.r, c.g, c.b, c.a - (1.0f * Time.deltaTime));
             GetComponent<Renderer>().material.color = c;
         }
         if (c.a <= 0)
@@ -113,12 +113,12 @@ public class CarrotBehavior : EnemyBehavior
         {
             if (FindClosestPlayer() != null)
             {
-                Vector2 loc = FindClosestPlayer().transform.position;
-                if (loc.x - transform.position.x < 0)
+                target = FindClosestPlayer().transform.position;
+                if (target.x - transform.position.x < 0)
                 {
                     spriteRenderer.flipX = false;
                 }
-                else if (loc.x - transform.position.x > 0)
+                else if (target.x - transform.position.x > 0)
                 {
                     spriteRenderer.flipX = true;
                 }
