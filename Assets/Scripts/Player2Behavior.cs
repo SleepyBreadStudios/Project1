@@ -208,8 +208,8 @@ public class Player2Behavior : NetworkBehaviour
 
 	private void UpdateServer()
 	{
-		transform.position = new Vector3(transform.position.x + leftRightPosition.Value,
-			transform.position.y + forwardBackPosition.Value, transform.position.z);
+		transform.position = new Vector3(transform.position.x + (leftRightPosition.Value * Time.fixedDeltaTime),
+			(transform.position.y + forwardBackPosition.Value * Time.fixedDeltaTime), transform.position.z);
 		//transform.localScale = new Vector3(scaleXPosition.Value, transform.localScale.y, transform.localScale.z);
 	}
 
@@ -268,8 +268,8 @@ public class Player2Behavior : NetworkBehaviour
 				{
 					//Debug.Log("forwardBackward post change: " + forwardBackward);
 					//Debug.Log("leftRight post change: " + leftRight);
-					forwardBackward = forwardBackward * Time.fixedDeltaTime;
-					leftRight = leftRight * Time.fixedDeltaTime;
+					//forwardBackward = forwardBackward * Time.fixedDeltaTime;
+					//leftRight = leftRight * Time.fixedDeltaTime;
 					//Debug.Log("forwardBackward post multiply: " + forwardBackward);
 					//Debug.Log("leftRight post multiply: " + leftRight);
 					UpdateClientPositionServerRpc(forwardBackward, leftRight);
