@@ -34,11 +34,17 @@ public class NPCBehavior : NetworkBehaviour
     private string materialName = default;
 
     [SerializeField]
+    protected List<GameObject> allSpawnObjects = new();
+
+    [SerializeField]
     private GameObject itemToSpawn = default;
 
     private Player2Behavior currPlayer = default;
 
     private bool spawnObject = false;
+
+    [SerializeField]
+    private bool deleteNPCOnSpawn;
 
     void Awake()
     {
@@ -51,7 +57,11 @@ public class NPCBehavior : NetworkBehaviour
         if(spawnObject && !currentlyInDialogue)
 		{
             SpawnObjectServerRpc();
-            Delete();
+            if (deleteNPCOnSpawn)
+			{
+                Delete();
+            }
+            spawnObject = false;
         }
 	}
 
@@ -69,8 +79,13 @@ public class NPCBehavior : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void SpawnObjectServerRpc()
     {
-        GameObject newItem = Instantiate(itemToSpawn, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-        newItem.GetComponent<NetworkObject>().Spawn(true);
+        for (int i = 0; i < allSpawnObjects.Count; i++)
+		{
+            Debug.Log("Spawn objects");
+            GameObject newItem = Instantiate(allSpawnObjects[i], new Vector2(transform.position.x + ((i + 1) * 0.5f), transform.position.y + ((i + 1) * 0.5f)), Quaternion.identity);
+            newItem.GetComponent<NetworkObject>().Spawn(true);
+        }
+
     }
     // may need to make this script a network behavior
     //public override void OnNetworkDespawn()
