@@ -186,7 +186,7 @@ public class EquipInventoryManager : PlayerItemManager
             // update with new size
             currInventorySize++;
             // tell inventory it has one less item now
-            playerInventory.UpdateInventory();
+            playerInventory.UpdateInventory(1);
         }
 
         if (equipIndex == headIndex)

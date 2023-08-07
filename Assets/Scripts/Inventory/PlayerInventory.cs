@@ -182,17 +182,21 @@ public class PlayerInventory : PlayerItemManager
             // update with new size
             currInventorySize++;
             // tell crafting it has one less item now
-            playerCrafting.UpdateInventory();
+            // don't think need this line since add slot by ref subtracts inventory size
+            //playerCrafting.UpdateInventory(1);
+            //Debug.Log(playerCrafting.GetCurrSize());
         }
 
         // if not swap slots
         inventory[inventoryIndex] = craftingSlot;
         playerCrafting.RemoveItemFromCrafting(craftingIndex);
         playerCrafting.AddSlotByRef(inventorySlot, craftingIndex);
-       
+        //Debug.Log(playerCrafting.GetCurrSize());
+
         OnItemsUpdated.Invoke();
         // since swapping with crafting, need to attempt to craft
-        playerCrafting.AttemptToCraftItem();
+        // add slot by ref will call attempt to craft anyways
+        //playerCrafting.AttemptToCraftItem();
     }
 
     public void SwapWEquip(int equipIndex, int inventoryIndex)
@@ -221,7 +225,7 @@ public class PlayerInventory : PlayerItemManager
             // update with new size
             currInventorySize++;
             // tell inventory it has one less item now
-            playerEquipment.UpdateInventory();
+            playerEquipment.UpdateInventory(1);
         }
 
         // swap empty w slot

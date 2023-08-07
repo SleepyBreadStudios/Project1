@@ -237,9 +237,9 @@ public abstract class PlayerItemManager : NetworkBehaviour
         OnItemsUpdated.Invoke();
     }
 
-    public virtual void UpdateInventory()
+    public virtual void UpdateInventory(int num)
     {
-        currInventorySize--;
+        currInventorySize = currInventorySize - num;
     }
 }
 

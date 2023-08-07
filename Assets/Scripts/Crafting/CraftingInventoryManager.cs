@@ -37,6 +37,11 @@ public class CraftingInventoryManager : PlayerItemManager
 
     private bool currentlyCrafting = false;
 
+    public int GetCurrSize()
+	{
+        return currInventorySize;
+	}
+
     public override bool IsInventoryFull()
     {
         //return inventoryFull;
@@ -201,7 +206,7 @@ public class CraftingInventoryManager : PlayerItemManager
             // update with new size
             currInventorySize++;
             // tell inventory it has one less item now
-            playerInventory.UpdateInventory();
+            playerInventory.UpdateInventory(1);
         }
 
         // swap the slots 
@@ -214,9 +219,9 @@ public class CraftingInventoryManager : PlayerItemManager
         // update player inventory
         playerInventory.AddSlotByRef(craftingSlot, inventoryIndex);
 
-
-        OnItemsUpdated.Invoke();
         AttemptToCraftItem();
+        OnItemsUpdated.Invoke();
+
     }
 
     // no need to update crafting string because this is only called
@@ -267,11 +272,10 @@ public class CraftingInventoryManager : PlayerItemManager
         //craftingStringForm.Add(resultSlot.GetItemName(), resultSlot.GetCurrStack());
         currentlyCraftingList[craftingIndex] = new CraftingItem(resultSlot.GetItemName(), resultSlot.GetCurrStack());
         currInventorySize++;
-        AttemptToCraftItem();
 
         // update result slot with empty slot
         inventory[resultIndex] = new ItemSlot();
-
+        AttemptToCraftItem();
         OnItemsUpdated.Invoke();
     }
 
@@ -323,16 +327,19 @@ public class CraftingInventoryManager : PlayerItemManager
     // updates preview of crafting
     public void AttemptToCraftItem()
     {
+        Debug.Log("Currently attempting to craft");
         // don't update crafting preview if there is crafting in the process
-        if(currentlyCrafting)
+        if (currentlyCrafting)
         {
             return;
         }
         // don't do anything if inventory is empty
         if(currInventorySize < 1)
 		{
+            Debug.Log("Inventory empty");
             return;
 		}
+        Debug.Log("Checking if able to craft");
         var recipePlusCount = craftingManager.Craft(currentlyCraftingList);
         if (recipePlusCount != null)
         {
@@ -359,6 +366,7 @@ public class CraftingInventoryManager : PlayerItemManager
             // clear preview result if the new contents of the crafting inventory is not a recipe
             if(!(inventory[maxInventorySize - 1].IsEmptySlot()))
             {
+                Debug.Log("Clear result slot");
                 EmptyResultSlot();
                 resultAmount = 0;
             }
@@ -375,8 +383,6 @@ public class CraftingInventoryManager : PlayerItemManager
         Recipe recipe = recipePlusCount.Item1;
         for (int i = 0; i < recipe.GetNumItems(); i++)
         {
-
-
                 var foundItem = inventory.Find(itemSlot => itemSlot.GetItemName() == recipe.recipeKeys[i]);
                 //Debug.Log(foundItem.GetItemName());
                 if (foundItem != null)

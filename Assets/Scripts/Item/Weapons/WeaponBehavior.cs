@@ -68,7 +68,7 @@ public class WeaponBehavior : ItemBehavior
         //Debug.Log("startTime: " + startTime + " endTime: " + endTime);
         if (startTime >= endTime)
         {
-            Debug.Log("Attempting to swing");
+            //Debug.Log("Attempting to swing");
             endTime = startTime + reload;
             //swing = false;
             //StartCoroutine("StartSwingTimer");
@@ -99,8 +99,8 @@ public class WeaponBehavior : ItemBehavior
 	[ServerRpc(RequireOwnership = false)]
 	public void WeaponSwingServerRpc(Vector3 mousePos, ServerRpcParams serverRpcParams = default)
 	{
-		Debug.Log("Swing");
-        Debug.Log("Mouse: " + mousePos);
+		//Debug.Log("Swing");
+        //Debug.Log("Mouse: " + mousePos);
 		var clientId = serverRpcParams.Receive.SenderClientId;
 		// check if clientid is connected
 		if (NetworkManager.ConnectedClients.ContainsKey(clientId))
@@ -114,7 +114,7 @@ public class WeaponBehavior : ItemBehavior
             weaponActive.gameObject.GetComponent<Collider2D>().enabled = true;
             var dir = mousePos - Camera.main.WorldToScreenPoint(weaponActive.transform.position);
             //Debug.Log("dir: " + dir);
-            Debug.Log(Camera.main.WorldToScreenPoint(weaponActive.transform.position));
+            //Debug.Log(Camera.main.WorldToScreenPoint(weaponActive.transform.position));
 			var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 			weaponActive.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 			weaponActive.transform.Translate(startX + (float)0.25, startY, 0);
