@@ -26,6 +26,9 @@ public abstract class PlayerItemManager : NetworkBehaviour
     [SerializeField]
     protected int currInventorySize = 0;
 
+    [SerializeField]
+    public Player2Behavior playerBehavior = null;
+
     // inventory list
     protected List<ItemSlot> inventory = new();
 
@@ -66,6 +69,11 @@ public abstract class PlayerItemManager : NetworkBehaviour
     {
         Debug.Log("Attempting to split stack");
         ItemSlot slot = inventory[slotIndex];
+        if(slot.itemBehavior.IsRecipe())
+		{
+            Debug.Log("Recipe!");
+            slot.itemBehavior.GetItemEffect(playerBehavior);
+        }
         // if can hold another stack
         if (!IsInventoryFull())
         {

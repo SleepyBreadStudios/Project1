@@ -22,5 +22,6 @@ public class RecipeItem : ItemBehavior
     {
         base.Awake();
         leftOrRight = "right";
+        itemIsRecipe = true;
     }
 }

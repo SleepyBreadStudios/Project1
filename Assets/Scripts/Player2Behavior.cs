@@ -88,6 +88,8 @@ public class Player2Behavior : NetworkBehaviour
 	private bool codeEnabled = false;
 	private bool dialogueEnabled = false;
 
+	private bool recipeOpen = false;
+
 	[SerializeField]
 	private bool resistColdEnabled = false;
 	private bool potResistCold = false;
@@ -293,6 +295,7 @@ public class Player2Behavior : NetworkBehaviour
 						inventoryEnabled = false;
 						craftingEnabled = false;
 						menuOpen = false;
+						recipeOpen = false;
 						playerInventory.inventoryTransferEnabled(false, false);
 					}
 				}
@@ -312,6 +315,7 @@ public class Player2Behavior : NetworkBehaviour
 						inventoryEnabled = false;
 						craftingEnabled = false;
 						menuOpen = false;
+						recipeOpen = false;
 						playerInventory.inventoryTransferEnabled(false, false);
 					}
 					else
@@ -332,7 +336,13 @@ public class Player2Behavior : NetworkBehaviour
 				#region Right click/Interacts
 				if (Input.GetMouseButtonDown(1))
 				{
-					if(!menuOpen)
+					if(recipeOpen)
+					{
+						Debug.Log("Closing recipe");
+						RecipeUI.transform.localScale = new Vector3(0, 0, 0);
+						recipeOpen = false;
+					}
+					if (!menuOpen)
 					{
 						RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 						if (hit.collider != null)
@@ -718,12 +728,24 @@ public class Player2Behavior : NetworkBehaviour
 
 	public void OpenRecipe(List<string> recipeText)
 	{
-		Debug.Log("test");
-		recipeUImanager.DisplayRecipe(recipeText);
-		RecipeUI.transform.localScale = new Vector3(1, 1, 1);
-		menuOpen = true;
-		OnMenuOpenUpdated.Invoke();
+		if(!recipeOpen)
+		{
+			//Debug.Log("test");
+			recipeUImanager.DisplayRecipe(recipeText);
+			RecipeUI.transform.localScale = new Vector3(1, 1, 1);
+			menuOpen = true;
+			OnMenuOpenUpdated.Invoke();
+			StartCoroutine("StartRecipeTimer");
+		}
 	}
+
+	IEnumerator StartRecipeTimer()
+	{
+		// Wait .001 seconds
+		yield return new WaitForSeconds(.001f);
+		recipeOpen = true;
+	}
+
 
 	// wrapper method to ask inventory if they have the item that is being looked for
 	public bool CheckPlayerInventoryForItem(string itemName, int cost)

@@ -34,6 +34,9 @@ public class ItemBehavior : NetworkBehaviour
     [SerializeField]
     public bool toolSwing;
 
+    [SerializeField]
+    public bool itemIsRecipe;
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
@@ -67,6 +70,11 @@ public class ItemBehavior : NetworkBehaviour
     public bool IsTool()
 	{
         return toolSwing;
+	}
+
+    public bool IsRecipe()
+	{
+        return itemIsRecipe;
 	}
 
     public void SetCount(int newCount)
