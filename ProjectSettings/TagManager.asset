@@ -26,11 +26,12 @@ TagManager:
   - Mushroom
   - HeldTool
   - HeldWeapon
+  - Barrier
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Foreground
   - Water
   - UI
   - 

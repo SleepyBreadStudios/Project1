@@ -77,6 +77,8 @@ public class Player2Behavior : NetworkBehaviour
 
 	public GameObject projectileObj = null;
 
+	public GameObject textPrefab;
+
 	[SerializeField]
 	Transform m_CameraFollow;
 
@@ -835,8 +837,64 @@ public class Player2Behavior : NetworkBehaviour
 			{
 				EnterSnow();
 			}
+
+			if (collision.CompareTag("Barrier")) // Adjust the tag as needed
+			{
+				GameObject spawnedText = Instantiate(textPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
+				
+				// Set the sorting layer of the spawned text to a higher layer than your tilemap
+				SpriteRenderer textRenderer = spawnedText.GetComponent<SpriteRenderer>();
+				if (textRenderer != null)
+				{
+					textRenderer.sortingLayerName = "Foreground"; // Adjust the sorting layer name
+				}
+				
+				Destroy(spawnedText, 2.0f);
+			}
+		
 		}
 	}
+
+	private IEnumerator LerpTextPosition(GameObject textObject, Vector3 initialPosition, Vector3 targetPosition, float duration)
+	{
+		SpriteRenderer textRenderer = textObject.GetComponent<SpriteRenderer>();
+		Color originalColor = textRenderer.color;
+		
+		float elapsedTime = 0.0f;
+		
+		// Fade-in duration (first half of the lerping)
+		float fadeInDuration = duration * 0.3f;
+		
+		while (elapsedTime < duration)
+		{
+			float lerpAmount = Mathf.Clamp01(elapsedTime / duration);
+			
+			if (elapsedTime < fadeInDuration)
+			{
+				// Calculate the fade-in amount
+				float fadeInAmount = Mathf.Clamp01(elapsedTime / fadeInDuration);
+				textRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, fadeInAmount);
+			}
+			else if (elapsedTime > duration - fadeInDuration)
+			{
+				// Calculate the fade-out amount
+				float fadeOutAmount = Mathf.Clamp01(1.0f - ((elapsedTime - (duration - fadeInDuration)) / fadeInDuration));
+				textRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, fadeOutAmount);
+			}
+			
+			textObject.transform.position = Vector3.Lerp(initialPosition, targetPosition, lerpAmount);
+			elapsedTime += Time.deltaTime;
+			yield return null;
+		}
+		
+		textRenderer.color = originalColor;
+		textObject.transform.position = targetPosition;
+		
+		// Destroy the text object after a delay
+		Destroy(textObject, 3.0f);
+	}
+
+
 
 	// wrapper method to tell server to tell clients to hide the object
 	[ServerRpc]
@@ -875,10 +933,11 @@ public class Player2Behavior : NetworkBehaviour
 			Debug.Log("SNOW SLOW");
 			//walkSpeed = 0.6f;
 			StartCoroutine("SnowDOT");
+			walkSpeed = 1.0f;
 		}
 		else
 		{
-			walkSpeed = 1f; 
+			walkSpeed = 0.5f; // Cuts speed by half
 		}
 	}
 

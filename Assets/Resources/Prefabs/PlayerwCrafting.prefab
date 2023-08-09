@@ -1427,6 +1427,7 @@ MonoBehaviour:
   recipeUImanager: {fileID: 5614014502803179194}
   projectile: {fileID: 4921440393766413185, guid: 33ba34d82f36e8f4bbe3411622a9d2e6, type: 3}
   projectileObj: {fileID: 4921440393766413185, guid: 33ba34d82f36e8f4bbe3411622a9d2e6, type: 3}
+  textPrefab: {fileID: 3697440695374866760, guid: 0eb3a1a026513c640b7877307fe66848, type: 3}
   m_CameraFollow: {fileID: 0}
   resistColdEnabled: 0
   RespawnUI: {fileID: 2219412501139647287}
@@ -1449,10 +1450,10 @@ MonoBehaviour:
   onEquipUpdated: {fileID: 11400000, guid: 250893a07c2f60942a4711a89067d725, type: 2}
   maxInventorySize: 60
   currInventorySize: 0
+  playerBehavior: {fileID: 3175410834743141282}
   onHotbarUpdated: {fileID: 11400000, guid: 30edbe458b097ab41a4d6b4d33b9739b, type: 2}
   playerCrafting: {fileID: 1635490780126689059}
   playerEquipment: {fileID: 4087091005946665511}
-  playerBehavior: {fileID: 3175410834743141282}
   currHotbarNum: 1
   inventoryShiftClick: 0
   craftingShiftClick: 0
@@ -1472,6 +1473,7 @@ MonoBehaviour:
   onEquipUpdated: {fileID: 11400000, guid: 250893a07c2f60942a4711a89067d725, type: 2}
   maxInventorySize: 6
   currInventorySize: 0
+  playerBehavior: {fileID: 0}
   playerInventory: {fileID: 1025459570113205275}
   craftingManager: {fileID: 0}
   currentlyCraftingList:
@@ -1490,7 +1492,7 @@ MonoBehaviour:
   - item: default
     count: 0
     index: 0
-  toolBehavior: {fileID: 0}
+  weaponBehavior: {fileID: 0}
 --- !u!114 &4087091005946665511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1507,6 +1509,7 @@ MonoBehaviour:
   onEquipUpdated: {fileID: 11400000, guid: 250893a07c2f60942a4711a89067d725, type: 2}
   maxInventorySize: 4
   currInventorySize: 0
+  playerBehavior: {fileID: 0}
   playerInventory: {fileID: 1025459570113205275}
   player: {fileID: 3175410834743141282}
   FrostItems:
