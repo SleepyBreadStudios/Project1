@@ -10,26 +10,24 @@ using Unity.Netcode;
 
 public class Tutorial : MonoBehaviour
 {
-    public GameObject tutorial;
+    public List<GameObject> tutorialPanels;
+    private int currentPanelIndex = 0;
 
-    private bool isActive = true;
     private bool isTabKeyDown = false;
     private bool isTutorialToggled = false;
-    private float toggleDelay = 0.5f;
-    private float timeSinceLastToggle = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        tutorial.SetActive(true);
+        SetActivePanel(currentPanelIndex);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
-            SetTutorialActive(false);
+            SwitchToNextPanel();
         }
 
         if (Input.GetKey(KeyCode.Tab))
@@ -41,32 +39,52 @@ public class Tutorial : MonoBehaviour
             isTabKeyDown = false;
             isTutorialToggled = false;
         }
+    }
 
-        // Toggle tutorial only when Tab key is held and not yet toggled
-        if (isTabKeyDown && !isTutorialToggled)
+    private void SwitchToNextPanel()
+    {
+        tutorialPanels[currentPanelIndex].SetActive(false);
+
+        currentPanelIndex++;
+        if (currentPanelIndex >= tutorialPanels.Count)
         {
-            timeSinceLastToggle += Time.deltaTime;
-            if (timeSinceLastToggle >= toggleDelay)
-            {
-                ToggleTutorial();
-                timeSinceLastToggle = 0f;
-                isTutorialToggled = true;
-            }
+            tutorialPanels[currentPanelIndex].SetActive(false);
         }
+
+        SetActivePanel(currentPanelIndex);
     }
 
-    private void SetTutorialActive(bool activeState)
+    private void SetActivePanel(int index)
     {
-        isActive = activeState;
-        tutorial.SetActive(isActive);
-    }
-
-    private void ToggleTutorial()
-    {
-        isActive = !isActive;
-        tutorial.SetActive(isActive);
+        tutorialPanels[index].SetActive(true);
     }
 }
+
+        // // Toggle tutorial only when Tab key is held and not yet toggled
+        // if (isTabKeyDown && !isTutorialToggled)
+        // {
+        //     timeSinceLastToggle += Time.deltaTime;
+        //     if (timeSinceLastToggle >= toggleDelay)
+        //     {
+        //         ToggleTutorial();
+        //         timeSinceLastToggle = 0f;
+        //         isTutorialToggled = true;
+        //     }
+        // }
+    
+
+    // private void SetTutorialActive(bool activeState)
+    // {
+    //     isActive = activeState;
+    //     tutorial.SetActive(isActive);
+    // }
+
+    // private void ToggleTutorial()
+    // {
+    //     isActive = !isActive;
+    //     tutorial.SetActive(isActive);
+    // }
+
 
 // public class Tutorial : NetworkBehaviour
 // {
