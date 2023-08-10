@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 2871952446186855405}
   - component: {fileID: 6711198603989643304}
   - component: {fileID: 8239944850100928078}
-  - component: {fileID: 8653844061060784454}
   - component: {fileID: 715708854225661067}
   m_Layer: 0
   m_Name: CraftingTable
@@ -184,67 +183,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!68 &8653844061060784454
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1882141601934732320}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: 1.5823966, y: -0.09225404}
-  - {x: 1.7221477, y: -1.3014176}
-  - {x: 0.82065207, y: -1.2190448}
-  - {x: 0.9739472, y: -2.450469}
-  - {x: 0.20150122, y: -2.2771528}
-  - {x: -0.38216498, y: -1.0199939}
-  - {x: -1.1109915, y: -1.6461169}
-  - {x: -1.724665, y: -1.4948369}
-  - {x: -1.2235489, y: -0.7513661}
-  - {x: -1.5140175, y: -0.56566465}
-  - {x: -1.4678247, y: 0.96090305}
-  - {x: -2.2148442, y: 1.3494511}
-  - {x: -2.1940477, y: 1.8819728}
-  - {x: -1.5926957, y: 2.233392}
-  - {x: 1.4368099, y: 2.2515872}
-  - {x: 2.009714, y: 2.053233}
-  - {x: 2.2120392, y: 1.7726086}
-  - {x: 2.2068925, y: 1.3097767}
-  - {x: 1.46566, y: 0.9409192}
-  - {x: 1.5173248, y: -0.092253685}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!61 &715708854225661067
 BoxCollider2D:
   m_ObjectHideFlags: 0
