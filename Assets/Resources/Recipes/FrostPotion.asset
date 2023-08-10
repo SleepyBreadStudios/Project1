@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fd869100de05f40ac51990b5bed79f, type: 3}
   m_Name: FrostPotion
   m_EditorClassIdentifier: 
-  recipeContents: MagicEssenceHeartberryFish
+  recipeContents: MagicEssenceFrostberryFish
   inspectorRecipeList:
   - item: MagicEssence
     count: 3
-  - item: Heartberry
-    count: 5
+  - item: Frostberry
+    count: 2
   - item: Fish
     count: 2
-  craftedItem: {fileID: 11400000, guid: 78b9e62d30206c3459296771a86fdee2, type: 2}
+  craftedItem: {fileID: 11400000, guid: 95875a91cf225d344ad2870cbe4ac937, type: 2}
   numOfItems: 3
   recipeKeys:
   - MagicEssence
-  - Heartberry
+  - Frostberry
   - Fish
