@@ -27,6 +27,8 @@ TagManager:
   - HeldTool
   - HeldWeapon
   - Barrier
+  - TrashSlot
+  - TrashObject
   layers:
   - Default
   - TransparentFX

@@ -67,6 +67,9 @@ public class Player2Behavior : NetworkBehaviour
 	private GameObject RecipeUI = null;
 
 	[SerializeField]
+	private GameObject TrashUI = null;
+
+	[SerializeField]
 	private DialogueManager dialogueManager = null;
 
 	[SerializeField]
@@ -89,7 +92,7 @@ public class Player2Behavior : NetworkBehaviour
 	private bool escEnabled = false;
 	private bool codeEnabled = false;
 	private bool dialogueEnabled = false;
-
+	private bool trashEnabled = false;
 	private bool recipeOpen = false;
 
 	[SerializeField]
@@ -144,6 +147,8 @@ public class Player2Behavior : NetworkBehaviour
 
 	private Vector3 craftingTablePos;
 
+	private Vector3 trashPos;
+
 	// for telling the escape menu that other menus are open
 	[SerializeField] private VoidEvent onMenuOpenUpdated = null;
 	public Action OnMenuOpenUpdated = delegate { };
@@ -158,6 +163,7 @@ public class Player2Behavior : NetworkBehaviour
 		playerInventory = gameObject.GetComponent<PlayerInventory>();
 		InventoryUI.transform.localScale = new Vector3(0, 0, 0);
 		CraftingUI.transform.localScale = new Vector3(0, 0, 0);
+		TrashUI.transform.localScale = new Vector3(0, 0, 0);
 		HotbarUI.transform.localScale = new Vector3(0, 0, 0);
 		HealthUI.transform.localScale = new Vector3(0, 0, 0);
 		EquipUI.transform.localScale = new Vector3(0, 0, 0);
@@ -289,16 +295,14 @@ public class Player2Behavior : NetworkBehaviour
 				{
 					if((Vector3.Distance(craftingTablePos, transform.position) > 3))
 					{
-						InventoryUI.transform.localScale = new Vector3(0, 0, 0);
-						EquipUI.transform.localScale = new Vector3(0, 0, 0);
-						InventoryUI.transform.position = originalInvPos;
-						HotbarUI.transform.localScale = new Vector3(1, 1, 1);
-						CraftingUI.transform.localScale = new Vector3(0, 0, 0);
-						inventoryEnabled = false;
-						craftingEnabled = false;
-						menuOpen = false;
-						recipeOpen = false;
-						playerInventory.inventoryTransferEnabled(false, false);
+						DefaultMenusClosed();
+					}
+				}
+				if(trashEnabled)
+				{
+					if ((Vector3.Distance(trashPos, transform.position) > 3))
+					{
+						DefaultMenusClosed();
 					}
 				}
 				// access inventory
@@ -308,17 +312,7 @@ public class Player2Behavior : NetworkBehaviour
 					if (inventoryEnabled)
 					{
 						// close
-						InventoryUI.transform.localScale = new Vector3(0, 0, 0);
-						EquipUI.transform.localScale = new Vector3(0, 0, 0);
-						InventoryUI.transform.position = originalInvPos;
-						HotbarUI.transform.localScale = new Vector3(1, 1, 1);
-						CraftingUI.transform.localScale = new Vector3(0, 0, 0);
-						RecipeUI.transform.localScale = new Vector3(0, 0, 0);
-						inventoryEnabled = false;
-						craftingEnabled = false;
-						menuOpen = false;
-						recipeOpen = false;
-						playerInventory.inventoryTransferEnabled(false, false);
+						DefaultMenusClosed();
 					}
 					else
 					{
@@ -329,7 +323,7 @@ public class Player2Behavior : NetworkBehaviour
 						RecipeUI.transform.localScale = new Vector3(0, 0, 0);
 						inventoryEnabled = true;
 						menuOpen = true;
-						playerInventory.inventoryTransferEnabled(true, false);
+						playerInventory.inventoryTransferEnabled(true, false, false);
 					}
 					OnMenuOpenUpdated.Invoke();
 				}
@@ -368,7 +362,7 @@ public class Player2Behavior : NetworkBehaviour
 									inventoryEnabled = true;
 									craftingEnabled = true;
 									menuOpen = true;
-									playerInventory.inventoryTransferEnabled(true, true);
+									playerInventory.inventoryTransferEnabled(true, true, false);
 									OnMenuOpenUpdated.Invoke();
 									return;
 								}
@@ -377,6 +371,35 @@ public class Player2Behavior : NetworkBehaviour
 									Debug.Log("too far from crafting table");
 								}
 
+							}
+							else if(hit.collider.tag == "TrashObject")
+							{
+								trashPos = hit.collider.gameObject.transform.position;
+								if (Vector3.Distance(trashPos, transform.position) <= 3)
+								{
+									Debug.Log("Right clicked trash, opening menu");
+									// adjust position and size of inventory
+									InventoryUI.transform.localScale = new Vector3(.8f, .8f, .8f);
+									InventoryUI.transform.position = new Vector3(InventoryUI.transform.position.x - 450, InventoryUI.transform.position.y, InventoryUI.transform.position.z);
+									// open trash
+									TrashUI.transform.localScale = new Vector3(1, 1, 1);
+									// close hotbar and equip 
+									HotbarUI.transform.localScale = new Vector3(0, 0, 0);
+									EquipUI.transform.localScale = new Vector3(0, 0, 0);
+									CraftingUI.transform.localScale = new Vector3(0, 0, 0);
+									inventoryEnabled = true;
+									craftingEnabled = false;
+									recipeOpen = false;
+									menuOpen = true;
+									trashEnabled = true;
+									playerInventory.inventoryTransferEnabled(true, false, true);
+									OnMenuOpenUpdated.Invoke();
+									return;
+								}
+								else
+								{
+									Debug.Log("too far from trash can");
+								}
 							}
 							else if(hit.collider.tag == "NPC")
 							{
@@ -548,18 +571,19 @@ public class Player2Behavior : NetworkBehaviour
 				else if (inventoryEnabled || craftingEnabled || menuOpen)
 				{
 					// close every other menu
-					InventoryUI.transform.localScale = new Vector3(0, 0, 0);
-					InventoryUI.transform.position = originalInvPos;
-					CraftingUI.transform.localScale = new Vector3(0, 0, 0);
-					EquipUI.transform.localScale = new Vector3(0, 0, 0);
-					RecipeUI.transform.localScale = new Vector3(0, 0, 0);
-					inventoryEnabled = false;
-					craftingEnabled = false;
-					HotbarUI.transform.localScale = new Vector3(1, 1, 1);
-					menuOpen = false;
-					playerInventory.inventoryTransferEnabled(false, false);
-					Debug.Log("CLOSE RECIPE");
-					OnMenuOpenUpdated.Invoke();
+					//InventoryUI.transform.localScale = new Vector3(0, 0, 0);
+					//InventoryUI.transform.position = originalInvPos;
+					//CraftingUI.transform.localScale = new Vector3(0, 0, 0);
+					//EquipUI.transform.localScale = new Vector3(0, 0, 0);
+					//RecipeUI.transform.localScale = new Vector3(0, 0, 0);
+					//inventoryEnabled = false;
+					//craftingEnabled = false;
+					//HotbarUI.transform.localScale = new Vector3(1, 1, 1);
+					//menuOpen = false;
+					//playerInventory.inventoryTransferEnabled(false, false, false);
+					//Debug.Log("CLOSE RECIPE");
+					//OnMenuOpenUpdated.Invoke();
+					DefaultMenusClosed();
 				}
 				else if (!escEnabled)
 				{
@@ -894,7 +918,23 @@ public class Player2Behavior : NetworkBehaviour
 		Destroy(textObject, 3.0f);
 	}
 
-
+	// turning off everything minus the hotbar
+	public void DefaultMenusClosed()
+	{
+		InventoryUI.transform.localScale = new Vector3(0, 0, 0);
+		InventoryUI.transform.position = originalInvPos;
+		EquipUI.transform.localScale = new Vector3(0, 0, 0);
+		CraftingUI.transform.localScale = new Vector3(0, 0, 0);
+		TrashUI.transform.localScale = new Vector3(0, 0, 0);
+		HotbarUI.transform.localScale = new Vector3(1, 1, 1);
+		inventoryEnabled = false;
+		craftingEnabled = false;
+		trashEnabled = false;
+		menuOpen = false;
+		recipeOpen = false;
+		playerInventory.inventoryTransferEnabled(false, false, false);
+		OnMenuOpenUpdated.Invoke();
+	}
 
 	// wrapper method to tell server to tell clients to hide the object
 	[ServerRpc]

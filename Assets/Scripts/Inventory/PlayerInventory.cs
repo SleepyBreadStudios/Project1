@@ -46,6 +46,7 @@ public class PlayerInventory : PlayerItemManager
 
     public bool inventoryShiftClick = false;
     public bool craftingShiftClick = false;
+    public bool trashShiftClick = false;
 
     // add item to player inventory
     public bool AddItem(ItemBehavior nBehavior, ItemData nItem)
@@ -392,10 +393,11 @@ public class PlayerInventory : PlayerItemManager
     }
 
     // called by player behavior
-    public void inventoryTransferEnabled(bool inventory, bool crafting)
+    public void inventoryTransferEnabled(bool inventory, bool crafting, bool trash)
     {
         inventoryShiftClick = inventory;
         craftingShiftClick = crafting;
+        trashShiftClick = trash;
     }
 
     // init inventory before anything

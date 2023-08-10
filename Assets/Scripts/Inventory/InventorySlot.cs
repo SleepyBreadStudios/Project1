@@ -21,6 +21,9 @@ public class InventorySlot : ItemSlotUI, IDropHandler
     private EquipInventoryManager equipment = null;
 
     [SerializeField]
+    private TrashInventoryManager trash = null;
+
+    [SerializeField]
     private PlayerInventory inventory = null;
 
     [SerializeField]
@@ -83,7 +86,8 @@ public class InventorySlot : ItemSlotUI, IDropHandler
     // move stack from  inventory slot to crafting or equipment with shift click
     public override void QuickMoveStack()
     {
-        if(inventory.inventoryShiftClick && inventory.craftingShiftClick)
+        // craft quick move
+        if (inventory.inventoryShiftClick && inventory.craftingShiftClick)
         {
             if (crafting.AddStack(ItemSlot))
             {
@@ -93,6 +97,15 @@ public class InventorySlot : ItemSlotUI, IDropHandler
                 inventory.DeleteFromInventory(SlotIndex);
             }
         }
+        // trash quick move
+        else if (inventory.inventoryShiftClick && inventory.trashShiftClick)
+		{
+            if(trash.AddStack(ItemSlot))
+			{
+                inventory.DeleteFromInventory(SlotIndex);
+            }
+		}
+        // equip quick move
         else if (inventory.inventoryShiftClick && !inventory.craftingShiftClick)
         {
             if (equipment.AddStack(ItemSlot, SlotIndex))
