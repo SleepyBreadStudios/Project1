@@ -21,7 +21,7 @@ public class Player2Behavior : NetworkBehaviour
 	//player stats
 	#region player stats
 	[SerializeField]
-	private float walkSpeed = 1.0f;
+	public float walkSpeed = 1.0f;
 	[SerializeField]
 	private float playerHealth;
 
