@@ -38,13 +38,14 @@ public class PumpkinBehavior : EnemyBehavior
         InvokeRepeating("FindPlayerServerRpc", 0.0f, 2.0f);
     }
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         if (isJumping)
         {
             MoveToPlayerServerRpc();
         } 
-        else if (!idleLock) 
+        if (!idleLock) 
         {
             MoveServerRpc();
         }
@@ -73,7 +74,7 @@ public class PumpkinBehavior : EnemyBehavior
                 dest = new Vector2(randX, randY);
             }
         }
-        transform.position = Vector3.MoveTowards(transform.position, dest, Time.deltaTime * getSpeed());
+        transform.position = Vector3.MoveTowards(transform.position, dest, Time.deltaTime);
     }
 
     // new move method, moves towards player
@@ -110,9 +111,7 @@ public class PumpkinBehavior : EnemyBehavior
             idleLock = false;
             isJumping = false;
             animator.ResetTrigger("jump");
-            float randX = Random.Range(transform.position.x - moveBias, transform.position.x + moveBias);
-            float randY = Random.Range(transform.position.y - moveBias, transform.position.y + moveBias);
-            dest = new Vector2(randX, randY);
+            dest = transform.position;
         }
     }
 

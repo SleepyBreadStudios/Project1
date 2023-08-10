@@ -39,8 +39,9 @@ public class AppleBehavior : EnemyBehavior
         InvokeRepeating("FindPlayerServerRpc", 0.0f, 4.0f);
     }
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         if (!isShooting)
         {
             MoveServerRpc();

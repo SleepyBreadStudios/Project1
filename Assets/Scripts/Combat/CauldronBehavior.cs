@@ -11,6 +11,7 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.LowLevel;
 using UnityEngine.UI;
 //using static UnityEditor.Progress;
 
@@ -107,22 +108,26 @@ public class CauldronBehavior : NetworkBehaviour
         spawned = new List<GameObject>();
         animator = gameObject.GetComponent<Animator>();
         isSpawning = false;
-        InvokeRepeating("SpawnEnemies", 0.0f, 5.0f);
     }
 
     void Update()
     {
         //StartCoroutine(RegenerateTest());
         //Debug.Log("List length: " + spawned.Count);
-        foreach (GameObject e in spawned)
+        GameObject[] enemyLoc = GameObject.FindGameObjectsWithTag("Enemy");
+        bool checkNear = false;
+        foreach (GameObject enemy in enemyLoc)
         {
-            if (e.GetComponent<EnemyBehavior>() != null)
+            Vector2 loc = enemy.transform.position;
+            if (Vector2.Distance(transform.position, loc) < aggroRange)
             {
-                if (e.GetComponent<EnemyBehavior>().getDoomed())
-                {
-                    DamageServerRpc(1);
-                }
+                checkNear = true;
             }
+        }
+
+        if (!checkNear)
+        {
+            SpawnEnemies();
         }
     }
 
@@ -163,7 +168,7 @@ public class CauldronBehavior : NetworkBehaviour
         healthBar.UpdateHealth(health);
         if (health <= 0)
         {
-            animator.SetTrigger("death");
+            //animator.SetTrigger("death");
             foreach (GameObject e in spawned)
             {
                 e.GetComponent<NetworkObject>().Despawn(true);
@@ -171,6 +176,8 @@ public class CauldronBehavior : NetworkBehaviour
             }
             ItemDrop();
             GetComponent<NetworkObject>().Despawn(true);
+            Debug.Log("Should be despawning");
+            Destroy(gameObject);
         }
     }
 
@@ -214,11 +221,6 @@ public class CauldronBehavior : NetworkBehaviour
         yield return new WaitForSeconds(0.15f);
         rb.velocity = Vector2.zero;
         OnDone?.Invoke();
-    }
-
-    public override void OnNetworkDespawn()
-    {
-        Destroy(gameObject);
     }
 
     public void PewFinish()

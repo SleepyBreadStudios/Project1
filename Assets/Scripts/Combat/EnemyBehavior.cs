@@ -57,6 +57,11 @@ public class EnemyBehavior : NetworkBehaviour
     [SerializeField]
     HealthBar healthBar;
 
+    [SerializeField]
+    GameObject alert;
+
+    private bool pointLock = false;
+
     // getter method
     public string getName()
     {
@@ -143,12 +148,16 @@ public class EnemyBehavior : NetworkBehaviour
         LoadServerRpc();
     }
 
-    void Update()
+    protected virtual void Update()
     {
         //StartCoroutine(RegenerateTest());
+        if (alert != null)
+        {
+            AlertServerRpc();
+        }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Weapon") || other.gameObject.CompareTag("HeldWeapon"))
         {
@@ -200,6 +209,24 @@ public class EnemyBehavior : NetworkBehaviour
     public void LoadServerRpc()
     {
         GetComponent<NetworkObject>().Spawn();
+    }
+
+    [ServerRpc]
+    private void AlertServerRpc()
+    {
+        if (FindClosestPlayer() != null)
+        {
+            if (pointLock == false)
+            {
+                pointLock = true;
+                alert.SetActive(true);
+            }
+        }
+
+        else if (FindClosestPlayer() == null)
+        {
+            pointLock = false;
+        }
     }
 
 

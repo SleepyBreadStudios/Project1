@@ -14,6 +14,10 @@ public class EnemySpawner : NetworkBehaviour
     [SerializeField]
     private GameObject enemyPrefab;
 
+    // how close the player has to be for spawner to be active
+    [SerializeField]
+    private float playerDistance = 15.0f;
+
     // spawn radius for spawning enemies
     [SerializeField]
     private float spawnRadius = 5.0f;
@@ -76,6 +80,7 @@ public class EnemySpawner : NetworkBehaviour
     {
         float x = transform.position.x;
         float y = transform.position.y;
+        bool checkNear = false;
 
         // counter to see how many enemies are within radius, in the future possibly restrict by enemy type
         int count = 0;
@@ -92,12 +97,25 @@ public class EnemySpawner : NetworkBehaviour
             }
         }
 
+        if (GameObject.FindWithTag("Player") != null)
+        {
+            GameObject[] playerLoc = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject player in playerLoc)
+            {
+                Vector2 loc = player.transform.position;
+                if (Vector2.Distance(transform.position, loc) < playerDistance)
+                {
+                    checkNear = true;
+                }
+            }
+        }
+
         // if count is less than limit, spawn an enemy inside spawning radius
-        if (count < limit)
+        if (count < limit && checkNear)
         {
             GameObject newEnemy = Instantiate(enemyPrefab, new Vector2(Random.Range(x - spawnRadius, x + spawnRadius),
                 Random.Range(y - spawnRadius, y + spawnRadius)), Quaternion.identity);
-            newEnemy.GetComponent<NetworkObject>().Spawn();
+            newEnemy.GetComponent<NetworkObject>().Spawn(true);
         }
     }
 }

@@ -49,8 +49,9 @@ public class CarrotBehavior : EnemyBehavior
         InvokeRepeating("FindPlayerServerRpc", 0.0f, 2.0f);
     }
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         Color c = GetComponent<Renderer>().material.color;
         if (isSpinning)
         {
