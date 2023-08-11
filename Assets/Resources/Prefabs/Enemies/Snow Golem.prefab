@@ -238,8 +238,16 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   rb: {fileID: 0}
-  dropTable: []
-  dropChance: []
+  dropTable:
+  - {fileID: 8561137990481344694, guid: 1742a05ee49447b49ba5b6efd0769600, type: 3}
+  - {fileID: 8561137990481344694, guid: 6bb6d8f78870eb446a93996b6c99dfc8, type: 3}
+  - {fileID: 8561137990481344694, guid: 5fdac039863aa3e48bc579ba7f4b23f2, type: 3}
+  - {fileID: 6304730611714531225, guid: 127f9e1e08a753d4ca2b0b49b9b09704, type: 3}
+  dropChance:
+  - 5
+  - 5
+  - 5
+  - 80
   health: 5
   maxHealth: 5
   speed: 1

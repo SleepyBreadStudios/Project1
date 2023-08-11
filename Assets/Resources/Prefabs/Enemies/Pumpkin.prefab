@@ -450,17 +450,17 @@ MonoBehaviour:
   - {fileID: 8575983762674333999, guid: 5c442d4ede0ebb4478e2ac1dfbd86ee3, type: 3}
   dropChance:
   - 50
-  - 50
+  - 75
   - 100
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
   health: 3
   maxHealth: 3
   speed: 3

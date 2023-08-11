@@ -188,6 +188,8 @@ MonoBehaviour:
   itemCount:
     m_InternalValue: 0
   leftOrRight: right
+  toolSwing: 0
+  itemIsRecipe: 0
   PotionDuration: 30
 --- !u!60 &-5889230695416629946
 PolygonCollider2D:
