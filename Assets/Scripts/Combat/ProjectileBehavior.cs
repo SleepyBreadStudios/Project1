@@ -37,6 +37,11 @@ public class ProjectileBehavior : NetworkBehaviour
     // To be tested for efficiency
     //private List<string>
 
+    public float getSpeed()
+    {
+        return speed;
+    }
+
     public int getStrength()
     {
         return strength;
@@ -50,12 +55,12 @@ public class ProjectileBehavior : NetworkBehaviour
         }
     }
 
-    void Update()
+    protected virtual void Update()
     {
         transform.position += transform.up * Time.deltaTime * speed;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
 
         if (other.gameObject.CompareTag(target) || other.gameObject.CompareTag("Overworld"))

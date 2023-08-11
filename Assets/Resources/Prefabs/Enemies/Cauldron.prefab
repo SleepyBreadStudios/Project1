@@ -213,7 +213,9 @@ MonoBehaviour:
   - {fileID: 4564895817255327029, guid: 5e4a52780e1795b4790ba5ca8eb21f83, type: 3}
   - {fileID: 4564895817255327029, guid: 5e4a52780e1795b4790ba5ca8eb21f83, type: 3}
   - {fileID: 4564895817255327029, guid: 5e4a52780e1795b4790ba5ca8eb21f83, type: 3}
+  - {fileID: 4564895817255327029, guid: 5e4a52780e1795b4790ba5ca8eb21f83, type: 3}
   dropChance:
+  - 100
   - 100
   - 100
   - 100
