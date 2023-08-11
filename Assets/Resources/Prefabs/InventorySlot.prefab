@@ -275,6 +275,7 @@ GameObject:
   - component: {fileID: 6010104593790101253}
   - component: {fileID: 5285764244345055573}
   - component: {fileID: -5674391263013945027}
+  - component: {fileID: -3286427163812415724}
   m_Layer: 0
   m_Name: InventorySlot
   m_TagString: InventorySlot
@@ -357,6 +358,7 @@ MonoBehaviour:
   SlotType: 
   crafting: {fileID: 0}
   equipment: {fileID: 0}
+  trash: {fileID: 0}
   inventory: {fileID: 31469402132694548, guid: 41ee2f4e8c49ec24c99602eb9f41b1f2, type: 3}
   itemQuantityText: {fileID: 8302857696489787658}
 --- !u!114 &-5674391263013945027
@@ -387,3 +389,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &-3286427163812415724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7431816269665899456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1

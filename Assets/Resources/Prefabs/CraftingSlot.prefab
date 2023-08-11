@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 51881576596004030}
   - component: {fileID: 7926925579953269427}
   - component: {fileID: 668346645848402739}
+  - component: {fileID: -8645720279431992237}
   m_Layer: 0
   m_Name: CraftingSlot
   m_TagString: CraftingSlot
@@ -259,6 +260,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-8645720279431992237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6781124746138674967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &8881831925620664976
 GameObject:
   m_ObjectHideFlags: 0
