@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: GoldHelm
   displayName: Gold Helmet
-  icon: {fileID: 21300000, guid: b0538623dfb03c44395a4e6887e3638f, type: 3}
+  icon: {fileID: 21300000, guid: 54dd8727966a0ec40886676837e9cfeb, type: 3}
   count: 1
   maxStack: 1
   startingCondition: 100

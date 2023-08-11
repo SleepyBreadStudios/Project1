@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: GoldLegs
   displayName: Gold Legs
-  icon: {fileID: 21300000, guid: fa9f3bd4fe56f314480b7ad5014459fb, type: 3}
+  icon: {fileID: 21300000, guid: e816fdb5486d1ab488ca0ebe21dedfcb, type: 3}
   count: 1
   maxStack: 1
   startingCondition: 100

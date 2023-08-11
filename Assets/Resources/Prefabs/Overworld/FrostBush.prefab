@@ -111,12 +111,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6439207773429620657, guid: 51d9922d0549cae459fbedf270668d19, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 51d9922d0549cae459fbedf270668d19, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.44, y: 1.68}
+  m_Size: {x: 0.17, y: 0.14}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -216,8 +216,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 8345128115173316132, guid: 5d9587a25960bba49a75e585b472e366, type: 3}
-  bushReady: {fileID: -6439207773429620657, guid: 51d9922d0549cae459fbedf270668d19, type: 3}
-  bushHarvested: {fileID: 112865942052366972, guid: d9fee4db101d1774a951afce1a4e2494, type: 3}
+  bushReady: {fileID: 21300000, guid: 51d9922d0549cae459fbedf270668d19, type: 3}
+  bushHarvested: {fileID: 21300000, guid: d9fee4db101d1774a951afce1a4e2494, type: 3}
   spawnRadius: 0.8
   RespawnTime: 30
 --- !u!58 &1662966578275511395
