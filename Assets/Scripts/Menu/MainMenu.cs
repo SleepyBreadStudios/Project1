@@ -12,11 +12,12 @@ using Unity.Netcode;
 
 public class MainMenu : MonoBehaviour
 {
+
     // First main menu of game
     public GameObject menuUI;
 
-    // // Second part of main menu
-    // public GameObject menuUI2;
+    // Second part of main menu
+    public GameObject credits;
 
     // // Menu handling hosting and joining
     // public GameObject menuUI3;
@@ -41,11 +42,11 @@ public class MainMenu : MonoBehaviour
     }
 
     // // Returns the player to the previous screen
-    // public void Back()
-    // {
-    //     menuUI.SetActive(true);
-    //     menuUI2.SetActive(false);
-    // }
+    public void Back()
+    {
+        menuUI.SetActive(true);
+        credits.SetActive(false);
+    }
 
     // Activates the hosting and client side
     public void Multiplayer()
@@ -54,10 +55,10 @@ public class MainMenu : MonoBehaviour
         //menuUI3.SetActive(true);
     }
 
-    // Sends the player back to the second menu screen
-    public void Back2()
+    // Sends the player back to the credits screen
+    public void Credits()
     {
-       // menuUI2.SetActive(true);
-        //menuUI3.SetActive(false); 
+        menuUI.SetActive(false);
+        credits.SetActive(true); 
     }
 }
