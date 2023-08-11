@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7554480de6d1a1d4cb14d26df94deb26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: {fileID: 11400000, guid: 96ccb067f4afea84d82e326df7db0a29, type: 2}
+  itemType: {fileID: 11400000, guid: 3758f653e6320b746a48e0ba96d6cb08, type: 2}
   itemName: 
   itemCount:
     m_InternalValue: 0

@@ -337,8 +337,10 @@ public class Player2Behavior : NetworkBehaviour
 						Debug.Log("Closing recipe");
 						RecipeUI.transform.localScale = new Vector3(0, 0, 0);
 						recipeOpen = false;
+						menuOpen = false;
+						OnMenuOpenUpdated.Invoke();
 					}
-					if (!menuOpen)
+					else if (!menuOpen)
 					{
 						RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 						if (hit.collider != null)
