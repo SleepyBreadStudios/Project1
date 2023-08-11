@@ -238,4 +238,5 @@ MonoBehaviour:
   itemIsRecipe: 1
   RecipeText:
   - Mushroom Bowtie
-  - x3 Carrot Husk
+  - x10 Spores
+  - x5 Carrot Husk

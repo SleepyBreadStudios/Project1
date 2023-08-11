@@ -234,8 +234,9 @@ MonoBehaviour:
   itemCount:
     m_InternalValue: 0
   leftOrRight: right
+  toolSwing: 0
+  itemIsRecipe: 0
   RecipeText:
   - Mushroom Pants
   - x5 Shroom Spore
-  - x2 Pumpkin Rind
-  - x2 Apple Core
+  - x4 Apple Core

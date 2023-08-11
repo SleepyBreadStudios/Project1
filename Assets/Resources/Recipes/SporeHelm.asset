@@ -17,7 +17,7 @@ MonoBehaviour:
   - item: Spores
     count: 5
   - item: PumpkinRind
-    count: 1
+    count: 3
   craftedItem: {fileID: 11400000, guid: bcb911cb6c4ad564fa141e869b9aafad, type: 2}
   numOfItems: 2
   recipeKeys:

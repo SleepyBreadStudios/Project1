@@ -17,7 +17,7 @@ MonoBehaviour:
   - item: Spores
     count: 10
   - item: CarrotHusk
-    count: 3
+    count: 5
   craftedItem: {fileID: 11400000, guid: 0ecbdab709477024383caf572d52cc48, type: 2}
   numOfItems: 2
   recipeKeys:
