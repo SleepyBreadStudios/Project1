@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipeContents: SnowPotionFrostwood
   inspectorRecipeList:
-  - item: SnowPotion
-    count: 2
-  - item: Frostwood
+  - item: FrostPotion
+    count: 3
+  - item: Frostberry
     count: 3
   craftedItem: {fileID: 11400000, guid: 87ba3462fd647ea46875e1137d67f0d5, type: 2}
   numOfItems: 2
   recipeKeys:
-  - Snow Potion
-  - Frostwood
+  - FrostPotion
+  - Frostberry

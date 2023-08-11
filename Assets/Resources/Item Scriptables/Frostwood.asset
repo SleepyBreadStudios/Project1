@@ -19,7 +19,7 @@ MonoBehaviour:
   maxStack: 99
   startingCondition: 100
   unique: 0
-  itemBehavior: {fileID: 0}
+  itemBehavior: {fileID: 4147153337611372707, guid: 127f9e1e08a753d4ca2b0b49b9b09704, type: 3}
   equipType: 
   defense: 0
   useText: Crafting material

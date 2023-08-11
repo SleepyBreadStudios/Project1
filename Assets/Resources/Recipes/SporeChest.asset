@@ -16,13 +16,10 @@ MonoBehaviour:
   inspectorRecipeList:
   - item: Spores
     count: 10
-  - item: PumpkinRind
-    count: 3
   - item: CarrotHusk
     count: 3
   craftedItem: {fileID: 11400000, guid: 0ecbdab709477024383caf572d52cc48, type: 2}
   numOfItems: 2
   recipeKeys:
   - Spores
-  - PumpkinRind
   - CarrotHusk

@@ -16,13 +16,10 @@ MonoBehaviour:
   inspectorRecipeList:
   - item: Spores
     count: 5
-  - item: PumpkinRind
-    count: 2
   - item: AppleCore
     count: 2
   craftedItem: {fileID: 11400000, guid: 802cadc595ccc844ea1b1626ba4bd4b5, type: 2}
   numOfItems: 2
   recipeKeys:
   - Spores
-  - PumpkinRind
   - AppleCore

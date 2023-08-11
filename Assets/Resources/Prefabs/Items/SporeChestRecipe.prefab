@@ -234,8 +234,8 @@ MonoBehaviour:
   itemCount:
     m_InternalValue: 0
   leftOrRight: right
+  toolSwing: 0
+  itemIsRecipe: 1
   RecipeText:
   - Mushroom Bowtie
-  - x10 Shroom Spore
-  - x3 Pumpkin Rind
   - x3 Carrot Husk
