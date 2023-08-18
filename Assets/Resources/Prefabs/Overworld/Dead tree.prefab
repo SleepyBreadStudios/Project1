@@ -175,6 +175,7 @@ MonoBehaviour:
   health: 5
   maxHealth: 5
   ToolRequired: Axe
+  sound: chop
 --- !u!60 &7315321528568421261
 PolygonCollider2D:
   m_ObjectHideFlags: 0

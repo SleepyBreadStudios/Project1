@@ -60,6 +60,8 @@ public class EnemyBehavior : NetworkBehaviour
     [SerializeField]
     GameObject alert;
 
+    private GameObject audioManager = null;
+
     private bool pointLock = false;
 
     // getter method
@@ -146,6 +148,7 @@ public class EnemyBehavior : NetworkBehaviour
         healthBar.SetHealth(maxHealth);
         doomed = false;
         LoadServerRpc();
+        audioManager = GameObject.Find("AudioManager");
     }
 
     protected virtual void Update()
@@ -242,6 +245,11 @@ public class EnemyBehavior : NetworkBehaviour
         {
             doomed = true;
             ItemDrop();
+            if (audioManager != null && audioManager.GetComponent<AudioManager>() != null)
+            {
+                audioManager.GetComponent<AudioManager>().PlaySound("poof");
+                Debug.Log("Should've heard sound");
+            }
             GameObject cauldron = null;
             GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
             foreach (GameObject wall in walls)
@@ -266,11 +274,14 @@ public class EnemyBehavior : NetworkBehaviour
     [ServerRpc]
     public void KnockbackServerRpc(Vector2 applier, float force)
     {
-        StopAllCoroutines();
-        OnBegin?.Invoke();
-        Vector2 direction = ((Vector2)transform.position - applier).normalized;
-        rb.AddForce(direction * force, ForceMode2D.Impulse);
-        StartCoroutine(ResetKB());
+        if (!doomed)
+        {
+            StopAllCoroutines();
+            OnBegin?.Invoke();
+            Vector2 direction = ((Vector2)transform.position - applier).normalized;
+            rb.AddForce(direction * force, ForceMode2D.Impulse);
+            StartCoroutine(ResetKB());
+        }
     }
 
     private IEnumerator ResetKB()

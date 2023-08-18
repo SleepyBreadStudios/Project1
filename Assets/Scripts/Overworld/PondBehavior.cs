@@ -2,6 +2,7 @@ using NUnit.Framework.Internal;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PondBehavior : NetworkBehaviour
@@ -38,6 +39,9 @@ public class PondBehavior : NetworkBehaviour
     private bool withinFishTime = false;
 
     private Player2Behavior currPlayer = null;
+
+    [SerializeField]
+    private AudioSource splash = null;
 
     public GameObject GetItem()
     {
@@ -77,6 +81,10 @@ public class PondBehavior : NetworkBehaviour
 			{
                 Debug.Log("This is a different player than who started the fishing!");
 			}
+            if (splash != null)
+            {
+                splash.Play();
+            }
             ItemDrop();
             currFishing = false;
             //sprite.sprite = pond;

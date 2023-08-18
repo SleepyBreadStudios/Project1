@@ -31,6 +31,9 @@ public class BushBehavior : NetworkBehaviour
     // num to update sprite cross server
     private NetworkVariable<float> spriteNum = new NetworkVariable<float>();
 
+    [SerializeField]
+    private AudioSource pop = null;
+
     public GameObject GetItem()
     {
         return item;
@@ -58,6 +61,10 @@ public class BushBehavior : NetworkBehaviour
         currRegenerating = true;
         if(IsServer)
 		{
+            if (pop != null)
+            {
+                pop.Play();
+            }
             ItemDrop();
         }
 

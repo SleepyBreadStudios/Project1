@@ -29,6 +29,11 @@ public class OverworldBehavior : NetworkBehaviour
     [SerializeField]
     private string ToolRequired = "";
 
+    private GameObject audioManager;
+
+    [SerializeField]
+    private string sound = null;
+
     public GameObject GetItem()
     {
         return item;
@@ -39,6 +44,7 @@ public class OverworldBehavior : NetworkBehaviour
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
+        audioManager = GameObject.Find("AudioManager");
     }
 
     public void Delete()
@@ -99,6 +105,11 @@ public class OverworldBehavior : NetworkBehaviour
         float alpha = health / maxHealth;
         sprite.color = new Color (1f, 1f, 1f, alpha);
         isBeingAttacked = true;
+
+        if (audioManager != null && audioManager.GetComponent<AudioManager>() != null)
+        {
+            audioManager.GetComponent<AudioManager>().PlaySound(sound);
+        }
 
         if (health <= 0)
         {

@@ -187,6 +187,8 @@ MonoBehaviour:
   health: 5
   maxHealth: 5
   ToolRequired: Pickaxe
+  audioManager: {fileID: 0}
+  sound: mine
 --- !u!60 &5581795076820339510
 PolygonCollider2D:
   m_ObjectHideFlags: 0

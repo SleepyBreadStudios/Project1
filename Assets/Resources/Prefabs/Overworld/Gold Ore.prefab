@@ -187,6 +187,7 @@ MonoBehaviour:
   health: 5
   maxHealth: 5
   ToolRequired: Pickaxe
+  sound: mine
 --- !u!58 &430408806772947414
 CircleCollider2D:
   m_ObjectHideFlags: 0

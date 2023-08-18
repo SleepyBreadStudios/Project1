@@ -36,7 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 1, z: 0}
 --- !u!212 &1735424466962753294
 SpriteRenderer:
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 5909226124758451408, guid: 4749a1c3b91fc2940b4a97125c26f333, type: 3}
+  playerDistance: 15
   spawnRadius: 5
   pollRadius: 30
   pollRate: 15
@@ -265,6 +266,7 @@ MonoBehaviour:
   health: 3
   maxHealth: 3
   ToolRequired: Axe
+  sound: chop
 --- !u!68 &7832893027733450419
 EdgeCollider2D:
   m_ObjectHideFlags: 0
