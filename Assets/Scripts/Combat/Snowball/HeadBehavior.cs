@@ -43,12 +43,7 @@ public class HeadBehavior : EnemyBehavior
     protected override void Update()
     {
         base.Update();
-        if (bodies.Count == 0)
-        {
-            ItemDrop();
-            GetComponent<NetworkObject>().Despawn(true);
-            Destroy(gameObject);
-        }
+        
 
         MoveServerRpc();
 
@@ -86,6 +81,13 @@ public class HeadBehavior : EnemyBehavior
                     break;
                 }
             }
+        }
+
+        if (bodies.Count == 0)
+        {
+            ItemDrop();
+            GetComponent<NetworkObject>().Despawn(true);
+            Destroy(gameObject);
         }
     }
 }
