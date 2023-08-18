@@ -15,9 +15,9 @@ MonoBehaviour:
   recipeContents: MagicEssenceHeartberryFish
   inspectorRecipeList:
   - item: MagicEssence
-    count: 1
+    count: 3
   - item: Heartberry
-    count: 2
+    count: 1
   - item: Fish
     count: 1
   craftedItem: {fileID: 11400000, guid: 78b9e62d30206c3459296771a86fdee2, type: 2}

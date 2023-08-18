@@ -22,6 +22,11 @@ public class Player2Behavior : NetworkBehaviour
 	#region player stats
 	[SerializeField]
 	public float walkSpeed = 1.0f;
+	public float ogWalkSpeed = 1.0f;
+
+	[SerializeField]
+	public float snowSpeed = 0.6f;
+
 	[SerializeField]
 	private float playerHealth;
 
@@ -156,7 +161,7 @@ public class Player2Behavior : NetworkBehaviour
 
 	void Start()
 	{
-
+		ogWalkSpeed = walkSpeed;
 		// transform.position = new Vector3(Random.Range(defaultPositionRange.x, defaultPositionRange.y), 0,
 		//       Random.Range(defaultPositionRange.x, defaultPositionRange.y));
 		transform.position = new Vector3(0, 0, 0);
@@ -748,7 +753,7 @@ public class Player2Behavior : NetworkBehaviour
 		}
 		else if(playerInSnow && resistColdEnabled)
 		{
-			walkSpeed = 0.02f;
+			walkSpeed = ogWalkSpeed;
 		}
 	}
 
@@ -973,13 +978,12 @@ public class Player2Behavior : NetworkBehaviour
 		if (!resistColdEnabled)
 		{
 			Debug.Log("SNOW SLOW");
-			//walkSpeed = 0.6f;
+			walkSpeed = snowWalkSpeed; 
 			StartCoroutine("SnowDOT");
-			walkSpeed = 1.0f;
 		}
 		else
 		{
-			walkSpeed = 0.5f; // Cuts speed by half
+			walkSpeed = ogWalkSpeed; 
 		}
 	}
 
@@ -987,6 +991,7 @@ public class Player2Behavior : NetworkBehaviour
 	{
 		playerInSnow = false;
 		//walkSpeed = 1f; // Speed returns back to normal upon exiting snow
+		walkSpeed = ogWalkSpeed;
 		StopCoroutine("SnowDOT");
 	}
 
