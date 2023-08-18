@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Ectoplasm
   displayName: Ectoplasm
-  icon: {fileID: 207486565399836071, guid: 44a8d8a3752207b4582324492e25f9ba, type: 3}
+  icon: {fileID: 21300000, guid: 44a8d8a3752207b4582324492e25f9ba, type: 3}
   count: 5
   maxStack: 99
   startingCondition: 100

@@ -411,8 +411,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   rb: {fileID: 797592511094102729}
-  dropTable: []
-  dropChance: []
+  dropTable:
+  - {fileID: 4448634609639371803, guid: a02ef82eff7c1e3409ff08c0300c2b6a, type: 3}
+  - {fileID: 4448634609639371803, guid: a02ef82eff7c1e3409ff08c0300c2b6a, type: 3}
+  dropChance:
+  - 50
+  - 50
   health: 4
   maxHealth: 4
   speed: 1
@@ -420,6 +424,7 @@ MonoBehaviour:
   defense: 0
   aggroRange: 4
   healthBar: {fileID: 6280975946706188957}
+  alert: {fileID: 0}
   item: {fileID: 4448634609639371803, guid: a02ef82eff7c1e3409ff08c0300c2b6a, type: 3}
   moveBias: 2
   sporeRespawnTime: 2

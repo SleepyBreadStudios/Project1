@@ -143,7 +143,7 @@ public class MushroomBehavior : EnemyBehavior
     {
         while (true) 
         {
-            yield return new WaitForSeconds(15.0f);
+            yield return new WaitForSeconds(25.0f);
             HarvestSpores();
         }
         // StartCoroutine("Regenerate");
